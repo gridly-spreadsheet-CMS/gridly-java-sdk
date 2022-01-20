@@ -1,0 +1,4223 @@
+openapi: 3.0.1
+info:
+  contact: {}
+  description: Gridly API documentation
+  license:
+    name: Apache 2.0
+  title: Gridly API
+  version: 3.21.0
+servers:
+- url: https://api.gridly.com/
+tags:
+- description: Branch API
+  name: branch
+- description: Grid API
+  name: grid
+- description: Grid Metadata API
+  name: grid-metadata
+- description: Record API
+  name: record
+- description: Task API
+  name: task
+- description: View API
+  name: view
+- description: View Column API
+  name: view-column
+- description: View Dependency API
+  name: view-dependency
+- description: View File API
+  name: view-file
+- description: Database API
+  name: database
+- description: Project API
+  name: project
+paths:
+  /v1/branches:
+    get:
+      deprecated: false
+      operationId: list
+      parameters:
+      - description: gridId
+        explode: true
+        in: query
+        name: gridId
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Branch'
+                type: array
+          description: OK
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: list
+      tags:
+      - branch
+      x-accepts: application/json
+    post:
+      deprecated: false
+      operationId: create
+      parameters:
+      - description: branchId
+        explode: true
+        in: query
+        name: branchId
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: gridId
+        explode: true
+        in: query
+        name: gridId
+        required: false
+        schema:
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBranch'
+        description: createBranch
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Branch'
+          description: Created
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: create
+      tags:
+      - branch
+      x-codegen-request-body-name: createBranch
+      x-contentType: application/json
+      x-accepts: application/json
+  /v1/branches/{branchId}:
+    delete:
+      deprecated: false
+      operationId: delete
+      parameters:
+      - description: branchId
+        explode: false
+        in: path
+        name: branchId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+      security:
+      - ApiKey: []
+      summary: delete
+      tags:
+      - branch
+      x-accepts: application/json
+    get:
+      deprecated: false
+      operationId: get
+      parameters:
+      - description: branchId
+        explode: false
+        in: path
+        name: branchId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Branch'
+          description: OK
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: get
+      tags:
+      - branch
+      x-accepts: application/json
+  /v1/branches/{branchId}/merge:
+    post:
+      deprecated: false
+      operationId: merge
+      parameters:
+      - description: branchId
+        explode: false
+        in: path
+        name: branchId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: destinationBranchId
+        explode: true
+        in: query
+        name: destinationBranchId
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: mergeRecordOptions
+        explode: true
+        in: query
+        name: mergeRecordOptions
+        required: false
+        schema:
+          enum:
+          - add
+          - update
+          - delete
+          - override
+          items:
+            enum:
+            - add
+            - update
+            - delete
+            - override
+            type: string
+          type: array
+        style: form
+      responses:
+        "201":
+          content: {}
+          description: Created
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: Accepted
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: merge
+      tags:
+      - branch
+      x-accepts: application/json
+  /v1/grids:
+    get:
+      deprecated: false
+      operationId: list
+      parameters:
+      - description: dbId
+        explode: true
+        in: query
+        name: dbId
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Grid'
+                type: array
+          description: OK
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: list
+      tags:
+      - grid
+      x-accepts: application/json
+    post:
+      deprecated: false
+      operationId: create
+      parameters:
+      - description: dbId
+        explode: true
+        in: query
+        name: dbId
+        required: true
+        schema:
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGrid'
+        description: createCompositeGrid
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Grid'
+          description: Created
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: create
+      tags:
+      - grid
+      x-codegen-request-body-name: createCompositeGrid
+      x-contentType: application/json
+      x-accepts: application/json
+  /v1/grids/{gridId}:
+    delete:
+      deprecated: false
+      operationId: delete
+      parameters:
+      - description: gridId
+        explode: false
+        in: path
+        name: gridId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+      security:
+      - ApiKey: []
+      summary: delete
+      tags:
+      - grid
+      x-accepts: application/json
+    get:
+      deprecated: false
+      operationId: get
+      parameters:
+      - description: gridId
+        explode: false
+        in: path
+        name: gridId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Grid'
+          description: OK
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: get
+      tags:
+      - grid
+      x-accepts: application/json
+    patch:
+      deprecated: false
+      operationId: update
+      parameters:
+      - description: gridId
+        explode: false
+        in: path
+        name: gridId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateGrid'
+        description: updateCompositeGrid
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Grid'
+          description: OK
+        "204":
+          content: {}
+          description: No Content
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+      security:
+      - ApiKey: []
+      summary: update
+      tags:
+      - grid
+      x-codegen-request-body-name: updateCompositeGrid
+      x-contentType: application/json
+      x-accepts: application/json
+  /v1/grids/{gridId}/metadata:
+    get:
+      deprecated: false
+      operationId: list
+      parameters:
+      - description: gridId
+        explode: false
+        in: path
+        name: gridId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Metadata'
+                type: array
+          description: OK
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: list
+      tags:
+      - grid-metadata
+      x-accepts: application/json
+    post:
+      deprecated: false
+      operationId: create
+      parameters:
+      - description: gridId
+        explode: false
+        in: path
+        name: gridId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMetadata'
+        description: createMetadataDTO
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Metadata'
+          description: Created
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: create
+      tags:
+      - grid-metadata
+      x-codegen-request-body-name: createMetadataDTO
+      x-contentType: application/json
+      x-accepts: application/json
+  /v1/grids/{gridId}/metadata/{metadataId}:
+    delete:
+      deprecated: false
+      operationId: delete
+      parameters:
+      - description: gridId
+        explode: false
+        in: path
+        name: gridId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: metadataId
+        explode: false
+        in: path
+        name: metadataId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+      security:
+      - ApiKey: []
+      summary: delete
+      tags:
+      - grid-metadata
+      x-accepts: application/json
+    get:
+      deprecated: false
+      operationId: get
+      parameters:
+      - description: gridId
+        explode: false
+        in: path
+        name: gridId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: metadataId
+        explode: false
+        in: path
+        name: metadataId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Metadata'
+          description: OK
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: get
+      tags:
+      - grid-metadata
+      x-accepts: application/json
+    patch:
+      deprecated: false
+      operationId: update
+      parameters:
+      - description: gridId
+        explode: false
+        in: path
+        name: gridId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: metadataId
+        explode: false
+        in: path
+        name: metadataId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMetadata'
+        description: updateMetadataDTO
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Metadata'
+          description: OK
+        "204":
+          content: {}
+          description: No Content
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+      security:
+      - ApiKey: []
+      summary: update
+      tags:
+      - grid-metadata
+      x-codegen-request-body-name: updateMetadataDTO
+      x-contentType: application/json
+      x-accepts: application/json
+  /v1/tasks/{taskId}:
+    get:
+      deprecated: false
+      operationId: get
+      parameters:
+      - description: taskId
+        explode: false
+        in: path
+        name: taskId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: OK
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: get
+      tags:
+      - task
+      x-accepts: application/json
+  /v1/template-grids:
+    get:
+      deprecated: false
+      operationId: listTemplateGrids
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Grid'
+                type: array
+          description: OK
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: listTemplateGrids
+      tags:
+      - grid
+      x-accepts: application/json
+  /v1/views:
+    get:
+      deprecated: false
+      operationId: list
+      parameters:
+      - description: branchId
+        explode: true
+        in: query
+        name: branchId
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: gridId
+        explode: true
+        in: query
+        name: gridId
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: type
+        explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          enum:
+          - defaultView
+          - accessView
+          - userView
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/View'
+                type: array
+          description: OK
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: list
+      tags:
+      - view
+      x-accepts: application/json
+  /v1/views/{viewId}:
+    get:
+      deprecated: false
+      operationId: get
+      parameters:
+      - description: columnIds
+        explode: true
+        in: query
+        name: columnIds
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: include
+        explode: true
+        in: query
+        name: include
+        required: false
+        schema:
+          enum:
+          - records
+          items:
+            enum:
+            - records
+            type: string
+          type: array
+        style: form
+      - description: page
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: "{}"
+          type: string
+        style: form
+      - description: query
+        explode: true
+        in: query
+        name: query
+        required: false
+        schema:
+          default: "{}"
+          type: string
+        style: form
+      - description: sort
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          default: "{}"
+          type: string
+        style: form
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/View'
+          description: OK
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: get
+      tags:
+      - view
+      x-accepts: application/json
+  /v1/views/{viewId}/columns:
+    post:
+      deprecated: false
+      operationId: create
+      parameters:
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateColumn'
+        description: createColumn
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ViewColumn'
+          description: Created
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: create
+      tags:
+      - view-column
+      x-codegen-request-body-name: createColumn
+      x-contentType: application/json
+      x-accepts: application/json
+  /v1/views/{viewId}/columns/{columnId}:
+    delete:
+      deprecated: false
+      operationId: delete
+      parameters:
+      - description: columnId
+        explode: false
+        in: path
+        name: columnId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+      security:
+      - ApiKey: []
+      summary: delete
+      tags:
+      - view-column
+      x-accepts: application/json
+    get:
+      deprecated: false
+      operationId: get
+      parameters:
+      - description: columnId
+        explode: false
+        in: path
+        name: columnId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ViewColumn'
+          description: OK
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: get
+      tags:
+      - view-column
+      x-accepts: application/json
+    patch:
+      deprecated: false
+      operationId: update
+      parameters:
+      - description: columnId
+        explode: false
+        in: path
+        name: columnId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateColumn'
+        description: updateColumn
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ViewColumn'
+          description: OK
+        "204":
+          content: {}
+          description: No Content
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+      security:
+      - ApiKey: []
+      summary: update
+      tags:
+      - view-column
+      x-codegen-request-body-name: updateColumn
+      x-contentType: application/json
+      x-accepts: application/json
+  /v1/views/{viewId}/columns/{columnId}/add:
+    post:
+      deprecated: false
+      operationId: add
+      parameters:
+      - description: columnId
+        explode: false
+        in: path
+        name: columnId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ViewColumn'
+          description: OK
+        "201":
+          content: {}
+          description: Created
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: add
+      tags:
+      - view-column
+      x-accepts: application/json
+  /v1/views/{viewId}/columns/{columnId}/remove:
+    post:
+      deprecated: false
+      operationId: remove
+      parameters:
+      - description: columnId
+        explode: false
+        in: path
+        name: columnId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: OK
+        "201":
+          content: {}
+          description: Created
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: remove
+      tags:
+      - view-column
+      x-accepts: application/json
+  /v1/views/{viewId}/dependencies:
+    delete:
+      deprecated: false
+      operationId: delete
+      parameters:
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteDependency'
+        description: deleteDependency
+        required: true
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+      security:
+      - ApiKey: []
+      summary: delete
+      tags:
+      - view-dependency
+      x-codegen-request-body-name: deleteDependency
+      x-contentType: application/json
+      x-accepts: application/json
+    get:
+      deprecated: false
+      operationId: list
+      parameters:
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Dependency'
+                type: array
+          description: OK
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: list
+      tags:
+      - view-dependency
+      x-accepts: application/json
+    post:
+      deprecated: false
+      operationId: create
+      parameters:
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDependency'
+        description: createDependency
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dependency'
+          description: Created
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: create
+      tags:
+      - view-dependency
+      x-codegen-request-body-name: createDependency
+      x-contentType: application/json
+      x-accepts: application/json
+  /v1/views/{viewId}/dependencies/{dependencyId}:
+    delete:
+      deprecated: false
+      operationId: delete
+      parameters:
+      - description: dependencyId
+        explode: false
+        in: path
+        name: dependencyId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+      security:
+      - ApiKey: []
+      summary: delete
+      tags:
+      - view-dependency
+      x-accepts: application/json
+    get:
+      deprecated: false
+      operationId: get
+      parameters:
+      - description: dependencyId
+        explode: false
+        in: path
+        name: dependencyId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dependency'
+          description: OK
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: get
+      tags:
+      - view-dependency
+      x-accepts: application/json
+    put:
+      deprecated: false
+      operationId: update
+      parameters:
+      - description: dependencyId
+        explode: false
+        in: path
+        name: dependencyId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDependency'
+        description: updateDependency
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dependency'
+          description: OK
+        "201":
+          content: {}
+          description: Created
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: update
+      tags:
+      - view-dependency
+      x-codegen-request-body-name: updateDependency
+      x-contentType: application/json
+      x-accepts: application/json
+  /v1/views/{viewId}/export:
+    get:
+      deprecated: false
+      operationId: export
+      parameters:
+      - description: columnIds
+        explode: true
+        in: query
+        name: columnIds
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: query
+        explode: true
+        in: query
+        name: query
+        required: false
+        schema:
+          default: "{}"
+          type: string
+        style: form
+      - description: sort
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          default: "{}"
+          type: string
+        style: form
+      - description: type
+        explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          default: csv
+          enum:
+          - csv
+          - tsv
+          - xls
+          - xlsx
+          - json
+          - po
+          type: string
+        style: form
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/octet-stream:
+              schema:
+                format: binary
+                type: string
+          description: OK
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: export
+      tags:
+      - view
+      x-accepts: application/octet-stream
+  /v1/views/{viewId}/files:
+    post:
+      deprecated: false
+      operationId: upload
+      parameters:
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                columnId:
+                  description: columnId
+                file:
+                  description: file
+                  format: binary
+                  type: string
+                recordId:
+                  description: recordId
+              required:
+              - columnId
+              - file
+              - recordId
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadedFile'
+          description: OK
+        "201":
+          content: {}
+          description: Created
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: upload
+      tags:
+      - view-file
+      x-contentType: multipart/form-data
+      x-accepts: application/json
+  /v1/views/{viewId}/files/zip:
+    post:
+      deprecated: false
+      operationId: uploadZip
+      parameters:
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                columnId:
+                  description: columnId
+                file:
+                  description: file
+                  format: binary
+                  type: string
+                fileMappings:
+                  description: fileMappings
+              required:
+              - columnId
+              - file
+              - fileMappings
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Record'
+                type: array
+          description: OK
+        "201":
+          content: {}
+          description: Created
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: uploadZip
+      tags:
+      - view-file
+      x-contentType: multipart/form-data
+      x-accepts: application/json
+  /v1/views/{viewId}/files/{fileId}:
+    get:
+      deprecated: false
+      operationId: download
+      parameters:
+      - description: fileId
+        explode: false
+        in: path
+        name: fileId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/octet-stream:
+              schema:
+                format: binary
+                type: string
+          description: OK
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: download
+      tags:
+      - view-file
+      x-accepts: application/octet-stream
+  /v1/views/{viewId}/import:
+    post:
+      deprecated: false
+      operationId: importView
+      parameters:
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                file:
+                  description: "The following file types are supported: csv, tsv,\
+                    \ xls, xlsx and JSON"
+                  format: binary
+                  type: string
+                importRequest:
+                  description: importRequest
+                type:
+                  description: type
+              required:
+              - file
+        required: true
+      responses:
+        "201":
+          content: {}
+          description: Created
+        "202":
+          content: {}
+          description: Accepted
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: importView
+      tags:
+      - view
+      x-contentType: multipart/form-data
+      x-accepts: application/json
+  /v1/views/{viewId}/merge:
+    post:
+      deprecated: false
+      operationId: merge
+      parameters:
+      - description: destinationViewId
+        explode: true
+        in: query
+        name: destinationViewId
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: mergeRecordOptions
+        explode: true
+        in: query
+        name: mergeRecordOptions
+        required: false
+        schema:
+          enum:
+          - add
+          - update
+          - delete
+          - override
+          items:
+            enum:
+            - add
+            - update
+            - delete
+            - override
+            type: string
+          type: array
+        style: form
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "201":
+          content: {}
+          description: Created
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: Accepted
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: merge
+      tags:
+      - view
+      x-accepts: application/json
+  /v1/views/{viewId}/records:
+    delete:
+      deprecated: false
+      operationId: delete
+      parameters:
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRecord'
+        description: deleteRecordDTO
+        required: true
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+      security:
+      - ApiKey: []
+      summary: delete
+      tags:
+      - record
+      x-codegen-request-body-name: deleteRecordDTO
+      x-contentType: application/json
+      x-accepts: application/json
+    get:
+      deprecated: false
+      operationId: fetch
+      parameters:
+      - description: columnIds
+        explode: true
+        in: query
+        name: columnIds
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: page
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: "{}"
+          type: string
+        style: form
+      - description: query
+        explode: true
+        in: query
+        name: query
+        required: false
+        schema:
+          default: "{}"
+          type: string
+        style: form
+      - description: sort
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          default: "{}"
+          type: string
+        style: form
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Record'
+                type: array
+          description: OK
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: fetch
+      tags:
+      - record
+      x-accepts: application/json
+    patch:
+      deprecated: false
+      operationId: update
+      parameters:
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/SetRecord'
+              type: array
+        description: updateRecordDTOs
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Record'
+                type: array
+          description: OK
+        "204":
+          content: {}
+          description: No Content
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+      security:
+      - ApiKey: []
+      summary: update
+      tags:
+      - record
+      x-codegen-request-body-name: updateRecordDTOs
+      x-contentType: application/json
+      x-accepts: application/json
+    post:
+      deprecated: false
+      operationId: create
+      parameters:
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/SetRecord'
+              type: array
+        description: createRecordDTOs
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Record'
+                type: array
+          description: OK
+        "201":
+          content: {}
+          description: Created
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: create
+      tags:
+      - record
+      x-codegen-request-body-name: createRecordDTOs
+      x-contentType: application/json
+      x-accepts: application/json
+  /v1/views/{viewId}/records/{id}:
+    patch:
+      deprecated: false
+      operationId: updateRecord
+      parameters:
+      - description: id
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: path
+        explode: true
+        in: query
+        name: path
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetRecord'
+        description: updateRecordDTO
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Record'
+          description: OK
+        "204":
+          content: {}
+          description: No Content
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+      security:
+      - ApiKey: []
+      summary: updateRecord
+      tags:
+      - record
+      x-codegen-request-body-name: updateRecordDTO
+      x-contentType: application/json
+      x-accepts: application/json
+  /v1/databases:
+    get:
+      deprecated: false
+      operationId: list
+      parameters:
+      - description: expand
+        explode: true
+        in: query
+        name: expand
+        required: false
+        schema:
+          enum:
+          - grid
+          - view
+          items:
+            enum:
+            - grid
+            - view
+            type: string
+          type: array
+        style: form
+      - description: page
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: projectId
+        explode: true
+        in: query
+        name: projectId
+        required: false
+        schema:
+          format: int64
+          type: integer
+        style: form
+      - description: search
+        explode: true
+        in: query
+        name: search
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: sort
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Database'
+                type: array
+          description: OK
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: list
+      tags:
+      - database
+      x-accepts: application/json
+    post:
+      deprecated: false
+      operationId: create
+      parameters:
+      - description: projectId
+        explode: true
+        in: query
+        name: projectId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDatabase'
+        description: body
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Database'
+          description: OK
+        "201":
+          content: {}
+          description: Created
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: create
+      tags:
+      - database
+      x-codegen-request-body-name: body
+      x-contentType: application/json
+      x-accepts: application/json
+  /v1/databases/{dbId}:
+    delete:
+      deprecated: false
+      operationId: delete
+      parameters:
+      - description: dbId
+        explode: false
+        in: path
+        name: dbId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+      security:
+      - ApiKey: []
+      summary: delete
+      tags:
+      - database
+      x-accepts: application/json
+    get:
+      deprecated: false
+      operationId: get
+      parameters:
+      - description: dbId
+        explode: false
+        in: path
+        name: dbId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Database'
+          description: OK
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: get
+      tags:
+      - database
+      x-accepts: application/json
+    put:
+      deprecated: false
+      operationId: update
+      parameters:
+      - description: dbId
+        explode: false
+        in: path
+        name: dbId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDatabase'
+        description: body
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Database'
+          description: OK
+        "201":
+          content: {}
+          description: Created
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: update
+      tags:
+      - database
+      x-codegen-request-body-name: body
+      x-contentType: application/json
+      x-accepts: application/json
+  /v1/databases/{dbId}/duplicate:
+    post:
+      deprecated: false
+      operationId: duplicate
+      parameters:
+      - description: dbId
+        explode: false
+        in: path
+        name: dbId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: projectId
+        explode: true
+        in: query
+        name: projectId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDatabase'
+        description: body
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Database'
+          description: OK
+        "201":
+          content: {}
+          description: Created
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: duplicate
+      tags:
+      - database
+      x-codegen-request-body-name: body
+      x-contentType: application/json
+      x-accepts: application/json
+  /v1/projects:
+    get:
+      deprecated: false
+      operationId: list
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Project'
+                type: array
+          description: OK
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: list
+      tags:
+      - project
+      x-accepts: application/json
+    post:
+      deprecated: false
+      operationId: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProject'
+        description: createProject
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: OK
+        "201":
+          content: {}
+          description: Created
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: create
+      tags:
+      - project
+      x-codegen-request-body-name: createProject
+      x-contentType: application/json
+      x-accepts: application/json
+  /v1/projects/{projectId}:
+    delete:
+      deprecated: false
+      operationId: delete
+      parameters:
+      - description: projectId
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: OK
+        "204":
+          content: {}
+          description: No Content
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+      security:
+      - ApiKey: []
+      summary: delete
+      tags:
+      - project
+      x-accepts: application/json
+    get:
+      deprecated: false
+      operationId: findOneDetail
+      parameters:
+      - description: expand
+        explode: true
+        in: query
+        name: expand
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: projectId
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectDetail'
+          description: OK
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: findOneDetail
+      tags:
+      - project
+      x-accepts: application/json
+    put:
+      deprecated: false
+      operationId: update
+      parameters:
+      - description: projectId
+        explode: false
+        in: path
+        name: projectId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProject'
+        description: updateProject
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: OK
+        "201":
+          content: {}
+          description: Created
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: update
+      tags:
+      - project
+      x-codegen-request-body-name: updateProject
+      x-contentType: application/json
+      x-accepts: application/json
+components:
+  schemas:
+    Branch:
+      example:
+        metadata:
+          key: metadata
+        defaultAccessViewId: defaultAccessViewId
+        columns:
+        - isTarget: true
+          reference:
+            selectionType: SINGLE
+            grid:
+              name: name
+              id: id
+            column:
+              name: name
+              selectionOptions:
+              - selectionOptions
+              - selectionOptions
+              id: id
+            type: ROW
+          dependsOn: dependsOn
+          numberFormat:
+            decimalPlaces: 0
+            currencySymbol: currencySymbol
+            type: DECIMAL
+            use1000Separator: true
+          isSource: true
+          name: name
+          selectionOptions:
+          - selectionOptions
+          - selectionOptions
+          description: description
+          id: id
+          languageCode: languageCode
+          type: singleLine
+        - isTarget: true
+          reference:
+            selectionType: SINGLE
+            grid:
+              name: name
+              id: id
+            column:
+              name: name
+              selectionOptions:
+              - selectionOptions
+              - selectionOptions
+              id: id
+            type: ROW
+          dependsOn: dependsOn
+          numberFormat:
+            decimalPlaces: 0
+            currencySymbol: currencySymbol
+            type: DECIMAL
+            use1000Separator: true
+          isSource: true
+          name: name
+          selectionOptions:
+          - selectionOptions
+          - selectionOptions
+          description: description
+          id: id
+          languageCode: languageCode
+          type: singleLine
+        isMaster: true
+        name: name
+        description: description
+        id: id
+      properties:
+        columns:
+          items:
+            $ref: '#/components/schemas/ViewColumn'
+          type: array
+        defaultAccessViewId:
+          type: string
+        description:
+          type: string
+        id:
+          type: string
+        isMaster:
+          type: boolean
+        metadata:
+          additionalProperties:
+            type: string
+          type: object
+        name:
+          type: string
+      title: Branch
+      type: object
+    CallableOfListOfRecord:
+      title: CallableOfListOfRecord
+      type: object
+    CallableOfResponseEntityOfUploadedFile:
+      title: CallableOfResponseEntityOfUploadedFile
+      type: object
+    Cell:
+      example:
+        columnId: columnId
+        dependencyStatus: upToDate
+        referencedIds:
+        - referencedIds
+        - referencedIds
+        value: "{}"
+      properties:
+        columnId:
+          type: string
+        dependencyStatus:
+          enum:
+          - upToDate
+          - outOfDate
+          - unset
+          type: string
+        referencedIds:
+          items:
+            type: string
+          type: array
+        value:
+          title: DataItem
+          type: object
+      title: Cell
+      type: object
+    ColumnReference:
+      example:
+        selectionType: SINGLE
+        grid:
+          name: name
+          id: id
+        column:
+          name: name
+          selectionOptions:
+          - selectionOptions
+          - selectionOptions
+          id: id
+        type: ROW
+      properties:
+        column:
+          $ref: '#/components/schemas/ReferencedColumn'
+        grid:
+          $ref: '#/components/schemas/ReferencedGrid'
+        selectionType:
+          enum:
+          - SINGLE
+          - MULTIPLE
+          type: string
+        type:
+          enum:
+          - ROW
+          - CELL
+          type: string
+      title: ColumnReference
+      type: object
+    CreateBranch:
+      example:
+        name: name
+      properties:
+        name:
+          type: string
+      title: CreateBranch
+      type: object
+    CreateColumn:
+      example:
+        reference:
+          selectionType: SINGLE
+          columnId: columnId
+          gridId: gridId
+          type: ROW
+        numberFormat:
+          decimalPlaces: 0
+          currencySymbol: currencySymbol
+          type: DECIMAL
+          use1000Separator: true
+        name: name
+        selectionOptions:
+        - selectionOptions
+        - selectionOptions
+        description: description
+        id: id
+        languageCode: enUS
+        type: singleLine
+      properties:
+        description:
+          type: string
+        id:
+          pattern: ^(?!_)\w+$
+          type: string
+        languageCode:
+          enum:
+          - enUS
+          - arSA
+          - caES
+          - zhCN
+          - zhTW
+          - deDE
+          - itIT
+          - jaJP
+          - koKR
+          - plPL
+          - ptBR
+          - ruRU
+          - esMX
+          - esLA
+          - esES
+          - bnBD
+          - bgBG
+          - zhHK
+          - csCZ
+          - daDK
+          - nlNL
+          - fiFI
+          - frFR
+          - frCA
+          - elGR
+          - heIL
+          - hiIN
+          - huHU
+          - idID
+          - jwID
+          - lvLV
+          - msMY
+          - noNO
+          - ptPT
+          - roRO
+          - skSK
+          - svSE
+          - tlPH
+          - thTH
+          - trTR
+          - ukUA
+          - urIN
+          - viVN
+          - afZA
+          - arAE
+          - arBH
+          - arDZ
+          - arEG
+          - arIQ
+          - arJO
+          - arKW
+          - arLB
+          - arLY
+          - arMA
+          - arOM
+          - arQA
+          - arSY
+          - arTN
+          - arYE
+          - azAZ
+          - beBY
+          - bsBA
+          - cyGB
+          - deAT
+          - deCH
+          - deLI
+          - deLU
+          - dvMV
+          - enAU
+          - enBZ
+          - enCA
+          - enGB
+          - enIE
+          - enJM
+          - enNZ
+          - enPH
+          - enTT
+          - enZA
+          - enZW
+          - esAR
+          - esBO
+          - esCL
+          - esCO
+          - esCR
+          - esDO
+          - esEC
+          - esGT
+          - esHN
+          - esNI
+          - esPA
+          - esPE
+          - esPR
+          - esPY
+          - esSV
+          - esUY
+          - esVE
+          - etEE
+          - euES
+          - faIR
+          - foFO
+          - frBE
+          - frCH
+          - frLU
+          - frMC
+          - glES
+          - guIN
+          - hrBA
+          - hrHR
+          - hyAM
+          - isIS
+          - itCH
+          - kaGE
+          - kkKZ
+          - knIN
+          - kokIN
+          - kyKG
+          - ltLT
+          - miNZ
+          - mkMK
+          - mnMN
+          - mrIN
+          - msBN
+          - mtMT
+          - nbNO
+          - nlBE
+          - nnNO
+          - nsZA
+          - paIN
+          - psAR
+          - quBO
+          - quEC
+          - quPE
+          - saIN
+          - seFI
+          - seNO
+          - seSE
+          - slSI
+          - sqAL
+          - srBA
+          - svFI
+          - swKE
+          - syrSY
+          - taIN
+          - teIN
+          - tnZA
+          - ttRU
+          - urPK
+          - uzUZ
+          - xhZA
+          - zhMO
+          - zhSG
+          - zuZA
+          type: string
+        name:
+          type: string
+        numberFormat:
+          $ref: '#/components/schemas/NumberFormat'
+        reference:
+          $ref: '#/components/schemas/Reference'
+        selectionOptions:
+          items:
+            type: string
+          type: array
+        type:
+          enum:
+          - singleLine
+          - multipleLines
+          - richText
+          - markdown
+          - singleSelection
+          - multipleSelections
+          - boolean
+          - number
+          - datetime
+          - files
+          - reference
+          - lookup
+          - language
+          - json
+          - yaml
+          - html
+          - formula
+          type: string
+      required:
+      - type
+      title: CreateColumn
+      type: object
+    CreateDependency:
+      example:
+        targetColumnId: targetColumnId
+        id: id
+        sourceColumnId: sourceColumnId
+      properties:
+        id:
+          pattern: ^(?!_)\w+$
+          type: string
+        sourceColumnId:
+          type: string
+        targetColumnId:
+          type: string
+      title: CreateDependency
+      type: object
+    CreateGrid:
+      example:
+        metadata:
+          key: metadata
+        templateGridId: templateGridId
+        name: name
+      properties:
+        metadata:
+          additionalProperties:
+            type: string
+          type: object
+        name:
+          type: string
+        templateGridId:
+          type: string
+      title: CreateGrid
+      type: object
+    CreateMetadata:
+      example:
+        data:
+          key: data
+        id: id
+      properties:
+        data:
+          additionalProperties:
+            type: string
+          type: object
+        id:
+          pattern: ^\w+$
+          type: string
+      title: CreateMetadata
+      type: object
+    DataItem:
+      title: DataItem
+      type: object
+    DeleteDependency:
+      example:
+        ids:
+        - ids
+        - ids
+      properties:
+        ids:
+          items:
+            type: string
+          type: array
+      title: DeleteDependency
+      type: object
+    DeleteRecord:
+      example:
+        identifiers:
+        - path: path
+          id: id
+        - path: path
+          id: id
+        ids:
+        - ids
+        - ids
+      properties:
+        identifiers:
+          items:
+            $ref: '#/components/schemas/RecordIdentifierWrapper'
+          type: array
+        ids:
+          items:
+            type: string
+          type: array
+      title: DeleteRecord
+      type: object
+    Dependency:
+      example:
+        targetColumnId: targetColumnId
+        id: id
+        sourceColumnId: sourceColumnId
+      properties:
+        id:
+          type: string
+        sourceColumnId:
+          type: string
+        targetColumnId:
+          type: string
+      title: Dependency
+      type: object
+    File:
+      properties:
+        absolute:
+          type: boolean
+        absoluteFile:
+          $ref: '#/components/schemas/File'
+        absolutePath:
+          type: string
+        canonicalFile:
+          $ref: '#/components/schemas/File'
+        canonicalPath:
+          type: string
+        directory:
+          type: boolean
+        file:
+          type: boolean
+        freeSpace:
+          format: int64
+          type: integer
+        hidden:
+          type: boolean
+        name:
+          type: string
+        parent:
+          type: string
+        parentFile:
+          $ref: '#/components/schemas/File'
+        path:
+          type: string
+        totalSpace:
+          format: int64
+          type: integer
+        usableSpace:
+          format: int64
+          type: integer
+      title: File
+      type: object
+    Grid:
+      example:
+        branchId: branchId
+        customProperties:
+          key: "{}"
+        defaultAccessViewId: defaultAccessViewId
+        parentGridId: parentGridId
+        name: name
+        id: id
+        branches:
+        - null
+        - null
+        groupTagDefinition:
+        - groupTagDefinition
+        - groupTagDefinition
+        status: status
+      properties:
+        branchId:
+          type: string
+        branches:
+          items:
+            $ref: '#/components/schemas/Grid'
+          type: array
+        customProperties:
+          additionalProperties:
+            properties: {}
+            type: object
+          type: object
+        defaultAccessViewId:
+          type: string
+        groupTagDefinition:
+          items:
+            type: string
+          type: array
+        id:
+          type: string
+        name:
+          type: string
+        parentGridId:
+          type: string
+        status:
+          type: string
+      title: Grid
+      type: object
+    InputStream:
+      title: InputStream
+      type: object
+    Metadata:
+      example:
+        data:
+          key: data
+        id: id
+      properties:
+        data:
+          additionalProperties:
+            type: string
+          type: object
+        id:
+          type: string
+      title: Metadata
+      type: object
+    NumberFormat:
+      example:
+        decimalPlaces: 0
+        currencySymbol: currencySymbol
+        type: DECIMAL
+        use1000Separator: true
+      properties:
+        currencySymbol:
+          type: string
+        decimalPlaces:
+          format: int32
+          type: integer
+        type:
+          enum:
+          - DECIMAL
+          - INTEGER
+          type: string
+        use1000Separator:
+          type: boolean
+      title: NumberFormat
+      type: object
+    OptionalOfstring:
+      example:
+        present: true
+        empty: true
+      properties:
+        empty:
+          type: boolean
+        present:
+          type: boolean
+      title: OptionalOfstring
+      type: object
+    Record:
+      example:
+        path: path
+        cells:
+        - columnId: columnId
+          dependencyStatus: upToDate
+          referencedIds:
+          - referencedIds
+          - referencedIds
+          value: "{}"
+        - columnId: columnId
+          dependencyStatus: upToDate
+          referencedIds:
+          - referencedIds
+          - referencedIds
+          value: "{}"
+        lastModifiedTime: 2000-01-23T04:56:07.000+00:00
+        lastModifiedBy: lastModifiedBy
+        id: id
+      properties:
+        cells:
+          items:
+            $ref: '#/components/schemas/Cell'
+          type: array
+        id:
+          type: string
+        lastModifiedBy:
+          type: string
+        lastModifiedTime:
+          format: date-time
+          type: string
+        path:
+          type: string
+      title: Record
+      type: object
+    RecordIdentifierWrapper:
+      example:
+        path: path
+        id: id
+      properties:
+        id:
+          type: string
+        path:
+          type: string
+      required:
+      - id
+      - path
+      title: RecordIdentifierWrapper
+      type: object
+    Reference:
+      example:
+        selectionType: SINGLE
+        columnId: columnId
+        gridId: gridId
+        type: ROW
+      properties:
+        columnId:
+          type: string
+        gridId:
+          type: string
+        selectionType:
+          enum:
+          - SINGLE
+          - MULTIPLE
+          type: string
+        type:
+          enum:
+          - ROW
+          - CELL
+          type: string
+      title: Reference
+      type: object
+    ReferencedColumn:
+      example:
+        name: name
+        selectionOptions:
+        - selectionOptions
+        - selectionOptions
+        id: id
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        selectionOptions:
+          items:
+            type: string
+          type: array
+      title: ReferencedColumn
+      type: object
+    ReferencedGrid:
+      example:
+        name: name
+        id: id
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      title: ReferencedGrid
+      type: object
+    Resource:
+      properties:
+        description:
+          type: string
+        file:
+          $ref: '#/components/schemas/File'
+        filename:
+          type: string
+        inputStream:
+          title: InputStream
+          type: object
+        open:
+          type: boolean
+        readable:
+          type: boolean
+        uri:
+          $ref: '#/components/schemas/URI'
+        url:
+          $ref: '#/components/schemas/URL'
+      title: Resource
+      type: object
+    SetCell:
+      example:
+        columnId: columnId
+        referencedIds:
+        - referencedIds
+        - referencedIds
+        value: "{}"
+      properties:
+        columnId:
+          type: string
+        referencedIds:
+          items:
+            type: string
+          type: array
+        value:
+          title: DataItem
+          type: object
+      title: SetCell
+      type: object
+    SetRecord:
+      example:
+        path:
+          present: true
+          empty: true
+        cells:
+        - columnId: columnId
+          referencedIds:
+          - referencedIds
+          - referencedIds
+          value: "{}"
+        - columnId: columnId
+          referencedIds:
+          - referencedIds
+          - referencedIds
+          value: "{}"
+        id: id
+      properties:
+        cells:
+          items:
+            $ref: '#/components/schemas/SetCell'
+          type: array
+        id:
+          type: string
+        path:
+          $ref: '#/components/schemas/OptionalOfstring'
+      title: SetRecord
+      type: object
+    StreamingResponseBody:
+      title: StreamingResponseBody
+      type: object
+    Task:
+      example:
+        id: id
+        status: failed
+      properties:
+        id:
+          type: string
+        status:
+          enum:
+          - failed
+          - successful
+          - running
+          type: string
+      title: Task
+      type: object
+    URI:
+      properties:
+        absolute:
+          type: boolean
+        authority:
+          type: string
+        fragment:
+          type: string
+        host:
+          type: string
+        opaque:
+          type: boolean
+        path:
+          type: string
+        port:
+          format: int32
+          type: integer
+        query:
+          type: string
+        rawAuthority:
+          type: string
+        rawFragment:
+          type: string
+        rawPath:
+          type: string
+        rawQuery:
+          type: string
+        rawSchemeSpecificPart:
+          type: string
+        rawUserInfo:
+          type: string
+        scheme:
+          type: string
+        schemeSpecificPart:
+          type: string
+        userInfo:
+          type: string
+      title: URI
+      type: object
+    URL:
+      properties:
+        authority:
+          type: string
+        content:
+          properties: {}
+          type: object
+        defaultPort:
+          format: int32
+          type: integer
+        file:
+          type: string
+        host:
+          type: string
+        path:
+          type: string
+        port:
+          format: int32
+          type: integer
+        protocol:
+          type: string
+        query:
+          type: string
+        ref:
+          type: string
+        userInfo:
+          type: string
+      title: URL
+      type: object
+    UpdateColumn:
+      example:
+        numberFormat:
+          decimalPlaces: 0
+          currencySymbol: currencySymbol
+          type: DECIMAL
+          use1000Separator: true
+        name: name
+        selectionOptions:
+        - selectionOptions
+        - selectionOptions
+        description: description
+        languageCode: enUS
+      properties:
+        description:
+          type: string
+        languageCode:
+          enum:
+          - enUS
+          - arSA
+          - caES
+          - zhCN
+          - zhTW
+          - deDE
+          - itIT
+          - jaJP
+          - koKR
+          - plPL
+          - ptBR
+          - ruRU
+          - esMX
+          - esLA
+          - esES
+          - bnBD
+          - bgBG
+          - zhHK
+          - csCZ
+          - daDK
+          - nlNL
+          - fiFI
+          - frFR
+          - frCA
+          - elGR
+          - heIL
+          - hiIN
+          - huHU
+          - idID
+          - jwID
+          - lvLV
+          - msMY
+          - noNO
+          - ptPT
+          - roRO
+          - skSK
+          - svSE
+          - tlPH
+          - thTH
+          - trTR
+          - ukUA
+          - urIN
+          - viVN
+          - afZA
+          - arAE
+          - arBH
+          - arDZ
+          - arEG
+          - arIQ
+          - arJO
+          - arKW
+          - arLB
+          - arLY
+          - arMA
+          - arOM
+          - arQA
+          - arSY
+          - arTN
+          - arYE
+          - azAZ
+          - beBY
+          - bsBA
+          - cyGB
+          - deAT
+          - deCH
+          - deLI
+          - deLU
+          - dvMV
+          - enAU
+          - enBZ
+          - enCA
+          - enGB
+          - enIE
+          - enJM
+          - enNZ
+          - enPH
+          - enTT
+          - enZA
+          - enZW
+          - esAR
+          - esBO
+          - esCL
+          - esCO
+          - esCR
+          - esDO
+          - esEC
+          - esGT
+          - esHN
+          - esNI
+          - esPA
+          - esPE
+          - esPR
+          - esPY
+          - esSV
+          - esUY
+          - esVE
+          - etEE
+          - euES
+          - faIR
+          - foFO
+          - frBE
+          - frCH
+          - frLU
+          - frMC
+          - glES
+          - guIN
+          - hrBA
+          - hrHR
+          - hyAM
+          - isIS
+          - itCH
+          - kaGE
+          - kkKZ
+          - knIN
+          - kokIN
+          - kyKG
+          - ltLT
+          - miNZ
+          - mkMK
+          - mnMN
+          - mrIN
+          - msBN
+          - mtMT
+          - nbNO
+          - nlBE
+          - nnNO
+          - nsZA
+          - paIN
+          - psAR
+          - quBO
+          - quEC
+          - quPE
+          - saIN
+          - seFI
+          - seNO
+          - seSE
+          - slSI
+          - sqAL
+          - srBA
+          - svFI
+          - swKE
+          - syrSY
+          - taIN
+          - teIN
+          - tnZA
+          - ttRU
+          - urPK
+          - uzUZ
+          - xhZA
+          - zhMO
+          - zhSG
+          - zuZA
+          type: string
+        name:
+          type: string
+        numberFormat:
+          $ref: '#/components/schemas/NumberFormat'
+        selectionOptions:
+          items:
+            type: string
+          type: array
+      title: UpdateColumn
+      type: object
+    UpdateDependency:
+      example:
+        targetColumnId: targetColumnId
+        newId: newId
+        sourceColumnId: sourceColumnId
+      properties:
+        newId:
+          pattern: ^(?!_)\w+$
+          type: string
+        sourceColumnId:
+          type: string
+        targetColumnId:
+          type: string
+      title: UpdateDependency
+      type: object
+    UpdateGrid:
+      example:
+        metadata:
+          key: metadata
+        name: name
+      properties:
+        metadata:
+          additionalProperties:
+            type: string
+          type: object
+        name:
+          type: string
+      title: UpdateGrid
+      type: object
+    UpdateMetadata:
+      example:
+        data:
+          key: data
+      properties:
+        data:
+          additionalProperties:
+            type: string
+          type: object
+      title: UpdateMetadata
+      type: object
+    UploadedFile:
+      example:
+        originalName: originalName
+        size: 0
+        id: id
+        contentType: contentType
+      properties:
+        contentType:
+          type: string
+        id:
+          type: string
+        originalName:
+          type: string
+        size:
+          format: int64
+          type: integer
+      title: UploadedFile
+      type: object
+    View:
+      example:
+        customProperties:
+          key: "{}"
+        name: name
+        description: description
+        gridId: gridId
+        id: id
+        groupTagDefinition:
+        - groupTagDefinition
+        - groupTagDefinition
+        status: status
+      properties:
+        customProperties:
+          additionalProperties:
+            properties: {}
+            type: object
+          type: object
+        description:
+          type: string
+        gridId:
+          type: string
+        groupTagDefinition:
+          items:
+            type: string
+          type: array
+        id:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+      title: View
+      type: object
+    ViewColumn:
+      example:
+        isTarget: true
+        reference:
+          selectionType: SINGLE
+          grid:
+            name: name
+            id: id
+          column:
+            name: name
+            selectionOptions:
+            - selectionOptions
+            - selectionOptions
+            id: id
+          type: ROW
+        dependsOn: dependsOn
+        numberFormat:
+          decimalPlaces: 0
+          currencySymbol: currencySymbol
+          type: DECIMAL
+          use1000Separator: true
+        isSource: true
+        name: name
+        selectionOptions:
+        - selectionOptions
+        - selectionOptions
+        description: description
+        id: id
+        languageCode: languageCode
+        type: singleLine
+      properties:
+        dependsOn:
+          type: string
+        description:
+          type: string
+        id:
+          type: string
+        isSource:
+          type: boolean
+        isTarget:
+          type: boolean
+        languageCode:
+          type: string
+        name:
+          type: string
+        numberFormat:
+          $ref: '#/components/schemas/NumberFormat'
+        reference:
+          $ref: '#/components/schemas/ColumnReference'
+        selectionOptions:
+          items:
+            type: string
+          type: array
+        type:
+          enum:
+          - singleLine
+          - multipleLines
+          - richText
+          - markdown
+          - singleSelection
+          - multipleSelections
+          - boolean
+          - number
+          - datetime
+          - files
+          - reference
+          - lookup
+          - language
+          - json
+          - yaml
+          - html
+          - formula
+          type: string
+      title: ViewColumn
+      type: object
+    CreateDatabase:
+      example:
+        name: name
+        description: description
+        id: id
+      properties:
+        description:
+          type: string
+        id:
+          pattern: ^\w+$
+          type: string
+        name:
+          type: string
+      title: CreateDatabase
+      type: object
+    CreateProject:
+      example:
+        name: name
+        description: description
+      properties:
+        description:
+          maxLength: 255
+          minLength: 0
+          type: string
+        name:
+          maxLength: 50
+          minLength: 0
+          type: string
+      required:
+      - name
+      title: CreateProject
+      type: object
+    Database:
+      example:
+        name: name
+        description: description
+        groups:
+        - null
+        - null
+        project:
+          role:
+            privileges:
+            - level: level
+              extra: extra
+              name: name
+              description: description
+              id: 5
+              label: label
+              serviceId: serviceId
+              order: 5
+            - level: level
+              extra: extra
+              name: name
+              description: description
+              id: 5
+              label: label
+              serviceId: serviceId
+              order: 5
+            isSystemRole: true
+            level: level
+            name: name
+            id: 6
+            title: title
+            type: type
+            privilegeIds:
+            - 1
+            - 1
+          name: name
+          description: description
+          id: 0
+        id: id
+        grids:
+        - branchId: branchId
+          customProperties:
+            key: "{}"
+          defaultAccessViewId: defaultAccessViewId
+          parentGridId: parentGridId
+          name: name
+          id: id
+          branches:
+          - null
+          - null
+          groupTagDefinition:
+          - groupTagDefinition
+          - groupTagDefinition
+          status: status
+        - branchId: branchId
+          customProperties:
+            key: "{}"
+          defaultAccessViewId: defaultAccessViewId
+          parentGridId: parentGridId
+          name: name
+          id: id
+          branches:
+          - null
+          - null
+          groupTagDefinition:
+          - groupTagDefinition
+          - groupTagDefinition
+          status: status
+        projectId: 2
+        views:
+        - customProperties:
+            key: "{}"
+          name: name
+          description: description
+          gridId: gridId
+          id: id
+          groupTagDefinition:
+          - groupTagDefinition
+          - groupTagDefinition
+          status: status
+        - customProperties:
+            key: "{}"
+          name: name
+          description: description
+          gridId: gridId
+          id: id
+          groupTagDefinition:
+          - groupTagDefinition
+          - groupTagDefinition
+          status: status
+      properties:
+        description:
+          type: string
+        grids:
+          items:
+            $ref: '#/components/schemas/Grid'
+          type: array
+        groups:
+          items:
+            $ref: '#/components/schemas/Group'
+          type: array
+        id:
+          type: string
+        name:
+          type: string
+        project:
+          $ref: '#/components/schemas/Project'
+        projectId:
+          format: int64
+          type: integer
+        views:
+          items:
+            $ref: '#/components/schemas/View'
+          type: array
+      title: Database
+      type: object
+    Group:
+      title: Group
+      type: object
+    Privilege:
+      example:
+        level: level
+        extra: extra
+        name: name
+        description: description
+        id: 5
+        label: label
+        serviceId: serviceId
+        order: 5
+      properties:
+        description:
+          type: string
+        extra:
+          type: string
+        id:
+          format: int64
+          type: integer
+        label:
+          type: string
+        level:
+          type: string
+        name:
+          type: string
+        order:
+          format: int32
+          type: integer
+        serviceId:
+          type: string
+      title: Privilege
+      type: object
+    Project:
+      example:
+        role:
+          privileges:
+          - level: level
+            extra: extra
+            name: name
+            description: description
+            id: 5
+            label: label
+            serviceId: serviceId
+            order: 5
+          - level: level
+            extra: extra
+            name: name
+            description: description
+            id: 5
+            label: label
+            serviceId: serviceId
+            order: 5
+          isSystemRole: true
+          level: level
+          name: name
+          id: 6
+          title: title
+          type: type
+          privilegeIds:
+          - 1
+          - 1
+        name: name
+        description: description
+        id: 0
+      properties:
+        description:
+          type: string
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+        role:
+          $ref: '#/components/schemas/Role'
+      title: Project
+      type: object
+    ProjectDetail:
+      example:
+        databases:
+        - name: name
+          description: description
+          groups:
+          - null
+          - null
+          project:
+            role:
+              privileges:
+              - level: level
+                extra: extra
+                name: name
+                description: description
+                id: 5
+                label: label
+                serviceId: serviceId
+                order: 5
+              - level: level
+                extra: extra
+                name: name
+                description: description
+                id: 5
+                label: label
+                serviceId: serviceId
+                order: 5
+              isSystemRole: true
+              level: level
+              name: name
+              id: 6
+              title: title
+              type: type
+              privilegeIds:
+              - 1
+              - 1
+            name: name
+            description: description
+            id: 0
+          id: id
+          grids:
+          - branchId: branchId
+            customProperties:
+              key: "{}"
+            defaultAccessViewId: defaultAccessViewId
+            parentGridId: parentGridId
+            name: name
+            id: id
+            branches:
+            - null
+            - null
+            groupTagDefinition:
+            - groupTagDefinition
+            - groupTagDefinition
+            status: status
+          - branchId: branchId
+            customProperties:
+              key: "{}"
+            defaultAccessViewId: defaultAccessViewId
+            parentGridId: parentGridId
+            name: name
+            id: id
+            branches:
+            - null
+            - null
+            groupTagDefinition:
+            - groupTagDefinition
+            - groupTagDefinition
+            status: status
+          projectId: 2
+          views:
+          - customProperties:
+              key: "{}"
+            name: name
+            description: description
+            gridId: gridId
+            id: id
+            groupTagDefinition:
+            - groupTagDefinition
+            - groupTagDefinition
+            status: status
+          - customProperties:
+              key: "{}"
+            name: name
+            description: description
+            gridId: gridId
+            id: id
+            groupTagDefinition:
+            - groupTagDefinition
+            - groupTagDefinition
+            status: status
+        - name: name
+          description: description
+          groups:
+          - null
+          - null
+          project:
+            role:
+              privileges:
+              - level: level
+                extra: extra
+                name: name
+                description: description
+                id: 5
+                label: label
+                serviceId: serviceId
+                order: 5
+              - level: level
+                extra: extra
+                name: name
+                description: description
+                id: 5
+                label: label
+                serviceId: serviceId
+                order: 5
+              isSystemRole: true
+              level: level
+              name: name
+              id: 6
+              title: title
+              type: type
+              privilegeIds:
+              - 1
+              - 1
+            name: name
+            description: description
+            id: 0
+          id: id
+          grids:
+          - branchId: branchId
+            customProperties:
+              key: "{}"
+            defaultAccessViewId: defaultAccessViewId
+            parentGridId: parentGridId
+            name: name
+            id: id
+            branches:
+            - null
+            - null
+            groupTagDefinition:
+            - groupTagDefinition
+            - groupTagDefinition
+            status: status
+          - branchId: branchId
+            customProperties:
+              key: "{}"
+            defaultAccessViewId: defaultAccessViewId
+            parentGridId: parentGridId
+            name: name
+            id: id
+            branches:
+            - null
+            - null
+            groupTagDefinition:
+            - groupTagDefinition
+            - groupTagDefinition
+            status: status
+          projectId: 2
+          views:
+          - customProperties:
+              key: "{}"
+            name: name
+            description: description
+            gridId: gridId
+            id: id
+            groupTagDefinition:
+            - groupTagDefinition
+            - groupTagDefinition
+            status: status
+          - customProperties:
+              key: "{}"
+            name: name
+            description: description
+            gridId: gridId
+            id: id
+            groupTagDefinition:
+            - groupTagDefinition
+            - groupTagDefinition
+            status: status
+        role:
+          privileges:
+          - level: level
+            extra: extra
+            name: name
+            description: description
+            id: 5
+            label: label
+            serviceId: serviceId
+            order: 5
+          - level: level
+            extra: extra
+            name: name
+            description: description
+            id: 5
+            label: label
+            serviceId: serviceId
+            order: 5
+          isSystemRole: true
+          level: level
+          name: name
+          id: 6
+          title: title
+          type: type
+          privilegeIds:
+          - 1
+          - 1
+        name: name
+        description: description
+        groups:
+        - null
+        - null
+        id: 0
+      properties:
+        databases:
+          items:
+            $ref: '#/components/schemas/Database'
+          type: array
+        description:
+          type: string
+        groups:
+          items:
+            $ref: '#/components/schemas/Group'
+          type: array
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+        role:
+          $ref: '#/components/schemas/Role'
+      title: ProjectDetail
+      type: object
+    Role:
+      example:
+        privileges:
+        - level: level
+          extra: extra
+          name: name
+          description: description
+          id: 5
+          label: label
+          serviceId: serviceId
+          order: 5
+        - level: level
+          extra: extra
+          name: name
+          description: description
+          id: 5
+          label: label
+          serviceId: serviceId
+          order: 5
+        isSystemRole: true
+        level: level
+        name: name
+        id: 6
+        title: title
+        type: type
+        privilegeIds:
+        - 1
+        - 1
+      properties:
+        id:
+          format: int64
+          type: integer
+        isSystemRole:
+          type: boolean
+        level:
+          type: string
+        name:
+          type: string
+        privilegeIds:
+          items:
+            format: int64
+            type: integer
+          type: array
+        privileges:
+          items:
+            $ref: '#/components/schemas/Privilege'
+          type: array
+        title:
+          type: string
+        type:
+          type: string
+      title: Role
+      type: object
+    UpdateDatabase:
+      example:
+        name: name
+        description: description
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+      required:
+      - name
+      title: UpdateDatabase
+      type: object
+    UpdateProject:
+      example:
+        name: name
+        description: description
+      properties:
+        description:
+          maxLength: 255
+          minLength: 0
+          type: string
+        name:
+          maxLength: 50
+          minLength: 0
+          type: string
+      required:
+      - name
+      title: UpdateProject
+      type: object
+  securitySchemes:
+    ApiKey:
+      in: header
+      name: Authorization
+      type: apiKey
+x-original-swagger-version: "2.0"
+
