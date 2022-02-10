@@ -131,7 +131,7 @@ public class ApiClient {
         json = new JSON();
 
         // Set default User-Agent.
-        setUserAgent("Gridly Java SDK 1.1.0");
+        setUserAgent("Gridly Java SDK 1.2.0");
 
         authentications = new HashMap<String, Authentication>();
     }
