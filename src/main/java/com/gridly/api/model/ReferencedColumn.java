@@ -46,6 +46,8 @@ public class ReferencedColumn implements Serializable {
   @SerializedName(SERIALIZED_NAME_SELECTION_OPTIONS)
   private List<String> selectionOptions = null;
 
+  public ReferencedColumn() { 
+  }
 
   public ReferencedColumn id(String id) {
     

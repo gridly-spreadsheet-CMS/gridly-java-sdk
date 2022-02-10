@@ -56,6 +56,8 @@ public class Record implements Serializable {
   @SerializedName(SERIALIZED_NAME_PATH)
   private String path;
 
+  public Record() { 
+  }
 
   public Record cells(List<Cell> cells) {
     

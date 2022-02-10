@@ -13,7 +13,7 @@ Gridly API documentation
 
 Building the API client library requires:
 1. Java 1.8+
-2. Maven/Gradle
+2. Maven (3.8.3+)/Gradle (7.2+)
 
 ## Installation
 
@@ -49,7 +49,14 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "com.gridly:api:1.1.0"
+  repositories {
+    mavenCentral()     // Needed if the 'api' jar has been published to maven central.
+    mavenLocal()       // Needed if the 'api' jar has been published to the local maven repo.
+  }
+
+  dependencies {
+     implementation "com.gridly:api:1.1.0"
+  }
 ```
 
 ### Others
@@ -139,7 +146,7 @@ Class | Method | HTTP request | Description
 *GridMetadataApi* | [**update**](docs/GridMetadataApi.md#update) | **PATCH** /v1/grids/{gridId}/metadata/{metadataId} | update
 *ProjectApi* | [**create**](docs/ProjectApi.md#create) | **POST** /v1/projects | create
 *ProjectApi* | [**delete**](docs/ProjectApi.md#delete) | **DELETE** /v1/projects/{projectId} | delete
-*ProjectApi* | [**findOneDetail**](docs/ProjectApi.md#findOneDetail) | **GET** /v1/projects/{projectId} | findOneDetail
+*ProjectApi* | [**findOne**](docs/ProjectApi.md#findOne) | **GET** /v1/projects/{projectId} | findOne
 *ProjectApi* | [**list**](docs/ProjectApi.md#list) | **GET** /v1/projects | list
 *ProjectApi* | [**update**](docs/ProjectApi.md#update) | **PUT** /v1/projects/{projectId} | update
 *RecordApi* | [**create**](docs/RecordApi.md#create) | **POST** /v1/views/{viewId}/records | create

@@ -48,6 +48,8 @@ public class UploadedFile implements Serializable {
   @SerializedName(SERIALIZED_NAME_SIZE)
   private Long size;
 
+  public UploadedFile() { 
+  }
 
   public UploadedFile contentType(String contentType) {
     

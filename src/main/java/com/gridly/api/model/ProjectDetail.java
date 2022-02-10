@@ -60,6 +60,8 @@ public class ProjectDetail implements Serializable {
   @SerializedName(SERIALIZED_NAME_ROLE)
   private Role role;
 
+  public ProjectDetail() { 
+  }
 
   public ProjectDetail databases(List<Database> databases) {
     

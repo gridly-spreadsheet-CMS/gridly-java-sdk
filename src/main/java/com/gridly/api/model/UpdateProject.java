@@ -40,6 +40,8 @@ public class UpdateProject implements Serializable {
   @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
 
+  public UpdateProject() { 
+  }
 
   public UpdateProject description(String description) {
     
@@ -74,6 +76,7 @@ public class UpdateProject implements Serializable {
    * Get name
    * @return name
   **/
+  @javax.annotation.Nonnull
   @ApiModelProperty(required = true, value = "")
 
   public String getName() {

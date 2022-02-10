@@ -43,6 +43,8 @@ public class CreateMetadata implements Serializable {
   @SerializedName(SERIALIZED_NAME_ID)
   private String id;
 
+  public CreateMetadata() { 
+  }
 
   public CreateMetadata data(Map<String, String> data) {
     

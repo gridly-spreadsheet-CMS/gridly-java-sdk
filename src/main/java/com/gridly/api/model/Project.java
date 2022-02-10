@@ -49,6 +49,8 @@ public class Project implements Serializable {
   @SerializedName(SERIALIZED_NAME_ROLE)
   private Role role;
 
+  public Project() { 
+  }
 
   public Project description(String description) {
     

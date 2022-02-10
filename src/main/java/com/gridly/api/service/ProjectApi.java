@@ -40,6 +40,8 @@ import java.util.Map;
 
 public class ProjectApi {
     private ApiClient localVarApiClient;
+    private int localHostIndex;
+    private String localCustomBaseUrl;
 
     public ProjectApi() {
         this(Configuration.getDefaultApiClient());
@@ -55,6 +57,22 @@ public class ProjectApi {
 
     public void setApiClient(ApiClient apiClient) {
         this.localVarApiClient = apiClient;
+    }
+
+    public int getHostIndex() {
+        return localHostIndex;
+    }
+
+    public void setHostIndex(int hostIndex) {
+        this.localHostIndex = hostIndex;
+    }
+
+    public String getCustomBaseUrl() {
+        return localCustomBaseUrl;
+    }
+
+    public void setCustomBaseUrl(String customBaseUrl) {
+        this.localCustomBaseUrl = customBaseUrl;
     }
 
     /**
@@ -74,6 +92,20 @@ public class ProjectApi {
      </table>
      */
     public okhttp3.Call createCall(CreateProject createProject, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = createProject;
 
         // create path and map variables
@@ -97,10 +129,12 @@ public class ProjectApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarHeaderParams != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "ApiKey" };
-        return localVarApiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
@@ -200,6 +234,20 @@ public class ProjectApi {
      </table>
      */
     public okhttp3.Call deleteCall(Long projectId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -224,10 +272,12 @@ public class ProjectApi {
             
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarHeaderParams != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "ApiKey" };
-        return localVarApiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
@@ -305,8 +355,7 @@ public class ProjectApi {
         return localVarCall;
     }
     /**
-     * Build call for findOneDetail
-     * @param expand expand (required)
+     * Build call for findOne
      * @param projectId projectId (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -320,7 +369,21 @@ public class ProjectApi {
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call findOneDetailCall(String expand, Long projectId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call findOneCall(Long projectId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -332,10 +395,6 @@ public class ProjectApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        if (expand != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("expand", expand));
-        }
 
         final String[] localVarAccepts = {
             "application/json"
@@ -349,35 +408,31 @@ public class ProjectApi {
             
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarHeaderParams != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "ApiKey" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call findOneDetailValidateBeforeCall(String expand, Long projectId, final ApiCallback _callback) throws ApiException {
-        
-        // verify the required parameter 'expand' is set
-        if (expand == null) {
-            throw new ApiException("Missing the required parameter 'expand' when calling findOneDetail(Async)");
-        }
+    private okhttp3.Call findOneValidateBeforeCall(Long projectId, final ApiCallback _callback) throws ApiException {
         
         // verify the required parameter 'projectId' is set
         if (projectId == null) {
-            throw new ApiException("Missing the required parameter 'projectId' when calling findOneDetail(Async)");
+            throw new ApiException("Missing the required parameter 'projectId' when calling findOne(Async)");
         }
         
 
-        okhttp3.Call localVarCall = findOneDetailCall(expand, projectId, _callback);
+        okhttp3.Call localVarCall = findOneCall(projectId, _callback);
         return localVarCall;
 
     }
 
     /**
-     * findOneDetail
+     * findOne
      * 
-     * @param expand expand (required)
      * @param projectId projectId (required)
      * @return ProjectDetail
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -390,15 +445,14 @@ public class ProjectApi {
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
      </table>
      */
-    public ProjectDetail findOneDetail(String expand, Long projectId) throws ApiException {
-        ApiResponse<ProjectDetail> localVarResp = findOneDetailWithHttpInfo(expand, projectId);
+    public ProjectDetail findOne(Long projectId) throws ApiException {
+        ApiResponse<ProjectDetail> localVarResp = findOneWithHttpInfo(projectId);
         return localVarResp.getData();
     }
 
     /**
-     * findOneDetail
+     * findOne
      * 
-     * @param expand expand (required)
      * @param projectId projectId (required)
      * @return ApiResponse&lt;ProjectDetail&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -411,16 +465,15 @@ public class ProjectApi {
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ProjectDetail> findOneDetailWithHttpInfo(String expand, Long projectId) throws ApiException {
-        okhttp3.Call localVarCall = findOneDetailValidateBeforeCall(expand, projectId, null);
+    public ApiResponse<ProjectDetail> findOneWithHttpInfo(Long projectId) throws ApiException {
+        okhttp3.Call localVarCall = findOneValidateBeforeCall(projectId, null);
         Type localVarReturnType = new TypeToken<ProjectDetail>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * findOneDetail (asynchronously)
+     * findOne (asynchronously)
      * 
-     * @param expand expand (required)
      * @param projectId projectId (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -434,9 +487,9 @@ public class ProjectApi {
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call findOneDetailAsync(String expand, Long projectId, final ApiCallback<ProjectDetail> _callback) throws ApiException {
+    public okhttp3.Call findOneAsync(Long projectId, final ApiCallback<ProjectDetail> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = findOneDetailValidateBeforeCall(expand, projectId, _callback);
+        okhttp3.Call localVarCall = findOneValidateBeforeCall(projectId, _callback);
         Type localVarReturnType = new TypeToken<ProjectDetail>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -456,6 +509,20 @@ public class ProjectApi {
      </table>
      */
     public okhttp3.Call listCall(final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -479,10 +546,12 @@ public class ProjectApi {
             
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarHeaderParams != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "ApiKey" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
@@ -573,6 +642,20 @@ public class ProjectApi {
      </table>
      */
     public okhttp3.Call updateCall(Long projectId, UpdateProject updateProject, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = updateProject;
 
         // create path and map variables
@@ -597,10 +680,12 @@ public class ProjectApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarHeaderParams != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "ApiKey" };
-        return localVarApiClient.buildCall(localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")

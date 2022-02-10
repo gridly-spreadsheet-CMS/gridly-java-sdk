@@ -492,6 +492,8 @@ public class CreateColumn implements Serializable {
   @SerializedName(SERIALIZED_NAME_TYPE)
   private TypeEnum type;
 
+  public CreateColumn() { 
+  }
 
   public CreateColumn description(String description) {
     
@@ -672,6 +674,7 @@ public class CreateColumn implements Serializable {
    * Get type
    * @return type
   **/
+  @javax.annotation.Nonnull
   @ApiModelProperty(required = true, value = "")
 
   public TypeEnum getType() {

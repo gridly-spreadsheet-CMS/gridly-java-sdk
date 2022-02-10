@@ -64,6 +64,8 @@ public class View implements Serializable {
   @SerializedName(SERIALIZED_NAME_STATUS)
   private String status;
 
+  public View() { 
+  }
 
   public View customProperties(Map<String, Object> customProperties) {
     

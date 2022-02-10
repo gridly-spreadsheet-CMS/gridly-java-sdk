@@ -402,6 +402,8 @@ public class UpdateColumn implements Serializable {
   @SerializedName(SERIALIZED_NAME_SELECTION_OPTIONS)
   private List<String> selectionOptions = null;
 
+  public UpdateColumn() { 
+  }
 
   public UpdateColumn description(String description) {
     

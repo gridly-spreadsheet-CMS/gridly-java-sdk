@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 .travis.yml
 README.md
 api/openapi.yaml
@@ -135,14 +134,3 @@ src/main/java/com/gridly/api/service/ViewApi.java
 src/main/java/com/gridly/api/service/ViewColumnApi.java
 src/main/java/com/gridly/api/service/ViewDependencyApi.java
 src/main/java/com/gridly/api/service/ViewFileApi.java
-src/test/java/com/gridly/api/service/BranchApiTest.java
-src/test/java/com/gridly/api/service/DatabaseApiTest.java
-src/test/java/com/gridly/api/service/GridApiTest.java
-src/test/java/com/gridly/api/service/GridMetadataApiTest.java
-src/test/java/com/gridly/api/service/ProjectApiTest.java
-src/test/java/com/gridly/api/service/RecordApiTest.java
-src/test/java/com/gridly/api/service/TaskApiTest.java
-src/test/java/com/gridly/api/service/ViewApiTest.java
-src/test/java/com/gridly/api/service/ViewColumnApiTest.java
-src/test/java/com/gridly/api/service/ViewDependencyApiTest.java
-src/test/java/com/gridly/api/service/ViewFileApiTest.java

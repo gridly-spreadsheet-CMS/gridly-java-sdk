@@ -39,6 +39,8 @@ import java.util.Map;
 
 public class ViewApi {
     private ApiClient localVarApiClient;
+    private int localHostIndex;
+    private String localCustomBaseUrl;
 
     public ViewApi() {
         this(Configuration.getDefaultApiClient());
@@ -56,10 +58,27 @@ public class ViewApi {
         this.localVarApiClient = apiClient;
     }
 
+    public int getHostIndex() {
+        return localHostIndex;
+    }
+
+    public void setHostIndex(int hostIndex) {
+        this.localHostIndex = hostIndex;
+    }
+
+    public String getCustomBaseUrl() {
+        return localCustomBaseUrl;
+    }
+
+    public void setCustomBaseUrl(String customBaseUrl) {
+        this.localCustomBaseUrl = customBaseUrl;
+    }
+
     /**
      * Build call for export
      * @param viewId viewId (required)
      * @param columnIds columnIds (optional)
+     * @param fileHeader fileHeader (optional, default to columnName)
      * @param query query (optional, default to {})
      * @param sort sort (optional, default to {})
      * @param type type (optional, default to csv)
@@ -75,7 +94,21 @@ public class ViewApi {
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call exportCall(String viewId, List<String> columnIds, String query, String sort, String type, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call exportCall(String viewId, List<String> columnIds, String fileHeader, String query, String sort, String type, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -90,6 +123,10 @@ public class ViewApi {
 
         if (columnIds != null) {
             localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "columnIds", columnIds));
+        }
+
+        if (fileHeader != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("fileHeader", fileHeader));
         }
 
         if (query != null) {
@@ -116,14 +153,16 @@ public class ViewApi {
             
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarHeaderParams != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "ApiKey" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call exportValidateBeforeCall(String viewId, List<String> columnIds, String query, String sort, String type, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call exportValidateBeforeCall(String viewId, List<String> columnIds, String fileHeader, String query, String sort, String type, final ApiCallback _callback) throws ApiException {
         
         // verify the required parameter 'viewId' is set
         if (viewId == null) {
@@ -131,7 +170,7 @@ public class ViewApi {
         }
         
 
-        okhttp3.Call localVarCall = exportCall(viewId, columnIds, query, sort, type, _callback);
+        okhttp3.Call localVarCall = exportCall(viewId, columnIds, fileHeader, query, sort, type, _callback);
         return localVarCall;
 
     }
@@ -141,6 +180,7 @@ public class ViewApi {
      * 
      * @param viewId viewId (required)
      * @param columnIds columnIds (optional)
+     * @param fileHeader fileHeader (optional, default to columnName)
      * @param query query (optional, default to {})
      * @param sort sort (optional, default to {})
      * @param type type (optional, default to csv)
@@ -155,8 +195,8 @@ public class ViewApi {
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
      </table>
      */
-    public File export(String viewId, List<String> columnIds, String query, String sort, String type) throws ApiException {
-        ApiResponse<File> localVarResp = exportWithHttpInfo(viewId, columnIds, query, sort, type);
+    public File export(String viewId, List<String> columnIds, String fileHeader, String query, String sort, String type) throws ApiException {
+        ApiResponse<File> localVarResp = exportWithHttpInfo(viewId, columnIds, fileHeader, query, sort, type);
         return localVarResp.getData();
     }
 
@@ -165,6 +205,7 @@ public class ViewApi {
      * 
      * @param viewId viewId (required)
      * @param columnIds columnIds (optional)
+     * @param fileHeader fileHeader (optional, default to columnName)
      * @param query query (optional, default to {})
      * @param sort sort (optional, default to {})
      * @param type type (optional, default to csv)
@@ -179,8 +220,8 @@ public class ViewApi {
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<File> exportWithHttpInfo(String viewId, List<String> columnIds, String query, String sort, String type) throws ApiException {
-        okhttp3.Call localVarCall = exportValidateBeforeCall(viewId, columnIds, query, sort, type, null);
+    public ApiResponse<File> exportWithHttpInfo(String viewId, List<String> columnIds, String fileHeader, String query, String sort, String type) throws ApiException {
+        okhttp3.Call localVarCall = exportValidateBeforeCall(viewId, columnIds, fileHeader, query, sort, type, null);
         Type localVarReturnType = new TypeToken<File>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -190,6 +231,7 @@ public class ViewApi {
      * 
      * @param viewId viewId (required)
      * @param columnIds columnIds (optional)
+     * @param fileHeader fileHeader (optional, default to columnName)
      * @param query query (optional, default to {})
      * @param sort sort (optional, default to {})
      * @param type type (optional, default to csv)
@@ -205,9 +247,9 @@ public class ViewApi {
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call exportAsync(String viewId, List<String> columnIds, String query, String sort, String type, final ApiCallback<File> _callback) throws ApiException {
+    public okhttp3.Call exportAsync(String viewId, List<String> columnIds, String fileHeader, String query, String sort, String type, final ApiCallback<File> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = exportValidateBeforeCall(viewId, columnIds, query, sort, type, _callback);
+        okhttp3.Call localVarCall = exportValidateBeforeCall(viewId, columnIds, fileHeader, query, sort, type, _callback);
         Type localVarReturnType = new TypeToken<File>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -233,6 +275,20 @@ public class ViewApi {
      </table>
      */
     public okhttp3.Call getCall(String viewId, List<String> columnIds, List<String> include, String page, String query, String sort, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -277,10 +333,12 @@ public class ViewApi {
             
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarHeaderParams != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "ApiKey" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
@@ -396,6 +454,20 @@ public class ViewApi {
      </table>
      */
     public okhttp3.Call importViewCall(String viewId, File file, Object importRequest, Object type, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -432,10 +504,12 @@ public class ViewApi {
             "multipart/form-data"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarHeaderParams != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "ApiKey" };
-        return localVarApiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
@@ -547,6 +621,20 @@ public class ViewApi {
      </table>
      */
     public okhttp3.Call listCall(String branchId, String gridId, String type, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -582,10 +670,12 @@ public class ViewApi {
             
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarHeaderParams != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "ApiKey" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
@@ -686,6 +776,20 @@ public class ViewApi {
      </table>
      */
     public okhttp3.Call mergeCall(String destinationViewId, String viewId, List<String> mergeRecordOptions, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -718,10 +822,12 @@ public class ViewApi {
             
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarHeaderParams != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "ApiKey" };
-        return localVarApiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")

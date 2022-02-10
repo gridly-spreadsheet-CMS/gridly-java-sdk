@@ -46,6 +46,8 @@ public class SetCell implements Serializable {
   @SerializedName(SERIALIZED_NAME_VALUE)
   private Object value;
 
+  public SetCell() { 
+  }
 
   public SetCell columnId(String columnId) {
     

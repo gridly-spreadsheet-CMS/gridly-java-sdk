@@ -69,6 +69,8 @@ public class Database implements Serializable {
   @SerializedName(SERIALIZED_NAME_VIEWS)
   private List<View> views = null;
 
+  public Database() { 
+  }
 
   public Database description(String description) {
     

@@ -36,6 +36,8 @@ public class CreateBranch implements Serializable {
   @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
 
+  public CreateBranch() { 
+  }
 
   public CreateBranch name(String name) {
     

@@ -40,6 +40,8 @@ public class CreateProject implements Serializable {
   @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
 
+  public CreateProject() { 
+  }
 
   public CreateProject description(String description) {
     
@@ -74,6 +76,7 @@ public class CreateProject implements Serializable {
    * Get name
    * @return name
   **/
+  @javax.annotation.Nonnull
   @ApiModelProperty(required = true, value = "")
 
   public String getName() {

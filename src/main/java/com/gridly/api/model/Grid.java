@@ -72,6 +72,8 @@ public class Grid implements Serializable {
   @SerializedName(SERIALIZED_NAME_STATUS)
   private String status;
 
+  public Grid() { 
+  }
 
   public Grid branchId(String branchId) {
     

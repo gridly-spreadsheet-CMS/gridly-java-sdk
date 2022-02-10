@@ -40,6 +40,8 @@ public class RecordIdentifierWrapper implements Serializable {
   @SerializedName(SERIALIZED_NAME_PATH)
   private String path;
 
+  public RecordIdentifierWrapper() { 
+  }
 
   public RecordIdentifierWrapper id(String id) {
     
@@ -51,6 +53,7 @@ public class RecordIdentifierWrapper implements Serializable {
    * Get id
    * @return id
   **/
+  @javax.annotation.Nonnull
   @ApiModelProperty(required = true, value = "")
 
   public String getId() {
@@ -73,6 +76,7 @@ public class RecordIdentifierWrapper implements Serializable {
    * Get path
    * @return path
   **/
+  @javax.annotation.Nonnull
   @ApiModelProperty(required = true, value = "")
 
   public String getPath() {

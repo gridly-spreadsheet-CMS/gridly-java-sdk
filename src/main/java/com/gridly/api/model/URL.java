@@ -76,6 +76,8 @@ public class URL implements Serializable {
   @SerializedName(SERIALIZED_NAME_USER_INFO)
   private String userInfo;
 
+  public URL() { 
+  }
 
   public URL authority(String authority) {
     

@@ -40,6 +40,8 @@ public class ReferencedGrid implements Serializable {
   @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
 
+  public ReferencedGrid() { 
+  }
 
   public ReferencedGrid id(String id) {
     

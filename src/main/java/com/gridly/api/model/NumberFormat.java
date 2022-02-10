@@ -95,6 +95,8 @@ public class NumberFormat implements Serializable {
   @SerializedName(SERIALIZED_NAME_USE1000_SEPARATOR)
   private Boolean use1000Separator;
 
+  public NumberFormat() { 
+  }
 
   public NumberFormat currencySymbol(String currencySymbol) {
     

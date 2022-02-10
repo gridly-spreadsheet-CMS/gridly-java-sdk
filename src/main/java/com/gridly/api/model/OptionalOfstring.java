@@ -40,6 +40,8 @@ public class OptionalOfstring implements Serializable {
   @SerializedName(SERIALIZED_NAME_PRESENT)
   private Boolean present;
 
+  public OptionalOfstring() { 
+  }
 
   public OptionalOfstring empty(Boolean empty) {
     

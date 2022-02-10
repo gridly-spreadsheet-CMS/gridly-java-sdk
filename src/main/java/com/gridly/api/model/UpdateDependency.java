@@ -44,6 +44,8 @@ public class UpdateDependency implements Serializable {
   @SerializedName(SERIALIZED_NAME_TARGET_COLUMN_ID)
   private String targetColumnId;
 
+  public UpdateDependency() { 
+  }
 
   public UpdateDependency newId(String newId) {
     

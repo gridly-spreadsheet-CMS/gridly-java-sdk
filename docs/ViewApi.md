@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 <a name="export"></a>
 # **export**
-> File export(viewId, columnIds, query, sort, type)
+> File export(viewId, columnIds, fileHeader, query, sort, type)
 
 export
 
@@ -41,11 +41,12 @@ public class Example {
     ViewApi apiInstance = new ViewApi(defaultClient);
     String viewId = "viewId_example"; // String | viewId
     List<String> columnIds = Arrays.asList(); // List<String> | columnIds
+    String fileHeader = "none"; // String | fileHeader
     String query = "{}"; // String | query
     String sort = "{}"; // String | sort
     String type = "csv"; // String | type
     try {
-      File result = apiInstance.export(viewId, columnIds, query, sort, type);
+      File result = apiInstance.export(viewId, columnIds, fileHeader, query, sort, type);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ViewApi#export");
@@ -64,6 +65,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **viewId** | **String**| viewId |
  **columnIds** | [**List&lt;String&gt;**](String.md)| columnIds | [optional]
+ **fileHeader** | **String**| fileHeader | [optional] [default to columnName] [enum: none, columnName]
  **query** | **String**| query | [optional] [default to {}]
  **sort** | **String**| sort | [optional] [default to {}]
  **type** | **String**| type | [optional] [default to csv] [enum: csv, tsv, xls, xlsx, json, po]
@@ -275,7 +277,7 @@ public class Example {
     ViewApi apiInstance = new ViewApi(defaultClient);
     String branchId = "branchId_example"; // String | branchId
     String gridId = "gridId_example"; // String | gridId
-    String type = "type_example"; // String | type
+    String type = "defaultView"; // String | type
     try {
       List<View> result = apiInstance.list(branchId, gridId, type);
       System.out.println(result);

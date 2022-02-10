@@ -44,6 +44,8 @@ public class CreateDatabase implements Serializable {
   @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
 
+  public CreateDatabase() { 
+  }
 
   public CreateDatabase description(String description) {
     

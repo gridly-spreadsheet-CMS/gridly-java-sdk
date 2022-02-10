@@ -144,6 +144,8 @@ public class ColumnReference implements Serializable {
   @SerializedName(SERIALIZED_NAME_TYPE)
   private TypeEnum type;
 
+  public ColumnReference() { 
+  }
 
   public ColumnReference column(ReferencedColumn column) {
     

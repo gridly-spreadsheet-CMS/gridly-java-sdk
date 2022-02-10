@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create**](ProjectApi.md#create) | **POST** /v1/projects | create
 [**delete**](ProjectApi.md#delete) | **DELETE** /v1/projects/{projectId} | delete
-[**findOneDetail**](ProjectApi.md#findOneDetail) | **GET** /v1/projects/{projectId} | findOneDetail
+[**findOne**](ProjectApi.md#findOne) | **GET** /v1/projects/{projectId} | findOne
 [**list**](ProjectApi.md#list) | **GET** /v1/projects | list
 [**update**](ProjectApi.md#update) | **PUT** /v1/projects/{projectId} | update
 
@@ -151,11 +151,11 @@ null (empty response body)
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 
-<a name="findOneDetail"></a>
-# **findOneDetail**
-> ProjectDetail findOneDetail(expand, projectId)
+<a name="findOne"></a>
+# **findOne**
+> ProjectDetail findOne(projectId)
 
-findOneDetail
+findOne
 
 ### Example
 ```java
@@ -179,13 +179,12 @@ public class Example {
     //ApiKey.setApiKeyPrefix("Token");
 
     ProjectApi apiInstance = new ProjectApi(defaultClient);
-    String expand = "expand_example"; // String | expand
     Long projectId = 56L; // Long | projectId
     try {
-      ProjectDetail result = apiInstance.findOneDetail(expand, projectId);
+      ProjectDetail result = apiInstance.findOne(projectId);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling ProjectApi#findOneDetail");
+      System.err.println("Exception when calling ProjectApi#findOne");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -199,7 +198,6 @@ public class Example {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **expand** | **String**| expand |
  **projectId** | **Long**| projectId |
 
 ### Return type

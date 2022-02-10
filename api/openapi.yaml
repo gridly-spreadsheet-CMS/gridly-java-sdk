@@ -1379,6 +1379,18 @@ paths:
             type: string
           type: array
         style: form
+      - description: fileHeader
+        explode: true
+        in: query
+        name: fileHeader
+        required: false
+        schema:
+          default: columnName
+          enum:
+          - none
+          - columnName
+          type: string
+        style: form
       - description: query
         explode: true
         in: query
@@ -2381,16 +2393,8 @@ paths:
       x-accepts: application/json
     get:
       deprecated: false
-      operationId: findOneDetail
+      operationId: findOne
       parameters:
-      - description: expand
-        explode: true
-        in: query
-        name: expand
-        required: true
-        schema:
-          type: string
-        style: form
       - description: projectId
         explode: false
         in: path
@@ -2418,7 +2422,7 @@ paths:
           description: Not Found
       security:
       - ApiKey: []
-      summary: findOneDetail
+      summary: findOne
       tags:
       - project
       x-accepts: application/json
@@ -2537,6 +2541,7 @@ components:
         name: name
         description: description
         id: id
+        status: deleted
       properties:
         columns:
           items:
@@ -2555,6 +2560,20 @@ components:
             type: string
           type: object
         name:
+          type: string
+        status:
+          enum:
+          - deleted
+          - active
+          - inactive
+          - restoring
+          - backingUp
+          - uploading
+          - importing
+          - branching
+          - merging
+          - duplicating
+          - clearingRecords
           type: string
       title: Branch
       type: object

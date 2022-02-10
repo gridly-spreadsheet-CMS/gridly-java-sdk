@@ -43,6 +43,8 @@ public class UpdateGrid implements Serializable {
   @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
 
+  public UpdateGrid() { 
+  }
 
   public UpdateGrid metadata(Map<String, String> metadata) {
     

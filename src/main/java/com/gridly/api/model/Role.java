@@ -67,6 +67,8 @@ public class Role implements Serializable {
   @SerializedName(SERIALIZED_NAME_TYPE)
   private String type;
 
+  public Role() { 
+  }
 
   public Role id(Long id) {
     

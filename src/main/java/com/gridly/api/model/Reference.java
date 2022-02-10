@@ -142,6 +142,8 @@ public class Reference implements Serializable {
   @SerializedName(SERIALIZED_NAME_TYPE)
   private TypeEnum type;
 
+  public Reference() { 
+  }
 
   public Reference columnId(String columnId) {
     

@@ -43,6 +43,8 @@ public class DeleteRecord implements Serializable {
   @SerializedName(SERIALIZED_NAME_IDS)
   private List<String> ids = null;
 
+  public DeleteRecord() { 
+  }
 
   public DeleteRecord identifiers(List<RecordIdentifierWrapper> identifiers) {
     

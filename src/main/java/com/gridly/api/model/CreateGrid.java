@@ -47,6 +47,8 @@ public class CreateGrid implements Serializable {
   @SerializedName(SERIALIZED_NAME_TEMPLATE_GRID_ID)
   private String templateGridId;
 
+  public CreateGrid() { 
+  }
 
   public CreateGrid metadata(Map<String, String> metadata) {
     

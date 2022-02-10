@@ -38,6 +38,8 @@ public class DeleteDependency implements Serializable {
   @SerializedName(SERIALIZED_NAME_IDS)
   private List<String> ids = null;
 
+  public DeleteDependency() { 
+  }
 
   public DeleteDependency ids(List<String> ids) {
     

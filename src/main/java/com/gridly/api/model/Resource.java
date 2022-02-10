@@ -66,6 +66,8 @@ public class Resource implements Serializable {
   @SerializedName(SERIALIZED_NAME_URL)
   private URL url;
 
+  public Resource() { 
+  }
 
   public Resource description(String description) {
     

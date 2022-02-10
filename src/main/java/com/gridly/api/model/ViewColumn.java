@@ -157,6 +157,8 @@ public class ViewColumn implements Serializable {
   @SerializedName(SERIALIZED_NAME_TYPE)
   private TypeEnum type;
 
+  public ViewColumn() { 
+  }
 
   public ViewColumn dependsOn(String dependsOn) {
     

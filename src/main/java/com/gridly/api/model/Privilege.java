@@ -64,6 +64,8 @@ public class Privilege implements Serializable {
   @SerializedName(SERIALIZED_NAME_SERVICE_ID)
   private String serviceId;
 
+  public Privilege() { 
+  }
 
   public Privilege description(String description) {
     

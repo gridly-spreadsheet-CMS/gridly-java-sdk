@@ -48,6 +48,8 @@ public class SetRecord implements Serializable {
   @SerializedName(SERIALIZED_NAME_PATH)
   private OptionalOfstring path;
 
+  public SetRecord() { 
+  }
 
   public SetRecord cells(List<SetCell> cells) {
     

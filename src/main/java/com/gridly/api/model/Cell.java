@@ -99,6 +99,8 @@ public class Cell implements Serializable {
   @SerializedName(SERIALIZED_NAME_VALUE)
   private Object value;
 
+  public Cell() { 
+  }
 
   public Cell columnId(String columnId) {
     

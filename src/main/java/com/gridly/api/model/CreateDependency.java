@@ -44,6 +44,8 @@ public class CreateDependency implements Serializable {
   @SerializedName(SERIALIZED_NAME_TARGET_COLUMN_ID)
   private String targetColumnId;
 
+  public CreateDependency() { 
+  }
 
   public CreateDependency id(String id) {
     

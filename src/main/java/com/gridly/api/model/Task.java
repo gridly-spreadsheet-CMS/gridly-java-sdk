@@ -89,6 +89,8 @@ public class Task implements Serializable {
   @SerializedName(SERIALIZED_NAME_STATUS)
   private StatusEnum status;
 
+  public Task() { 
+  }
 
   public Task id(String id) {
     

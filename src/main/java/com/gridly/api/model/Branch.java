@@ -65,6 +65,77 @@ public class Branch implements Serializable {
   @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
 
+  /**
+   * Gets or Sets status
+   */
+  @JsonAdapter(StatusEnum.Adapter.class)
+  public enum StatusEnum {
+    DELETED("deleted"),
+    
+    ACTIVE("active"),
+    
+    INACTIVE("inactive"),
+    
+    RESTORING("restoring"),
+    
+    BACKINGUP("backingUp"),
+    
+    UPLOADING("uploading"),
+    
+    IMPORTING("importing"),
+    
+    BRANCHING("branching"),
+    
+    MERGING("merging"),
+    
+    DUPLICATING("duplicating"),
+    
+    CLEARINGRECORDS("clearingRecords");
+
+    private String value;
+
+    StatusEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static StatusEnum fromValue(String value) {
+      for (StatusEnum b : StatusEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+
+    public static class Adapter extends TypeAdapter<StatusEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final StatusEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public StatusEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return StatusEnum.fromValue(value);
+      }
+    }
+  }
+
+  public static final String SERIALIZED_NAME_STATUS = "status";
+  @SerializedName(SERIALIZED_NAME_STATUS)
+  private StatusEnum status;
+
+  public Branch() { 
+  }
 
   public Branch columns(List<ViewColumn> columns) {
     
@@ -243,6 +314,29 @@ public class Branch implements Serializable {
   }
 
 
+  public Branch status(StatusEnum status) {
+    
+    this.status = status;
+    return this;
+  }
+
+   /**
+   * Get status
+   * @return status
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public StatusEnum getStatus() {
+    return status;
+  }
+
+
+  public void setStatus(StatusEnum status) {
+    this.status = status;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -258,12 +352,13 @@ public class Branch implements Serializable {
         Objects.equals(this.id, branch.id) &&
         Objects.equals(this.isMaster, branch.isMaster) &&
         Objects.equals(this.metadata, branch.metadata) &&
-        Objects.equals(this.name, branch.name);
+        Objects.equals(this.name, branch.name) &&
+        Objects.equals(this.status, branch.status);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(columns, defaultAccessViewId, description, id, isMaster, metadata, name);
+    return Objects.hash(columns, defaultAccessViewId, description, id, isMaster, metadata, name, status);
   }
 
   @Override
@@ -277,6 +372,7 @@ public class Branch implements Serializable {
     sb.append("    isMaster: ").append(toIndentedString(isMaster)).append("\n");
     sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("}");
     return sb.toString();
   }

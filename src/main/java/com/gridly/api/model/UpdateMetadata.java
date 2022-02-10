@@ -39,6 +39,8 @@ public class UpdateMetadata implements Serializable {
   @SerializedName(SERIALIZED_NAME_DATA)
   private Map<String, String> data = null;
 
+  public UpdateMetadata() { 
+  }
 
   public UpdateMetadata data(Map<String, String> data) {
     
