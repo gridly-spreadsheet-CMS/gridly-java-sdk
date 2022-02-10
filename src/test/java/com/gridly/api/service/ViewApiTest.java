@@ -49,7 +49,7 @@ public class ViewApiTest {
         String query = null;
         String sort = null;
         String type = null;
-        File response = api.export(viewId, columnIds, query, sort, type);
+        File response = api.export(viewId, columnIds, null, query, sort, type);
 
         // TODO: test validations
     }

@@ -76,10 +76,10 @@ public class ProjectApiTest {
      *          if the Api call fails
      */
     @Test
-    public void findOneDetailTest() throws ApiException {
+    public void findOneTest() throws ApiException {
         String expand = null;
         Long projectId = null;
-        ProjectDetail response = api.findOneDetail(expand, projectId);
+        ProjectDetail response = api.findOne(projectId);
 
         // TODO: test validations
     }
