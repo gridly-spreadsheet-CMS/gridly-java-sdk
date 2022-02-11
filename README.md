@@ -1,4 +1,4 @@
-# api
+# gridly-api
 
 Gridly API
 - API version: 3.21.0
@@ -38,7 +38,7 @@ Add this dependency to your project's POM:
 ```xml
 <dependency>
   <groupId>com.gridly</groupId>
-  <artifactId>api</artifactId>
+  <artifactId>gridly-api</artifactId>
   <version>1.2.0</version>
   <scope>compile</scope>
 </dependency>
@@ -50,12 +50,12 @@ Add this dependency to your project's build file:
 
 ```groovy
   repositories {
-    mavenCentral()     // Needed if the 'api' jar has been published to maven central.
-    mavenLocal()       // Needed if the 'api' jar has been published to the local maven repo.
+    mavenCentral()     // Needed if the 'gridly-api' jar has been published to maven central.
+    mavenLocal()       // Needed if the 'gridly-api' jar has been published to the local maven repo.
   }
 
   dependencies {
-     implementation "com.gridly:api:1.2.0"
+     implementation "com.gridly:gridly-api:1.2.0"
   }
 ```
 
@@ -69,7 +69,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/api-1.2.0.jar`
+* `target/gridly-api-1.2.0.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
