@@ -25,7 +25,6 @@ docs/GridApi.md
 docs/GridMetadataApi.md
 docs/Metadata.md
 docs/NumberFormat.md
-docs/OptionalOfstring.md
 docs/Privilege.md
 docs/Project.md
 docs/ProjectApi.md
@@ -99,7 +98,6 @@ src/main/java/com/gridly/api/model/Dependency.java
 src/main/java/com/gridly/api/model/Grid.java
 src/main/java/com/gridly/api/model/Metadata.java
 src/main/java/com/gridly/api/model/NumberFormat.java
-src/main/java/com/gridly/api/model/OptionalOfstring.java
 src/main/java/com/gridly/api/model/Privilege.java
 src/main/java/com/gridly/api/model/Project.java
 src/main/java/com/gridly/api/model/ProjectDetail.java

@@ -196,7 +196,6 @@ Class | Method | HTTP request | Description
  - [Grid](docs/Grid.md)
  - [Metadata](docs/Metadata.md)
  - [NumberFormat](docs/NumberFormat.md)
- - [OptionalOfstring](docs/OptionalOfstring.md)
  - [Privilege](docs/Privilege.md)
  - [Project](docs/Project.md)
  - [ProjectDetail](docs/ProjectDetail.md)

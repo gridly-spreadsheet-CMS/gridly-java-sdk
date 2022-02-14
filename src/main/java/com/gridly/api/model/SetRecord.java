@@ -20,7 +20,6 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.gridly.api.model.OptionalOfstring;
 import com.gridly.api.model.SetCell;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -46,7 +45,7 @@ public class SetRecord implements Serializable {
 
   public static final String SERIALIZED_NAME_PATH = "path";
   @SerializedName(SERIALIZED_NAME_PATH)
-  private OptionalOfstring path;
+  private String path;
 
   public SetRecord() { 
   }
@@ -105,7 +104,7 @@ public class SetRecord implements Serializable {
   }
 
 
-  public SetRecord path(OptionalOfstring path) {
+  public SetRecord path(String path) {
     
     this.path = path;
     return this;
@@ -118,12 +117,12 @@ public class SetRecord implements Serializable {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public OptionalOfstring getPath() {
+  public String getPath() {
     return path;
   }
 
 
-  public void setPath(OptionalOfstring path) {
+  public void setPath(String path) {
     this.path = path;
   }
 
