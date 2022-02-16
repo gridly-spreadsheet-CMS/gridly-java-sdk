@@ -13,8 +13,6 @@ tags:
   name: branch
 - description: Grid API
   name: grid
-- description: Grid Metadata API
-  name: grid-metadata
 - description: Record API
   name: record
 - description: Task API
@@ -433,216 +431,6 @@ paths:
       tags:
       - grid
       x-codegen-request-body-name: updateCompositeGrid
-      x-contentType: application/json
-      x-accepts: application/json
-  /v1/grids/{gridId}/metadata:
-    get:
-      deprecated: false
-      operationId: list
-      parameters:
-      - description: gridId
-        explode: false
-        in: path
-        name: gridId
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/Metadata'
-                type: array
-          description: OK
-        "401":
-          content: {}
-          description: Unauthorized
-        "403":
-          content: {}
-          description: Forbidden
-        "404":
-          content: {}
-          description: Not Found
-      security:
-      - ApiKey: []
-      summary: list
-      tags:
-      - grid-metadata
-      x-accepts: application/json
-    post:
-      deprecated: false
-      operationId: create
-      parameters:
-      - description: gridId
-        explode: false
-        in: path
-        name: gridId
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateMetadata'
-        description: createMetadataDTO
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Metadata'
-          description: Created
-        "401":
-          content: {}
-          description: Unauthorized
-        "403":
-          content: {}
-          description: Forbidden
-        "404":
-          content: {}
-          description: Not Found
-      security:
-      - ApiKey: []
-      summary: create
-      tags:
-      - grid-metadata
-      x-codegen-request-body-name: createMetadataDTO
-      x-contentType: application/json
-      x-accepts: application/json
-  /v1/grids/{gridId}/metadata/{metadataId}:
-    delete:
-      deprecated: false
-      operationId: delete
-      parameters:
-      - description: gridId
-        explode: false
-        in: path
-        name: gridId
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: metadataId
-        explode: false
-        in: path
-        name: metadataId
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "204":
-          content: {}
-          description: No Content
-        "401":
-          content: {}
-          description: Unauthorized
-        "403":
-          content: {}
-          description: Forbidden
-      security:
-      - ApiKey: []
-      summary: delete
-      tags:
-      - grid-metadata
-      x-accepts: application/json
-    get:
-      deprecated: false
-      operationId: get
-      parameters:
-      - description: gridId
-        explode: false
-        in: path
-        name: gridId
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: metadataId
-        explode: false
-        in: path
-        name: metadataId
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Metadata'
-          description: OK
-        "401":
-          content: {}
-          description: Unauthorized
-        "403":
-          content: {}
-          description: Forbidden
-        "404":
-          content: {}
-          description: Not Found
-      security:
-      - ApiKey: []
-      summary: get
-      tags:
-      - grid-metadata
-      x-accepts: application/json
-    patch:
-      deprecated: false
-      operationId: update
-      parameters:
-      - description: gridId
-        explode: false
-        in: path
-        name: gridId
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: metadataId
-        explode: false
-        in: path
-        name: metadataId
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateMetadata'
-        description: updateMetadataDTO
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Metadata'
-          description: OK
-        "204":
-          content: {}
-          description: No Content
-        "401":
-          content: {}
-          description: Unauthorized
-        "403":
-          content: {}
-          description: Forbidden
-      security:
-      - ApiKey: []
-      summary: update
-      tags:
-      - grid-metadata
-      x-codegen-request-body-name: updateMetadataDTO
       x-contentType: application/json
       x-accepts: application/json
   /v1/tasks/{taskId}:
@@ -2577,12 +2365,6 @@ components:
           type: string
       title: Branch
       type: object
-    CallableOfListOfRecord:
-      title: CallableOfListOfRecord
-      type: object
-    CallableOfResponseEntityOfUploadedFile:
-      title: CallableOfResponseEntityOfUploadedFile
-      type: object
     Cell:
       example:
         columnId: columnId
@@ -2894,21 +2676,6 @@ components:
           type: string
       title: CreateGrid
       type: object
-    CreateMetadata:
-      example:
-        data:
-          key: data
-        id: id
-      properties:
-        data:
-          additionalProperties:
-            type: string
-          type: object
-        id:
-          pattern: ^\w+$
-          type: string
-      title: CreateMetadata
-      type: object
     DataItem:
       title: DataItem
       type: object
@@ -2959,103 +2726,104 @@ components:
           type: string
       title: Dependency
       type: object
-    File:
-      properties:
-        absolute:
-          type: boolean
-        absoluteFile:
-          $ref: '#/components/schemas/File'
-        absolutePath:
-          type: string
-        canonicalFile:
-          $ref: '#/components/schemas/File'
-        canonicalPath:
-          type: string
-        directory:
-          type: boolean
-        file:
-          type: boolean
-        freeSpace:
-          format: int64
-          type: integer
-        hidden:
-          type: boolean
-        name:
-          type: string
-        parent:
-          type: string
-        parentFile:
-          $ref: '#/components/schemas/File'
-        path:
-          type: string
-        totalSpace:
-          format: int64
-          type: integer
-        usableSpace:
-          format: int64
-          type: integer
-      title: File
-      type: object
     Grid:
       example:
-        branchId: branchId
-        customProperties:
-          key: "{}"
+        metadata:
+          key: metadata
         defaultAccessViewId: defaultAccessViewId
-        parentGridId: parentGridId
+        columns:
+        - isTarget: true
+          reference:
+            selectionType: SINGLE
+            grid:
+              name: name
+              id: id
+            column:
+              name: name
+              selectionOptions:
+              - selectionOptions
+              - selectionOptions
+              id: id
+            type: ROW
+          dependsOn: dependsOn
+          numberFormat:
+            decimalPlaces: 0
+            currencySymbol: currencySymbol
+            type: DECIMAL
+            use1000Separator: true
+          isSource: true
+          name: name
+          selectionOptions:
+          - selectionOptions
+          - selectionOptions
+          description: description
+          id: id
+          languageCode: languageCode
+          type: singleLine
+        - isTarget: true
+          reference:
+            selectionType: SINGLE
+            grid:
+              name: name
+              id: id
+            column:
+              name: name
+              selectionOptions:
+              - selectionOptions
+              - selectionOptions
+              id: id
+            type: ROW
+          dependsOn: dependsOn
+          numberFormat:
+            decimalPlaces: 0
+            currencySymbol: currencySymbol
+            type: DECIMAL
+            use1000Separator: true
+          isSource: true
+          name: name
+          selectionOptions:
+          - selectionOptions
+          - selectionOptions
+          description: description
+          id: id
+          languageCode: languageCode
+          type: singleLine
         name: name
+        description: description
         id: id
-        branches:
-        - null
-        - null
-        groupTagDefinition:
-        - groupTagDefinition
-        - groupTagDefinition
-        status: status
+        status: deleted
       properties:
-        branchId:
-          type: string
-        branches:
+        columns:
           items:
-            $ref: '#/components/schemas/Grid'
+            $ref: '#/components/schemas/ViewColumn'
           type: array
-        customProperties:
-          additionalProperties:
-            properties: {}
-            type: object
-          type: object
         defaultAccessViewId:
           type: string
-        groupTagDefinition:
-          items:
-            type: string
-          type: array
+        description:
+          type: string
         id:
           type: string
-        name:
-          type: string
-        parentGridId:
-          type: string
-        status:
-          type: string
-      title: Grid
-      type: object
-    InputStream:
-      title: InputStream
-      type: object
-    Metadata:
-      example:
-        data:
-          key: data
-        id: id
-      properties:
-        data:
+        metadata:
           additionalProperties:
             type: string
           type: object
-        id:
+        name:
           type: string
-      title: Metadata
+        status:
+          enum:
+          - deleted
+          - active
+          - inactive
+          - restoring
+          - backingUp
+          - uploading
+          - importing
+          - branching
+          - merging
+          - duplicating
+          - clearingRecords
+          type: string
+      title: Grid
       type: object
     NumberFormat:
       example:
@@ -3179,27 +2947,6 @@ components:
           type: string
       title: ReferencedGrid
       type: object
-    Resource:
-      properties:
-        description:
-          type: string
-        file:
-          $ref: '#/components/schemas/File'
-        filename:
-          type: string
-        inputStream:
-          title: InputStream
-          type: object
-        open:
-          type: boolean
-        readable:
-          type: boolean
-        uri:
-          $ref: '#/components/schemas/URI'
-        url:
-          $ref: '#/components/schemas/URL'
-      title: Resource
-      type: object
     SetCell:
       example:
         columnId: columnId
@@ -3245,9 +2992,6 @@ components:
           type: string
       title: SetRecord
       type: object
-    StreamingResponseBody:
-      title: StreamingResponseBody
-      type: object
     Task:
       example:
         id: id
@@ -3262,74 +3006,6 @@ components:
           - running
           type: string
       title: Task
-      type: object
-    URI:
-      properties:
-        absolute:
-          type: boolean
-        authority:
-          type: string
-        fragment:
-          type: string
-        host:
-          type: string
-        opaque:
-          type: boolean
-        path:
-          type: string
-        port:
-          format: int32
-          type: integer
-        query:
-          type: string
-        rawAuthority:
-          type: string
-        rawFragment:
-          type: string
-        rawPath:
-          type: string
-        rawQuery:
-          type: string
-        rawSchemeSpecificPart:
-          type: string
-        rawUserInfo:
-          type: string
-        scheme:
-          type: string
-        schemeSpecificPart:
-          type: string
-        userInfo:
-          type: string
-      title: URI
-      type: object
-    URL:
-      properties:
-        authority:
-          type: string
-        content:
-          properties: {}
-          type: object
-        defaultPort:
-          format: int32
-          type: integer
-        file:
-          type: string
-        host:
-          type: string
-        path:
-          type: string
-        port:
-          format: int32
-          type: integer
-        protocol:
-          type: string
-        query:
-          type: string
-        ref:
-          type: string
-        userInfo:
-          type: string
-      title: URL
       type: object
     UpdateColumn:
       example:
@@ -3541,17 +3217,6 @@ components:
           type: string
       title: UpdateGrid
       type: object
-    UpdateMetadata:
-      example:
-        data:
-          key: data
-      properties:
-        data:
-          additionalProperties:
-            type: string
-          type: object
-      title: UpdateMetadata
-      type: object
     UploadedFile:
       example:
         originalName: originalName
@@ -3572,36 +3237,131 @@ components:
       type: object
     View:
       example:
-        customProperties:
-          key: "{}"
+        records:
+        - path: path
+          cells:
+          - columnId: columnId
+            dependencyStatus: upToDate
+            referencedIds:
+            - referencedIds
+            - referencedIds
+            value: "{}"
+          - columnId: columnId
+            dependencyStatus: upToDate
+            referencedIds:
+            - referencedIds
+            - referencedIds
+            value: "{}"
+          lastModifiedTime: 2000-01-23T04:56:07.000+00:00
+          lastModifiedBy: lastModifiedBy
+          id: id
+        - path: path
+          cells:
+          - columnId: columnId
+            dependencyStatus: upToDate
+            referencedIds:
+            - referencedIds
+            - referencedIds
+            value: "{}"
+          - columnId: columnId
+            dependencyStatus: upToDate
+            referencedIds:
+            - referencedIds
+            - referencedIds
+            value: "{}"
+          lastModifiedTime: 2000-01-23T04:56:07.000+00:00
+          lastModifiedBy: lastModifiedBy
+          id: id
+        columns:
+        - isTarget: true
+          reference:
+            selectionType: SINGLE
+            grid:
+              name: name
+              id: id
+            column:
+              name: name
+              selectionOptions:
+              - selectionOptions
+              - selectionOptions
+              id: id
+            type: ROW
+          dependsOn: dependsOn
+          numberFormat:
+            decimalPlaces: 0
+            currencySymbol: currencySymbol
+            type: DECIMAL
+            use1000Separator: true
+          isSource: true
+          name: name
+          selectionOptions:
+          - selectionOptions
+          - selectionOptions
+          description: description
+          id: id
+          languageCode: languageCode
+          type: singleLine
+        - isTarget: true
+          reference:
+            selectionType: SINGLE
+            grid:
+              name: name
+              id: id
+            column:
+              name: name
+              selectionOptions:
+              - selectionOptions
+              - selectionOptions
+              id: id
+            type: ROW
+          dependsOn: dependsOn
+          numberFormat:
+            decimalPlaces: 0
+            currencySymbol: currencySymbol
+            type: DECIMAL
+            use1000Separator: true
+          isSource: true
+          name: name
+          selectionOptions:
+          - selectionOptions
+          - selectionOptions
+          description: description
+          id: id
+          languageCode: languageCode
+          type: singleLine
         name: name
-        description: description
         gridId: gridId
+        gridStatus: deleted
         id: id
-        groupTagDefinition:
-        - groupTagDefinition
-        - groupTagDefinition
-        status: status
       properties:
-        customProperties:
-          additionalProperties:
-            properties: {}
-            type: object
-          type: object
-        description:
-          type: string
+        columns:
+          items:
+            $ref: '#/components/schemas/ViewColumn'
+          type: array
         gridId:
           type: string
-        groupTagDefinition:
-          items:
-            type: string
-          type: array
+        gridStatus:
+          enum:
+          - deleted
+          - active
+          - inactive
+          - restoring
+          - backingUp
+          - uploading
+          - importing
+          - branching
+          - merging
+          - duplicating
+          - clearingRecords
+          type: string
         id:
           type: string
         name:
           type: string
-        status:
-          type: string
+        records:
+          items:
+            $ref: '#/components/schemas/Record'
+          type: array
       title: View
       type: object
     ViewColumn:
@@ -3751,56 +3511,328 @@ components:
           id: 0
         id: id
         grids:
-        - branchId: branchId
-          customProperties:
-            key: "{}"
+        - metadata:
+            key: metadata
           defaultAccessViewId: defaultAccessViewId
-          parentGridId: parentGridId
+          columns:
+          - isTarget: true
+            reference:
+              selectionType: SINGLE
+              grid:
+                name: name
+                id: id
+              column:
+                name: name
+                selectionOptions:
+                - selectionOptions
+                - selectionOptions
+                id: id
+              type: ROW
+            dependsOn: dependsOn
+            numberFormat:
+              decimalPlaces: 0
+              currencySymbol: currencySymbol
+              type: DECIMAL
+              use1000Separator: true
+            isSource: true
+            name: name
+            selectionOptions:
+            - selectionOptions
+            - selectionOptions
+            description: description
+            id: id
+            languageCode: languageCode
+            type: singleLine
+          - isTarget: true
+            reference:
+              selectionType: SINGLE
+              grid:
+                name: name
+                id: id
+              column:
+                name: name
+                selectionOptions:
+                - selectionOptions
+                - selectionOptions
+                id: id
+              type: ROW
+            dependsOn: dependsOn
+            numberFormat:
+              decimalPlaces: 0
+              currencySymbol: currencySymbol
+              type: DECIMAL
+              use1000Separator: true
+            isSource: true
+            name: name
+            selectionOptions:
+            - selectionOptions
+            - selectionOptions
+            description: description
+            id: id
+            languageCode: languageCode
+            type: singleLine
           name: name
+          description: description
           id: id
-          branches:
-          - null
-          - null
-          groupTagDefinition:
-          - groupTagDefinition
-          - groupTagDefinition
-          status: status
-        - branchId: branchId
-          customProperties:
-            key: "{}"
+          status: deleted
+        - metadata:
+            key: metadata
           defaultAccessViewId: defaultAccessViewId
-          parentGridId: parentGridId
+          columns:
+          - isTarget: true
+            reference:
+              selectionType: SINGLE
+              grid:
+                name: name
+                id: id
+              column:
+                name: name
+                selectionOptions:
+                - selectionOptions
+                - selectionOptions
+                id: id
+              type: ROW
+            dependsOn: dependsOn
+            numberFormat:
+              decimalPlaces: 0
+              currencySymbol: currencySymbol
+              type: DECIMAL
+              use1000Separator: true
+            isSource: true
+            name: name
+            selectionOptions:
+            - selectionOptions
+            - selectionOptions
+            description: description
+            id: id
+            languageCode: languageCode
+            type: singleLine
+          - isTarget: true
+            reference:
+              selectionType: SINGLE
+              grid:
+                name: name
+                id: id
+              column:
+                name: name
+                selectionOptions:
+                - selectionOptions
+                - selectionOptions
+                id: id
+              type: ROW
+            dependsOn: dependsOn
+            numberFormat:
+              decimalPlaces: 0
+              currencySymbol: currencySymbol
+              type: DECIMAL
+              use1000Separator: true
+            isSource: true
+            name: name
+            selectionOptions:
+            - selectionOptions
+            - selectionOptions
+            description: description
+            id: id
+            languageCode: languageCode
+            type: singleLine
           name: name
+          description: description
           id: id
-          branches:
-          - null
-          - null
-          groupTagDefinition:
-          - groupTagDefinition
-          - groupTagDefinition
-          status: status
+          status: deleted
         projectId: 2
         views:
-        - customProperties:
-            key: "{}"
+        - records:
+          - path: path
+            cells:
+            - columnId: columnId
+              dependencyStatus: upToDate
+              referencedIds:
+              - referencedIds
+              - referencedIds
+              value: "{}"
+            - columnId: columnId
+              dependencyStatus: upToDate
+              referencedIds:
+              - referencedIds
+              - referencedIds
+              value: "{}"
+            lastModifiedTime: 2000-01-23T04:56:07.000+00:00
+            lastModifiedBy: lastModifiedBy
+            id: id
+          - path: path
+            cells:
+            - columnId: columnId
+              dependencyStatus: upToDate
+              referencedIds:
+              - referencedIds
+              - referencedIds
+              value: "{}"
+            - columnId: columnId
+              dependencyStatus: upToDate
+              referencedIds:
+              - referencedIds
+              - referencedIds
+              value: "{}"
+            lastModifiedTime: 2000-01-23T04:56:07.000+00:00
+            lastModifiedBy: lastModifiedBy
+            id: id
+          columns:
+          - isTarget: true
+            reference:
+              selectionType: SINGLE
+              grid:
+                name: name
+                id: id
+              column:
+                name: name
+                selectionOptions:
+                - selectionOptions
+                - selectionOptions
+                id: id
+              type: ROW
+            dependsOn: dependsOn
+            numberFormat:
+              decimalPlaces: 0
+              currencySymbol: currencySymbol
+              type: DECIMAL
+              use1000Separator: true
+            isSource: true
+            name: name
+            selectionOptions:
+            - selectionOptions
+            - selectionOptions
+            description: description
+            id: id
+            languageCode: languageCode
+            type: singleLine
+          - isTarget: true
+            reference:
+              selectionType: SINGLE
+              grid:
+                name: name
+                id: id
+              column:
+                name: name
+                selectionOptions:
+                - selectionOptions
+                - selectionOptions
+                id: id
+              type: ROW
+            dependsOn: dependsOn
+            numberFormat:
+              decimalPlaces: 0
+              currencySymbol: currencySymbol
+              type: DECIMAL
+              use1000Separator: true
+            isSource: true
+            name: name
+            selectionOptions:
+            - selectionOptions
+            - selectionOptions
+            description: description
+            id: id
+            languageCode: languageCode
+            type: singleLine
           name: name
-          description: description
           gridId: gridId
+          gridStatus: deleted
           id: id
-          groupTagDefinition:
-          - groupTagDefinition
-          - groupTagDefinition
-          status: status
-        - customProperties:
-            key: "{}"
+        - records:
+          - path: path
+            cells:
+            - columnId: columnId
+              dependencyStatus: upToDate
+              referencedIds:
+              - referencedIds
+              - referencedIds
+              value: "{}"
+            - columnId: columnId
+              dependencyStatus: upToDate
+              referencedIds:
+              - referencedIds
+              - referencedIds
+              value: "{}"
+            lastModifiedTime: 2000-01-23T04:56:07.000+00:00
+            lastModifiedBy: lastModifiedBy
+            id: id
+          - path: path
+            cells:
+            - columnId: columnId
+              dependencyStatus: upToDate
+              referencedIds:
+              - referencedIds
+              - referencedIds
+              value: "{}"
+            - columnId: columnId
+              dependencyStatus: upToDate
+              referencedIds:
+              - referencedIds
+              - referencedIds
+              value: "{}"
+            lastModifiedTime: 2000-01-23T04:56:07.000+00:00
+            lastModifiedBy: lastModifiedBy
+            id: id
+          columns:
+          - isTarget: true
+            reference:
+              selectionType: SINGLE
+              grid:
+                name: name
+                id: id
+              column:
+                name: name
+                selectionOptions:
+                - selectionOptions
+                - selectionOptions
+                id: id
+              type: ROW
+            dependsOn: dependsOn
+            numberFormat:
+              decimalPlaces: 0
+              currencySymbol: currencySymbol
+              type: DECIMAL
+              use1000Separator: true
+            isSource: true
+            name: name
+            selectionOptions:
+            - selectionOptions
+            - selectionOptions
+            description: description
+            id: id
+            languageCode: languageCode
+            type: singleLine
+          - isTarget: true
+            reference:
+              selectionType: SINGLE
+              grid:
+                name: name
+                id: id
+              column:
+                name: name
+                selectionOptions:
+                - selectionOptions
+                - selectionOptions
+                id: id
+              type: ROW
+            dependsOn: dependsOn
+            numberFormat:
+              decimalPlaces: 0
+              currencySymbol: currencySymbol
+              type: DECIMAL
+              use1000Separator: true
+            isSource: true
+            name: name
+            selectionOptions:
+            - selectionOptions
+            - selectionOptions
+            description: description
+            id: id
+            languageCode: languageCode
+            type: singleLine
           name: name
-          description: description
           gridId: gridId
+          gridStatus: deleted
           id: id
-          groupTagDefinition:
-          - groupTagDefinition
-          - groupTagDefinition
-          status: status
       properties:
         description:
           type: string
@@ -3946,56 +3978,328 @@ components:
             id: 0
           id: id
           grids:
-          - branchId: branchId
-            customProperties:
-              key: "{}"
+          - metadata:
+              key: metadata
             defaultAccessViewId: defaultAccessViewId
-            parentGridId: parentGridId
+            columns:
+            - isTarget: true
+              reference:
+                selectionType: SINGLE
+                grid:
+                  name: name
+                  id: id
+                column:
+                  name: name
+                  selectionOptions:
+                  - selectionOptions
+                  - selectionOptions
+                  id: id
+                type: ROW
+              dependsOn: dependsOn
+              numberFormat:
+                decimalPlaces: 0
+                currencySymbol: currencySymbol
+                type: DECIMAL
+                use1000Separator: true
+              isSource: true
+              name: name
+              selectionOptions:
+              - selectionOptions
+              - selectionOptions
+              description: description
+              id: id
+              languageCode: languageCode
+              type: singleLine
+            - isTarget: true
+              reference:
+                selectionType: SINGLE
+                grid:
+                  name: name
+                  id: id
+                column:
+                  name: name
+                  selectionOptions:
+                  - selectionOptions
+                  - selectionOptions
+                  id: id
+                type: ROW
+              dependsOn: dependsOn
+              numberFormat:
+                decimalPlaces: 0
+                currencySymbol: currencySymbol
+                type: DECIMAL
+                use1000Separator: true
+              isSource: true
+              name: name
+              selectionOptions:
+              - selectionOptions
+              - selectionOptions
+              description: description
+              id: id
+              languageCode: languageCode
+              type: singleLine
             name: name
+            description: description
             id: id
-            branches:
-            - null
-            - null
-            groupTagDefinition:
-            - groupTagDefinition
-            - groupTagDefinition
-            status: status
-          - branchId: branchId
-            customProperties:
-              key: "{}"
+            status: deleted
+          - metadata:
+              key: metadata
             defaultAccessViewId: defaultAccessViewId
-            parentGridId: parentGridId
+            columns:
+            - isTarget: true
+              reference:
+                selectionType: SINGLE
+                grid:
+                  name: name
+                  id: id
+                column:
+                  name: name
+                  selectionOptions:
+                  - selectionOptions
+                  - selectionOptions
+                  id: id
+                type: ROW
+              dependsOn: dependsOn
+              numberFormat:
+                decimalPlaces: 0
+                currencySymbol: currencySymbol
+                type: DECIMAL
+                use1000Separator: true
+              isSource: true
+              name: name
+              selectionOptions:
+              - selectionOptions
+              - selectionOptions
+              description: description
+              id: id
+              languageCode: languageCode
+              type: singleLine
+            - isTarget: true
+              reference:
+                selectionType: SINGLE
+                grid:
+                  name: name
+                  id: id
+                column:
+                  name: name
+                  selectionOptions:
+                  - selectionOptions
+                  - selectionOptions
+                  id: id
+                type: ROW
+              dependsOn: dependsOn
+              numberFormat:
+                decimalPlaces: 0
+                currencySymbol: currencySymbol
+                type: DECIMAL
+                use1000Separator: true
+              isSource: true
+              name: name
+              selectionOptions:
+              - selectionOptions
+              - selectionOptions
+              description: description
+              id: id
+              languageCode: languageCode
+              type: singleLine
             name: name
+            description: description
             id: id
-            branches:
-            - null
-            - null
-            groupTagDefinition:
-            - groupTagDefinition
-            - groupTagDefinition
-            status: status
+            status: deleted
           projectId: 2
           views:
-          - customProperties:
-              key: "{}"
+          - records:
+            - path: path
+              cells:
+              - columnId: columnId
+                dependencyStatus: upToDate
+                referencedIds:
+                - referencedIds
+                - referencedIds
+                value: "{}"
+              - columnId: columnId
+                dependencyStatus: upToDate
+                referencedIds:
+                - referencedIds
+                - referencedIds
+                value: "{}"
+              lastModifiedTime: 2000-01-23T04:56:07.000+00:00
+              lastModifiedBy: lastModifiedBy
+              id: id
+            - path: path
+              cells:
+              - columnId: columnId
+                dependencyStatus: upToDate
+                referencedIds:
+                - referencedIds
+                - referencedIds
+                value: "{}"
+              - columnId: columnId
+                dependencyStatus: upToDate
+                referencedIds:
+                - referencedIds
+                - referencedIds
+                value: "{}"
+              lastModifiedTime: 2000-01-23T04:56:07.000+00:00
+              lastModifiedBy: lastModifiedBy
+              id: id
+            columns:
+            - isTarget: true
+              reference:
+                selectionType: SINGLE
+                grid:
+                  name: name
+                  id: id
+                column:
+                  name: name
+                  selectionOptions:
+                  - selectionOptions
+                  - selectionOptions
+                  id: id
+                type: ROW
+              dependsOn: dependsOn
+              numberFormat:
+                decimalPlaces: 0
+                currencySymbol: currencySymbol
+                type: DECIMAL
+                use1000Separator: true
+              isSource: true
+              name: name
+              selectionOptions:
+              - selectionOptions
+              - selectionOptions
+              description: description
+              id: id
+              languageCode: languageCode
+              type: singleLine
+            - isTarget: true
+              reference:
+                selectionType: SINGLE
+                grid:
+                  name: name
+                  id: id
+                column:
+                  name: name
+                  selectionOptions:
+                  - selectionOptions
+                  - selectionOptions
+                  id: id
+                type: ROW
+              dependsOn: dependsOn
+              numberFormat:
+                decimalPlaces: 0
+                currencySymbol: currencySymbol
+                type: DECIMAL
+                use1000Separator: true
+              isSource: true
+              name: name
+              selectionOptions:
+              - selectionOptions
+              - selectionOptions
+              description: description
+              id: id
+              languageCode: languageCode
+              type: singleLine
             name: name
-            description: description
             gridId: gridId
+            gridStatus: deleted
             id: id
-            groupTagDefinition:
-            - groupTagDefinition
-            - groupTagDefinition
-            status: status
-          - customProperties:
-              key: "{}"
+          - records:
+            - path: path
+              cells:
+              - columnId: columnId
+                dependencyStatus: upToDate
+                referencedIds:
+                - referencedIds
+                - referencedIds
+                value: "{}"
+              - columnId: columnId
+                dependencyStatus: upToDate
+                referencedIds:
+                - referencedIds
+                - referencedIds
+                value: "{}"
+              lastModifiedTime: 2000-01-23T04:56:07.000+00:00
+              lastModifiedBy: lastModifiedBy
+              id: id
+            - path: path
+              cells:
+              - columnId: columnId
+                dependencyStatus: upToDate
+                referencedIds:
+                - referencedIds
+                - referencedIds
+                value: "{}"
+              - columnId: columnId
+                dependencyStatus: upToDate
+                referencedIds:
+                - referencedIds
+                - referencedIds
+                value: "{}"
+              lastModifiedTime: 2000-01-23T04:56:07.000+00:00
+              lastModifiedBy: lastModifiedBy
+              id: id
+            columns:
+            - isTarget: true
+              reference:
+                selectionType: SINGLE
+                grid:
+                  name: name
+                  id: id
+                column:
+                  name: name
+                  selectionOptions:
+                  - selectionOptions
+                  - selectionOptions
+                  id: id
+                type: ROW
+              dependsOn: dependsOn
+              numberFormat:
+                decimalPlaces: 0
+                currencySymbol: currencySymbol
+                type: DECIMAL
+                use1000Separator: true
+              isSource: true
+              name: name
+              selectionOptions:
+              - selectionOptions
+              - selectionOptions
+              description: description
+              id: id
+              languageCode: languageCode
+              type: singleLine
+            - isTarget: true
+              reference:
+                selectionType: SINGLE
+                grid:
+                  name: name
+                  id: id
+                column:
+                  name: name
+                  selectionOptions:
+                  - selectionOptions
+                  - selectionOptions
+                  id: id
+                type: ROW
+              dependsOn: dependsOn
+              numberFormat:
+                decimalPlaces: 0
+                currencySymbol: currencySymbol
+                type: DECIMAL
+                use1000Separator: true
+              isSource: true
+              name: name
+              selectionOptions:
+              - selectionOptions
+              - selectionOptions
+              description: description
+              id: id
+              languageCode: languageCode
+              type: singleLine
             name: name
-            description: description
             gridId: gridId
+            gridStatus: deleted
             id: id
-            groupTagDefinition:
-            - groupTagDefinition
-            - groupTagDefinition
-            status: status
         - name: name
           description: description
           groups:
@@ -4034,56 +4338,328 @@ components:
             id: 0
           id: id
           grids:
-          - branchId: branchId
-            customProperties:
-              key: "{}"
+          - metadata:
+              key: metadata
             defaultAccessViewId: defaultAccessViewId
-            parentGridId: parentGridId
+            columns:
+            - isTarget: true
+              reference:
+                selectionType: SINGLE
+                grid:
+                  name: name
+                  id: id
+                column:
+                  name: name
+                  selectionOptions:
+                  - selectionOptions
+                  - selectionOptions
+                  id: id
+                type: ROW
+              dependsOn: dependsOn
+              numberFormat:
+                decimalPlaces: 0
+                currencySymbol: currencySymbol
+                type: DECIMAL
+                use1000Separator: true
+              isSource: true
+              name: name
+              selectionOptions:
+              - selectionOptions
+              - selectionOptions
+              description: description
+              id: id
+              languageCode: languageCode
+              type: singleLine
+            - isTarget: true
+              reference:
+                selectionType: SINGLE
+                grid:
+                  name: name
+                  id: id
+                column:
+                  name: name
+                  selectionOptions:
+                  - selectionOptions
+                  - selectionOptions
+                  id: id
+                type: ROW
+              dependsOn: dependsOn
+              numberFormat:
+                decimalPlaces: 0
+                currencySymbol: currencySymbol
+                type: DECIMAL
+                use1000Separator: true
+              isSource: true
+              name: name
+              selectionOptions:
+              - selectionOptions
+              - selectionOptions
+              description: description
+              id: id
+              languageCode: languageCode
+              type: singleLine
             name: name
+            description: description
             id: id
-            branches:
-            - null
-            - null
-            groupTagDefinition:
-            - groupTagDefinition
-            - groupTagDefinition
-            status: status
-          - branchId: branchId
-            customProperties:
-              key: "{}"
+            status: deleted
+          - metadata:
+              key: metadata
             defaultAccessViewId: defaultAccessViewId
-            parentGridId: parentGridId
+            columns:
+            - isTarget: true
+              reference:
+                selectionType: SINGLE
+                grid:
+                  name: name
+                  id: id
+                column:
+                  name: name
+                  selectionOptions:
+                  - selectionOptions
+                  - selectionOptions
+                  id: id
+                type: ROW
+              dependsOn: dependsOn
+              numberFormat:
+                decimalPlaces: 0
+                currencySymbol: currencySymbol
+                type: DECIMAL
+                use1000Separator: true
+              isSource: true
+              name: name
+              selectionOptions:
+              - selectionOptions
+              - selectionOptions
+              description: description
+              id: id
+              languageCode: languageCode
+              type: singleLine
+            - isTarget: true
+              reference:
+                selectionType: SINGLE
+                grid:
+                  name: name
+                  id: id
+                column:
+                  name: name
+                  selectionOptions:
+                  - selectionOptions
+                  - selectionOptions
+                  id: id
+                type: ROW
+              dependsOn: dependsOn
+              numberFormat:
+                decimalPlaces: 0
+                currencySymbol: currencySymbol
+                type: DECIMAL
+                use1000Separator: true
+              isSource: true
+              name: name
+              selectionOptions:
+              - selectionOptions
+              - selectionOptions
+              description: description
+              id: id
+              languageCode: languageCode
+              type: singleLine
             name: name
+            description: description
             id: id
-            branches:
-            - null
-            - null
-            groupTagDefinition:
-            - groupTagDefinition
-            - groupTagDefinition
-            status: status
+            status: deleted
           projectId: 2
           views:
-          - customProperties:
-              key: "{}"
+          - records:
+            - path: path
+              cells:
+              - columnId: columnId
+                dependencyStatus: upToDate
+                referencedIds:
+                - referencedIds
+                - referencedIds
+                value: "{}"
+              - columnId: columnId
+                dependencyStatus: upToDate
+                referencedIds:
+                - referencedIds
+                - referencedIds
+                value: "{}"
+              lastModifiedTime: 2000-01-23T04:56:07.000+00:00
+              lastModifiedBy: lastModifiedBy
+              id: id
+            - path: path
+              cells:
+              - columnId: columnId
+                dependencyStatus: upToDate
+                referencedIds:
+                - referencedIds
+                - referencedIds
+                value: "{}"
+              - columnId: columnId
+                dependencyStatus: upToDate
+                referencedIds:
+                - referencedIds
+                - referencedIds
+                value: "{}"
+              lastModifiedTime: 2000-01-23T04:56:07.000+00:00
+              lastModifiedBy: lastModifiedBy
+              id: id
+            columns:
+            - isTarget: true
+              reference:
+                selectionType: SINGLE
+                grid:
+                  name: name
+                  id: id
+                column:
+                  name: name
+                  selectionOptions:
+                  - selectionOptions
+                  - selectionOptions
+                  id: id
+                type: ROW
+              dependsOn: dependsOn
+              numberFormat:
+                decimalPlaces: 0
+                currencySymbol: currencySymbol
+                type: DECIMAL
+                use1000Separator: true
+              isSource: true
+              name: name
+              selectionOptions:
+              - selectionOptions
+              - selectionOptions
+              description: description
+              id: id
+              languageCode: languageCode
+              type: singleLine
+            - isTarget: true
+              reference:
+                selectionType: SINGLE
+                grid:
+                  name: name
+                  id: id
+                column:
+                  name: name
+                  selectionOptions:
+                  - selectionOptions
+                  - selectionOptions
+                  id: id
+                type: ROW
+              dependsOn: dependsOn
+              numberFormat:
+                decimalPlaces: 0
+                currencySymbol: currencySymbol
+                type: DECIMAL
+                use1000Separator: true
+              isSource: true
+              name: name
+              selectionOptions:
+              - selectionOptions
+              - selectionOptions
+              description: description
+              id: id
+              languageCode: languageCode
+              type: singleLine
             name: name
-            description: description
             gridId: gridId
+            gridStatus: deleted
             id: id
-            groupTagDefinition:
-            - groupTagDefinition
-            - groupTagDefinition
-            status: status
-          - customProperties:
-              key: "{}"
+          - records:
+            - path: path
+              cells:
+              - columnId: columnId
+                dependencyStatus: upToDate
+                referencedIds:
+                - referencedIds
+                - referencedIds
+                value: "{}"
+              - columnId: columnId
+                dependencyStatus: upToDate
+                referencedIds:
+                - referencedIds
+                - referencedIds
+                value: "{}"
+              lastModifiedTime: 2000-01-23T04:56:07.000+00:00
+              lastModifiedBy: lastModifiedBy
+              id: id
+            - path: path
+              cells:
+              - columnId: columnId
+                dependencyStatus: upToDate
+                referencedIds:
+                - referencedIds
+                - referencedIds
+                value: "{}"
+              - columnId: columnId
+                dependencyStatus: upToDate
+                referencedIds:
+                - referencedIds
+                - referencedIds
+                value: "{}"
+              lastModifiedTime: 2000-01-23T04:56:07.000+00:00
+              lastModifiedBy: lastModifiedBy
+              id: id
+            columns:
+            - isTarget: true
+              reference:
+                selectionType: SINGLE
+                grid:
+                  name: name
+                  id: id
+                column:
+                  name: name
+                  selectionOptions:
+                  - selectionOptions
+                  - selectionOptions
+                  id: id
+                type: ROW
+              dependsOn: dependsOn
+              numberFormat:
+                decimalPlaces: 0
+                currencySymbol: currencySymbol
+                type: DECIMAL
+                use1000Separator: true
+              isSource: true
+              name: name
+              selectionOptions:
+              - selectionOptions
+              - selectionOptions
+              description: description
+              id: id
+              languageCode: languageCode
+              type: singleLine
+            - isTarget: true
+              reference:
+                selectionType: SINGLE
+                grid:
+                  name: name
+                  id: id
+                column:
+                  name: name
+                  selectionOptions:
+                  - selectionOptions
+                  - selectionOptions
+                  id: id
+                type: ROW
+              dependsOn: dependsOn
+              numberFormat:
+                decimalPlaces: 0
+                currencySymbol: currencySymbol
+                type: DECIMAL
+                use1000Separator: true
+              isSource: true
+              name: name
+              selectionOptions:
+              - selectionOptions
+              - selectionOptions
+              description: description
+              id: id
+              languageCode: languageCode
+              type: singleLine
             name: name
-            description: description
             gridId: gridId
+            gridStatus: deleted
             id: id
-            groupTagDefinition:
-            - groupTagDefinition
-            - groupTagDefinition
-            status: status
         role:
           privileges:
           - level: level

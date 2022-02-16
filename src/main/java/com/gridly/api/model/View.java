@@ -20,13 +20,13 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.gridly.api.model.Record;
+import com.gridly.api.model.ViewColumn;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.io.Serializable;
 
 /**
@@ -36,21 +36,82 @@ import java.io.Serializable;
 public class View implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  public static final String SERIALIZED_NAME_CUSTOM_PROPERTIES = "customProperties";
-  @SerializedName(SERIALIZED_NAME_CUSTOM_PROPERTIES)
-  private Map<String, Object> customProperties = null;
-
-  public static final String SERIALIZED_NAME_DESCRIPTION = "description";
-  @SerializedName(SERIALIZED_NAME_DESCRIPTION)
-  private String description;
+  public static final String SERIALIZED_NAME_COLUMNS = "columns";
+  @SerializedName(SERIALIZED_NAME_COLUMNS)
+  private List<ViewColumn> columns = null;
 
   public static final String SERIALIZED_NAME_GRID_ID = "gridId";
   @SerializedName(SERIALIZED_NAME_GRID_ID)
   private String gridId;
 
-  public static final String SERIALIZED_NAME_GROUP_TAG_DEFINITION = "groupTagDefinition";
-  @SerializedName(SERIALIZED_NAME_GROUP_TAG_DEFINITION)
-  private List<String> groupTagDefinition = null;
+  /**
+   * Gets or Sets gridStatus
+   */
+  @JsonAdapter(GridStatusEnum.Adapter.class)
+  public enum GridStatusEnum {
+    DELETED("deleted"),
+    
+    ACTIVE("active"),
+    
+    INACTIVE("inactive"),
+    
+    RESTORING("restoring"),
+    
+    BACKINGUP("backingUp"),
+    
+    UPLOADING("uploading"),
+    
+    IMPORTING("importing"),
+    
+    BRANCHING("branching"),
+    
+    MERGING("merging"),
+    
+    DUPLICATING("duplicating"),
+    
+    CLEARINGRECORDS("clearingRecords");
+
+    private String value;
+
+    GridStatusEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static GridStatusEnum fromValue(String value) {
+      for (GridStatusEnum b : GridStatusEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+
+    public static class Adapter extends TypeAdapter<GridStatusEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final GridStatusEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public GridStatusEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return GridStatusEnum.fromValue(value);
+      }
+    }
+  }
+
+  public static final String SERIALIZED_NAME_GRID_STATUS = "gridStatus";
+  @SerializedName(SERIALIZED_NAME_GRID_STATUS)
+  private GridStatusEnum gridStatus;
 
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -60,64 +121,41 @@ public class View implements Serializable {
   @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
 
-  public static final String SERIALIZED_NAME_STATUS = "status";
-  @SerializedName(SERIALIZED_NAME_STATUS)
-  private String status;
+  public static final String SERIALIZED_NAME_RECORDS = "records";
+  @SerializedName(SERIALIZED_NAME_RECORDS)
+  private List<Record> records = null;
 
   public View() { 
   }
 
-  public View customProperties(Map<String, Object> customProperties) {
+  public View columns(List<ViewColumn> columns) {
     
-    this.customProperties = customProperties;
+    this.columns = columns;
     return this;
   }
 
-  public View putCustomPropertiesItem(String key, Object customPropertiesItem) {
-    if (this.customProperties == null) {
-      this.customProperties = new HashMap<>();
+  public View addColumnsItem(ViewColumn columnsItem) {
+    if (this.columns == null) {
+      this.columns = new ArrayList<>();
     }
-    this.customProperties.put(key, customPropertiesItem);
+    this.columns.add(columnsItem);
     return this;
   }
 
    /**
-   * Get customProperties
-   * @return customProperties
+   * Get columns
+   * @return columns
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public Map<String, Object> getCustomProperties() {
-    return customProperties;
+  public List<ViewColumn> getColumns() {
+    return columns;
   }
 
 
-  public void setCustomProperties(Map<String, Object> customProperties) {
-    this.customProperties = customProperties;
-  }
-
-
-  public View description(String description) {
-    
-    this.description = description;
-    return this;
-  }
-
-   /**
-   * Get description
-   * @return description
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
-  public String getDescription() {
-    return description;
-  }
-
-
-  public void setDescription(String description) {
-    this.description = description;
+  public void setColumns(List<ViewColumn> columns) {
+    this.columns = columns;
   }
 
 
@@ -144,34 +182,26 @@ public class View implements Serializable {
   }
 
 
-  public View groupTagDefinition(List<String> groupTagDefinition) {
+  public View gridStatus(GridStatusEnum gridStatus) {
     
-    this.groupTagDefinition = groupTagDefinition;
-    return this;
-  }
-
-  public View addGroupTagDefinitionItem(String groupTagDefinitionItem) {
-    if (this.groupTagDefinition == null) {
-      this.groupTagDefinition = new ArrayList<>();
-    }
-    this.groupTagDefinition.add(groupTagDefinitionItem);
+    this.gridStatus = gridStatus;
     return this;
   }
 
    /**
-   * Get groupTagDefinition
-   * @return groupTagDefinition
+   * Get gridStatus
+   * @return gridStatus
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public List<String> getGroupTagDefinition() {
-    return groupTagDefinition;
+  public GridStatusEnum getGridStatus() {
+    return gridStatus;
   }
 
 
-  public void setGroupTagDefinition(List<String> groupTagDefinition) {
-    this.groupTagDefinition = groupTagDefinition;
+  public void setGridStatus(GridStatusEnum gridStatus) {
+    this.gridStatus = gridStatus;
   }
 
 
@@ -221,26 +251,34 @@ public class View implements Serializable {
   }
 
 
-  public View status(String status) {
+  public View records(List<Record> records) {
     
-    this.status = status;
+    this.records = records;
+    return this;
+  }
+
+  public View addRecordsItem(Record recordsItem) {
+    if (this.records == null) {
+      this.records = new ArrayList<>();
+    }
+    this.records.add(recordsItem);
     return this;
   }
 
    /**
-   * Get status
-   * @return status
+   * Get records
+   * @return records
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public String getStatus() {
-    return status;
+  public List<Record> getRecords() {
+    return records;
   }
 
 
-  public void setStatus(String status) {
-    this.status = status;
+  public void setRecords(List<Record> records) {
+    this.records = records;
   }
 
 
@@ -253,31 +291,29 @@ public class View implements Serializable {
       return false;
     }
     View view = (View) o;
-    return Objects.equals(this.customProperties, view.customProperties) &&
-        Objects.equals(this.description, view.description) &&
+    return Objects.equals(this.columns, view.columns) &&
         Objects.equals(this.gridId, view.gridId) &&
-        Objects.equals(this.groupTagDefinition, view.groupTagDefinition) &&
+        Objects.equals(this.gridStatus, view.gridStatus) &&
         Objects.equals(this.id, view.id) &&
         Objects.equals(this.name, view.name) &&
-        Objects.equals(this.status, view.status);
+        Objects.equals(this.records, view.records);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(customProperties, description, gridId, groupTagDefinition, id, name, status);
+    return Objects.hash(columns, gridId, gridStatus, id, name, records);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class View {\n");
-    sb.append("    customProperties: ").append(toIndentedString(customProperties)).append("\n");
-    sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    columns: ").append(toIndentedString(columns)).append("\n");
     sb.append("    gridId: ").append(toIndentedString(gridId)).append("\n");
-    sb.append("    groupTagDefinition: ").append(toIndentedString(groupTagDefinition)).append("\n");
+    sb.append("    gridStatus: ").append(toIndentedString(gridStatus)).append("\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    records: ").append(toIndentedString(records)).append("\n");
     sb.append("}");
     return sb.toString();
   }

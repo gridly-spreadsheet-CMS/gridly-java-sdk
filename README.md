@@ -39,7 +39,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.gridly</groupId>
   <artifactId>gridly-api</artifactId>
-  <version>1.2.1</version>
+  <version>1.2.2</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -55,7 +55,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "com.gridly:gridly-api:1.2.1"
+     implementation "com.gridly:gridly-api:1.2.2"
   }
 ```
 
@@ -69,7 +69,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/gridly-api-1.2.1.jar`
+* `target/gridly-api-1.2.2.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -139,11 +139,6 @@ Class | Method | HTTP request | Description
 *GridApi* | [**list**](docs/GridApi.md#list) | **GET** /v1/grids | list
 *GridApi* | [**listTemplateGrids**](docs/GridApi.md#listTemplateGrids) | **GET** /v1/template-grids | listTemplateGrids
 *GridApi* | [**update**](docs/GridApi.md#update) | **PATCH** /v1/grids/{gridId} | update
-*GridMetadataApi* | [**create**](docs/GridMetadataApi.md#create) | **POST** /v1/grids/{gridId}/metadata | create
-*GridMetadataApi* | [**delete**](docs/GridMetadataApi.md#delete) | **DELETE** /v1/grids/{gridId}/metadata/{metadataId} | delete
-*GridMetadataApi* | [**get**](docs/GridMetadataApi.md#get) | **GET** /v1/grids/{gridId}/metadata/{metadataId} | get
-*GridMetadataApi* | [**list**](docs/GridMetadataApi.md#list) | **GET** /v1/grids/{gridId}/metadata | list
-*GridMetadataApi* | [**update**](docs/GridMetadataApi.md#update) | **PATCH** /v1/grids/{gridId}/metadata/{metadataId} | update
 *ProjectApi* | [**create**](docs/ProjectApi.md#create) | **POST** /v1/projects | create
 *ProjectApi* | [**delete**](docs/ProjectApi.md#delete) | **DELETE** /v1/projects/{projectId} | delete
 *ProjectApi* | [**findOne**](docs/ProjectApi.md#findOne) | **GET** /v1/projects/{projectId} | findOne
@@ -187,14 +182,12 @@ Class | Method | HTTP request | Description
  - [CreateDatabase](docs/CreateDatabase.md)
  - [CreateDependency](docs/CreateDependency.md)
  - [CreateGrid](docs/CreateGrid.md)
- - [CreateMetadata](docs/CreateMetadata.md)
  - [CreateProject](docs/CreateProject.md)
  - [Database](docs/Database.md)
  - [DeleteDependency](docs/DeleteDependency.md)
  - [DeleteRecord](docs/DeleteRecord.md)
  - [Dependency](docs/Dependency.md)
  - [Grid](docs/Grid.md)
- - [Metadata](docs/Metadata.md)
  - [NumberFormat](docs/NumberFormat.md)
  - [Privilege](docs/Privilege.md)
  - [Project](docs/Project.md)
@@ -204,17 +197,14 @@ Class | Method | HTTP request | Description
  - [Reference](docs/Reference.md)
  - [ReferencedColumn](docs/ReferencedColumn.md)
  - [ReferencedGrid](docs/ReferencedGrid.md)
- - [Resource](docs/Resource.md)
  - [Role](docs/Role.md)
  - [SetCell](docs/SetCell.md)
  - [SetRecord](docs/SetRecord.md)
  - [Task](docs/Task.md)
- - [URL](docs/URL.md)
  - [UpdateColumn](docs/UpdateColumn.md)
  - [UpdateDatabase](docs/UpdateDatabase.md)
  - [UpdateDependency](docs/UpdateDependency.md)
  - [UpdateGrid](docs/UpdateGrid.md)
- - [UpdateMetadata](docs/UpdateMetadata.md)
  - [UpdateProject](docs/UpdateProject.md)
  - [UploadedFile](docs/UploadedFile.md)
  - [View](docs/View.md)
