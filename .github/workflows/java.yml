@@ -33,7 +33,15 @@ jobs:
       run: |
         VER=$(cat VERSION)
         echo "RELEASE_VERSION=$VER" >> $GITHUB_ENV
-        
+
+    - name: Archive Artifact
+      uses: actions/upload-artifact@v2.2.4
+      with:
+        name: com.gridly.java-sdk-${env.RELEASE_VERSION}
+        path: build/libs/*.jar
+        retention-days: 1
+        if-no-files-found: error
+
     - name: Github Release
       uses: softprops/action-gh-release@v1
       id: create_release
