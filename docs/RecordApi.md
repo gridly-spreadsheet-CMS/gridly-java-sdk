@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 <a name="create"></a>
 # **create**
-> List&lt;Record&gt; create(viewId, createRecordDTOs)
+> List&lt;Record&gt; create(viewId, createRecords)
 
 create
 
@@ -40,9 +40,9 @@ public class Example {
 
     RecordApi apiInstance = new RecordApi(defaultClient);
     String viewId = "viewId_example"; // String | viewId
-    List<SetRecord> createRecordDTOs = Arrays.asList(); // List<SetRecord> | createRecordDTOs
+    List<SetRecord> createRecords = Arrays.asList(); // List<SetRecord> | createRecords
     try {
-      List<Record> result = apiInstance.create(viewId, createRecordDTOs);
+      List<Record> result = apiInstance.create(viewId, createRecords);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling RecordApi#create");
@@ -60,7 +60,7 @@ public class Example {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **viewId** | **String**| viewId |
- **createRecordDTOs** | [**List&lt;SetRecord&gt;**](SetRecord.md)| createRecordDTOs |
+ **createRecords** | [**List&lt;SetRecord&gt;**](SetRecord.md)| createRecords |
 
 ### Return type
 
@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
 
 <a name="delete"></a>
 # **delete**
-> delete(viewId, deleteRecordDTO)
+> delete(viewId, deleteRecord)
 
 delete
 
@@ -113,9 +113,9 @@ public class Example {
 
     RecordApi apiInstance = new RecordApi(defaultClient);
     String viewId = "viewId_example"; // String | viewId
-    DeleteRecord deleteRecordDTO = new DeleteRecord(); // DeleteRecord | deleteRecordDTO
+    DeleteRecord deleteRecord = new DeleteRecord(); // DeleteRecord | deleteRecord
     try {
-      apiInstance.delete(viewId, deleteRecordDTO);
+      apiInstance.delete(viewId, deleteRecord);
     } catch (ApiException e) {
       System.err.println("Exception when calling RecordApi#delete");
       System.err.println("Status code: " + e.getCode());
@@ -132,7 +132,7 @@ public class Example {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **viewId** | **String**| viewId |
- **deleteRecordDTO** | [**DeleteRecord**](DeleteRecord.md)| deleteRecordDTO |
+ **deleteRecord** | [**DeleteRecord**](DeleteRecord.md)| deleteRecord |
 
 ### Return type
 
@@ -234,7 +234,7 @@ Name | Type | Description  | Notes
 
 <a name="update"></a>
 # **update**
-> List&lt;Record&gt; update(viewId, updateRecordDTOs)
+> List&lt;Record&gt; update(viewId, updateRecords)
 
 update
 
@@ -261,9 +261,9 @@ public class Example {
 
     RecordApi apiInstance = new RecordApi(defaultClient);
     String viewId = "viewId_example"; // String | viewId
-    List<SetRecord> updateRecordDTOs = Arrays.asList(); // List<SetRecord> | updateRecordDTOs
+    List<SetRecord> updateRecords = Arrays.asList(); // List<SetRecord> | updateRecords
     try {
-      List<Record> result = apiInstance.update(viewId, updateRecordDTOs);
+      List<Record> result = apiInstance.update(viewId, updateRecords);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling RecordApi#update");
@@ -281,7 +281,7 @@ public class Example {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **viewId** | **String**| viewId |
- **updateRecordDTOs** | [**List&lt;SetRecord&gt;**](SetRecord.md)| updateRecordDTOs |
+ **updateRecords** | [**List&lt;SetRecord&gt;**](SetRecord.md)| updateRecords |
 
 ### Return type
 
@@ -306,7 +306,7 @@ Name | Type | Description  | Notes
 
 <a name="updateRecord"></a>
 # **updateRecord**
-> Record updateRecord(id, viewId, updateRecordDTO, path)
+> Record updateRecord(id, viewId, updateRecord, path)
 
 updateRecord
 
@@ -334,10 +334,10 @@ public class Example {
     RecordApi apiInstance = new RecordApi(defaultClient);
     String id = "id_example"; // String | id
     String viewId = "viewId_example"; // String | viewId
-    SetRecord updateRecordDTO = new SetRecord(); // SetRecord | updateRecordDTO
+    SetRecord updateRecord = new SetRecord(); // SetRecord | updateRecord
     String path = "path_example"; // String | path
     try {
-      Record result = apiInstance.updateRecord(id, viewId, updateRecordDTO, path);
+      Record result = apiInstance.updateRecord(id, viewId, updateRecord, path);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling RecordApi#updateRecord");
@@ -356,7 +356,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **String**| id |
  **viewId** | **String**| viewId |
- **updateRecordDTO** | [**SetRecord**](SetRecord.md)| updateRecordDTO |
+ **updateRecord** | [**SetRecord**](SetRecord.md)| updateRecord |
  **path** | **String**| path | [optional]
 
 ### Return type

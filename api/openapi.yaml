@@ -5,7 +5,7 @@ info:
   license:
     name: Apache 2.0
   title: Gridly API
-  version: 3.21.3
+  version: 3.21.4
 servers:
 - url: https://api.gridly.com/
 tags:
@@ -301,7 +301,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateGrid'
-        description: createCompositeGrid
+        description: createGrid
         required: true
       responses:
         "201":
@@ -324,7 +324,7 @@ paths:
       summary: create
       tags:
       - grid
-      x-codegen-request-body-name: createCompositeGrid
+      x-codegen-request-body-name: createGrid
       x-contentType: application/json
       x-accepts: application/json
   /v1/grids/{gridId}:
@@ -407,7 +407,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateGrid'
-        description: updateCompositeGrid
+        description: updateGrid
         required: true
       responses:
         "200":
@@ -430,7 +430,7 @@ paths:
       summary: update
       tags:
       - grid
-      x-codegen-request-body-name: updateCompositeGrid
+      x-codegen-request-body-name: updateGrid
       x-contentType: application/json
       x-accepts: application/json
   /v1/tasks/{taskId}:
@@ -1541,7 +1541,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/DeleteRecord'
-        description: deleteRecordDTO
+        description: deleteRecord
         required: true
       responses:
         "204":
@@ -1558,7 +1558,7 @@ paths:
       summary: delete
       tags:
       - record
-      x-codegen-request-body-name: deleteRecordDTO
+      x-codegen-request-body-name: deleteRecord
       x-contentType: application/json
       x-accepts: application/json
     get:
@@ -1653,7 +1653,7 @@ paths:
               items:
                 $ref: '#/components/schemas/SetRecord'
               type: array
-        description: updateRecordDTOs
+        description: updateRecords
         required: true
       responses:
         "200":
@@ -1678,7 +1678,7 @@ paths:
       summary: update
       tags:
       - record
-      x-codegen-request-body-name: updateRecordDTOs
+      x-codegen-request-body-name: updateRecords
       x-contentType: application/json
       x-accepts: application/json
     post:
@@ -1700,7 +1700,7 @@ paths:
               items:
                 $ref: '#/components/schemas/SetRecord'
               type: array
-        description: createRecordDTOs
+        description: createRecords
         required: true
       responses:
         "200":
@@ -1728,7 +1728,7 @@ paths:
       summary: create
       tags:
       - record
-      x-codegen-request-body-name: createRecordDTOs
+      x-codegen-request-body-name: createRecords
       x-contentType: application/json
       x-accepts: application/json
   /v1/views/{viewId}/records/{id}:
@@ -1765,7 +1765,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/SetRecord'
-        description: updateRecordDTO
+        description: updateRecord
         required: true
       responses:
         "200":
@@ -1788,7 +1788,7 @@ paths:
       summary: updateRecord
       tags:
       - record
-      x-codegen-request-body-name: updateRecordDTO
+      x-codegen-request-body-name: updateRecord
       x-contentType: application/json
       x-accepts: application/json
   /v1/databases:

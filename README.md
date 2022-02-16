@@ -1,7 +1,7 @@
 # gridly-api
 
 Gridly API
-- API version: 3.21.3
+- API version: 3.21.4
 
 Gridly API documentation
 

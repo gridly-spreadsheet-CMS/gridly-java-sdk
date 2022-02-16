@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 <a name="create"></a>
 # **create**
-> Grid create(dbId, createCompositeGrid)
+> Grid create(dbId, createGrid)
 
 create
 
@@ -41,9 +41,9 @@ public class Example {
 
     GridApi apiInstance = new GridApi(defaultClient);
     String dbId = "dbId_example"; // String | dbId
-    CreateGrid createCompositeGrid = new CreateGrid(); // CreateGrid | createCompositeGrid
+    CreateGrid createGrid = new CreateGrid(); // CreateGrid | createGrid
     try {
-      Grid result = apiInstance.create(dbId, createCompositeGrid);
+      Grid result = apiInstance.create(dbId, createGrid);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling GridApi#create");
@@ -61,7 +61,7 @@ public class Example {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dbId** | **String**| dbId |
- **createCompositeGrid** | [**CreateGrid**](CreateGrid.md)| createCompositeGrid |
+ **createGrid** | [**CreateGrid**](CreateGrid.md)| createGrid |
 
 ### Return type
 
@@ -360,7 +360,7 @@ This endpoint does not need any parameter.
 
 <a name="update"></a>
 # **update**
-> Grid update(gridId, updateCompositeGrid)
+> Grid update(gridId, updateGrid)
 
 update
 
@@ -387,9 +387,9 @@ public class Example {
 
     GridApi apiInstance = new GridApi(defaultClient);
     String gridId = "gridId_example"; // String | gridId
-    UpdateGrid updateCompositeGrid = new UpdateGrid(); // UpdateGrid | updateCompositeGrid
+    UpdateGrid updateGrid = new UpdateGrid(); // UpdateGrid | updateGrid
     try {
-      Grid result = apiInstance.update(gridId, updateCompositeGrid);
+      Grid result = apiInstance.update(gridId, updateGrid);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling GridApi#update");
@@ -407,7 +407,7 @@ public class Example {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **gridId** | **String**| gridId |
- **updateCompositeGrid** | [**UpdateGrid**](UpdateGrid.md)| updateCompositeGrid |
+ **updateGrid** | [**UpdateGrid**](UpdateGrid.md)| updateGrid |
 
 ### Return type
 
