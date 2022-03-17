@@ -5,7 +5,7 @@ info:
   license:
     name: Apache 2.0
   title: Gridly API
-  version: 3.21.4
+  version: 3.23.2
 servers:
 - url: https://api.gridly.com/
 tags:
@@ -552,6 +552,43 @@ paths:
       summary: list
       tags:
       - view
+      x-accepts: application/json
+    post:
+      deprecated: false
+      operationId: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateView'
+        description: createView
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/View'
+          description: OK
+        "201":
+          content: {}
+          description: Created
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+        "404":
+          content: {}
+          description: Not Found
+      security:
+      - ApiKey: []
+      summary: create
+      tags:
+      - view
+      x-codegen-request-body-name: createView
+      x-contentType: application/json
       x-accepts: application/json
   /v1/views/{viewId}:
     get:
@@ -2263,6 +2300,17 @@ paths:
       x-accepts: application/json
 components:
   schemas:
+    AddViewColumn:
+      example:
+        editable: true
+        id: id
+      properties:
+        editable:
+          type: boolean
+        id:
+          type: string
+      title: AddViewColumn
+      type: object
     Branch:
       example:
         metadata:
@@ -2676,6 +2724,26 @@ components:
           type: string
       title: CreateGrid
       type: object
+    CreateView:
+      example:
+        columns:
+        - editable: true
+          id: id
+        - editable: true
+          id: id
+        name: name
+        gridId: gridId
+      properties:
+        columns:
+          items:
+            $ref: '#/components/schemas/AddViewColumn'
+          type: array
+        gridId:
+          type: string
+        name:
+          type: string
+      title: CreateView
+      type: object
     DataItem:
       title: DataItem
       type: object
@@ -2950,12 +3018,19 @@ components:
     SetCell:
       example:
         columnId: columnId
+        dependencyStatus: upToDate
         referencedIds:
         - referencedIds
         - referencedIds
         value: "{}"
       properties:
         columnId:
+          type: string
+        dependencyStatus:
+          enum:
+          - upToDate
+          - outOfDate
+          - unset
           type: string
         referencedIds:
           items:
@@ -2971,11 +3046,13 @@ components:
         path: path
         cells:
         - columnId: columnId
+          dependencyStatus: upToDate
           referencedIds:
           - referencedIds
           - referencedIds
           value: "{}"
         - columnId: columnId
+          dependencyStatus: upToDate
           referencedIds:
           - referencedIds
           - referencedIds
@@ -3014,6 +3091,7 @@ components:
           currencySymbol: currencySymbol
           type: DECIMAL
           use1000Separator: true
+        newId: newId
         name: name
         selectionOptions:
         - selectionOptions
@@ -3179,6 +3257,8 @@ components:
           - zuZA
           type: string
         name:
+          type: string
+        newId:
           type: string
         numberFormat:
           $ref: '#/components/schemas/NumberFormat'

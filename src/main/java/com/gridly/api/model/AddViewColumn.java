@@ -26,66 +26,66 @@ import java.io.IOException;
 import java.io.Serializable;
 
 /**
- * UpdateDatabase
+ * AddViewColumn
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
-public class UpdateDatabase implements Serializable {
+public class AddViewColumn implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  public static final String SERIALIZED_NAME_DESCRIPTION = "description";
-  @SerializedName(SERIALIZED_NAME_DESCRIPTION)
-  private String description;
+  public static final String SERIALIZED_NAME_EDITABLE = "editable";
+  @SerializedName(SERIALIZED_NAME_EDITABLE)
+  private Boolean editable;
 
-  public static final String SERIALIZED_NAME_NAME = "name";
-  @SerializedName(SERIALIZED_NAME_NAME)
-  private String name;
+  public static final String SERIALIZED_NAME_ID = "id";
+  @SerializedName(SERIALIZED_NAME_ID)
+  private String id;
 
-  public UpdateDatabase() { 
+  public AddViewColumn() { 
   }
 
-  public UpdateDatabase description(String description) {
+  public AddViewColumn editable(Boolean editable) {
     
-    this.description = description;
+    this.editable = editable;
     return this;
   }
 
    /**
-   * Get description
-   * @return description
+   * Get editable
+   * @return editable
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public String getDescription() {
-    return description;
+  public Boolean isEditable() {
+    return editable;
   }
 
 
-  public void setDescription(String description) {
-    this.description = description;
+  public void setEditable(Boolean editable) {
+    this.editable = editable;
   }
 
 
-  public UpdateDatabase name(String name) {
+  public AddViewColumn id(String id) {
     
-    this.name = name;
+    this.id = id;
     return this;
   }
 
    /**
-   * Get name
-   * @return name
+   * Get id
+   * @return id
   **/
-  @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "")
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
 
-  public String getName() {
-    return name;
+  public String getId() {
+    return id;
   }
 
 
-  public void setName(String name) {
-    this.name = name;
+  public void setId(String id) {
+    this.id = id;
   }
 
 
@@ -97,22 +97,22 @@ public class UpdateDatabase implements Serializable {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    UpdateDatabase updateDatabase = (UpdateDatabase) o;
-    return Objects.equals(this.description, updateDatabase.description) &&
-        Objects.equals(this.name, updateDatabase.name);
+    AddViewColumn addViewColumn = (AddViewColumn) o;
+    return Objects.equals(this.editable, addViewColumn.editable) &&
+        Objects.equals(this.id, addViewColumn.id);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(description, name);
+    return Objects.hash(editable, id);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class UpdateDatabase {\n");
-    sb.append("    description: ").append(toIndentedString(description)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("class AddViewColumn {\n");
+    sb.append("    editable: ").append(toIndentedString(editable)).append("\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("}");
     return sb.toString();
   }

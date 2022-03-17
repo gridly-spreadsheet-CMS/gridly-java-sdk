@@ -1,7 +1,7 @@
 # gridly-api
 
 Gridly API
-- API version: 3.21.4
+- API version: 3.23.2
 
 Gridly API documentation
 
@@ -39,7 +39,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.gridly</groupId>
   <artifactId>gridly-api</artifactId>
-  <version>1.2.2</version>
+  <version>1.2.4</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -55,7 +55,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "com.gridly:gridly-api:1.2.2"
+     implementation "com.gridly:gridly-api:1.2.4"
   }
 ```
 
@@ -69,7 +69,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/gridly-api-1.2.2.jar`
+* `target/gridly-api-1.2.4.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -150,6 +150,7 @@ Class | Method | HTTP request | Description
 *RecordApi* | [**update**](docs/RecordApi.md#update) | **PATCH** /v1/views/{viewId}/records | update
 *RecordApi* | [**updateRecord**](docs/RecordApi.md#updateRecord) | **PATCH** /v1/views/{viewId}/records/{id} | updateRecord
 *TaskApi* | [**get**](docs/TaskApi.md#get) | **GET** /v1/tasks/{taskId} | get
+*ViewApi* | [**create**](docs/ViewApi.md#create) | **POST** /v1/views | create
 *ViewApi* | [**export**](docs/ViewApi.md#export) | **GET** /v1/views/{viewId}/export | export
 *ViewApi* | [**get**](docs/ViewApi.md#get) | **GET** /v1/views/{viewId} | get
 *ViewApi* | [**importView**](docs/ViewApi.md#importView) | **POST** /v1/views/{viewId}/import | importView
@@ -174,6 +175,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
+ - [AddViewColumn](docs/AddViewColumn.md)
  - [Branch](docs/Branch.md)
  - [Cell](docs/Cell.md)
  - [ColumnReference](docs/ColumnReference.md)
@@ -183,6 +185,7 @@ Class | Method | HTTP request | Description
  - [CreateDependency](docs/CreateDependency.md)
  - [CreateGrid](docs/CreateGrid.md)
  - [CreateProject](docs/CreateProject.md)
+ - [CreateView](docs/CreateView.md)
  - [Database](docs/Database.md)
  - [DeleteDependency](docs/DeleteDependency.md)
  - [DeleteRecord](docs/DeleteRecord.md)

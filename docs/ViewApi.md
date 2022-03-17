@@ -4,12 +4,84 @@ All URIs are relative to *https://api.gridly.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**create**](ViewApi.md#create) | **POST** /v1/views | create
 [**export**](ViewApi.md#export) | **GET** /v1/views/{viewId}/export | export
 [**get**](ViewApi.md#get) | **GET** /v1/views/{viewId} | get
 [**importView**](ViewApi.md#importView) | **POST** /v1/views/{viewId}/import | importView
 [**list**](ViewApi.md#list) | **GET** /v1/views | list
 [**merge**](ViewApi.md#merge) | **POST** /v1/views/{viewId}/merge | merge
 
+
+<a name="create"></a>
+# **create**
+> View create(createView)
+
+create
+
+### Example
+```java
+// Import classes:
+import com.gridly.api.client.ApiClient;
+import com.gridly.api.client.ApiException;
+import com.gridly.api.client.Configuration;
+import com.gridly.api.client.auth.*;
+import com.gridly.api.client.models.*;
+import com.gridly.api.service.ViewApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://api.gridly.com");
+    
+    // Configure API key authorization: ApiKey
+    ApiKeyAuth ApiKey = (ApiKeyAuth) defaultClient.getAuthentication("ApiKey");
+    ApiKey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //ApiKey.setApiKeyPrefix("Token");
+
+    ViewApi apiInstance = new ViewApi(defaultClient);
+    CreateView createView = new CreateView(); // CreateView | createView
+    try {
+      View result = apiInstance.create(createView);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ViewApi#create");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **createView** | [**CreateView**](CreateView.md)| createView |
+
+### Return type
+
+[**View**](View.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**201** | Created |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
 
 <a name="export"></a>
 # **export**

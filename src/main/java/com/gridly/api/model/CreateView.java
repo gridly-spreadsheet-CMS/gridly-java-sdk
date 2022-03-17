@@ -20,6 +20,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.gridly.api.model.AddViewColumn;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -28,51 +29,82 @@ import java.util.List;
 import java.io.Serializable;
 
 /**
- * ReferencedColumn
+ * CreateView
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
-public class ReferencedColumn implements Serializable {
+public class CreateView implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  public static final String SERIALIZED_NAME_ID = "id";
-  @SerializedName(SERIALIZED_NAME_ID)
-  private String id;
+  public static final String SERIALIZED_NAME_COLUMNS = "columns";
+  @SerializedName(SERIALIZED_NAME_COLUMNS)
+  private List<AddViewColumn> columns = null;
+
+  public static final String SERIALIZED_NAME_GRID_ID = "gridId";
+  @SerializedName(SERIALIZED_NAME_GRID_ID)
+  private String gridId;
 
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
 
-  public static final String SERIALIZED_NAME_SELECTION_OPTIONS = "selectionOptions";
-  @SerializedName(SERIALIZED_NAME_SELECTION_OPTIONS)
-  private List<String> selectionOptions = null;
-
-  public ReferencedColumn() { 
+  public CreateView() { 
   }
 
-  public ReferencedColumn id(String id) {
+  public CreateView columns(List<AddViewColumn> columns) {
     
-    this.id = id;
+    this.columns = columns;
+    return this;
+  }
+
+  public CreateView addColumnsItem(AddViewColumn columnsItem) {
+    if (this.columns == null) {
+      this.columns = new ArrayList<>();
+    }
+    this.columns.add(columnsItem);
     return this;
   }
 
    /**
-   * Get id
-   * @return id
+   * Get columns
+   * @return columns
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public String getId() {
-    return id;
+  public List<AddViewColumn> getColumns() {
+    return columns;
   }
 
 
-  public void setId(String id) {
-    this.id = id;
+  public void setColumns(List<AddViewColumn> columns) {
+    this.columns = columns;
   }
 
 
-  public ReferencedColumn name(String name) {
+  public CreateView gridId(String gridId) {
+    
+    this.gridId = gridId;
+    return this;
+  }
+
+   /**
+   * Get gridId
+   * @return gridId
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public String getGridId() {
+    return gridId;
+  }
+
+
+  public void setGridId(String gridId) {
+    this.gridId = gridId;
+  }
+
+
+  public CreateView name(String name) {
     
     this.name = name;
     return this;
@@ -95,37 +127,6 @@ public class ReferencedColumn implements Serializable {
   }
 
 
-  public ReferencedColumn selectionOptions(List<String> selectionOptions) {
-    
-    this.selectionOptions = selectionOptions;
-    return this;
-  }
-
-  public ReferencedColumn addSelectionOptionsItem(String selectionOptionsItem) {
-    if (this.selectionOptions == null) {
-      this.selectionOptions = new ArrayList<>();
-    }
-    this.selectionOptions.add(selectionOptionsItem);
-    return this;
-  }
-
-   /**
-   * Get selectionOptions
-   * @return selectionOptions
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
-  public List<String> getSelectionOptions() {
-    return selectionOptions;
-  }
-
-
-  public void setSelectionOptions(List<String> selectionOptions) {
-    this.selectionOptions = selectionOptions;
-  }
-
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -134,24 +135,24 @@ public class ReferencedColumn implements Serializable {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ReferencedColumn referencedColumn = (ReferencedColumn) o;
-    return Objects.equals(this.id, referencedColumn.id) &&
-        Objects.equals(this.name, referencedColumn.name) &&
-        Objects.equals(this.selectionOptions, referencedColumn.selectionOptions);
+    CreateView createView = (CreateView) o;
+    return Objects.equals(this.columns, createView.columns) &&
+        Objects.equals(this.gridId, createView.gridId) &&
+        Objects.equals(this.name, createView.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, selectionOptions);
+    return Objects.hash(columns, gridId, name);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class ReferencedColumn {\n");
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("class CreateView {\n");
+    sb.append("    columns: ").append(toIndentedString(columns)).append("\n");
+    sb.append("    gridId: ").append(toIndentedString(gridId)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    selectionOptions: ").append(toIndentedString(selectionOptions)).append("\n");
     sb.append("}");
     return sb.toString();
   }

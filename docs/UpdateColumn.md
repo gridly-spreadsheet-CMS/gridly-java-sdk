@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **description** | **String** |  |  [optional]
 **languageCode** | [**LanguageCodeEnum**](#LanguageCodeEnum) |  |  [optional]
 **name** | **String** |  |  [optional]
+**newId** | **String** |  |  [optional]
 **numberFormat** | [**NumberFormat**](NumberFormat.md) |  |  [optional]
 **selectionOptions** | **List&lt;String&gt;** |  |  [optional]
 
