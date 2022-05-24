@@ -80,7 +80,7 @@ public class ViewFileApi {
      * @param columnId columnId (required)
      * @param recordId recordId (required)
      * @param viewId viewId (required)
-     * @param deleteFileDTO deleteFileDTO (required)
+     * @param deleteFile deleteFile (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -92,7 +92,7 @@ public class ViewFileApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call deleteCall(String columnId, String recordId, String viewId, DeleteFile deleteFileDTO, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call deleteCall(String columnId, String recordId, String viewId, DeleteFile deleteFile, final ApiCallback _callback) throws ApiException {
         String basePath = null;
 
         // Operation Servers
@@ -107,7 +107,7 @@ public class ViewFileApi {
             basePath = null;
         }
 
-        Object localVarPostBody = deleteFileDTO;
+        Object localVarPostBody = deleteFile;
 
         // create path and map variables
         String localVarPath = "/v1/views/{viewId}/files"
@@ -148,7 +148,7 @@ public class ViewFileApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call deleteValidateBeforeCall(String columnId, String recordId, String viewId, DeleteFile deleteFileDTO, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call deleteValidateBeforeCall(String columnId, String recordId, String viewId, DeleteFile deleteFile, final ApiCallback _callback) throws ApiException {
         
         // verify the required parameter 'columnId' is set
         if (columnId == null) {
@@ -165,13 +165,13 @@ public class ViewFileApi {
             throw new ApiException("Missing the required parameter 'viewId' when calling delete(Async)");
         }
         
-        // verify the required parameter 'deleteFileDTO' is set
-        if (deleteFileDTO == null) {
-            throw new ApiException("Missing the required parameter 'deleteFileDTO' when calling delete(Async)");
+        // verify the required parameter 'deleteFile' is set
+        if (deleteFile == null) {
+            throw new ApiException("Missing the required parameter 'deleteFile' when calling delete(Async)");
         }
         
 
-        okhttp3.Call localVarCall = deleteCall(columnId, recordId, viewId, deleteFileDTO, _callback);
+        okhttp3.Call localVarCall = deleteCall(columnId, recordId, viewId, deleteFile, _callback);
         return localVarCall;
 
     }
@@ -182,7 +182,7 @@ public class ViewFileApi {
      * @param columnId columnId (required)
      * @param recordId recordId (required)
      * @param viewId viewId (required)
-     * @param deleteFileDTO deleteFileDTO (required)
+     * @param deleteFile deleteFile (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -192,8 +192,8 @@ public class ViewFileApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    public void delete(String columnId, String recordId, String viewId, DeleteFile deleteFileDTO) throws ApiException {
-        deleteWithHttpInfo(columnId, recordId, viewId, deleteFileDTO);
+    public void delete(String columnId, String recordId, String viewId, DeleteFile deleteFile) throws ApiException {
+        deleteWithHttpInfo(columnId, recordId, viewId, deleteFile);
     }
 
     /**
@@ -202,7 +202,7 @@ public class ViewFileApi {
      * @param columnId columnId (required)
      * @param recordId recordId (required)
      * @param viewId viewId (required)
-     * @param deleteFileDTO deleteFileDTO (required)
+     * @param deleteFile deleteFile (required)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -213,8 +213,8 @@ public class ViewFileApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> deleteWithHttpInfo(String columnId, String recordId, String viewId, DeleteFile deleteFileDTO) throws ApiException {
-        okhttp3.Call localVarCall = deleteValidateBeforeCall(columnId, recordId, viewId, deleteFileDTO, null);
+    public ApiResponse<Void> deleteWithHttpInfo(String columnId, String recordId, String viewId, DeleteFile deleteFile) throws ApiException {
+        okhttp3.Call localVarCall = deleteValidateBeforeCall(columnId, recordId, viewId, deleteFile, null);
         return localVarApiClient.execute(localVarCall);
     }
 
@@ -224,7 +224,7 @@ public class ViewFileApi {
      * @param columnId columnId (required)
      * @param recordId recordId (required)
      * @param viewId viewId (required)
-     * @param deleteFileDTO deleteFileDTO (required)
+     * @param deleteFile deleteFile (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -236,9 +236,9 @@ public class ViewFileApi {
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call deleteAsync(String columnId, String recordId, String viewId, DeleteFile deleteFileDTO, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call deleteAsync(String columnId, String recordId, String viewId, DeleteFile deleteFile, final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = deleteValidateBeforeCall(columnId, recordId, viewId, deleteFileDTO, _callback);
+        okhttp3.Call localVarCall = deleteValidateBeforeCall(columnId, recordId, viewId, deleteFile, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }

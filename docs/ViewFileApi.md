@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 <a name="delete"></a>
 # **delete**
-> delete(columnId, recordId, viewId, deleteFileDTO)
+> delete(columnId, recordId, viewId, deleteFile)
 
 delete
 
@@ -41,9 +41,9 @@ public class Example {
     String columnId = "columnId_example"; // String | columnId
     String recordId = "recordId_example"; // String | recordId
     String viewId = "viewId_example"; // String | viewId
-    DeleteFile deleteFileDTO = new DeleteFile(); // DeleteFile | deleteFileDTO
+    DeleteFile deleteFile = new DeleteFile(); // DeleteFile | deleteFile
     try {
-      apiInstance.delete(columnId, recordId, viewId, deleteFileDTO);
+      apiInstance.delete(columnId, recordId, viewId, deleteFile);
     } catch (ApiException e) {
       System.err.println("Exception when calling ViewFileApi#delete");
       System.err.println("Status code: " + e.getCode());
@@ -62,7 +62,7 @@ Name | Type | Description  | Notes
  **columnId** | **String**| columnId |
  **recordId** | **String**| recordId |
  **viewId** | **String**| viewId |
- **deleteFileDTO** | [**DeleteFile**](DeleteFile.md)| deleteFileDTO |
+ **deleteFile** | [**DeleteFile**](DeleteFile.md)| deleteFile |
 
 ### Return type
 

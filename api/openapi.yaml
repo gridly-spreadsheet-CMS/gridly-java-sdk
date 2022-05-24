@@ -1315,7 +1315,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/DeleteFile'
-        description: deleteFileDTO
+        description: deleteFile
         required: true
       responses:
         "204":
@@ -1332,7 +1332,7 @@ paths:
       summary: delete
       tags:
       - view-file
-      x-codegen-request-body-name: deleteFileDTO
+      x-codegen-request-body-name: deleteFile
       x-contentType: application/json
       x-accepts: application/json
     post:

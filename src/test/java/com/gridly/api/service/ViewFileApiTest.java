@@ -48,8 +48,8 @@ public class ViewFileApiTest {
         String columnId = null;
         String recordId = null;
         String viewId = null;
-        DeleteFile deleteFileDTO = null;
-                api.delete(columnId, recordId, viewId, deleteFileDTO);
+        DeleteFile deleteFile = null;
+                api.delete(columnId, recordId, viewId, deleteFile);
         // TODO: test validations
     }
     
