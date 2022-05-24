@@ -4,10 +4,85 @@ All URIs are relative to *https://api.gridly.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**delete**](ViewFileApi.md#delete) | **DELETE** /v1/views/{viewId}/files | delete
 [**download**](ViewFileApi.md#download) | **GET** /v1/views/{viewId}/files/{fileId} | download
 [**upload**](ViewFileApi.md#upload) | **POST** /v1/views/{viewId}/files | upload
 [**uploadZip**](ViewFileApi.md#uploadZip) | **POST** /v1/views/{viewId}/files/zip | uploadZip
 
+
+<a name="delete"></a>
+# **delete**
+> delete(columnId, recordId, viewId, deleteFileDTO)
+
+delete
+
+### Example
+```java
+// Import classes:
+import com.gridly.api.client.ApiClient;
+import com.gridly.api.client.ApiException;
+import com.gridly.api.client.Configuration;
+import com.gridly.api.client.auth.*;
+import com.gridly.api.client.models.*;
+import com.gridly.api.service.ViewFileApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://api.gridly.com");
+    
+    // Configure API key authorization: ApiKey
+    ApiKeyAuth ApiKey = (ApiKeyAuth) defaultClient.getAuthentication("ApiKey");
+    ApiKey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //ApiKey.setApiKeyPrefix("Token");
+
+    ViewFileApi apiInstance = new ViewFileApi(defaultClient);
+    String columnId = "columnId_example"; // String | columnId
+    String recordId = "recordId_example"; // String | recordId
+    String viewId = "viewId_example"; // String | viewId
+    DeleteFile deleteFileDTO = new DeleteFile(); // DeleteFile | deleteFileDTO
+    try {
+      apiInstance.delete(columnId, recordId, viewId, deleteFileDTO);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ViewFileApi#delete");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **columnId** | **String**| columnId |
+ **recordId** | **String**| recordId |
+ **viewId** | **String**| viewId |
+ **deleteFileDTO** | [**DeleteFile**](DeleteFile.md)| deleteFileDTO |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: Not defined
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | No Content |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
 
 <a name="download"></a>
 # **download**
@@ -110,9 +185,9 @@ public class Example {
 
     ViewFileApi apiInstance = new ViewFileApi(defaultClient);
     String viewId = "viewId_example"; // String | viewId
-    Object columnId = null; // Object | columnId
+    String columnId = "columnId_example"; // String | columnId
     File file = new File("/path/to/file"); // File | file
-    Object recordId = null; // Object | recordId
+    String recordId = "recordId_example"; // String | recordId
     try {
       UploadedFile result = apiInstance.upload(viewId, columnId, file, recordId);
       System.out.println(result);
@@ -132,9 +207,9 @@ public class Example {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **viewId** | **String**| viewId |
- **columnId** | [**Object**](Object.md)| columnId | [default to null]
+ **columnId** | **String**| columnId |
  **file** | **File**| file |
- **recordId** | [**Object**](Object.md)| recordId | [default to null]
+ **recordId** | **String**| recordId |
 
 ### Return type
 
@@ -187,9 +262,9 @@ public class Example {
 
     ViewFileApi apiInstance = new ViewFileApi(defaultClient);
     String viewId = "viewId_example"; // String | viewId
-    Object columnId = null; // Object | columnId
+    String columnId = "columnId_example"; // String | columnId
     File file = new File("/path/to/file"); // File | file
-    Object fileMappings = null; // Object | fileMappings
+    String fileMappings = "fileMappings_example"; // String | fileMappings
     try {
       List<Record> result = apiInstance.uploadZip(viewId, columnId, file, fileMappings);
       System.out.println(result);
@@ -209,9 +284,9 @@ public class Example {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **viewId** | **String**| viewId |
- **columnId** | [**Object**](Object.md)| columnId | [default to null]
+ **columnId** | **String**| columnId |
  **file** | **File**| file |
- **fileMappings** | [**Object**](Object.md)| fileMappings | [default to null]
+ **fileMappings** | **String**| fileMappings |
 
 ### Return type
 

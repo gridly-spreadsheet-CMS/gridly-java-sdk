@@ -1,7 +1,7 @@
 # gridly-api
 
 Gridly API
-- API version: 3.23.2
+- API version: 3.27.2
 
 Gridly API documentation
 
@@ -39,7 +39,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.gridly</groupId>
   <artifactId>gridly-api</artifactId>
-  <version>1.2.4</version>
+  <version>1.2.5</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -55,7 +55,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "com.gridly:gridly-api:1.2.4"
+     implementation "com.gridly:gridly-api:1.2.5"
   }
 ```
 
@@ -69,7 +69,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/gridly-api-1.2.4.jar`
+* `target/gridly-api-1.2.5.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -168,6 +168,7 @@ Class | Method | HTTP request | Description
 *ViewDependencyApi* | [**get**](docs/ViewDependencyApi.md#get) | **GET** /v1/views/{viewId}/dependencies/{dependencyId} | get
 *ViewDependencyApi* | [**list**](docs/ViewDependencyApi.md#list) | **GET** /v1/views/{viewId}/dependencies | list
 *ViewDependencyApi* | [**update**](docs/ViewDependencyApi.md#update) | **PUT** /v1/views/{viewId}/dependencies/{dependencyId} | update
+*ViewFileApi* | [**delete**](docs/ViewFileApi.md#delete) | **DELETE** /v1/views/{viewId}/files | delete
 *ViewFileApi* | [**download**](docs/ViewFileApi.md#download) | **GET** /v1/views/{viewId}/files/{fileId} | download
 *ViewFileApi* | [**upload**](docs/ViewFileApi.md#upload) | **POST** /v1/views/{viewId}/files | upload
 *ViewFileApi* | [**uploadZip**](docs/ViewFileApi.md#uploadZip) | **POST** /v1/views/{viewId}/files/zip | uploadZip
@@ -188,6 +189,7 @@ Class | Method | HTTP request | Description
  - [CreateView](docs/CreateView.md)
  - [Database](docs/Database.md)
  - [DeleteDependency](docs/DeleteDependency.md)
+ - [DeleteFile](docs/DeleteFile.md)
  - [DeleteRecord](docs/DeleteRecord.md)
  - [Dependency](docs/Dependency.md)
  - [Grid](docs/Grid.md)

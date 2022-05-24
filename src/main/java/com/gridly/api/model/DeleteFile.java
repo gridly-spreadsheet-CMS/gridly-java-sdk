@@ -28,26 +28,26 @@ import java.util.List;
 import java.io.Serializable;
 
 /**
- * DeleteDependency
+ * DeleteFile
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
-public class DeleteDependency implements Serializable {
+public class DeleteFile implements Serializable {
   private static final long serialVersionUID = 1L;
 
   public static final String SERIALIZED_NAME_IDS = "ids";
   @SerializedName(SERIALIZED_NAME_IDS)
   private List<String> ids = null;
 
-  public DeleteDependency() { 
+  public DeleteFile() { 
   }
 
-  public DeleteDependency ids(List<String> ids) {
+  public DeleteFile ids(List<String> ids) {
     
     this.ids = ids;
     return this;
   }
 
-  public DeleteDependency addIdsItem(String idsItem) {
+  public DeleteFile addIdsItem(String idsItem) {
     if (this.ids == null) {
       this.ids = new ArrayList<>();
     }
@@ -80,8 +80,8 @@ public class DeleteDependency implements Serializable {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    DeleteDependency deleteDependency = (DeleteDependency) o;
-    return Objects.equals(this.ids, deleteDependency.ids);
+    DeleteFile deleteFile = (DeleteFile) o;
+    return Objects.equals(this.ids, deleteFile.ids);
   }
 
   @Override
@@ -92,7 +92,7 @@ public class DeleteDependency implements Serializable {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class DeleteDependency {\n");
+    sb.append("class DeleteFile {\n");
     sb.append("    ids: ").append(toIndentedString(ids)).append("\n");
     sb.append("}");
     return sb.toString();

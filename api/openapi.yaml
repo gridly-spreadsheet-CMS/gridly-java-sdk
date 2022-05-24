@@ -5,7 +5,7 @@ info:
   license:
     name: Apache 2.0
   title: Gridly API
-  version: 3.23.2
+  version: 3.27.2
 servers:
 - url: https://api.gridly.com/
 tags:
@@ -1282,6 +1282,59 @@ paths:
       - view
       x-accepts: application/octet-stream
   /v1/views/{viewId}/files:
+    delete:
+      deprecated: false
+      operationId: delete
+      parameters:
+      - description: columnId
+        explode: true
+        in: query
+        name: columnId
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: recordId
+        explode: true
+        in: query
+        name: recordId
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteFile'
+        description: deleteFileDTO
+        required: true
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "401":
+          content: {}
+          description: Unauthorized
+        "403":
+          content: {}
+          description: Forbidden
+      security:
+      - ApiKey: []
+      summary: delete
+      tags:
+      - view-file
+      x-codegen-request-body-name: deleteFileDTO
+      x-contentType: application/json
+      x-accepts: application/json
     post:
       deprecated: false
       operationId: upload
@@ -1301,12 +1354,14 @@ paths:
               properties:
                 columnId:
                   description: columnId
+                  type: string
                 file:
                   description: file
                   format: binary
                   type: string
                 recordId:
                   description: recordId
+                  type: string
               required:
               - columnId
               - file
@@ -1358,12 +1413,14 @@ paths:
               properties:
                 columnId:
                   description: columnId
+                  type: string
                 file:
                   description: file
                   format: binary
                   type: string
                 fileMappings:
                   description: fileMappings
+                  type: string
               required:
               - columnId
               - file
@@ -1466,8 +1523,10 @@ paths:
                   type: string
                 importRequest:
                   description: importRequest
+                  type: string
                 type:
                   description: type
+                  type: string
               required:
               - file
         required: true
@@ -2644,6 +2703,8 @@ components:
           - slSI
           - sqAL
           - srBA
+          - srRS
+          - srME
           - svFI
           - swKE
           - syrSY
@@ -2657,6 +2718,85 @@ components:
           - zhMO
           - zhSG
           - zuZA
+          - hy
+          - az
+          - bn
+          - bs
+          - ca
+          - hr
+          - da
+          - nl
+          - en
+          - fi
+          - fr
+          - hi
+          - hu
+          - id
+          - it
+          - mi
+          - ps
+          - ru
+          - sl
+          - es
+          - sw
+          - ta
+          - ur
+          - af
+          - et
+          - gl
+          - ja
+          - kk
+          - ky
+          - mk
+          - ms
+          - se
+          - pl
+          - pa
+          - ro
+          - sk
+          - sv
+          - tt
+          - te
+          - tr
+          - uz
+          - vi
+          - eu
+          - be
+          - cs
+          - de
+          - gu
+          - he
+          - is
+          - ko
+          - lt
+          - mr
+          - mn
+          - nb
+          - nn
+          - pt
+          - sa
+          - tn
+          - uk
+          - xh
+          - sq
+          - ar
+          - bg
+          - zh
+          - dv
+          - fo
+          - fa
+          - ka
+          - el
+          - kn
+          - lv
+          - mt
+          - qu
+          - sr
+          - tl
+          - th
+          - cy
+          - zu
+          - "no"
           type: string
         name:
           type: string
@@ -2758,6 +2898,18 @@ components:
             type: string
           type: array
       title: DeleteDependency
+      type: object
+    DeleteFile:
+      example:
+        ids:
+        - ids
+        - ids
+      properties:
+        ids:
+          items:
+            type: string
+          type: array
+      title: DeleteFile
       type: object
     DeleteRecord:
       example:
@@ -3242,6 +3394,8 @@ components:
           - slSI
           - sqAL
           - srBA
+          - srRS
+          - srME
           - svFI
           - swKE
           - syrSY
@@ -3255,6 +3409,85 @@ components:
           - zhMO
           - zhSG
           - zuZA
+          - hy
+          - az
+          - bn
+          - bs
+          - ca
+          - hr
+          - da
+          - nl
+          - en
+          - fi
+          - fr
+          - hi
+          - hu
+          - id
+          - it
+          - mi
+          - ps
+          - ru
+          - sl
+          - es
+          - sw
+          - ta
+          - ur
+          - af
+          - et
+          - gl
+          - ja
+          - kk
+          - ky
+          - mk
+          - ms
+          - se
+          - pl
+          - pa
+          - ro
+          - sk
+          - sv
+          - tt
+          - te
+          - tr
+          - uz
+          - vi
+          - eu
+          - be
+          - cs
+          - de
+          - gu
+          - he
+          - is
+          - ko
+          - lt
+          - mr
+          - mn
+          - nb
+          - nn
+          - pt
+          - sa
+          - tn
+          - uk
+          - xh
+          - sq
+          - ar
+          - bg
+          - zh
+          - dv
+          - fo
+          - fa
+          - ka
+          - el
+          - kn
+          - lv
+          - mt
+          - qu
+          - sr
+          - tl
+          - th
+          - cy
+          - zu
+          - "no"
           type: string
         name:
           type: string

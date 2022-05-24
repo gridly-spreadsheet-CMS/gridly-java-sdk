@@ -273,8 +273,8 @@ public class Example {
     ViewApi apiInstance = new ViewApi(defaultClient);
     String viewId = "viewId_example"; // String | viewId
     File file = new File("/path/to/file"); // File | The following file types are supported: csv, tsv, xls, xlsx and JSON
-    Object importRequest = null; // Object | importRequest
-    Object type = null; // Object | type
+    String importRequest = "importRequest_example"; // String | importRequest
+    String type = "type_example"; // String | type
     try {
       apiInstance.importView(viewId, file, importRequest, type);
     } catch (ApiException e) {
@@ -294,8 +294,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **viewId** | **String**| viewId |
  **file** | **File**| The following file types are supported: csv, tsv, xls, xlsx and JSON |
- **importRequest** | [**Object**](Object.md)| importRequest | [optional] [default to null]
- **type** | [**Object**](Object.md)| type | [optional] [default to null]
+ **importRequest** | **String**| importRequest | [optional]
+ **type** | **String**| type | [optional]
 
 ### Return type
 
