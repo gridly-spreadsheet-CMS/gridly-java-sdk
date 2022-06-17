@@ -5,20 +5,16 @@
 
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**id** | **Long** |  |  [optional]
-**isSystemRole** | **Boolean** |  |  [optional]
-**level** | **String** |  |  [optional]
-**name** | **String** |  |  [optional]
-**privilegeIds** | **List&lt;Long&gt;** |  |  [optional]
-**privileges** | [**List&lt;Privilege&gt;**](Privilege.md) |  |  [optional]
-**title** | **String** |  |  [optional]
-**type** | **String** |  |  [optional]
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**id** | **Long** |  |  [optional] |
+|**name** | **String** |  |  [optional] |
+|**title** | **String** |  |  [optional] |
+|**type** | **String** |  |  [optional] |
+|**level** | **String** |  |  [optional] |
+|**privileges** | [**Set&lt;Privilege&gt;**](Privilege.md) |  |  [optional] |
+|**privilegeIds** | **Set&lt;Long&gt;** |  |  [optional] |
+|**isSystemRole** | **Boolean** |  |  [optional] |
 
-
-## Implemented Interfaces
-
-* Serializable
 
 

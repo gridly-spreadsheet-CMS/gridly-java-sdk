@@ -5,14 +5,10 @@
 
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**editable** | **Boolean** |  |  [optional]
-**id** | **String** |  |  [optional]
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**editable** | **Boolean** |  |  [optional] |
+|**id** | **String** |  |  [optional] |
 
-
-## Implemented Interfaces
-
-* Serializable
 
 

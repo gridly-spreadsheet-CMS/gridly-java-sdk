@@ -2,14 +2,16 @@
 
 All URIs are relative to *https://api.gridly.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**get**](TaskApi.md#get) | **GET** /v1/tasks/{taskId} | get
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**get**](TaskApi.md#get) | **GET** /v1/tasks/{taskId} | get |
 
 
 <a name="get"></a>
 # **get**
 > Task get(taskId)
+
+get
 
 get
 
@@ -52,9 +54,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **taskId** | **String**| taskId |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **taskId** | **String**| taskId | |
 
 ### Return type
 
@@ -72,8 +74,5 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
+| **200** | OK |  -  |
 

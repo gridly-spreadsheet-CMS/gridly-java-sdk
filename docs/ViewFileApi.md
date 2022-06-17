@@ -2,17 +2,19 @@
 
 All URIs are relative to *https://api.gridly.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**delete**](ViewFileApi.md#delete) | **DELETE** /v1/views/{viewId}/files | delete
-[**download**](ViewFileApi.md#download) | **GET** /v1/views/{viewId}/files/{fileId} | download
-[**upload**](ViewFileApi.md#upload) | **POST** /v1/views/{viewId}/files | upload
-[**uploadZip**](ViewFileApi.md#uploadZip) | **POST** /v1/views/{viewId}/files/zip | uploadZip
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**delete**](ViewFileApi.md#delete) | **DELETE** /v1/views/{viewId}/files | delete |
+| [**download**](ViewFileApi.md#download) | **GET** /v1/views/{viewId}/files/{fileId} | download |
+| [**upload**](ViewFileApi.md#upload) | **POST** /v1/views/{viewId}/files | upload |
+| [**uploadZip**](ViewFileApi.md#uploadZip) | **POST** /v1/views/{viewId}/files/zip | uploadZip |
 
 
 <a name="delete"></a>
 # **delete**
 > delete(columnId, recordId, viewId, deleteFile)
+
+delete
 
 delete
 
@@ -41,7 +43,7 @@ public class Example {
     String columnId = "columnId_example"; // String | columnId
     String recordId = "recordId_example"; // String | recordId
     String viewId = "viewId_example"; // String | viewId
-    DeleteFile deleteFile = new DeleteFile(); // DeleteFile | deleteFile
+    DeleteFile deleteFile = new DeleteFile(); // DeleteFile | 
     try {
       apiInstance.delete(columnId, recordId, viewId, deleteFile);
     } catch (ApiException e) {
@@ -57,12 +59,12 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **columnId** | **String**| columnId |
- **recordId** | **String**| recordId |
- **viewId** | **String**| viewId |
- **deleteFile** | [**DeleteFile**](DeleteFile.md)| deleteFile |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **columnId** | **String**| columnId | |
+| **recordId** | **String**| recordId | |
+| **viewId** | **String**| viewId | |
+| **deleteFile** | [**DeleteFile**](DeleteFile.md)|  | |
 
 ### Return type
 
@@ -80,13 +82,13 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | No Content |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
+| **204** | No Content |  -  |
 
 <a name="download"></a>
 # **download**
 > File download(fileId, viewId)
+
+download
 
 download
 
@@ -130,10 +132,10 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **fileId** | **String**| fileId |
- **viewId** | **String**| viewId |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **fileId** | **String**| fileId | |
+| **viewId** | **String**| viewId | |
 
 ### Return type
 
@@ -151,14 +153,13 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
+| **0** | default response |  -  |
 
 <a name="upload"></a>
 # **upload**
-> UploadedFile upload(viewId, columnId, file, recordId)
+> UploadedFile upload(viewId, columnId, recordId, _file)
+
+upload
 
 upload
 
@@ -186,10 +187,10 @@ public class Example {
     ViewFileApi apiInstance = new ViewFileApi(defaultClient);
     String viewId = "viewId_example"; // String | viewId
     String columnId = "columnId_example"; // String | columnId
-    File file = new File("/path/to/file"); // File | file
     String recordId = "recordId_example"; // String | recordId
+    File _file = new File("/path/to/file"); // File | 
     try {
-      UploadedFile result = apiInstance.upload(viewId, columnId, file, recordId);
+      UploadedFile result = apiInstance.upload(viewId, columnId, recordId, _file);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ViewFileApi#upload");
@@ -204,12 +205,12 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **viewId** | **String**| viewId |
- **columnId** | **String**| columnId |
- **file** | **File**| file |
- **recordId** | **String**| recordId |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **viewId** | **String**| viewId | |
+| **columnId** | **String**| columnId | |
+| **recordId** | **String**| recordId | |
+| **_file** | **File**|  | |
 
 ### Return type
 
@@ -227,15 +228,13 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**201** | Created |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
+| **201** | Created |  -  |
 
 <a name="uploadZip"></a>
 # **uploadZip**
-> List&lt;Record&gt; uploadZip(viewId, columnId, file, fileMappings)
+> List&lt;Record&gt; uploadZip(viewId, columnId, fileMappings, _file)
+
+uploadZip
 
 uploadZip
 
@@ -263,10 +262,10 @@ public class Example {
     ViewFileApi apiInstance = new ViewFileApi(defaultClient);
     String viewId = "viewId_example"; // String | viewId
     String columnId = "columnId_example"; // String | columnId
-    File file = new File("/path/to/file"); // File | file
     String fileMappings = "fileMappings_example"; // String | fileMappings
+    File _file = new File("/path/to/file"); // File | 
     try {
-      List<Record> result = apiInstance.uploadZip(viewId, columnId, file, fileMappings);
+      List<Record> result = apiInstance.uploadZip(viewId, columnId, fileMappings, _file);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ViewFileApi#uploadZip");
@@ -281,12 +280,12 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **viewId** | **String**| viewId |
- **columnId** | **String**| columnId |
- **file** | **File**| file |
- **fileMappings** | **String**| fileMappings |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **viewId** | **String**| viewId | |
+| **columnId** | **String**| columnId | |
+| **fileMappings** | **String**| fileMappings | |
+| **_file** | **File**|  | |
 
 ### Return type
 
@@ -304,9 +303,5 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**201** | Created |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
+| **0** | default response |  -  |
 

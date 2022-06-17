@@ -5,16 +5,12 @@
 
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**contentType** | **String** |  |  [optional]
-**id** | **String** |  |  [optional]
-**originalName** | **String** |  |  [optional]
-**size** | **Long** |  |  [optional]
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**id** | **String** |  |  [optional] |
+|**originalName** | **String** |  |  [optional] |
+|**contentType** | **String** |  |  [optional] |
+|**size** | **Long** |  |  [optional] |
 
-
-## Implemented Interfaces
-
-* Serializable
 
 

@@ -5,20 +5,16 @@
 
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**description** | **String** |  |  [optional]
-**grids** | [**List&lt;Grid&gt;**](Grid.md) |  |  [optional]
-**groups** | **List&lt;Object&gt;** |  |  [optional]
-**id** | **String** |  |  [optional]
-**name** | **String** |  |  [optional]
-**project** | [**Project**](Project.md) |  |  [optional]
-**projectId** | **Long** |  |  [optional]
-**views** | [**List&lt;View&gt;**](View.md) |  |  [optional]
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**id** | **String** |  |  [optional] |
+|**name** | **String** |  |  [optional] |
+|**description** | **String** |  |  [optional] |
+|**projectId** | **Long** |  |  [optional] |
+|**grids** | [**List&lt;Grid&gt;**](Grid.md) |  |  [optional] |
+|**views** | [**List&lt;View&gt;**](View.md) |  |  [optional] |
+|**project** | [**Project**](Project.md) |  |  [optional] |
+|**groups** | [**Set&lt;Group&gt;**](Group.md) |  |  [optional] |
 
-
-## Implemented Interfaces
-
-* Serializable
 
 

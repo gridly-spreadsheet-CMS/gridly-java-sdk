@@ -5,15 +5,11 @@
 
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**metadata** | **Map&lt;String, String&gt;** |  |  [optional]
-**name** | **String** |  |  [optional]
-**templateGridId** | **String** |  |  [optional]
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**name** | **String** |  |  |
+|**templateGridId** | **String** |  |  [optional] |
+|**metadata** | **Map&lt;String, String&gt;** |  |  [optional] |
 
-
-## Implemented Interfaces
-
-* Serializable
 
 

@@ -2,19 +2,94 @@
 
 All URIs are relative to *https://api.gridly.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**create**](ViewApi.md#create) | **POST** /v1/views | create
-[**export**](ViewApi.md#export) | **GET** /v1/views/{viewId}/export | export
-[**get**](ViewApi.md#get) | **GET** /v1/views/{viewId} | get
-[**importView**](ViewApi.md#importView) | **POST** /v1/views/{viewId}/import | importView
-[**list**](ViewApi.md#list) | **GET** /v1/views | list
-[**merge**](ViewApi.md#merge) | **POST** /v1/views/{viewId}/merge | merge
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**callList**](ViewApi.md#callList) | **GET** /v1/views | list |
+| [**create**](ViewApi.md#create) | **POST** /v1/views | create |
+| [**export**](ViewApi.md#export) | **GET** /v1/views/{viewId}/export | export |
+| [**get**](ViewApi.md#get) | **GET** /v1/views/{viewId} | get |
+| [**importView**](ViewApi.md#importView) | **POST** /v1/views/{viewId}/import | importView |
+| [**merge**](ViewApi.md#merge) | **POST** /v1/views/{viewId}/merge | merge |
 
+
+<a name="callList"></a>
+# **callList**
+> List&lt;View&gt; callList(branchId, gridId, type)
+
+list
+
+list
+
+### Example
+```java
+// Import classes:
+import com.gridly.api.client.ApiClient;
+import com.gridly.api.client.ApiException;
+import com.gridly.api.client.Configuration;
+import com.gridly.api.client.auth.*;
+import com.gridly.api.client.models.*;
+import com.gridly.api.service.ViewApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://api.gridly.com");
+    
+    // Configure API key authorization: ApiKey
+    ApiKeyAuth ApiKey = (ApiKeyAuth) defaultClient.getAuthentication("ApiKey");
+    ApiKey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //ApiKey.setApiKeyPrefix("Token");
+
+    ViewApi apiInstance = new ViewApi(defaultClient);
+    String branchId = "branchId_example"; // String | branchId
+    String gridId = "gridId_example"; // String | gridId
+    ViewType type = ViewType.fromValue("defaultView"); // ViewType | type
+    try {
+      List<View> result = apiInstance.callList(branchId, gridId, type);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ViewApi#callList");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **branchId** | **String**| branchId | [optional] |
+| **gridId** | **String**| gridId | [optional] |
+| **type** | [**ViewType**](.md)| type | [optional] [default to accessView] [enum: defaultView, accessView, userView] |
+
+### Return type
+
+[**List&lt;View&gt;**](View.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
 
 <a name="create"></a>
 # **create**
 > View create(createView)
+
+create
 
 create
 
@@ -40,7 +115,7 @@ public class Example {
     //ApiKey.setApiKeyPrefix("Token");
 
     ViewApi apiInstance = new ViewApi(defaultClient);
-    CreateView createView = new CreateView(); // CreateView | createView
+    CreateView createView = new CreateView(); // CreateView | 
     try {
       View result = apiInstance.create(createView);
       System.out.println(result);
@@ -57,9 +132,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **createView** | [**CreateView**](CreateView.md)| createView |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **createView** | [**CreateView**](CreateView.md)|  | |
 
 ### Return type
 
@@ -77,15 +152,13 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**201** | Created |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
+| **200** | OK |  -  |
 
 <a name="export"></a>
 # **export**
 > File export(viewId, columnIds, fileHeader, query, sort, type)
+
+export
 
 export
 
@@ -113,10 +186,10 @@ public class Example {
     ViewApi apiInstance = new ViewApi(defaultClient);
     String viewId = "viewId_example"; // String | viewId
     List<String> columnIds = Arrays.asList(); // List<String> | columnIds
-    String fileHeader = "none"; // String | fileHeader
+    ExportFileHeader fileHeader = ExportFileHeader.fromValue("none"); // ExportFileHeader | fileHeader
     String query = "{}"; // String | query
     String sort = "{}"; // String | sort
-    String type = "csv"; // String | type
+    FileType type = FileType.fromValue("csv"); // FileType | type
     try {
       File result = apiInstance.export(viewId, columnIds, fileHeader, query, sort, type);
       System.out.println(result);
@@ -133,14 +206,14 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **viewId** | **String**| viewId |
- **columnIds** | [**List&lt;String&gt;**](String.md)| columnIds | [optional]
- **fileHeader** | **String**| fileHeader | [optional] [default to columnName] [enum: none, columnName]
- **query** | **String**| query | [optional] [default to {}]
- **sort** | **String**| sort | [optional] [default to {}]
- **type** | **String**| type | [optional] [default to csv] [enum: csv, tsv, xls, xlsx, json, po]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **viewId** | **String**| viewId | |
+| **columnIds** | [**List&lt;String&gt;**](String.md)| columnIds | [optional] |
+| **fileHeader** | [**ExportFileHeader**](.md)| fileHeader | [optional] [default to columnName] [enum: none, columnName] |
+| **query** | **String**| query | [optional] [default to {}] |
+| **sort** | **String**| sort | [optional] [default to {}] |
+| **type** | [**FileType**](.md)| type | [optional] [default to csv] [enum: csv, tsv, xls, xlsx, json, po] |
 
 ### Return type
 
@@ -158,14 +231,13 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
+| **0** | default response |  -  |
 
 <a name="get"></a>
 # **get**
 > View get(viewId, columnIds, include, page, query, sort)
+
+get
 
 get
 
@@ -213,14 +285,14 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **viewId** | **String**| viewId |
- **columnIds** | [**List&lt;String&gt;**](String.md)| columnIds | [optional]
- **include** | [**List&lt;String&gt;**](String.md)| include | [optional] [enum: records]
- **page** | **String**| page | [optional] [default to {}]
- **query** | **String**| query | [optional] [default to {}]
- **sort** | **String**| sort | [optional] [default to {}]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **viewId** | **String**| viewId | |
+| **columnIds** | [**List&lt;String&gt;**](String.md)| columnIds | [optional] |
+| **include** | [**List&lt;String&gt;**](String.md)| include | [optional] [enum: records] |
+| **page** | **String**| page | [optional] [default to {}] |
+| **query** | **String**| query | [optional] [default to {}] |
+| **sort** | **String**| sort | [optional] [default to {}] |
 
 ### Return type
 
@@ -238,14 +310,13 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
+| **200** | OK |  -  |
 
 <a name="importView"></a>
 # **importView**
-> importView(viewId, file, importRequest, type)
+> importView(viewId, _file, importRequest, type)
+
+importView
 
 importView
 
@@ -272,11 +343,11 @@ public class Example {
 
     ViewApi apiInstance = new ViewApi(defaultClient);
     String viewId = "viewId_example"; // String | viewId
-    File file = new File("/path/to/file"); // File | The following file types are supported: csv, tsv, xls, xlsx and JSON
-    String importRequest = "importRequest_example"; // String | importRequest
-    String type = "type_example"; // String | type
+    File _file = new File("/path/to/file"); // File | 
+    String importRequest = "{}"; // String | importRequest
+    String type = "csv"; // String | type
     try {
-      apiInstance.importView(viewId, file, importRequest, type);
+      apiInstance.importView(viewId, _file, importRequest, type);
     } catch (ApiException e) {
       System.err.println("Exception when calling ViewApi#importView");
       System.err.println("Status code: " + e.getCode());
@@ -290,12 +361,12 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **viewId** | **String**| viewId |
- **file** | **File**| The following file types are supported: csv, tsv, xls, xlsx and JSON |
- **importRequest** | **String**| importRequest | [optional]
- **type** | **String**| type | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **viewId** | **String**| viewId | |
+| **_file** | **File**|  | |
+| **importRequest** | **String**| importRequest | [optional] [default to {}] |
+| **type** | **String**| type | [optional] [default to csv] [enum: csv, tsv, xls, xlsx, json, po] |
 
 ### Return type
 
@@ -313,89 +384,13 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | Created |  -  |
-**202** | Accepted |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-
-<a name="list"></a>
-# **list**
-> List&lt;View&gt; list(branchId, gridId, type)
-
-list
-
-### Example
-```java
-// Import classes:
-import com.gridly.api.client.ApiClient;
-import com.gridly.api.client.ApiException;
-import com.gridly.api.client.Configuration;
-import com.gridly.api.client.auth.*;
-import com.gridly.api.client.models.*;
-import com.gridly.api.service.ViewApi;
-
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.gridly.com");
-    
-    // Configure API key authorization: ApiKey
-    ApiKeyAuth ApiKey = (ApiKeyAuth) defaultClient.getAuthentication("ApiKey");
-    ApiKey.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //ApiKey.setApiKeyPrefix("Token");
-
-    ViewApi apiInstance = new ViewApi(defaultClient);
-    String branchId = "branchId_example"; // String | branchId
-    String gridId = "gridId_example"; // String | gridId
-    String type = "defaultView"; // String | type
-    try {
-      List<View> result = apiInstance.list(branchId, gridId, type);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling ViewApi#list");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **branchId** | **String**| branchId | [optional]
- **gridId** | **String**| gridId | [optional]
- **type** | **String**| type | [optional] [enum: defaultView, accessView, userView]
-
-### Return type
-
-[**List&lt;View&gt;**](View.md)
-
-### Authorization
-
-[ApiKey](../README.md#ApiKey)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
+| **202** | Accepted |  -  |
 
 <a name="merge"></a>
 # **merge**
-> merge(destinationViewId, viewId, mergeRecordOptions)
+> Task merge(destinationViewId, viewId, mergeRecordOptions)
+
+merge
 
 merge
 
@@ -425,7 +420,8 @@ public class Example {
     String viewId = "viewId_example"; // String | viewId
     List<String> mergeRecordOptions = Arrays.asList(); // List<String> | mergeRecordOptions
     try {
-      apiInstance.merge(destinationViewId, viewId, mergeRecordOptions);
+      Task result = apiInstance.merge(destinationViewId, viewId, mergeRecordOptions);
+      System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ViewApi#merge");
       System.err.println("Status code: " + e.getCode());
@@ -439,15 +435,15 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **destinationViewId** | **String**| destinationViewId |
- **viewId** | **String**| viewId |
- **mergeRecordOptions** | [**List&lt;String&gt;**](String.md)| mergeRecordOptions | [optional] [enum: add, update, delete, override]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **destinationViewId** | **String**| destinationViewId | |
+| **viewId** | **String**| viewId | |
+| **mergeRecordOptions** | [**List&lt;String&gt;**](String.md)| mergeRecordOptions | [optional] [enum: add, update, delete, override] |
 
 ### Return type
 
-null (empty response body)
+[**Task**](Task.md)
 
 ### Authorization
 
@@ -461,9 +457,5 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | Created |  -  |
-**202** | Accepted |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
+| **202** | Accepted |  -  |
 

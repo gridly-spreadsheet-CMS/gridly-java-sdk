@@ -5,18 +5,14 @@
 
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**databases** | [**List&lt;Database&gt;**](Database.md) |  |  [optional]
-**description** | **String** |  |  [optional]
-**groups** | **List&lt;Object&gt;** |  |  [optional]
-**id** | **Long** |  |  [optional]
-**name** | **String** |  |  [optional]
-**role** | [**Role**](Role.md) |  |  [optional]
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**id** | **Long** |  |  [optional] |
+|**name** | **String** |  |  [optional] |
+|**description** | **String** |  |  [optional] |
+|**role** | [**Role**](Role.md) |  |  [optional] |
+|**databases** | [**List&lt;Database&gt;**](Database.md) |  |  [optional] |
+|**groups** | [**List&lt;Group&gt;**](Group.md) |  |  [optional] |
 
-
-## Implemented Interfaces
-
-* Serializable
 
 

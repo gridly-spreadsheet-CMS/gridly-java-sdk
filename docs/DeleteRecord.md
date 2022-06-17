@@ -5,14 +5,10 @@
 
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**identifiers** | [**List&lt;RecordIdentifierWrapper&gt;**](RecordIdentifierWrapper.md) |  |  [optional]
-**ids** | **List&lt;String&gt;** |  |  [optional]
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**ids** | **List&lt;String&gt;** |  |  [optional] |
+|**identifiers** | [**List&lt;RecordIdentifierWrapper&gt;**](RecordIdentifierWrapper.md) |  |  [optional] |
 
-
-## Implemented Interfaces
-
-* Serializable
 
 

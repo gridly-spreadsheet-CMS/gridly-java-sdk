@@ -2,18 +2,20 @@
 
 All URIs are relative to *https://api.gridly.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**create**](RecordApi.md#create) | **POST** /v1/views/{viewId}/records | create
-[**delete**](RecordApi.md#delete) | **DELETE** /v1/views/{viewId}/records | delete
-[**fetch**](RecordApi.md#fetch) | **GET** /v1/views/{viewId}/records | fetch
-[**update**](RecordApi.md#update) | **PATCH** /v1/views/{viewId}/records | update
-[**updateRecord**](RecordApi.md#updateRecord) | **PATCH** /v1/views/{viewId}/records/{id} | updateRecord
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**create**](RecordApi.md#create) | **POST** /v1/views/{viewId}/records | create |
+| [**delete**](RecordApi.md#delete) | **DELETE** /v1/views/{viewId}/records | delete |
+| [**fetch**](RecordApi.md#fetch) | **GET** /v1/views/{viewId}/records | fetch |
+| [**update**](RecordApi.md#update) | **PATCH** /v1/views/{viewId}/records | update |
+| [**updateRecord**](RecordApi.md#updateRecord) | **PATCH** /v1/views/{viewId}/records/{id} | updateRecord |
 
 
 <a name="create"></a>
 # **create**
-> List&lt;Record&gt; create(viewId, createRecords)
+> List&lt;Record&gt; create(viewId, setRecord)
+
+create
 
 create
 
@@ -40,9 +42,9 @@ public class Example {
 
     RecordApi apiInstance = new RecordApi(defaultClient);
     String viewId = "viewId_example"; // String | viewId
-    List<SetRecord> createRecords = Arrays.asList(); // List<SetRecord> | createRecords
+    List<SetRecord> setRecord = Arrays.asList(); // List<SetRecord> | 
     try {
-      List<Record> result = apiInstance.create(viewId, createRecords);
+      List<Record> result = apiInstance.create(viewId, setRecord);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling RecordApi#create");
@@ -57,10 +59,10 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **viewId** | **String**| viewId |
- **createRecords** | [**List&lt;SetRecord&gt;**](SetRecord.md)| createRecords |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **viewId** | **String**| viewId | |
+| **setRecord** | [**List&lt;SetRecord&gt;**](SetRecord.md)|  | |
 
 ### Return type
 
@@ -78,15 +80,13 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**201** | Created |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
+| **200** | OK |  -  |
 
 <a name="delete"></a>
 # **delete**
 > delete(viewId, deleteRecord)
+
+delete
 
 delete
 
@@ -113,7 +113,7 @@ public class Example {
 
     RecordApi apiInstance = new RecordApi(defaultClient);
     String viewId = "viewId_example"; // String | viewId
-    DeleteRecord deleteRecord = new DeleteRecord(); // DeleteRecord | deleteRecord
+    DeleteRecord deleteRecord = new DeleteRecord(); // DeleteRecord | 
     try {
       apiInstance.delete(viewId, deleteRecord);
     } catch (ApiException e) {
@@ -129,10 +129,10 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **viewId** | **String**| viewId |
- **deleteRecord** | [**DeleteRecord**](DeleteRecord.md)| deleteRecord |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **viewId** | **String**| viewId | |
+| **deleteRecord** | [**DeleteRecord**](DeleteRecord.md)|  | |
 
 ### Return type
 
@@ -150,13 +150,13 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | No Content |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
+| **204** | No Content |  -  |
 
 <a name="fetch"></a>
 # **fetch**
-> List&lt;Record&gt; fetch(viewId, columnIds, page, query, sort)
+> List&lt;Record&gt; fetch(viewId, columnIds, page, query, sort, fetchFileOption)
+
+fetch
 
 fetch
 
@@ -187,8 +187,9 @@ public class Example {
     String page = "{}"; // String | page
     String query = "{}"; // String | query
     String sort = "{}"; // String | sort
+    FetchFileOption fetchFileOption = FetchFileOption.fromValue("all"); // FetchFileOption | fetchFileOption
     try {
-      List<Record> result = apiInstance.fetch(viewId, columnIds, page, query, sort);
+      List<Record> result = apiInstance.fetch(viewId, columnIds, page, query, sort, fetchFileOption);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling RecordApi#fetch");
@@ -203,13 +204,14 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **viewId** | **String**| viewId |
- **columnIds** | [**List&lt;String&gt;**](String.md)| columnIds | [optional]
- **page** | **String**| page | [optional] [default to {}]
- **query** | **String**| query | [optional] [default to {}]
- **sort** | **String**| sort | [optional] [default to {}]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **viewId** | **String**| viewId | |
+| **columnIds** | [**List&lt;String&gt;**](String.md)| columnIds | [optional] |
+| **page** | **String**| page | [optional] [default to {}] |
+| **query** | **String**| query | [optional] [default to {}] |
+| **sort** | **String**| sort | [optional] [default to {}] |
+| **fetchFileOption** | [**FetchFileOption**](.md)| fetchFileOption | [optional] [default to id] [enum: all, id, name] |
 
 ### Return type
 
@@ -227,14 +229,13 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
+| **200** | OK |  -  |
 
 <a name="update"></a>
 # **update**
-> List&lt;Record&gt; update(viewId, updateRecords)
+> List&lt;Record&gt; update(viewId, setRecord)
+
+update
 
 update
 
@@ -261,9 +262,9 @@ public class Example {
 
     RecordApi apiInstance = new RecordApi(defaultClient);
     String viewId = "viewId_example"; // String | viewId
-    List<SetRecord> updateRecords = Arrays.asList(); // List<SetRecord> | updateRecords
+    List<SetRecord> setRecord = Arrays.asList(); // List<SetRecord> | 
     try {
-      List<Record> result = apiInstance.update(viewId, updateRecords);
+      List<Record> result = apiInstance.update(viewId, setRecord);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling RecordApi#update");
@@ -278,10 +279,10 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **viewId** | **String**| viewId |
- **updateRecords** | [**List&lt;SetRecord&gt;**](SetRecord.md)| updateRecords |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **viewId** | **String**| viewId | |
+| **setRecord** | [**List&lt;SetRecord&gt;**](SetRecord.md)|  | |
 
 ### Return type
 
@@ -299,14 +300,13 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**204** | No Content |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
+| **200** | OK |  -  |
 
 <a name="updateRecord"></a>
 # **updateRecord**
-> Record updateRecord(id, viewId, updateRecord, path)
+> Record updateRecord(id, viewId, setRecord, path)
+
+updateRecord
 
 updateRecord
 
@@ -334,10 +334,10 @@ public class Example {
     RecordApi apiInstance = new RecordApi(defaultClient);
     String id = "id_example"; // String | id
     String viewId = "viewId_example"; // String | viewId
-    SetRecord updateRecord = new SetRecord(); // SetRecord | updateRecord
+    SetRecord setRecord = new SetRecord(); // SetRecord | 
     String path = "path_example"; // String | path
     try {
-      Record result = apiInstance.updateRecord(id, viewId, updateRecord, path);
+      Record result = apiInstance.updateRecord(id, viewId, setRecord, path);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling RecordApi#updateRecord");
@@ -352,12 +352,12 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **String**| id |
- **viewId** | **String**| viewId |
- **updateRecord** | [**SetRecord**](SetRecord.md)| updateRecord |
- **path** | **String**| path | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | **String**| id | |
+| **viewId** | **String**| viewId | |
+| **setRecord** | [**SetRecord**](SetRecord.md)|  | |
+| **path** | **String**| path | [optional] |
 
 ### Return type
 
@@ -375,8 +375,5 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**204** | No Content |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
+| **200** | OK |  -  |
 

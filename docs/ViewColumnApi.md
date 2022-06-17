@@ -2,19 +2,21 @@
 
 All URIs are relative to *https://api.gridly.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**add**](ViewColumnApi.md#add) | **POST** /v1/views/{viewId}/columns/{columnId}/add | add
-[**create**](ViewColumnApi.md#create) | **POST** /v1/views/{viewId}/columns | create
-[**delete**](ViewColumnApi.md#delete) | **DELETE** /v1/views/{viewId}/columns/{columnId} | delete
-[**get**](ViewColumnApi.md#get) | **GET** /v1/views/{viewId}/columns/{columnId} | get
-[**remove**](ViewColumnApi.md#remove) | **POST** /v1/views/{viewId}/columns/{columnId}/remove | remove
-[**update**](ViewColumnApi.md#update) | **PATCH** /v1/views/{viewId}/columns/{columnId} | update
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**add**](ViewColumnApi.md#add) | **POST** /v1/views/{viewId}/columns/{columnId}/add | add |
+| [**create**](ViewColumnApi.md#create) | **POST** /v1/views/{viewId}/columns | create |
+| [**delete**](ViewColumnApi.md#delete) | **DELETE** /v1/views/{viewId}/columns/{columnId} | delete |
+| [**get**](ViewColumnApi.md#get) | **GET** /v1/views/{viewId}/columns/{columnId} | get |
+| [**remove**](ViewColumnApi.md#remove) | **POST** /v1/views/{viewId}/columns/{columnId}/remove | remove |
+| [**update**](ViewColumnApi.md#update) | **PATCH** /v1/views/{viewId}/columns/{columnId} | update |
 
 
 <a name="add"></a>
 # **add**
 > ViewColumn add(columnId, viewId)
+
+add
 
 add
 
@@ -58,10 +60,10 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **columnId** | **String**| columnId |
- **viewId** | **String**| viewId |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **columnId** | **String**| columnId | |
+| **viewId** | **String**| viewId | |
 
 ### Return type
 
@@ -79,17 +81,15 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**201** | Created |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
+| **200** | OK |  -  |
 
 <a name="create"></a>
 # **create**
 > ViewColumn create(viewId, createColumn)
 
 create
+
+Create a Column
 
 ### Example
 ```java
@@ -114,7 +114,7 @@ public class Example {
 
     ViewColumnApi apiInstance = new ViewColumnApi(defaultClient);
     String viewId = "viewId_example"; // String | viewId
-    CreateColumn createColumn = new CreateColumn(); // CreateColumn | createColumn
+    CreateColumn createColumn = new CreateColumn(); // CreateColumn | 
     try {
       ViewColumn result = apiInstance.create(viewId, createColumn);
       System.out.println(result);
@@ -131,10 +131,10 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **viewId** | **String**| viewId |
- **createColumn** | [**CreateColumn**](CreateColumn.md)| createColumn |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **viewId** | **String**| viewId | |
+| **createColumn** | [**CreateColumn**](CreateColumn.md)|  | |
 
 ### Return type
 
@@ -152,14 +152,13 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | Created |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
+| **201** | Created |  -  |
 
 <a name="delete"></a>
 # **delete**
 > delete(columnId, viewId)
+
+delete
 
 delete
 
@@ -202,10 +201,10 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **columnId** | **String**| columnId |
- **viewId** | **String**| viewId |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **columnId** | **String**| columnId | |
+| **viewId** | **String**| viewId | |
 
 ### Return type
 
@@ -223,13 +222,13 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | No Content |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
+| **204** | No Content |  -  |
 
 <a name="get"></a>
 # **get**
 > ViewColumn get(columnId, viewId)
+
+get
 
 get
 
@@ -273,10 +272,10 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **columnId** | **String**| columnId |
- **viewId** | **String**| viewId |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **columnId** | **String**| columnId | |
+| **viewId** | **String**| viewId | |
 
 ### Return type
 
@@ -294,14 +293,13 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
+| **200** | OK |  -  |
 
 <a name="remove"></a>
 # **remove**
 > remove(columnId, viewId)
+
+remove
 
 remove
 
@@ -344,10 +342,10 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **columnId** | **String**| columnId |
- **viewId** | **String**| viewId |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **columnId** | **String**| columnId | |
+| **viewId** | **String**| viewId | |
 
 ### Return type
 
@@ -365,15 +363,13 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**201** | Created |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
+| **200** | OK |  -  |
 
 <a name="update"></a>
 # **update**
 > ViewColumn update(columnId, viewId, updateColumn)
+
+update
 
 update
 
@@ -401,7 +397,7 @@ public class Example {
     ViewColumnApi apiInstance = new ViewColumnApi(defaultClient);
     String columnId = "columnId_example"; // String | columnId
     String viewId = "viewId_example"; // String | viewId
-    UpdateColumn updateColumn = new UpdateColumn(); // UpdateColumn | updateColumn
+    UpdateColumn updateColumn = new UpdateColumn(); // UpdateColumn | 
     try {
       ViewColumn result = apiInstance.update(columnId, viewId, updateColumn);
       System.out.println(result);
@@ -418,11 +414,11 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **columnId** | **String**| columnId |
- **viewId** | **String**| viewId |
- **updateColumn** | [**UpdateColumn**](UpdateColumn.md)| updateColumn |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **columnId** | **String**| columnId | |
+| **viewId** | **String**| viewId | |
+| **updateColumn** | [**UpdateColumn**](UpdateColumn.md)|  | |
 
 ### Return type
 
@@ -440,8 +436,5 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**204** | No Content |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
+| **200** | OK |  -  |
 
