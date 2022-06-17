@@ -1903,7 +1903,7 @@ components:
         referencedIds:
         - referencedIds
         - referencedIds
-        value: "{}"
+        value: ""
       properties:
         columnId:
           type: string
@@ -1918,7 +1918,7 @@ components:
             type: string
           type: array
         value:
-          type: object
+          type: AnyType
       type: object
     ColumnReference:
       example:
@@ -1978,13 +1978,13 @@ components:
           referencedIds:
           - referencedIds
           - referencedIds
-          value: "{}"
+          value: ""
         - columnId: columnId
           dependencyStatus: upToDate
           referencedIds:
           - referencedIds
           - referencedIds
-          value: "{}"
+          value: ""
         lastModifiedTime: 2000-01-23T04:56:07.000+00:00
         lastModifiedBy: lastModifiedBy
         id: id
@@ -2040,13 +2040,13 @@ components:
             referencedIds:
             - referencedIds
             - referencedIds
-            value: "{}"
+            value: ""
           - columnId: columnId
             dependencyStatus: upToDate
             referencedIds:
             - referencedIds
             - referencedIds
-            value: "{}"
+            value: ""
           lastModifiedTime: 2000-01-23T04:56:07.000+00:00
           lastModifiedBy: lastModifiedBy
           id: id
@@ -2057,13 +2057,13 @@ components:
             referencedIds:
             - referencedIds
             - referencedIds
-            value: "{}"
+            value: ""
           - columnId: columnId
             dependencyStatus: upToDate
             referencedIds:
             - referencedIds
             - referencedIds
-            value: "{}"
+            value: ""
           lastModifiedTime: 2000-01-23T04:56:07.000+00:00
           lastModifiedBy: lastModifiedBy
           id: id
@@ -2239,7 +2239,7 @@ components:
         referencedIds:
         - referencedIds
         - referencedIds
-        value: "{}"
+        value: ""
       properties:
         columnId:
           type: string
@@ -2254,7 +2254,7 @@ components:
             type: string
           type: array
         value:
-          type: object
+          type: AnyType
       type: object
     SetRecord:
       example:
@@ -2265,13 +2265,13 @@ components:
           referencedIds:
           - referencedIds
           - referencedIds
-          value: "{}"
+          value: ""
         - columnId: columnId
           dependencyStatus: upToDate
           referencedIds:
           - referencedIds
           - referencedIds
-          value: "{}"
+          value: ""
         id: id
       properties:
         id:
@@ -3600,13 +3600,13 @@ components:
               referencedIds:
               - referencedIds
               - referencedIds
-              value: "{}"
+              value: ""
             - columnId: columnId
               dependencyStatus: upToDate
               referencedIds:
               - referencedIds
               - referencedIds
-              value: "{}"
+              value: ""
             lastModifiedTime: 2000-01-23T04:56:07.000+00:00
             lastModifiedBy: lastModifiedBy
             id: id
@@ -3617,13 +3617,13 @@ components:
               referencedIds:
               - referencedIds
               - referencedIds
-              value: "{}"
+              value: ""
             - columnId: columnId
               dependencyStatus: upToDate
               referencedIds:
               - referencedIds
               - referencedIds
-              value: "{}"
+              value: ""
             lastModifiedTime: 2000-01-23T04:56:07.000+00:00
             lastModifiedBy: lastModifiedBy
             id: id
@@ -3696,13 +3696,13 @@ components:
               referencedIds:
               - referencedIds
               - referencedIds
-              value: "{}"
+              value: ""
             - columnId: columnId
               dependencyStatus: upToDate
               referencedIds:
               - referencedIds
               - referencedIds
-              value: "{}"
+              value: ""
             lastModifiedTime: 2000-01-23T04:56:07.000+00:00
             lastModifiedBy: lastModifiedBy
             id: id
@@ -3713,13 +3713,13 @@ components:
               referencedIds:
               - referencedIds
               - referencedIds
-              value: "{}"
+              value: ""
             - columnId: columnId
               dependencyStatus: upToDate
               referencedIds:
               - referencedIds
               - referencedIds
-              value: "{}"
+              value: ""
             lastModifiedTime: 2000-01-23T04:56:07.000+00:00
             lastModifiedBy: lastModifiedBy
             id: id
@@ -4068,13 +4068,13 @@ components:
                 referencedIds:
                 - referencedIds
                 - referencedIds
-                value: "{}"
+                value: ""
               - columnId: columnId
                 dependencyStatus: upToDate
                 referencedIds:
                 - referencedIds
                 - referencedIds
-                value: "{}"
+                value: ""
               lastModifiedTime: 2000-01-23T04:56:07.000+00:00
               lastModifiedBy: lastModifiedBy
               id: id
@@ -4085,13 +4085,13 @@ components:
                 referencedIds:
                 - referencedIds
                 - referencedIds
-                value: "{}"
+                value: ""
               - columnId: columnId
                 dependencyStatus: upToDate
                 referencedIds:
                 - referencedIds
                 - referencedIds
-                value: "{}"
+                value: ""
               lastModifiedTime: 2000-01-23T04:56:07.000+00:00
               lastModifiedBy: lastModifiedBy
               id: id
@@ -4164,13 +4164,13 @@ components:
                 referencedIds:
                 - referencedIds
                 - referencedIds
-                value: "{}"
+                value: ""
               - columnId: columnId
                 dependencyStatus: upToDate
                 referencedIds:
                 - referencedIds
                 - referencedIds
-                value: "{}"
+                value: ""
               lastModifiedTime: 2000-01-23T04:56:07.000+00:00
               lastModifiedBy: lastModifiedBy
               id: id
@@ -4181,13 +4181,13 @@ components:
                 referencedIds:
                 - referencedIds
                 - referencedIds
-                value: "{}"
+                value: ""
               - columnId: columnId
                 dependencyStatus: upToDate
                 referencedIds:
                 - referencedIds
                 - referencedIds
-                value: "{}"
+                value: ""
               lastModifiedTime: 2000-01-23T04:56:07.000+00:00
               lastModifiedBy: lastModifiedBy
               id: id
@@ -4442,13 +4442,13 @@ components:
                 referencedIds:
                 - referencedIds
                 - referencedIds
-                value: "{}"
+                value: ""
               - columnId: columnId
                 dependencyStatus: upToDate
                 referencedIds:
                 - referencedIds
                 - referencedIds
-                value: "{}"
+                value: ""
               lastModifiedTime: 2000-01-23T04:56:07.000+00:00
               lastModifiedBy: lastModifiedBy
               id: id
@@ -4459,13 +4459,13 @@ components:
                 referencedIds:
                 - referencedIds
                 - referencedIds
-                value: "{}"
+                value: ""
               - columnId: columnId
                 dependencyStatus: upToDate
                 referencedIds:
                 - referencedIds
                 - referencedIds
-                value: "{}"
+                value: ""
               lastModifiedTime: 2000-01-23T04:56:07.000+00:00
               lastModifiedBy: lastModifiedBy
               id: id
@@ -4538,13 +4538,13 @@ components:
                 referencedIds:
                 - referencedIds
                 - referencedIds
-                value: "{}"
+                value: ""
               - columnId: columnId
                 dependencyStatus: upToDate
                 referencedIds:
                 - referencedIds
                 - referencedIds
-                value: "{}"
+                value: ""
               lastModifiedTime: 2000-01-23T04:56:07.000+00:00
               lastModifiedBy: lastModifiedBy
               id: id
@@ -4555,13 +4555,13 @@ components:
                 referencedIds:
                 - referencedIds
                 - referencedIds
-                value: "{}"
+                value: ""
               - columnId: columnId
                 dependencyStatus: upToDate
                 referencedIds:
                 - referencedIds
                 - referencedIds
-                value: "{}"
+                value: ""
               lastModifiedTime: 2000-01-23T04:56:07.000+00:00
               lastModifiedBy: lastModifiedBy
               id: id

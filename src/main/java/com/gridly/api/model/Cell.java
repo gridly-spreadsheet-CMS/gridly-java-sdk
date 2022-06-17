@@ -117,7 +117,7 @@ public class Cell {
 
   public static final String SERIALIZED_NAME_VALUE = "value";
   @SerializedName(SERIALIZED_NAME_VALUE)
-  private Object value;
+  private Object value = null;
 
   public Cell() { 
   }
