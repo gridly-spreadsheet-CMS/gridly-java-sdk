@@ -44,7 +44,7 @@ public class Example {
     ViewApi apiInstance = new ViewApi(defaultClient);
     String branchId = "branchId_example"; // String | branchId
     String gridId = "gridId_example"; // String | gridId
-    ViewType type = ViewType.fromValue("defaultView"); // ViewType | type
+    String type = "defaultView"; // String | type
     try {
       List<View> result = apiInstance.callList(branchId, gridId, type);
       System.out.println(result);
@@ -65,7 +65,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **branchId** | **String**| branchId | [optional] |
 | **gridId** | **String**| gridId | [optional] |
-| **type** | [**ViewType**](.md)| type | [optional] [default to accessView] [enum: defaultView, accessView, userView] |
+| **type** | **String**| type | [optional] [enum: defaultView, accessView, userView] |
 
 ### Return type
 
@@ -210,10 +210,10 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **viewId** | **String**| viewId | |
 | **columnIds** | [**List&lt;String&gt;**](String.md)| columnIds | [optional] |
-| **fileHeader** | [**ExportFileHeader**](.md)| fileHeader | [optional] [default to columnName] [enum: none, columnName] |
+| **fileHeader** | [**ExportFileHeader**](.md)| fileHeader | [optional] [enum: none, columnName] |
 | **query** | **String**| query | [optional] [default to {}] |
 | **sort** | **String**| sort | [optional] [default to {}] |
-| **type** | [**FileType**](.md)| type | [optional] [default to csv] [enum: csv, tsv, xls, xlsx, json, po] |
+| **type** | [**FileType**](.md)| type | [optional] [enum: csv, tsv, xls, xlsx, json, po] |
 
 ### Return type
 
@@ -343,9 +343,9 @@ public class Example {
 
     ViewApi apiInstance = new ViewApi(defaultClient);
     String viewId = "viewId_example"; // String | viewId
-    File _file = new File("/path/to/file"); // File | 
+    File _file = new File("/path/to/file"); // File | The following file types are supported: csv, tsv, xls, xlsx and json
     String importRequest = "{}"; // String | importRequest
-    String type = "csv"; // String | type
+    FileType type = FileType.fromValue("csv"); // FileType | type
     try {
       apiInstance.importView(viewId, _file, importRequest, type);
     } catch (ApiException e) {
@@ -364,9 +364,9 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **viewId** | **String**| viewId | |
-| **_file** | **File**|  | |
+| **_file** | **File**| The following file types are supported: csv, tsv, xls, xlsx and json | |
 | **importRequest** | **String**| importRequest | [optional] [default to {}] |
-| **type** | **String**| type | [optional] [default to csv] [enum: csv, tsv, xls, xlsx, json, po] |
+| **type** | [**FileType**](.md)| type | [optional] [enum: csv, tsv, xls, xlsx, json, po] |
 
 ### Return type
 

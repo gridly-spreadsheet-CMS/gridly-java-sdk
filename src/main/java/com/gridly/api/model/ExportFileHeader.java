@@ -30,9 +30,9 @@ import com.google.gson.stream.JsonWriter;
 @JsonAdapter(ExportFileHeader.Adapter.class)
 public enum ExportFileHeader {
   
-  NONE("none"),
+  none("none"),
   
-  COLUMNNAME("columnName");
+  columnName("columnName");
 
   private String value;
 
@@ -55,7 +55,7 @@ public enum ExportFileHeader {
         return b;
       }
     }
-    return null;
+    throw new IllegalArgumentException("Unexpected value '" + value + "'");
   }
 
   public static class Adapter extends TypeAdapter<ExportFileHeader> {

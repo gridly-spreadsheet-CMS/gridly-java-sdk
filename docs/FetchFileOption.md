@@ -5,11 +5,11 @@
 ## Enum
 
 
-* `ALL` (value: `"all"`)
+* `all` (value: `"all"`)
 
-* `ID` (value: `"id"`)
+* `id` (value: `"id"`)
 
-* `NAME` (value: `"name"`)
+* `name` (value: `"name"`)
 
 
 

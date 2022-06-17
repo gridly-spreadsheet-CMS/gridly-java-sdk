@@ -57,7 +57,6 @@ docs/ViewColumn.md
 docs/ViewColumnApi.md
 docs/ViewDependencyApi.md
 docs/ViewFileApi.md
-docs/ViewType.md
 git_push.sh
 gradle.properties
 gradle/wrapper/gradle-wrapper.jar
@@ -127,7 +126,6 @@ src/main/java/com/gridly/api/model/UpdateProject.java
 src/main/java/com/gridly/api/model/UploadedFile.java
 src/main/java/com/gridly/api/model/View.java
 src/main/java/com/gridly/api/model/ViewColumn.java
-src/main/java/com/gridly/api/model/ViewType.java
 src/main/java/com/gridly/api/service/BranchApi.java
 src/main/java/com/gridly/api/service/DatabaseApi.java
 src/main/java/com/gridly/api/service/GridApi.java

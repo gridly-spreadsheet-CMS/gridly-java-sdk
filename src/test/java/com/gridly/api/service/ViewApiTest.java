@@ -20,7 +20,6 @@ import java.io.File;
 import com.gridly.api.model.FileType;
 import com.gridly.api.model.Task;
 import com.gridly.api.model.View;
-import com.gridly.api.model.ViewType;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -48,7 +47,7 @@ public class ViewApiTest {
     public void callListTest() throws ApiException {
         String branchId = null;
         String gridId = null;
-        ViewType type = null;
+        String type = null;
         List<View> response = api.callList(branchId, gridId, type);
         // TODO: test validations
     }
@@ -117,7 +116,7 @@ public class ViewApiTest {
         String viewId = null;
         File _file = null;
         String importRequest = null;
-        String type = null;
+        FileType type = null;
         api.importView(viewId, _file, importRequest, type);
         // TODO: test validations
     }

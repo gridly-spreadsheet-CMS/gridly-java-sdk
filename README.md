@@ -217,7 +217,6 @@ Class | Method | HTTP request | Description
  - [UploadedFile](docs/UploadedFile.md)
  - [View](docs/View.md)
  - [ViewColumn](docs/ViewColumn.md)
- - [ViewType](docs/ViewType.md)
 
 
 ## Documentation for Authorization

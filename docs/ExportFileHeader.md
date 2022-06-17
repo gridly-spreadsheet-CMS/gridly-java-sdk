@@ -5,9 +5,9 @@
 ## Enum
 
 
-* `NONE` (value: `"none"`)
+* `none` (value: `"none"`)
 
-* `COLUMNNAME` (value: `"columnName"`)
+* `columnName` (value: `"columnName"`)
 
 
 

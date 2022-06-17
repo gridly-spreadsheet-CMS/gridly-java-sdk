@@ -30,17 +30,17 @@ import com.google.gson.stream.JsonWriter;
 @JsonAdapter(FileType.Adapter.class)
 public enum FileType {
   
-  CSV("csv"),
+  csv("csv"),
   
-  TSV("tsv"),
+  tsv("tsv"),
   
-  XLS("xls"),
+  xls("xls"),
   
-  XLSX("xlsx"),
+  xlsx("xlsx"),
   
-  JSON("json"),
+  json("json"),
   
-  PO("po");
+  po("po");
 
   private String value;
 

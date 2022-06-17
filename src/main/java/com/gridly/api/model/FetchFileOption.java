@@ -30,11 +30,11 @@ import com.google.gson.stream.JsonWriter;
 @JsonAdapter(FetchFileOption.Adapter.class)
 public enum FetchFileOption {
   
-  ALL("all"),
+  all("all"),
   
-  ID("id"),
+  id("id"),
   
-  NAME("name");
+  name("name");
 
   private String value;
 
