@@ -89,7 +89,7 @@ public class Example {
 
 <a name="create"></a>
 # **create**
-> Database create(projectId, createDatabase)
+> Database create(projectId, body)
 
 create
 
@@ -116,9 +116,9 @@ public class Example {
 
     DatabaseApi apiInstance = new DatabaseApi(defaultClient);
     Long projectId = 56L; // Long | projectId
-    CreateDatabase createDatabase = new CreateDatabase(); // CreateDatabase | 
+    CreateDatabase body = new CreateDatabase(); // CreateDatabase | body
     try {
-      Database result = apiInstance.create(projectId, createDatabase);
+      Database result = apiInstance.create(projectId, body);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling DatabaseApi#create");
@@ -136,7 +136,7 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **Long**| projectId | |
-| **createDatabase** | [**CreateDatabase**](CreateDatabase.md)|  | |
+| **body** | [**CreateDatabase**](CreateDatabase.md)| body | |
 
 ### Return type
 
@@ -224,7 +224,7 @@ null (empty response body)
 
 <a name="duplicate"></a>
 # **duplicate**
-> Database duplicate(dbId, projectId, createDatabase)
+> Database duplicate(dbId, projectId, body)
 
 duplicate
 
@@ -252,9 +252,9 @@ public class Example {
     DatabaseApi apiInstance = new DatabaseApi(defaultClient);
     String dbId = "dbId_example"; // String | dbId
     Long projectId = 56L; // Long | projectId
-    CreateDatabase createDatabase = new CreateDatabase(); // CreateDatabase | 
+    CreateDatabase body = new CreateDatabase(); // CreateDatabase | body
     try {
-      Database result = apiInstance.duplicate(dbId, projectId, createDatabase);
+      Database result = apiInstance.duplicate(dbId, projectId, body);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling DatabaseApi#duplicate");
@@ -273,7 +273,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **dbId** | **String**| dbId | |
 | **projectId** | **Long**| projectId | |
-| **createDatabase** | [**CreateDatabase**](CreateDatabase.md)|  | |
+| **body** | [**CreateDatabase**](CreateDatabase.md)| body | |
 
 ### Return type
 
@@ -362,7 +362,7 @@ public class Example {
 
 <a name="update"></a>
 # **update**
-> Database update(dbId, updateDatabase)
+> Database update(dbId, body)
 
 update
 
@@ -389,9 +389,9 @@ public class Example {
 
     DatabaseApi apiInstance = new DatabaseApi(defaultClient);
     String dbId = "dbId_example"; // String | dbId
-    UpdateDatabase updateDatabase = new UpdateDatabase(); // UpdateDatabase | 
+    UpdateDatabase body = new UpdateDatabase(); // UpdateDatabase | body
     try {
-      Database result = apiInstance.update(dbId, updateDatabase);
+      Database result = apiInstance.update(dbId, body);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling DatabaseApi#update");
@@ -409,7 +409,7 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **dbId** | **String**| dbId | |
-| **updateDatabase** | [**UpdateDatabase**](UpdateDatabase.md)|  | |
+| **body** | [**UpdateDatabase**](UpdateDatabase.md)| body | |
 
 ### Return type
 

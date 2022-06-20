@@ -235,7 +235,7 @@ public class DatabaseApi {
     /**
      * Build call for create
      * @param projectId projectId (required)
-     * @param createDatabase  (required)
+     * @param body body (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -245,7 +245,7 @@ public class DatabaseApi {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call createCall(Long projectId, CreateDatabase createDatabase, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call createCall(Long projectId, CreateDatabase body, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -259,7 +259,7 @@ public class DatabaseApi {
             basePath = null;
         }
 
-        Object localVarPostBody = createDatabase;
+        Object localVarPostBody = body;
 
         // create path and map variables
         String localVarPath = "/v1/databases";
@@ -295,20 +295,20 @@ public class DatabaseApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call createValidateBeforeCall(Long projectId, CreateDatabase createDatabase, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call createValidateBeforeCall(Long projectId, CreateDatabase body, final ApiCallback _callback) throws ApiException {
         
         // verify the required parameter 'projectId' is set
         if (projectId == null) {
             throw new ApiException("Missing the required parameter 'projectId' when calling create(Async)");
         }
         
-        // verify the required parameter 'createDatabase' is set
-        if (createDatabase == null) {
-            throw new ApiException("Missing the required parameter 'createDatabase' when calling create(Async)");
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling create(Async)");
         }
         
 
-        okhttp3.Call localVarCall = createCall(projectId, createDatabase, _callback);
+        okhttp3.Call localVarCall = createCall(projectId, body, _callback);
         return localVarCall;
 
     }
@@ -317,7 +317,7 @@ public class DatabaseApi {
      * create
      * 
      * @param projectId projectId (required)
-     * @param createDatabase  (required)
+     * @param body body (required)
      * @return Database
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -326,8 +326,8 @@ public class DatabaseApi {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public Database create(Long projectId, CreateDatabase createDatabase) throws ApiException {
-        ApiResponse<Database> localVarResp = createWithHttpInfo(projectId, createDatabase);
+    public Database create(Long projectId, CreateDatabase body) throws ApiException {
+        ApiResponse<Database> localVarResp = createWithHttpInfo(projectId, body);
         return localVarResp.getData();
     }
 
@@ -335,7 +335,7 @@ public class DatabaseApi {
      * create
      * 
      * @param projectId projectId (required)
-     * @param createDatabase  (required)
+     * @param body body (required)
      * @return ApiResponse&lt;Database&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -344,8 +344,8 @@ public class DatabaseApi {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Database> createWithHttpInfo(Long projectId, CreateDatabase createDatabase) throws ApiException {
-        okhttp3.Call localVarCall = createValidateBeforeCall(projectId, createDatabase, null);
+    public ApiResponse<Database> createWithHttpInfo(Long projectId, CreateDatabase body) throws ApiException {
+        okhttp3.Call localVarCall = createValidateBeforeCall(projectId, body, null);
         Type localVarReturnType = new TypeToken<Database>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -354,7 +354,7 @@ public class DatabaseApi {
      * create (asynchronously)
      * 
      * @param projectId projectId (required)
-     * @param createDatabase  (required)
+     * @param body body (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -364,9 +364,9 @@ public class DatabaseApi {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call createAsync(Long projectId, CreateDatabase createDatabase, final ApiCallback<Database> _callback) throws ApiException {
+    public okhttp3.Call createAsync(Long projectId, CreateDatabase body, final ApiCallback<Database> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = createValidateBeforeCall(projectId, createDatabase, _callback);
+        okhttp3.Call localVarCall = createValidateBeforeCall(projectId, body, _callback);
         Type localVarReturnType = new TypeToken<Database>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -498,7 +498,7 @@ public class DatabaseApi {
      * Build call for duplicate
      * @param dbId dbId (required)
      * @param projectId projectId (required)
-     * @param createDatabase  (required)
+     * @param body body (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -508,7 +508,7 @@ public class DatabaseApi {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call duplicateCall(String dbId, Long projectId, CreateDatabase createDatabase, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call duplicateCall(String dbId, Long projectId, CreateDatabase body, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -522,7 +522,7 @@ public class DatabaseApi {
             basePath = null;
         }
 
-        Object localVarPostBody = createDatabase;
+        Object localVarPostBody = body;
 
         // create path and map variables
         String localVarPath = "/v1/databases/{dbId}/duplicate"
@@ -559,7 +559,7 @@ public class DatabaseApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call duplicateValidateBeforeCall(String dbId, Long projectId, CreateDatabase createDatabase, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call duplicateValidateBeforeCall(String dbId, Long projectId, CreateDatabase body, final ApiCallback _callback) throws ApiException {
         
         // verify the required parameter 'dbId' is set
         if (dbId == null) {
@@ -571,13 +571,13 @@ public class DatabaseApi {
             throw new ApiException("Missing the required parameter 'projectId' when calling duplicate(Async)");
         }
         
-        // verify the required parameter 'createDatabase' is set
-        if (createDatabase == null) {
-            throw new ApiException("Missing the required parameter 'createDatabase' when calling duplicate(Async)");
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling duplicate(Async)");
         }
         
 
-        okhttp3.Call localVarCall = duplicateCall(dbId, projectId, createDatabase, _callback);
+        okhttp3.Call localVarCall = duplicateCall(dbId, projectId, body, _callback);
         return localVarCall;
 
     }
@@ -587,7 +587,7 @@ public class DatabaseApi {
      * 
      * @param dbId dbId (required)
      * @param projectId projectId (required)
-     * @param createDatabase  (required)
+     * @param body body (required)
      * @return Database
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -596,8 +596,8 @@ public class DatabaseApi {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public Database duplicate(String dbId, Long projectId, CreateDatabase createDatabase) throws ApiException {
-        ApiResponse<Database> localVarResp = duplicateWithHttpInfo(dbId, projectId, createDatabase);
+    public Database duplicate(String dbId, Long projectId, CreateDatabase body) throws ApiException {
+        ApiResponse<Database> localVarResp = duplicateWithHttpInfo(dbId, projectId, body);
         return localVarResp.getData();
     }
 
@@ -606,7 +606,7 @@ public class DatabaseApi {
      * 
      * @param dbId dbId (required)
      * @param projectId projectId (required)
-     * @param createDatabase  (required)
+     * @param body body (required)
      * @return ApiResponse&lt;Database&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -615,8 +615,8 @@ public class DatabaseApi {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Database> duplicateWithHttpInfo(String dbId, Long projectId, CreateDatabase createDatabase) throws ApiException {
-        okhttp3.Call localVarCall = duplicateValidateBeforeCall(dbId, projectId, createDatabase, null);
+    public ApiResponse<Database> duplicateWithHttpInfo(String dbId, Long projectId, CreateDatabase body) throws ApiException {
+        okhttp3.Call localVarCall = duplicateValidateBeforeCall(dbId, projectId, body, null);
         Type localVarReturnType = new TypeToken<Database>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -626,7 +626,7 @@ public class DatabaseApi {
      * 
      * @param dbId dbId (required)
      * @param projectId projectId (required)
-     * @param createDatabase  (required)
+     * @param body body (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -636,9 +636,9 @@ public class DatabaseApi {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call duplicateAsync(String dbId, Long projectId, CreateDatabase createDatabase, final ApiCallback<Database> _callback) throws ApiException {
+    public okhttp3.Call duplicateAsync(String dbId, Long projectId, CreateDatabase body, final ApiCallback<Database> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = duplicateValidateBeforeCall(dbId, projectId, createDatabase, _callback);
+        okhttp3.Call localVarCall = duplicateValidateBeforeCall(dbId, projectId, body, _callback);
         Type localVarReturnType = new TypeToken<Database>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -773,7 +773,7 @@ public class DatabaseApi {
     /**
      * Build call for update
      * @param dbId dbId (required)
-     * @param updateDatabase  (required)
+     * @param body body (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -783,7 +783,7 @@ public class DatabaseApi {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call updateCall(String dbId, UpdateDatabase updateDatabase, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call updateCall(String dbId, UpdateDatabase body, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -797,7 +797,7 @@ public class DatabaseApi {
             basePath = null;
         }
 
-        Object localVarPostBody = updateDatabase;
+        Object localVarPostBody = body;
 
         // create path and map variables
         String localVarPath = "/v1/databases/{dbId}"
@@ -830,20 +830,20 @@ public class DatabaseApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call updateValidateBeforeCall(String dbId, UpdateDatabase updateDatabase, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call updateValidateBeforeCall(String dbId, UpdateDatabase body, final ApiCallback _callback) throws ApiException {
         
         // verify the required parameter 'dbId' is set
         if (dbId == null) {
             throw new ApiException("Missing the required parameter 'dbId' when calling update(Async)");
         }
         
-        // verify the required parameter 'updateDatabase' is set
-        if (updateDatabase == null) {
-            throw new ApiException("Missing the required parameter 'updateDatabase' when calling update(Async)");
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling update(Async)");
         }
         
 
-        okhttp3.Call localVarCall = updateCall(dbId, updateDatabase, _callback);
+        okhttp3.Call localVarCall = updateCall(dbId, body, _callback);
         return localVarCall;
 
     }
@@ -852,7 +852,7 @@ public class DatabaseApi {
      * update
      * 
      * @param dbId dbId (required)
-     * @param updateDatabase  (required)
+     * @param body body (required)
      * @return Database
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -861,8 +861,8 @@ public class DatabaseApi {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public Database update(String dbId, UpdateDatabase updateDatabase) throws ApiException {
-        ApiResponse<Database> localVarResp = updateWithHttpInfo(dbId, updateDatabase);
+    public Database update(String dbId, UpdateDatabase body) throws ApiException {
+        ApiResponse<Database> localVarResp = updateWithHttpInfo(dbId, body);
         return localVarResp.getData();
     }
 
@@ -870,7 +870,7 @@ public class DatabaseApi {
      * update
      * 
      * @param dbId dbId (required)
-     * @param updateDatabase  (required)
+     * @param body body (required)
      * @return ApiResponse&lt;Database&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -879,8 +879,8 @@ public class DatabaseApi {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Database> updateWithHttpInfo(String dbId, UpdateDatabase updateDatabase) throws ApiException {
-        okhttp3.Call localVarCall = updateValidateBeforeCall(dbId, updateDatabase, null);
+    public ApiResponse<Database> updateWithHttpInfo(String dbId, UpdateDatabase body) throws ApiException {
+        okhttp3.Call localVarCall = updateValidateBeforeCall(dbId, body, null);
         Type localVarReturnType = new TypeToken<Database>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -889,7 +889,7 @@ public class DatabaseApi {
      * update (asynchronously)
      * 
      * @param dbId dbId (required)
-     * @param updateDatabase  (required)
+     * @param body body (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -899,9 +899,9 @@ public class DatabaseApi {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call updateAsync(String dbId, UpdateDatabase updateDatabase, final ApiCallback<Database> _callback) throws ApiException {
+    public okhttp3.Call updateAsync(String dbId, UpdateDatabase body, final ApiCallback<Database> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = updateValidateBeforeCall(dbId, updateDatabase, _callback);
+        okhttp3.Call localVarCall = updateValidateBeforeCall(dbId, body, _callback);
         Type localVarReturnType = new TypeToken<Database>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

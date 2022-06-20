@@ -30,7 +30,6 @@ import java.io.IOException;
 import com.gridly.api.model.CreateView;
 import com.gridly.api.model.ExportFileHeader;
 import java.io.File;
-import com.gridly.api.model.FileType;
 import com.gridly.api.model.Task;
 import com.gridly.api.model.View;
 
@@ -352,7 +351,7 @@ public class ViewApi {
      * @param fileHeader fileHeader (optional)
      * @param query query (optional, default to {})
      * @param sort sort (optional, default to {})
-     * @param type type (optional)
+     * @param type type (optional, default to csv)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -362,7 +361,7 @@ public class ViewApi {
         <tr><td> 0 </td><td> default response </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call exportCall(String viewId, List<String> columnIds, ExportFileHeader fileHeader, String query, String sort, FileType type, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call exportCall(String viewId, List<String> columnIds, ExportFileHeader fileHeader, String query, String sort, String type, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -429,7 +428,7 @@ public class ViewApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call exportValidateBeforeCall(String viewId, List<String> columnIds, ExportFileHeader fileHeader, String query, String sort, FileType type, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call exportValidateBeforeCall(String viewId, List<String> columnIds, ExportFileHeader fileHeader, String query, String sort, String type, final ApiCallback _callback) throws ApiException {
         
         // verify the required parameter 'viewId' is set
         if (viewId == null) {
@@ -450,7 +449,7 @@ public class ViewApi {
      * @param fileHeader fileHeader (optional)
      * @param query query (optional, default to {})
      * @param sort sort (optional, default to {})
-     * @param type type (optional)
+     * @param type type (optional, default to csv)
      * @return File
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -459,7 +458,7 @@ public class ViewApi {
         <tr><td> 0 </td><td> default response </td><td>  -  </td></tr>
      </table>
      */
-    public File export(String viewId, List<String> columnIds, ExportFileHeader fileHeader, String query, String sort, FileType type) throws ApiException {
+    public File export(String viewId, List<String> columnIds, ExportFileHeader fileHeader, String query, String sort, String type) throws ApiException {
         ApiResponse<File> localVarResp = exportWithHttpInfo(viewId, columnIds, fileHeader, query, sort, type);
         return localVarResp.getData();
     }
@@ -472,7 +471,7 @@ public class ViewApi {
      * @param fileHeader fileHeader (optional)
      * @param query query (optional, default to {})
      * @param sort sort (optional, default to {})
-     * @param type type (optional)
+     * @param type type (optional, default to csv)
      * @return ApiResponse&lt;File&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -481,7 +480,7 @@ public class ViewApi {
         <tr><td> 0 </td><td> default response </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<File> exportWithHttpInfo(String viewId, List<String> columnIds, ExportFileHeader fileHeader, String query, String sort, FileType type) throws ApiException {
+    public ApiResponse<File> exportWithHttpInfo(String viewId, List<String> columnIds, ExportFileHeader fileHeader, String query, String sort, String type) throws ApiException {
         okhttp3.Call localVarCall = exportValidateBeforeCall(viewId, columnIds, fileHeader, query, sort, type, null);
         Type localVarReturnType = new TypeToken<File>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -495,7 +494,7 @@ public class ViewApi {
      * @param fileHeader fileHeader (optional)
      * @param query query (optional, default to {})
      * @param sort sort (optional, default to {})
-     * @param type type (optional)
+     * @param type type (optional, default to csv)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -505,7 +504,7 @@ public class ViewApi {
         <tr><td> 0 </td><td> default response </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call exportAsync(String viewId, List<String> columnIds, ExportFileHeader fileHeader, String query, String sort, FileType type, final ApiCallback<File> _callback) throws ApiException {
+    public okhttp3.Call exportAsync(String viewId, List<String> columnIds, ExportFileHeader fileHeader, String query, String sort, String type, final ApiCallback<File> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = exportValidateBeforeCall(viewId, columnIds, fileHeader, query, sort, type, _callback);
         Type localVarReturnType = new TypeToken<File>(){}.getType();
@@ -684,7 +683,7 @@ public class ViewApi {
      * @param viewId viewId (required)
      * @param _file The following file types are supported: csv, tsv, xls, xlsx and json (required)
      * @param importRequest importRequest (optional, default to {})
-     * @param type type (optional)
+     * @param type type (optional, default to csv)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -694,7 +693,7 @@ public class ViewApi {
         <tr><td> 202 </td><td> Accepted </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call importViewCall(String viewId, File _file, String importRequest, FileType type, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call importViewCall(String viewId, File _file, String importRequest, String type, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -753,7 +752,7 @@ public class ViewApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call importViewValidateBeforeCall(String viewId, File _file, String importRequest, FileType type, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call importViewValidateBeforeCall(String viewId, File _file, String importRequest, String type, final ApiCallback _callback) throws ApiException {
         
         // verify the required parameter 'viewId' is set
         if (viewId == null) {
@@ -777,7 +776,7 @@ public class ViewApi {
      * @param viewId viewId (required)
      * @param _file The following file types are supported: csv, tsv, xls, xlsx and json (required)
      * @param importRequest importRequest (optional, default to {})
-     * @param type type (optional)
+     * @param type type (optional, default to csv)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -785,7 +784,7 @@ public class ViewApi {
         <tr><td> 202 </td><td> Accepted </td><td>  -  </td></tr>
      </table>
      */
-    public void importView(String viewId, File _file, String importRequest, FileType type) throws ApiException {
+    public void importView(String viewId, File _file, String importRequest, String type) throws ApiException {
         importViewWithHttpInfo(viewId, _file, importRequest, type);
     }
 
@@ -795,7 +794,7 @@ public class ViewApi {
      * @param viewId viewId (required)
      * @param _file The following file types are supported: csv, tsv, xls, xlsx and json (required)
      * @param importRequest importRequest (optional, default to {})
-     * @param type type (optional)
+     * @param type type (optional, default to csv)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -804,7 +803,7 @@ public class ViewApi {
         <tr><td> 202 </td><td> Accepted </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> importViewWithHttpInfo(String viewId, File _file, String importRequest, FileType type) throws ApiException {
+    public ApiResponse<Void> importViewWithHttpInfo(String viewId, File _file, String importRequest, String type) throws ApiException {
         okhttp3.Call localVarCall = importViewValidateBeforeCall(viewId, _file, importRequest, type, null);
         return localVarApiClient.execute(localVarCall);
     }
@@ -815,7 +814,7 @@ public class ViewApi {
      * @param viewId viewId (required)
      * @param _file The following file types are supported: csv, tsv, xls, xlsx and json (required)
      * @param importRequest importRequest (optional, default to {})
-     * @param type type (optional)
+     * @param type type (optional, default to csv)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -825,7 +824,7 @@ public class ViewApi {
         <tr><td> 202 </td><td> Accepted </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call importViewAsync(String viewId, File _file, String importRequest, FileType type, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call importViewAsync(String viewId, File _file, String importRequest, String type, final ApiCallback<Void> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = importViewValidateBeforeCall(viewId, _file, importRequest, type, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);

@@ -193,7 +193,6 @@ Class | Method | HTTP request | Description
  - [Dependency](docs/Dependency.md)
  - [ExportFileHeader](docs/ExportFileHeader.md)
  - [FetchFileOption](docs/FetchFileOption.md)
- - [FileType](docs/FileType.md)
  - [Grid](docs/Grid.md)
  - [Group](docs/Group.md)
  - [NumberFormat](docs/NumberFormat.md)

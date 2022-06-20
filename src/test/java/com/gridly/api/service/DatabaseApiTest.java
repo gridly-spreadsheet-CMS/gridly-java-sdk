@@ -57,8 +57,8 @@ public class DatabaseApiTest {
     @Test
     public void createTest() throws ApiException {
         Long projectId = null;
-        CreateDatabase createDatabase = null;
-        Database response = api.create(projectId, createDatabase);
+        CreateDatabase body = null;
+        Database response = api.create(projectId, body);
         // TODO: test validations
     }
 
@@ -83,8 +83,8 @@ public class DatabaseApiTest {
     public void duplicateTest() throws ApiException {
         String dbId = null;
         Long projectId = null;
-        CreateDatabase createDatabase = null;
-        Database response = api.duplicate(dbId, projectId, createDatabase);
+        CreateDatabase body = null;
+        Database response = api.duplicate(dbId, projectId, body);
         // TODO: test validations
     }
 
@@ -108,8 +108,8 @@ public class DatabaseApiTest {
     @Test
     public void updateTest() throws ApiException {
         String dbId = null;
-        UpdateDatabase updateDatabase = null;
-        Database response = api.update(dbId, updateDatabase);
+        UpdateDatabase body = null;
+        Database response = api.update(dbId, body);
         // TODO: test validations
     }
 

@@ -189,7 +189,7 @@ public class Example {
     ExportFileHeader fileHeader = ExportFileHeader.fromValue("none"); // ExportFileHeader | fileHeader
     String query = "{}"; // String | query
     String sort = "{}"; // String | sort
-    FileType type = FileType.fromValue("csv"); // FileType | type
+    String type = "csv"; // String | type
     try {
       File result = apiInstance.export(viewId, columnIds, fileHeader, query, sort, type);
       System.out.println(result);
@@ -213,7 +213,7 @@ public class Example {
 | **fileHeader** | [**ExportFileHeader**](.md)| fileHeader | [optional] [enum: none, columnName] |
 | **query** | **String**| query | [optional] [default to {}] |
 | **sort** | **String**| sort | [optional] [default to {}] |
-| **type** | [**FileType**](.md)| type | [optional] [enum: csv, tsv, xls, xlsx, json, po] |
+| **type** | **String**| type | [optional] [default to csv] [enum: csv, tsv, xls, xlsx, json, po] |
 
 ### Return type
 
@@ -345,7 +345,7 @@ public class Example {
     String viewId = "viewId_example"; // String | viewId
     File _file = new File("/path/to/file"); // File | The following file types are supported: csv, tsv, xls, xlsx and json
     String importRequest = "{}"; // String | importRequest
-    FileType type = FileType.fromValue("csv"); // FileType | type
+    String type = "csv"; // String | type
     try {
       apiInstance.importView(viewId, _file, importRequest, type);
     } catch (ApiException e) {
@@ -366,7 +366,7 @@ public class Example {
 | **viewId** | **String**| viewId | |
 | **_file** | **File**| The following file types are supported: csv, tsv, xls, xlsx and json | |
 | **importRequest** | **String**| importRequest | [optional] [default to {}] |
-| **type** | [**FileType**](.md)| type | [optional] [enum: csv, tsv, xls, xlsx, json, po] |
+| **type** | **String**| type | [optional] [default to csv] [enum: csv, tsv, xls, xlsx, json, po] |
 
 ### Return type
 

@@ -13,7 +13,7 @@ All URIs are relative to *https://api.gridly.com*
 
 <a name="create"></a>
 # **create**
-> List&lt;Record&gt; create(viewId, setRecord)
+> List&lt;Record&gt; create(viewId, createRecords)
 
 create
 
@@ -42,9 +42,9 @@ public class Example {
 
     RecordApi apiInstance = new RecordApi(defaultClient);
     String viewId = "viewId_example"; // String | viewId
-    List<SetRecord> setRecord = Arrays.asList(); // List<SetRecord> | 
+    List<SetRecord> createRecords = Arrays.asList(); // List<SetRecord> | createRecords
     try {
-      List<Record> result = apiInstance.create(viewId, setRecord);
+      List<Record> result = apiInstance.create(viewId, createRecords);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling RecordApi#create");
@@ -62,7 +62,7 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **viewId** | **String**| viewId | |
-| **setRecord** | [**List&lt;SetRecord&gt;**](SetRecord.md)|  | |
+| **createRecords** | [**List&lt;SetRecord&gt;**](SetRecord.md)| createRecords | |
 
 ### Return type
 

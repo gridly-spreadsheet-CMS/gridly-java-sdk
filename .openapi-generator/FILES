@@ -25,7 +25,6 @@ docs/DeleteRecord.md
 docs/Dependency.md
 docs/ExportFileHeader.md
 docs/FetchFileOption.md
-docs/FileType.md
 docs/Grid.md
 docs/GridApi.md
 docs/Group.md
@@ -102,7 +101,6 @@ src/main/java/com/gridly/api/model/DeleteRecord.java
 src/main/java/com/gridly/api/model/Dependency.java
 src/main/java/com/gridly/api/model/ExportFileHeader.java
 src/main/java/com/gridly/api/model/FetchFileOption.java
-src/main/java/com/gridly/api/model/FileType.java
 src/main/java/com/gridly/api/model/Grid.java
 src/main/java/com/gridly/api/model/Group.java
 src/main/java/com/gridly/api/model/NumberFormat.java

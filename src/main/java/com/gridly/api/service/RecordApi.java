@@ -79,7 +79,7 @@ public class RecordApi {
     /**
      * Build call for create
      * @param viewId viewId (required)
-     * @param setRecord  (required)
+     * @param createRecords createRecords (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -89,7 +89,7 @@ public class RecordApi {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call createCall(String viewId, List<SetRecord> setRecord, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call createCall(String viewId, List<SetRecord> createRecords, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -103,7 +103,7 @@ public class RecordApi {
             basePath = null;
         }
 
-        Object localVarPostBody = setRecord;
+        Object localVarPostBody = createRecords;
 
         // create path and map variables
         String localVarPath = "/v1/views/{viewId}/records"
@@ -136,20 +136,20 @@ public class RecordApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call createValidateBeforeCall(String viewId, List<SetRecord> setRecord, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call createValidateBeforeCall(String viewId, List<SetRecord> createRecords, final ApiCallback _callback) throws ApiException {
         
         // verify the required parameter 'viewId' is set
         if (viewId == null) {
             throw new ApiException("Missing the required parameter 'viewId' when calling create(Async)");
         }
         
-        // verify the required parameter 'setRecord' is set
-        if (setRecord == null) {
-            throw new ApiException("Missing the required parameter 'setRecord' when calling create(Async)");
+        // verify the required parameter 'createRecords' is set
+        if (createRecords == null) {
+            throw new ApiException("Missing the required parameter 'createRecords' when calling create(Async)");
         }
         
 
-        okhttp3.Call localVarCall = createCall(viewId, setRecord, _callback);
+        okhttp3.Call localVarCall = createCall(viewId, createRecords, _callback);
         return localVarCall;
 
     }
@@ -158,7 +158,7 @@ public class RecordApi {
      * create
      * create
      * @param viewId viewId (required)
-     * @param setRecord  (required)
+     * @param createRecords createRecords (required)
      * @return List&lt;Record&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -167,8 +167,8 @@ public class RecordApi {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public List<Record> create(String viewId, List<SetRecord> setRecord) throws ApiException {
-        ApiResponse<List<Record>> localVarResp = createWithHttpInfo(viewId, setRecord);
+    public List<Record> create(String viewId, List<SetRecord> createRecords) throws ApiException {
+        ApiResponse<List<Record>> localVarResp = createWithHttpInfo(viewId, createRecords);
         return localVarResp.getData();
     }
 
@@ -176,7 +176,7 @@ public class RecordApi {
      * create
      * create
      * @param viewId viewId (required)
-     * @param setRecord  (required)
+     * @param createRecords createRecords (required)
      * @return ApiResponse&lt;List&lt;Record&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -185,8 +185,8 @@ public class RecordApi {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<Record>> createWithHttpInfo(String viewId, List<SetRecord> setRecord) throws ApiException {
-        okhttp3.Call localVarCall = createValidateBeforeCall(viewId, setRecord, null);
+    public ApiResponse<List<Record>> createWithHttpInfo(String viewId, List<SetRecord> createRecords) throws ApiException {
+        okhttp3.Call localVarCall = createValidateBeforeCall(viewId, createRecords, null);
         Type localVarReturnType = new TypeToken<List<Record>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -195,7 +195,7 @@ public class RecordApi {
      * create (asynchronously)
      * create
      * @param viewId viewId (required)
-     * @param setRecord  (required)
+     * @param createRecords createRecords (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -205,9 +205,9 @@ public class RecordApi {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call createAsync(String viewId, List<SetRecord> setRecord, final ApiCallback<List<Record>> _callback) throws ApiException {
+    public okhttp3.Call createAsync(String viewId, List<SetRecord> createRecords, final ApiCallback<List<Record>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = createValidateBeforeCall(viewId, setRecord, _callback);
+        okhttp3.Call localVarCall = createValidateBeforeCall(viewId, createRecords, _callback);
         Type localVarReturnType = new TypeToken<List<Record>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

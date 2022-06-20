@@ -44,8 +44,8 @@ public class RecordApiTest {
     @Test
     public void createTest() throws ApiException {
         String viewId = null;
-        List<SetRecord> setRecord = null;
-        List<Record> response = api.create(viewId, setRecord);
+        List<SetRecord> createRecords = null;
+        List<Record> response = api.create(viewId, createRecords);
         // TODO: test validations
     }
 

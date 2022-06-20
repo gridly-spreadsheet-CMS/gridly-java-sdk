@@ -17,7 +17,6 @@ import com.gridly.api.client.ApiException;
 import com.gridly.api.model.CreateView;
 import com.gridly.api.model.ExportFileHeader;
 import java.io.File;
-import com.gridly.api.model.FileType;
 import com.gridly.api.model.Task;
 import com.gridly.api.model.View;
 import org.junit.jupiter.api.Disabled;
@@ -80,7 +79,7 @@ public class ViewApiTest {
         ExportFileHeader fileHeader = null;
         String query = null;
         String sort = null;
-        FileType type = null;
+        String type = null;
         File response = api.export(viewId, columnIds, fileHeader, query, sort, type);
         // TODO: test validations
     }
@@ -116,7 +115,7 @@ public class ViewApiTest {
         String viewId = null;
         File _file = null;
         String importRequest = null;
-        FileType type = null;
+        String type = null;
         api.importView(viewId, _file, importRequest, type);
         // TODO: test validations
     }

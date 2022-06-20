@@ -46,8 +46,9 @@ import java.util.Set;
 import com.gridly.api.client.JSON;
 
 /**
- * CreateDatabase
+ * body
  */
+@ApiModel(description = "body")
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class CreateDatabase {
   private static final long serialVersionUID = 1L;
