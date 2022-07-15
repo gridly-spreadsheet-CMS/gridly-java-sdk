@@ -261,8 +261,8 @@ public class Example {
 
     ViewFileApi apiInstance = new ViewFileApi(defaultClient);
     String viewId = "viewId_example"; // String | viewId
-    String columnId = "columnId_example"; // String | columnId
-    String fileMappings = "fileMappings_example"; // String | fileMappings
+    String columnId = "columnId_example"; // String | 
+    String fileMappings = "fileMappings_example"; // String | 
     File _file = new File("/path/to/file"); // File | 
     try {
       List<Record> result = apiInstance.uploadZip(viewId, columnId, fileMappings, _file);
@@ -283,8 +283,8 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **viewId** | **String**| viewId | |
-| **columnId** | **String**| columnId | |
-| **fileMappings** | **String**| fileMappings | |
+| **columnId** | **String**|  | |
+| **fileMappings** | **String**|  | |
 | **_file** | **File**|  | |
 
 ### Return type
@@ -297,7 +297,7 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: multipart/form-data
+ - **Content-Type**: multipart/form-data, application/json
  - **Accept**: application/json
 
 ### HTTP response details

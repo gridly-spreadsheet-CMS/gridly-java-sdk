@@ -1,7 +1,7 @@
 # gridly-api
 
 Gridly API
-- API version: 3.29.0
+- API version: 3.30.0
 
 Gridly API documentation
 
@@ -40,7 +40,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.gridly</groupId>
   <artifactId>gridly-api</artifactId>
-  <version>1.2.6</version>
+  <version>1.2.7</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -56,7 +56,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "com.gridly:gridly-api:1.2.6"
+     implementation "com.gridly:gridly-api:1.2.7"
   }
 ```
 
@@ -70,7 +70,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/gridly-api-1.2.6.jar`
+* `target/gridly-api-1.2.7.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -213,6 +213,7 @@ Class | Method | HTTP request | Description
  - [UpdateDependency](docs/UpdateDependency.md)
  - [UpdateGrid](docs/UpdateGrid.md)
  - [UpdateProject](docs/UpdateProject.md)
+ - [UploadZipRequest](docs/UploadZipRequest.md)
  - [UploadedFile](docs/UploadedFile.md)
  - [View](docs/View.md)
  - [ViewColumn](docs/ViewColumn.md)

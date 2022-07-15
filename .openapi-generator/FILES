@@ -49,6 +49,7 @@ docs/UpdateDatabase.md
 docs/UpdateDependency.md
 docs/UpdateGrid.md
 docs/UpdateProject.md
+docs/UploadZipRequest.md
 docs/UploadedFile.md
 docs/View.md
 docs/ViewApi.md
@@ -121,6 +122,7 @@ src/main/java/com/gridly/api/model/UpdateDatabase.java
 src/main/java/com/gridly/api/model/UpdateDependency.java
 src/main/java/com/gridly/api/model/UpdateGrid.java
 src/main/java/com/gridly/api/model/UpdateProject.java
+src/main/java/com/gridly/api/model/UploadZipRequest.java
 src/main/java/com/gridly/api/model/UploadedFile.java
 src/main/java/com/gridly/api/model/View.java
 src/main/java/com/gridly/api/model/ViewColumn.java
