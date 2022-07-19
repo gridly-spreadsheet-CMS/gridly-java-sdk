@@ -13,7 +13,17 @@
 |**description** | **String** |  |  [optional] |
 |**metadata** | **Map&lt;String, String&gt;** |  |  [optional] |
 |**name** | **String** |  |  [optional] |
+|**recordIdentifierType** | [**RecordIdentifierTypeEnum**](#RecordIdentifierTypeEnum) |  |  [optional] |
 |**status** | [**StatusEnum**](#StatusEnum) |  |  [optional] |
+
+
+
+## Enum: RecordIdentifierTypeEnum
+
+| Name | Value |
+|---- | -----|
+| RECORDID | &quot;recordId&quot; |
+| PATHTAGRECORDID | &quot;pathTagRecordId&quot; |
 
 
 

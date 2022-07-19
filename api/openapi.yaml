@@ -10,7 +10,7 @@ info:
     url: ""
   termsOfService: ""
   title: Gridly API
-  version: 3.30.0
+  version: 3.31.0
 servers:
 - description: Generated server url
   url: https://api.gridly.com
@@ -2709,6 +2709,7 @@ components:
       type: object
     CreateGrid:
       example:
+        recordIdentifierType: recordId
         templateGridId: templateGridId
         metadata:
           key: metadata
@@ -2717,6 +2718,11 @@ components:
         name:
           type: string
         templateGridId:
+          type: string
+        recordIdentifierType:
+          enum:
+          - recordId
+          - pathTagRecordId
           type: string
         metadata:
           additionalProperties:
@@ -2727,6 +2733,7 @@ components:
       type: object
     Grid:
       example:
+        recordIdentifierType: recordId
         metadata:
           key: metadata
         defaultAccessViewId: defaultAccessViewId
@@ -2808,6 +2815,11 @@ components:
           type: object
         name:
           type: string
+        recordIdentifierType:
+          enum:
+          - recordId
+          - pathTagRecordId
+          type: string
         status:
           enum:
           - deleted
@@ -2834,6 +2846,7 @@ components:
       type: object
     Branch:
       example:
+        recordIdentifierType: recordId
         metadata:
           key: metadata
         defaultAccessViewId: defaultAccessViewId
@@ -2915,6 +2928,11 @@ components:
             type: string
           type: object
         name:
+          type: string
+        recordIdentifierType:
+          enum:
+          - recordId
+          - pathTagRecordId
           type: string
         status:
           enum:
@@ -3501,7 +3519,8 @@ components:
         id: id
         projectId: 2
         grids:
-        - metadata:
+        - recordIdentifierType: recordId
+          metadata:
             key: metadata
           defaultAccessViewId: defaultAccessViewId
           columns:
@@ -3565,7 +3584,8 @@ components:
           description: description
           id: id
           status: deleted
-        - metadata:
+        - recordIdentifierType: recordId
+          metadata:
             key: metadata
           defaultAccessViewId: defaultAccessViewId
           columns:
@@ -3978,7 +3998,8 @@ components:
           id: id
           projectId: 2
           grids:
-          - metadata:
+          - recordIdentifierType: recordId
+            metadata:
               key: metadata
             defaultAccessViewId: defaultAccessViewId
             columns:
@@ -4042,7 +4063,8 @@ components:
             description: description
             id: id
             status: deleted
-          - metadata:
+          - recordIdentifierType: recordId
+            metadata:
               key: metadata
             defaultAccessViewId: defaultAccessViewId
             columns:
@@ -4360,7 +4382,8 @@ components:
           id: id
           projectId: 2
           grids:
-          - metadata:
+          - recordIdentifierType: recordId
+            metadata:
               key: metadata
             defaultAccessViewId: defaultAccessViewId
             columns:
@@ -4424,7 +4447,8 @@ components:
             description: description
             id: id
             status: deleted
-          - metadata:
+          - recordIdentifierType: recordId
+            metadata:
               key: metadata
             defaultAccessViewId: defaultAccessViewId
             columns:
