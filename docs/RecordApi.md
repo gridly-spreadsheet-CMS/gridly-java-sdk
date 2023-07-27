@@ -7,6 +7,7 @@ All URIs are relative to *https://api.gridly.com*
 | [**create**](RecordApi.md#create) | **POST** /v1/views/{viewId}/records | create |
 | [**delete**](RecordApi.md#delete) | **DELETE** /v1/views/{viewId}/records | delete |
 | [**fetch**](RecordApi.md#fetch) | **GET** /v1/views/{viewId}/records | fetch |
+| [**fetchHistories**](RecordApi.md#fetchHistories) | **GET** /v1/views/{viewId}/records/{recordId}/histories | fetchHistories |
 | [**update**](RecordApi.md#update) | **PATCH** /v1/views/{viewId}/records | update |
 | [**updateRecord**](RecordApi.md#updateRecord) | **PATCH** /v1/views/{viewId}/records/{id} | updateRecord |
 
@@ -154,7 +155,7 @@ null (empty response body)
 
 <a name="fetch"></a>
 # **fetch**
-> List&lt;Record&gt; fetch(viewId, columnIds, page, query, sort, fetchFileOption)
+> List&lt;Record&gt; fetch(viewId, columnIds, page, query, sort, fetchFileOption, afterRecordId, beforeRecordId)
 
 fetch
 
@@ -188,8 +189,10 @@ public class Example {
     String query = "{}"; // String | query
     String sort = "{}"; // String | sort
     FetchFileOption fetchFileOption = FetchFileOption.fromValue("all"); // FetchFileOption | fetchFileOption
+    String afterRecordId = "afterRecordId_example"; // String | afterRecordId
+    String beforeRecordId = "beforeRecordId_example"; // String | beforeRecordId
     try {
-      List<Record> result = apiInstance.fetch(viewId, columnIds, page, query, sort, fetchFileOption);
+      List<Record> result = apiInstance.fetch(viewId, columnIds, page, query, sort, fetchFileOption, afterRecordId, beforeRecordId);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling RecordApi#fetch");
@@ -212,10 +215,85 @@ public class Example {
 | **query** | **String**| query | [optional] [default to {}] |
 | **sort** | **String**| sort | [optional] [default to {}] |
 | **fetchFileOption** | [**FetchFileOption**](.md)| fetchFileOption | [optional] [default to id] [enum: all, id, name] |
+| **afterRecordId** | **String**| afterRecordId | [optional] |
+| **beforeRecordId** | **String**| beforeRecordId | [optional] |
 
 ### Return type
 
 [**List&lt;Record&gt;**](Record.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+
+<a name="fetchHistories"></a>
+# **fetchHistories**
+> List&lt;RecordHistory&gt; fetchHistories(viewId, recordId, page)
+
+fetchHistories
+
+fetchHistories
+
+### Example
+```java
+// Import classes:
+import com.gridly.api.client.ApiClient;
+import com.gridly.api.client.ApiException;
+import com.gridly.api.client.Configuration;
+import com.gridly.api.client.auth.*;
+import com.gridly.api.client.models.*;
+import com.gridly.api.service.RecordApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://api.gridly.com");
+    
+    // Configure API key authorization: ApiKey
+    ApiKeyAuth ApiKey = (ApiKeyAuth) defaultClient.getAuthentication("ApiKey");
+    ApiKey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //ApiKey.setApiKeyPrefix("Token");
+
+    RecordApi apiInstance = new RecordApi(defaultClient);
+    String viewId = "viewId_example"; // String | viewId
+    String recordId = "recordId_example"; // String | recordId
+    String page = "{}"; // String | page
+    try {
+      List<RecordHistory> result = apiInstance.fetchHistories(viewId, recordId, page);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling RecordApi#fetchHistories");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **viewId** | **String**| viewId | |
+| **recordId** | **String**| recordId | |
+| **page** | **String**| page | [optional] [default to {}] |
+
+### Return type
+
+[**List&lt;RecordHistory&gt;**](RecordHistory.md)
 
 ### Authorization
 

@@ -45,4 +45,8 @@
 | CLEARINGRECORDS | &quot;clearingRecords&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

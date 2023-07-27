@@ -10,7 +10,12 @@ body
 |------------ | ------------- | ------------- | -------------|
 |**name** | **String** |  |  |
 |**description** | **String** |  |  [optional] |
+|**enableGuidRecord** | **Boolean** |  |  [optional] |
 |**id** | **String** |  |  [optional] |
 
+
+## Implemented Interfaces
+
+* Serializable
 
 

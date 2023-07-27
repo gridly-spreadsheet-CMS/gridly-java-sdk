@@ -9,10 +9,39 @@
 |------------ | ------------- | ------------- | -------------|
 |**name** | **String** |  |  [optional] |
 |**description** | **String** |  |  [optional] |
+|**type** | [**TypeEnum**](#TypeEnum) |  |  [optional] |
 |**languageCode** | [**LanguageCodeEnum**](#LanguageCodeEnum) |  |  [optional] |
+|**localizationType** | [**LocalizationTypeEnum**](#LocalizationTypeEnum) |  |  [optional] |
 |**selectionOptions** | **List&lt;String&gt;** |  |  [optional] |
 |**numberFormat** | [**NumberFormat**](NumberFormat.md) |  |  [optional] |
+|**reference** | [**Reference**](Reference.md) |  |  [optional] |
+|**formula** | [**Formula**](Formula.md) |  |  [optional] |
+|**dateTimeFormat** | [**DateTimeFormat**](DateTimeFormat.md) |  |  [optional] |
 |**newId** | **String** |  |  [optional] |
+
+
+
+## Enum: TypeEnum
+
+| Name | Value |
+|---- | -----|
+| SINGLELINE | &quot;singleLine&quot; |
+| MULTIPLELINES | &quot;multipleLines&quot; |
+| RICHTEXT | &quot;richText&quot; |
+| MARKDOWN | &quot;markdown&quot; |
+| SINGLESELECTION | &quot;singleSelection&quot; |
+| MULTIPLESELECTIONS | &quot;multipleSelections&quot; |
+| BOOLEAN | &quot;boolean&quot; |
+| NUMBER | &quot;number&quot; |
+| DATETIME | &quot;datetime&quot; |
+| FILES | &quot;files&quot; |
+| REFERENCE | &quot;reference&quot; |
+| LOOKUP | &quot;lookup&quot; |
+| LANGUAGE | &quot;language&quot; |
+| JSON | &quot;json&quot; |
+| YAML | &quot;yaml&quot; |
+| HTML | &quot;html&quot; |
+| FORMULA | &quot;formula&quot; |
 
 
 
@@ -30,6 +59,7 @@
 | JAJP | &quot;jaJP&quot; |
 | KOKR | &quot;koKR&quot; |
 | PLPL | &quot;plPL&quot; |
+| PTAO | &quot;ptAO&quot; |
 | PTBR | &quot;ptBR&quot; |
 | RURU | &quot;ruRU&quot; |
 | ESMX | &quot;esMX&quot; |
@@ -99,6 +129,13 @@
 | ENTT | &quot;enTT&quot; |
 | ENZA | &quot;enZA&quot; |
 | ENZW | &quot;enZW&quot; |
+| ENSG | &quot;enSG&quot; |
+| ENIN | &quot;enIN&quot; |
+| ENGH | &quot;enGH&quot; |
+| ENRW | &quot;enRW&quot; |
+| ENZM | &quot;enZM&quot; |
+| ENKE | &quot;enKE&quot; |
+| ENNG | &quot;enNG&quot; |
 | ESAR | &quot;esAR&quot; |
 | ESBO | &quot;esBO&quot; |
 | ESCL | &quot;esCL&quot; |
@@ -174,6 +211,7 @@
 | ZHMO | &quot;zhMO&quot; |
 | ZHSG | &quot;zhSG&quot; |
 | ZUZA | &quot;zuZA&quot; |
+| AM | &quot;am&quot; |
 | HY | &quot;hy&quot; |
 | AZ | &quot;az&quot; |
 | BN | &quot;bn&quot; |
@@ -189,6 +227,7 @@
 | HU | &quot;hu&quot; |
 | ID | &quot;id&quot; |
 | IT | &quot;it&quot; |
+| KM | &quot;km&quot; |
 | MI | &quot;mi&quot; |
 | PS | &quot;ps&quot; |
 | RU | &quot;ru&quot; |
@@ -248,11 +287,25 @@
 | MT | &quot;mt&quot; |
 | QU | &quot;qu&quot; |
 | SR | &quot;sr&quot; |
+| SI | &quot;si&quot; |
 | TL | &quot;tl&quot; |
 | TH | &quot;th&quot; |
 | CY | &quot;cy&quot; |
 | ZU | &quot;zu&quot; |
 | NO | &quot;no&quot; |
 
+
+
+## Enum: LocalizationTypeEnum
+
+| Name | Value |
+|---- | -----|
+| SOURCELANGUAGE | &quot;sourceLanguage&quot; |
+| TARGETLANGUAGE | &quot;targetLanguage&quot; |
+
+
+## Implemented Interfaces
+
+* Serializable
 
 

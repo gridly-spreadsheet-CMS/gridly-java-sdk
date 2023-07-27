@@ -22,4 +22,8 @@
 | INTEGER | &quot;INTEGER&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

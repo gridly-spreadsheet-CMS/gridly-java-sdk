@@ -12,4 +12,8 @@
 |**targetColumnId** | **String** |  |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

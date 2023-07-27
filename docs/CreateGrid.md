@@ -22,4 +22,8 @@
 | PATHTAGRECORDID | &quot;pathTagRecordId&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

@@ -8,16 +8,28 @@
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**id** | **String** |  |  [optional] |
+|**dateTimeFormat** | [**DateTimeFormat**](DateTimeFormat.md) |  |  [optional] |
 |**dependsOn** | **String** |  |  [optional] |
 |**description** | **String** |  |  [optional] |
+|**formula** | [**Formula**](Formula.md) |  |  [optional] |
 |**isSource** | **Boolean** |  |  [optional] |
 |**isTarget** | **Boolean** |  |  [optional] |
 |**languageCode** | **String** |  |  [optional] |
+|**localizationType** | [**LocalizationTypeEnum**](#LocalizationTypeEnum) |  |  [optional] |
 |**name** | **String** |  |  [optional] |
 |**numberFormat** | [**NumberFormat**](NumberFormat.md) |  |  [optional] |
 |**reference** | [**ColumnReference**](ColumnReference.md) |  |  [optional] |
 |**selectionOptions** | **List&lt;String&gt;** |  |  [optional] |
 |**type** | [**TypeEnum**](#TypeEnum) |  |  [optional] |
+
+
+
+## Enum: LocalizationTypeEnum
+
+| Name | Value |
+|---- | -----|
+| SOURCELANGUAGE | &quot;sourceLanguage&quot; |
+| TARGETLANGUAGE | &quot;targetLanguage&quot; |
 
 
 
@@ -43,5 +55,9 @@
 | HTML | &quot;html&quot; |
 | FORMULA | &quot;formula&quot; |
 
+
+## Implemented Interfaces
+
+* Serializable
 
 

@@ -1,16 +1,16 @@
 openapi: 3.0.1
 info:
   contact:
-    email: ""
-    name: ""
-    url: ""
+    email: support@gridly.com
+    name: Gridly Team
+    url: https://www.gridly.com
   description: Gridly API documentation
   license:
     name: MIT
     url: ""
   termsOfService: ""
   title: Gridly API
-  version: 3.31.0
+  version: 4.15.1
 servers:
 - description: Generated server url
   url: https://api.gridly.com
@@ -23,12 +23,16 @@ tags:
   name: task
 - description: View API
   name: view
+- description: Path API
+  name: Path
 - description: Record API
   name: record
 - description: Branch API
   name: branch
 - description: Grid API
   name: grid
+- description: API for sharing view
+  name: share-view
 - description: View File API
   name: view-file
 - description: View Column API
@@ -37,7 +41,129 @@ tags:
   name: database
 - description: Project API
   name: project
+- description: Translation Memory API
+  name: transmem
 paths:
+  /v1/views/{viewId}/shares:
+    delete:
+      description: delete
+      operationId: delete
+      parameters:
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+      security:
+      - ApiKey: []
+      summary: delete
+      tags:
+      - share-view
+      x-accepts: application/json
+    get:
+      description: get
+      operationId: get
+      parameters:
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShareView'
+          description: OK
+      security:
+      - ApiKey: []
+      summary: get
+      tags:
+      - share-view
+      x-accepts: application/json
+    put:
+      description: create
+      operationId: create
+      parameters:
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateShareView'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShareView'
+          description: OK
+      security:
+      - ApiKey: []
+      summary: create
+      tags:
+      - share-view
+      x-content-type: application/json
+      x-accepts: application/json
+  /v1/views/{viewId}/paths/{path}:
+    put:
+      description: update
+      operationId: update
+      parameters:
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: path
+        explode: false
+        in: path
+        name: path
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePath'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PathSingle'
+          description: OK
+      security:
+      - ApiKey: []
+      summary: update
+      tags:
+      - Path
+      x-content-type: application/json
+      x-accepts: application/json
   /v1/views/{viewId}/dependencies/{dependencyId}:
     delete:
       description: deleteById
@@ -303,6 +429,22 @@ paths:
         schema:
           $ref: '#/components/schemas/FetchFileOption'
         style: form
+      - description: afterRecordId
+        explode: true
+        in: query
+        name: afterRecordId
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: beforeRecordId
+        explode: true
+        in: query
+        name: beforeRecordId
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
         "200":
           content:
@@ -390,6 +532,100 @@ paths:
       tags:
       - record
       x-codegen-request-body-name: createRecords
+      x-content-type: application/json
+      x-accepts: application/json
+  /v1/views/{viewId}/paths:
+    delete:
+      description: delete
+      operationId: delete
+      parameters:
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeletePath'
+        required: true
+      responses:
+        "204":
+          description: No Content
+      security:
+      - ApiKey: []
+      summary: delete
+      tags:
+      - Path
+      x-content-type: application/json
+      x-accepts: application/json
+    post:
+      description: create
+      operationId: create
+      parameters:
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePath'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PathList'
+          description: OK
+      security:
+      - ApiKey: []
+      summary: create
+      tags:
+      - Path
+      x-content-type: application/json
+      x-accepts: application/json
+  /v1/views/{viewId}/paths/move:
+    post:
+      description: move
+      operationId: move
+      parameters:
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MovePath'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PathList'
+          description: OK
+      security:
+      - ApiKey: []
+      summary: move
+      tags:
+      - Path
       x-content-type: application/json
       x-accepts: application/json
   /v1/views/{viewId}/merge:
@@ -480,6 +716,7 @@ paths:
           - xlsx
           - json
           - po
+          - html
           nullable: true
           type: string
         style: form
@@ -496,43 +733,6 @@ paths:
       summary: importView
       tags:
       - view
-      x-content-type: multipart/form-data
-      x-accepts: application/json
-  /v1/views/{viewId}/files/zip:
-    post:
-      description: uploadZip
-      operationId: uploadZip
-      parameters:
-      - description: viewId
-        explode: false
-        in: path
-        name: viewId
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/uploadZip_request'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/uploadZip_request'
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/Record'
-                type: array
-          description: default response
-      security:
-      - ApiKey: []
-      summary: uploadZip
-      tags:
-      - view-file
       x-content-type: multipart/form-data
       x-accepts: application/json
   /v1/views/{viewId}/files:
@@ -623,6 +823,43 @@ paths:
       security:
       - ApiKey: []
       summary: upload
+      tags:
+      - view-file
+      x-content-type: multipart/form-data
+      x-accepts: application/json
+  /v1/views/{viewId}/files/zip:
+    post:
+      description: uploadZip
+      operationId: uploadZip
+      parameters:
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/uploadZip_request'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/uploadZip_request'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Record'
+                type: array
+          description: default response
+      security:
+      - ApiKey: []
+      summary: uploadZip
       tags:
       - view-file
       x-content-type: multipart/form-data
@@ -1304,6 +1541,88 @@ paths:
       tags:
       - view
       x-accepts: application/json
+  /v1/views/{viewId}/records/{recordId}/histories:
+    get:
+      description: fetchHistories
+      operationId: fetchHistories
+      parameters:
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: recordId
+        explode: false
+        in: path
+        name: recordId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: page
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: "{}"
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RecordHistory'
+                type: array
+          description: OK
+      security:
+      - ApiKey: []
+      summary: fetchHistories
+      tags:
+      - record
+      x-accepts: application/json
+  /v1/views/{viewId}/paths/tree:
+    get:
+      description: list
+      operationId: list
+      parameters:
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: rootPath
+        explode: true
+        in: query
+        name: rootPath
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PathNode'
+                type: array
+          description: OK
+      security:
+      - ApiKey: []
+      summary: list
+      tags:
+      - Path
+      x-accepts: application/json
   /v1/views/{viewId}/files/{fileId}:
     get:
       description: download
@@ -1406,6 +1725,7 @@ paths:
           - xlsx
           - json
           - po
+          - html
           nullable: true
           type: string
         style: form
@@ -1856,8 +2176,289 @@ paths:
       x-codegen-request-body-name: body
       x-content-type: application/json
       x-accepts: application/json
+  /v1/transmems:
+    get:
+      operationId: listTM
+      parameters:
+      - explode: true
+        in: query
+        name: projectId
+        required: false
+        schema:
+          format: int64
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TransMem'
+                type: array
+          description: OK
+      summary: List all available translation memories or create default one if there
+        is no translation memory
+      tags:
+      - transmem
+      x-accepts: application/json
+    post:
+      operationId: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTransMem'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransMem'
+          description: Create a new translation memory successful !
+      summary: Create a new translation memory
+      tags:
+      - transmem
+      x-content-type: application/json
+      x-accepts: application/json
+  /v1/transmems/upload:
+    post:
+      operationId: createWithFile
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/upload_request'
+        description: Based tmx file to create translation memory
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransMem'
+          description: Create a new translation memory based on provided tmx file
+            successfully !
+      summary: Create a new translation memory by uploading tmx file
+      tags:
+      - transmem
+      x-content-type: multipart/form-data
+      x-accepts: application/json
+  /v1/transmems/{tmId}:
+    delete:
+      operationId: delete
+      parameters:
+      - explode: false
+        in: path
+        name: tmId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransMem'
+          description: OK
+      summary: Delete a translation memory by id
+      tags:
+      - transmem
+      x-accepts: application/json
+    get:
+      operationId: get
+      parameters:
+      - explode: false
+        in: path
+        name: tmId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransMem'
+          description: OK
+      summary: Get translation memory info by id
+      tags:
+      - transmem
+      x-accepts: application/json
+    put:
+      operationId: update
+      parameters:
+      - explode: false
+        in: path
+        name: tmId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTransMem'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransMem'
+          description: OK
+      summary: Update a translation memory
+      tags:
+      - transmem
+      x-content-type: application/json
+      x-accepts: application/json
+  /v1/transmems/{tmId}/cleanup:
+    put:
+      operationId: cleanup
+      parameters:
+      - explode: false
+        in: path
+        name: tmId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+      summary: Erases all the translation data of the provided tmId
+      tags:
+      - transmem
+      x-accepts: application/json
+  /v1/transmems/{tmId}/export:
+    get:
+      operationId: export
+      parameters:
+      - explode: false
+        in: path
+        name: tmId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: format
+        required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/ExportFormat'
+          - {}
+        style: form
+      - explode: true
+        in: query
+        name: sourceLang
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: targetLangs
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/octet-stream:
+              schema:
+                format: binary
+                type: string
+          description: OK
+      summary: Export translation memory tmx file
+      tags:
+      - transmem
+      x-accepts: application/octet-stream
+  /v1/transmems/{tmId}/import:
+    post:
+      operationId: importTmx
+      parameters:
+      - explode: false
+        in: path
+        name: tmId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/upload_request'
+        description: tmx file to upload
+        required: true
+      responses:
+        "200":
+          description: Import tmx file successfully
+      summary: Import a translation memory from tmx file
+      tags:
+      - transmem
+      x-content-type: multipart/form-data
+      x-accepts: application/json
 components:
   schemas:
+    CreateShareView:
+      example:
+        includeGridHistory: true
+      properties:
+        includeGridHistory:
+          type: boolean
+      type: object
+    ShareView:
+      example:
+        companyId: companyId
+        viewId: viewId
+        createdDate: 2000-01-23T04:56:07.000+00:00
+        lastModifiedDate: 2000-01-23T04:56:07.000+00:00
+        includeGridHistory: true
+        link: link
+        active: true
+      properties:
+        companyId:
+          type: string
+        link:
+          type: string
+        active:
+          type: boolean
+        viewId:
+          type: string
+        includeGridHistory:
+          type: boolean
+        createdDate:
+          format: date-time
+          type: string
+        lastModifiedDate:
+          format: date-time
+          type: string
+      type: object
+    UpdatePath:
+      example:
+        newName: newName
+      properties:
+        newName:
+          pattern: "^[^/\\\\]+$"
+          type: string
+      required:
+      - newName
+      type: object
+    PathSingle:
+      example:
+        path: path
+      properties:
+        path:
+          type: string
+      type: object
     UpdateDependency:
       example:
         targetColumnId: targetColumnId
@@ -1923,8 +2524,10 @@ components:
     Cell:
       example:
         sourceStatus: unset
+        lengthLimit: 6
         columnId: columnId
         dependencyStatus: upToDate
+        tm: true
         referencedIds:
         - referencedIds
         - referencedIds
@@ -1938,6 +2541,9 @@ components:
           - outOfDate
           - unset
           type: string
+        lengthLimit:
+          format: int32
+          type: integer
         referencedIds:
           items:
             type: string
@@ -1950,6 +2556,8 @@ components:
           - readyForTranslation
           - locked
           type: string
+        tm:
+          type: boolean
         value:
           type: AnyType
       type: object
@@ -1966,11 +2574,16 @@ components:
           - selectionOptions
           id: id
         type: ROW
+        branch:
+          name: name
+          id: id
       properties:
         grid:
           $ref: '#/components/schemas/ReferencedGrid'
         column:
           $ref: '#/components/schemas/ReferencedColumn'
+        branch:
+          $ref: '#/components/schemas/ReferencedGrid'
         type:
           enum:
           - ROW
@@ -1981,6 +2594,59 @@ components:
           - SINGLE
           - MULTIPLE
           type: string
+      type: object
+    DateFormat:
+      example:
+        name: name
+        format: format
+      properties:
+        name:
+          type: string
+        format:
+          type: string
+      type: object
+    DateTimeFormat:
+      example:
+        zoneOffset: zoneOffset
+        dateFormat:
+          name: name
+          format: format
+        timeFormat: hour12
+        showTimeZone: true
+      properties:
+        dateFormat:
+          $ref: '#/components/schemas/DateFormat'
+        timeFormat:
+          enum:
+          - hour12
+          - hour24
+          type: string
+        zoneOffset:
+          type: string
+        showTimeZone:
+          type: boolean
+      type: object
+    Formula:
+      example:
+        formulaText: formulaText
+        detectResultValueType: list
+        alwaysFormatResultValueAsList: true
+      properties:
+        formulaText:
+          type: string
+        alwaysFormatResultValueAsList:
+          type: boolean
+        detectResultValueType:
+          enum:
+          - list
+          - string
+          - decimal
+          - boolean
+          - datetime
+          - na
+          type: string
+      required:
+      - formulaText
       type: object
     NumberFormat:
       example:
@@ -2007,15 +2673,19 @@ components:
         path: path
         cells:
         - sourceStatus: unset
+          lengthLimit: 6
           columnId: columnId
           dependencyStatus: upToDate
+          tm: true
           referencedIds:
           - referencedIds
           - referencedIds
           value: ""
         - sourceStatus: unset
+          lengthLimit: 6
           columnId: columnId
           dependencyStatus: upToDate
+          tm: true
           referencedIds:
           - referencedIds
           - referencedIds
@@ -2071,15 +2741,19 @@ components:
         - path: path
           cells:
           - sourceStatus: unset
+            lengthLimit: 6
             columnId: columnId
             dependencyStatus: upToDate
+            tm: true
             referencedIds:
             - referencedIds
             - referencedIds
             value: ""
           - sourceStatus: unset
+            lengthLimit: 6
             columnId: columnId
             dependencyStatus: upToDate
+            tm: true
             referencedIds:
             - referencedIds
             - referencedIds
@@ -2090,15 +2764,19 @@ components:
         - path: path
           cells:
           - sourceStatus: unset
+            lengthLimit: 6
             columnId: columnId
             dependencyStatus: upToDate
+            tm: true
             referencedIds:
             - referencedIds
             - referencedIds
             value: ""
           - sourceStatus: unset
+            lengthLimit: 6
             columnId: columnId
             dependencyStatus: upToDate
+            tm: true
             referencedIds:
             - referencedIds
             - referencedIds
@@ -2107,7 +2785,15 @@ components:
           lastModifiedBy: lastModifiedBy
           id: id
         columns:
-        - isTarget: true
+        - dependsOn: dependsOn
+          selectionOptions:
+          - selectionOptions
+          - selectionOptions
+          description: description
+          localizationType: sourceLanguage
+          languageCode: languageCode
+          type: singleLine
+          isTarget: true
           reference:
             selectionType: SINGLE
             grid:
@@ -2120,7 +2806,16 @@ components:
               - selectionOptions
               id: id
             type: ROW
-          dependsOn: dependsOn
+            branch:
+              name: name
+              id: id
+          dateTimeFormat:
+            zoneOffset: zoneOffset
+            dateFormat:
+              name: name
+              format: format
+            timeFormat: hour12
+            showTimeZone: true
           numberFormat:
             decimalPlaces: 0
             currencySymbol: currencySymbol
@@ -2128,14 +2823,20 @@ components:
             use1000Separator: true
           isSource: true
           name: name
+          formula:
+            formulaText: formulaText
+            detectResultValueType: list
+            alwaysFormatResultValueAsList: true
+          id: id
+        - dependsOn: dependsOn
           selectionOptions:
           - selectionOptions
           - selectionOptions
           description: description
-          id: id
+          localizationType: sourceLanguage
           languageCode: languageCode
           type: singleLine
-        - isTarget: true
+          isTarget: true
           reference:
             selectionType: SINGLE
             grid:
@@ -2148,7 +2849,16 @@ components:
               - selectionOptions
               id: id
             type: ROW
-          dependsOn: dependsOn
+            branch:
+              name: name
+              id: id
+          dateTimeFormat:
+            zoneOffset: zoneOffset
+            dateFormat:
+              name: name
+              format: format
+            timeFormat: hour12
+            showTimeZone: true
           numberFormat:
             decimalPlaces: 0
             currencySymbol: currencySymbol
@@ -2156,13 +2866,11 @@ components:
             use1000Separator: true
           isSource: true
           name: name
-          selectionOptions:
-          - selectionOptions
-          - selectionOptions
-          description: description
+          formula:
+            formulaText: formulaText
+            detectResultValueType: list
+            alwaysFormatResultValueAsList: true
           id: id
-          languageCode: languageCode
-          type: singleLine
         name: name
         id: id
         gridId: gridId
@@ -2199,6 +2907,14 @@ components:
       type: object
     ViewColumn:
       example:
+        dependsOn: dependsOn
+        selectionOptions:
+        - selectionOptions
+        - selectionOptions
+        description: description
+        localizationType: sourceLanguage
+        languageCode: languageCode
+        type: singleLine
         isTarget: true
         reference:
           selectionType: SINGLE
@@ -2212,7 +2928,16 @@ components:
             - selectionOptions
             id: id
           type: ROW
-        dependsOn: dependsOn
+          branch:
+            name: name
+            id: id
+        dateTimeFormat:
+          zoneOffset: zoneOffset
+          dateFormat:
+            name: name
+            format: format
+          timeFormat: hour12
+          showTimeZone: true
         numberFormat:
           decimalPlaces: 0
           currencySymbol: currencySymbol
@@ -2220,25 +2945,32 @@ components:
           use1000Separator: true
         isSource: true
         name: name
-        selectionOptions:
-        - selectionOptions
-        - selectionOptions
-        description: description
+        formula:
+          formulaText: formulaText
+          detectResultValueType: list
+          alwaysFormatResultValueAsList: true
         id: id
-        languageCode: languageCode
-        type: singleLine
       properties:
         id:
           type: string
+        dateTimeFormat:
+          $ref: '#/components/schemas/DateTimeFormat'
         dependsOn:
           type: string
         description:
           type: string
+        formula:
+          $ref: '#/components/schemas/Formula'
         isSource:
           type: boolean
         isTarget:
           type: boolean
         languageCode:
+          type: string
+        localizationType:
+          enum:
+          - sourceLanguage
+          - targetLanguage
           type: string
         name:
           type: string
@@ -2274,6 +3006,7 @@ components:
     SetCell:
       example:
         sourceStatus: unset
+        lengthLimit: 0
         columnId: columnId
         dependencyStatus: upToDate
         referencedIds:
@@ -2289,6 +3022,9 @@ components:
           - outOfDate
           - unset
           type: string
+        lengthLimit:
+          format: int32
+          type: integer
         referencedIds:
           items:
             type: string
@@ -2309,6 +3045,7 @@ components:
         path: path
         cells:
         - sourceStatus: unset
+          lengthLimit: 0
           columnId: columnId
           dependencyStatus: upToDate
           referencedIds:
@@ -2316,6 +3053,7 @@ components:
           - referencedIds
           value: ""
         - sourceStatus: unset
+          lengthLimit: 0
           columnId: columnId
           dependencyStatus: upToDate
           referencedIds:
@@ -2333,6 +3071,54 @@ components:
         path:
           type: string
       type: object
+    CreatePath:
+      example:
+        paths:
+        - paths
+        - paths
+        parentPath: parentPath
+      properties:
+        parentPath:
+          type: string
+        paths:
+          items:
+            type: string
+          type: array
+      type: object
+    PathList:
+      example:
+        paths:
+        - paths
+        - paths
+      properties:
+        paths:
+          items:
+            type: string
+          type: array
+      type: object
+    MovePath:
+      example:
+        moveBefore: moveBefore
+        fromParentPath: fromParentPath
+        names:
+        - names
+        - names
+        toParentPath: toParentPath
+        moveAfter: moveAfter
+      properties:
+        fromParentPath:
+          type: string
+        moveAfter:
+          type: string
+        moveBefore:
+          type: string
+        names:
+          items:
+            type: string
+          type: array
+        toParentPath:
+          type: string
+      type: object
     Task:
       example:
         id: id
@@ -2345,6 +3131,8 @@ components:
           - failed
           - successful
           - running
+          - retrySuccessful
+          - cancel
           type: string
       type: object
     UploadedFile:
@@ -2384,6 +3172,7 @@ components:
     CreateColumn:
       example:
         reference:
+          branchId: branchId
           selectionType: SINGLE
           columnId: columnId
           gridId: gridId
@@ -2393,6 +3182,13 @@ components:
           currencySymbol: currencySymbol
           type: DECIMAL
           use1000Separator: true
+        dateTimeFormat:
+          zoneOffset: zoneOffset
+          dateFormat:
+            name: name
+            format: format
+          timeFormat: hour12
+          showTimeZone: true
         name: name
         selectionOptions:
         - selectionOptions
@@ -2401,6 +3197,11 @@ components:
         - selectionOptions
         - selectionOptions
         description: description
+        localizationType: sourceLanguage
+        formula:
+          formulaText: formulaText
+          detectResultValueType: list
+          alwaysFormatResultValueAsList: true
         id: id
         type: singleLine
         languageCode: enUS
@@ -2441,6 +3242,7 @@ components:
           - jaJP
           - koKR
           - plPL
+          - ptAO
           - ptBR
           - ruRU
           - esMX
@@ -2510,6 +3312,13 @@ components:
           - enTT
           - enZA
           - enZW
+          - enSG
+          - enIN
+          - enGH
+          - enRW
+          - enZM
+          - enKE
+          - enNG
           - esAR
           - esBO
           - esCL
@@ -2585,6 +3394,7 @@ components:
           - zhMO
           - zhSG
           - zuZA
+          - am
           - hy
           - az
           - bn
@@ -2600,6 +3410,7 @@ components:
           - hu
           - id
           - it
+          - km
           - mi
           - ps
           - ru
@@ -2659,11 +3470,17 @@ components:
           - mt
           - qu
           - sr
+          - si
           - tl
           - th
           - cy
           - zu
           - "no"
+          type: string
+        localizationType:
+          enum:
+          - sourceLanguage
+          - targetLanguage
           type: string
         numberFormat:
           $ref: '#/components/schemas/NumberFormat'
@@ -2675,6 +3492,10 @@ components:
           type: array
         reference:
           $ref: '#/components/schemas/Reference'
+        formula:
+          $ref: '#/components/schemas/Formula'
+        dateTimeFormat:
+          $ref: '#/components/schemas/DateTimeFormat'
         id:
           pattern: ^(?!_)\w+$
           type: string
@@ -2684,12 +3505,15 @@ components:
       type: object
     Reference:
       example:
+        branchId: branchId
         selectionType: SINGLE
         columnId: columnId
         gridId: gridId
         type: ROW
       properties:
         gridId:
+          type: string
+        branchId:
           type: string
         columnId:
           type: string
@@ -2738,7 +3562,15 @@ components:
           key: metadata
         defaultAccessViewId: defaultAccessViewId
         columns:
-        - isTarget: true
+        - dependsOn: dependsOn
+          selectionOptions:
+          - selectionOptions
+          - selectionOptions
+          description: description
+          localizationType: sourceLanguage
+          languageCode: languageCode
+          type: singleLine
+          isTarget: true
           reference:
             selectionType: SINGLE
             grid:
@@ -2751,7 +3583,16 @@ components:
               - selectionOptions
               id: id
             type: ROW
-          dependsOn: dependsOn
+            branch:
+              name: name
+              id: id
+          dateTimeFormat:
+            zoneOffset: zoneOffset
+            dateFormat:
+              name: name
+              format: format
+            timeFormat: hour12
+            showTimeZone: true
           numberFormat:
             decimalPlaces: 0
             currencySymbol: currencySymbol
@@ -2759,14 +3600,20 @@ components:
             use1000Separator: true
           isSource: true
           name: name
+          formula:
+            formulaText: formulaText
+            detectResultValueType: list
+            alwaysFormatResultValueAsList: true
+          id: id
+        - dependsOn: dependsOn
           selectionOptions:
           - selectionOptions
           - selectionOptions
           description: description
-          id: id
+          localizationType: sourceLanguage
           languageCode: languageCode
           type: singleLine
-        - isTarget: true
+          isTarget: true
           reference:
             selectionType: SINGLE
             grid:
@@ -2779,7 +3626,16 @@ components:
               - selectionOptions
               id: id
             type: ROW
-          dependsOn: dependsOn
+            branch:
+              name: name
+              id: id
+          dateTimeFormat:
+            zoneOffset: zoneOffset
+            dateFormat:
+              name: name
+              format: format
+            timeFormat: hour12
+            showTimeZone: true
           numberFormat:
             decimalPlaces: 0
             currencySymbol: currencySymbol
@@ -2787,13 +3643,11 @@ components:
             use1000Separator: true
           isSource: true
           name: name
-          selectionOptions:
-          - selectionOptions
-          - selectionOptions
-          description: description
+          formula:
+            formulaText: formulaText
+            detectResultValueType: list
+            alwaysFormatResultValueAsList: true
           id: id
-          languageCode: languageCode
-          type: singleLine
         name: name
         description: description
         id: id
@@ -2851,7 +3705,15 @@ components:
           key: metadata
         defaultAccessViewId: defaultAccessViewId
         columns:
-        - isTarget: true
+        - dependsOn: dependsOn
+          selectionOptions:
+          - selectionOptions
+          - selectionOptions
+          description: description
+          localizationType: sourceLanguage
+          languageCode: languageCode
+          type: singleLine
+          isTarget: true
           reference:
             selectionType: SINGLE
             grid:
@@ -2864,7 +3726,16 @@ components:
               - selectionOptions
               id: id
             type: ROW
-          dependsOn: dependsOn
+            branch:
+              name: name
+              id: id
+          dateTimeFormat:
+            zoneOffset: zoneOffset
+            dateFormat:
+              name: name
+              format: format
+            timeFormat: hour12
+            showTimeZone: true
           numberFormat:
             decimalPlaces: 0
             currencySymbol: currencySymbol
@@ -2872,14 +3743,20 @@ components:
             use1000Separator: true
           isSource: true
           name: name
+          formula:
+            formulaText: formulaText
+            detectResultValueType: list
+            alwaysFormatResultValueAsList: true
+          id: id
+        - dependsOn: dependsOn
           selectionOptions:
           - selectionOptions
           - selectionOptions
           description: description
-          id: id
+          localizationType: sourceLanguage
           languageCode: languageCode
           type: singleLine
-        - isTarget: true
+          isTarget: true
           reference:
             selectionType: SINGLE
             grid:
@@ -2892,7 +3769,16 @@ components:
               - selectionOptions
               id: id
             type: ROW
-          dependsOn: dependsOn
+            branch:
+              name: name
+              id: id
+          dateTimeFormat:
+            zoneOffset: zoneOffset
+            dateFormat:
+              name: name
+              format: format
+            timeFormat: hour12
+            showTimeZone: true
           numberFormat:
             decimalPlaces: 0
             currencySymbol: currencySymbol
@@ -2900,13 +3786,11 @@ components:
             use1000Separator: true
           isSource: true
           name: name
-          selectionOptions:
-          - selectionOptions
-          - selectionOptions
-          description: description
+          formula:
+            formulaText: formulaText
+            detectResultValueType: list
+            alwaysFormatResultValueAsList: true
           id: id
-          languageCode: languageCode
-          type: singleLine
         isMaster: true
         name: name
         description: description
@@ -2953,11 +3837,24 @@ components:
       type: object
     UpdateColumn:
       example:
+        reference:
+          branchId: branchId
+          selectionType: SINGLE
+          columnId: columnId
+          gridId: gridId
+          type: ROW
         numberFormat:
           decimalPlaces: 0
           currencySymbol: currencySymbol
           type: DECIMAL
           use1000Separator: true
+        dateTimeFormat:
+          zoneOffset: zoneOffset
+          dateFormat:
+            name: name
+            format: format
+          timeFormat: hour12
+          showTimeZone: true
         newId: newId
         name: name
         selectionOptions:
@@ -2967,11 +3864,37 @@ components:
         - selectionOptions
         - selectionOptions
         description: description
+        localizationType: sourceLanguage
+        formula:
+          formulaText: formulaText
+          detectResultValueType: list
+          alwaysFormatResultValueAsList: true
+        type: singleLine
         languageCode: enUS
       properties:
         name:
           type: string
         description:
+          type: string
+        type:
+          enum:
+          - singleLine
+          - multipleLines
+          - richText
+          - markdown
+          - singleSelection
+          - multipleSelections
+          - boolean
+          - number
+          - datetime
+          - files
+          - reference
+          - lookup
+          - language
+          - json
+          - yaml
+          - html
+          - formula
           type: string
         languageCode:
           enum:
@@ -2985,6 +3908,7 @@ components:
           - jaJP
           - koKR
           - plPL
+          - ptAO
           - ptBR
           - ruRU
           - esMX
@@ -3054,6 +3978,13 @@ components:
           - enTT
           - enZA
           - enZW
+          - enSG
+          - enIN
+          - enGH
+          - enRW
+          - enZM
+          - enKE
+          - enNG
           - esAR
           - esBO
           - esCL
@@ -3129,6 +4060,7 @@ components:
           - zhMO
           - zhSG
           - zuZA
+          - am
           - hy
           - az
           - bn
@@ -3144,6 +4076,7 @@ components:
           - hu
           - id
           - it
+          - km
           - mi
           - ps
           - ru
@@ -3203,11 +4136,17 @@ components:
           - mt
           - qu
           - sr
+          - si
           - tl
           - th
           - cy
           - zu
           - "no"
+          type: string
+        localizationType:
+          enum:
+          - sourceLanguage
+          - targetLanguage
           type: string
         selectionOptions:
           items:
@@ -3217,6 +4156,12 @@ components:
           type: array
         numberFormat:
           $ref: '#/components/schemas/NumberFormat'
+        reference:
+          $ref: '#/components/schemas/Reference'
+        formula:
+          $ref: '#/components/schemas/Formula'
+        dateTimeFormat:
+          $ref: '#/components/schemas/DateTimeFormat'
         newId:
           type: string
       type: object
@@ -3244,6 +4189,69 @@ components:
       - all
       - id
       - name
+    CellHistory:
+      example:
+        sourceStatus: unset
+        columnId: columnId
+        dependencyStatus: upToDate
+        value: "{}"
+      properties:
+        dependencyStatus:
+          enum:
+          - upToDate
+          - outOfDate
+          - unset
+          type: string
+        sourceStatus:
+          enum:
+          - unset
+          - doNotTranslate
+          - notReadyForTranslation
+          - readyForTranslation
+          - locked
+          type: string
+        columnId:
+          type: string
+        value:
+          type: object
+      type: object
+    RecordHistory:
+      example:
+        path: path
+        cells:
+        - sourceStatus: unset
+          columnId: columnId
+          dependencyStatus: upToDate
+          value: "{}"
+        - sourceStatus: unset
+          columnId: columnId
+          dependencyStatus: upToDate
+          value: "{}"
+        lastModifiedTime: 2000-01-23T04:56:07.000+00:00
+        lastModifiedBy: lastModifiedBy
+      properties:
+        path:
+          type: string
+        cells:
+          items:
+            $ref: '#/components/schemas/CellHistory'
+          type: array
+        lastModifiedBy:
+          type: string
+        lastModifiedTime:
+          format: date-time
+          type: string
+      type: object
+    PathNode:
+      example:
+        parentPath: parentPath
+        name: name
+      properties:
+        name:
+          type: string
+        parentPath:
+          type: string
+      type: object
     ExportFileHeader:
       enum:
       - none
@@ -3284,6 +4292,17 @@ components:
       required:
       - id
       - path
+      type: object
+    DeletePath:
+      example:
+        paths:
+        - paths
+        - paths
+      properties:
+        paths:
+          items:
+            type: string
+          type: array
       type: object
     DeleteFile:
       example:
@@ -3331,7 +4350,7 @@ components:
         extra: extra
         name: name
         description: description
-        id: 1
+        id: 5
         label: label
         serviceId: serviceId
         order: 5
@@ -3357,13 +4376,14 @@ components:
       type: object
     Project:
       example:
+        companyId: 3
         role:
           privileges:
           - level: level
             extra: extra
             name: name
             description: description
-            id: 1
+            id: 5
             label: label
             serviceId: serviceId
             order: 5
@@ -3371,24 +4391,27 @@ components:
             extra: extra
             name: name
             description: description
-            id: 1
+            id: 5
             label: label
             serviceId: serviceId
             order: 5
           isSystemRole: true
           level: level
           name: name
-          id: 6
+          id: 1
           title: title
           type: type
           privilegeIds:
-          - 5
-          - 5
+          - 2
+          - 2
         name: name
         description: description
-        id: 7
+        id: 9
       properties:
         id:
+          format: int64
+          type: integer
+        companyId:
           format: int64
           type: integer
         name:
@@ -3405,7 +4428,7 @@ components:
           extra: extra
           name: name
           description: description
-          id: 1
+          id: 5
           label: label
           serviceId: serviceId
           order: 5
@@ -3413,19 +4436,19 @@ components:
           extra: extra
           name: name
           description: description
-          id: 1
+          id: 5
           label: label
           serviceId: serviceId
           order: 5
         isSystemRole: true
         level: level
         name: name
-        id: 6
+        id: 1
         title: title
         type: type
         privilegeIds:
-        - 5
-        - 5
+        - 2
+        - 2
       properties:
         id:
           format: int64
@@ -3469,13 +4492,14 @@ components:
         name: name
         description: description
         project:
+          companyId: 3
           role:
             privileges:
             - level: level
               extra: extra
               name: name
               description: description
-              id: 1
+              id: 5
               label: label
               serviceId: serviceId
               order: 5
@@ -3483,33 +4507,33 @@ components:
               extra: extra
               name: name
               description: description
-              id: 1
+              id: 5
               label: label
               serviceId: serviceId
               order: 5
             isSystemRole: true
             level: level
             name: name
-            id: 6
+            id: 1
             title: title
             type: type
             privilegeIds:
-            - 5
-            - 5
+            - 2
+            - 2
           name: name
           description: description
-          id: 7
+          id: 9
         groups:
-        - companyId: 3
-          groupId: 9
+        - companyId: 4
+          groupId: 2
           isSystemGroup: true
           name: name
           id: id
           type: NORMAL
           systemGroup: true
           logoUrl: logoUrl
-        - companyId: 3
-          groupId: 9
+        - companyId: 4
+          groupId: 2
           isSystemGroup: true
           name: name
           id: id
@@ -3517,14 +4541,22 @@ components:
           systemGroup: true
           logoUrl: logoUrl
         id: id
-        projectId: 2
+        projectId: 7
         grids:
         - recordIdentifierType: recordId
           metadata:
             key: metadata
           defaultAccessViewId: defaultAccessViewId
           columns:
-          - isTarget: true
+          - dependsOn: dependsOn
+            selectionOptions:
+            - selectionOptions
+            - selectionOptions
+            description: description
+            localizationType: sourceLanguage
+            languageCode: languageCode
+            type: singleLine
+            isTarget: true
             reference:
               selectionType: SINGLE
               grid:
@@ -3537,7 +4569,16 @@ components:
                 - selectionOptions
                 id: id
               type: ROW
-            dependsOn: dependsOn
+              branch:
+                name: name
+                id: id
+            dateTimeFormat:
+              zoneOffset: zoneOffset
+              dateFormat:
+                name: name
+                format: format
+              timeFormat: hour12
+              showTimeZone: true
             numberFormat:
               decimalPlaces: 0
               currencySymbol: currencySymbol
@@ -3545,14 +4586,20 @@ components:
               use1000Separator: true
             isSource: true
             name: name
+            formula:
+              formulaText: formulaText
+              detectResultValueType: list
+              alwaysFormatResultValueAsList: true
+            id: id
+          - dependsOn: dependsOn
             selectionOptions:
             - selectionOptions
             - selectionOptions
             description: description
-            id: id
+            localizationType: sourceLanguage
             languageCode: languageCode
             type: singleLine
-          - isTarget: true
+            isTarget: true
             reference:
               selectionType: SINGLE
               grid:
@@ -3565,7 +4612,16 @@ components:
                 - selectionOptions
                 id: id
               type: ROW
-            dependsOn: dependsOn
+              branch:
+                name: name
+                id: id
+            dateTimeFormat:
+              zoneOffset: zoneOffset
+              dateFormat:
+                name: name
+                format: format
+              timeFormat: hour12
+              showTimeZone: true
             numberFormat:
               decimalPlaces: 0
               currencySymbol: currencySymbol
@@ -3573,13 +4629,11 @@ components:
               use1000Separator: true
             isSource: true
             name: name
-            selectionOptions:
-            - selectionOptions
-            - selectionOptions
-            description: description
+            formula:
+              formulaText: formulaText
+              detectResultValueType: list
+              alwaysFormatResultValueAsList: true
             id: id
-            languageCode: languageCode
-            type: singleLine
           name: name
           description: description
           id: id
@@ -3589,7 +4643,15 @@ components:
             key: metadata
           defaultAccessViewId: defaultAccessViewId
           columns:
-          - isTarget: true
+          - dependsOn: dependsOn
+            selectionOptions:
+            - selectionOptions
+            - selectionOptions
+            description: description
+            localizationType: sourceLanguage
+            languageCode: languageCode
+            type: singleLine
+            isTarget: true
             reference:
               selectionType: SINGLE
               grid:
@@ -3602,7 +4664,16 @@ components:
                 - selectionOptions
                 id: id
               type: ROW
-            dependsOn: dependsOn
+              branch:
+                name: name
+                id: id
+            dateTimeFormat:
+              zoneOffset: zoneOffset
+              dateFormat:
+                name: name
+                format: format
+              timeFormat: hour12
+              showTimeZone: true
             numberFormat:
               decimalPlaces: 0
               currencySymbol: currencySymbol
@@ -3610,14 +4681,20 @@ components:
               use1000Separator: true
             isSource: true
             name: name
+            formula:
+              formulaText: formulaText
+              detectResultValueType: list
+              alwaysFormatResultValueAsList: true
+            id: id
+          - dependsOn: dependsOn
             selectionOptions:
             - selectionOptions
             - selectionOptions
             description: description
-            id: id
+            localizationType: sourceLanguage
             languageCode: languageCode
             type: singleLine
-          - isTarget: true
+            isTarget: true
             reference:
               selectionType: SINGLE
               grid:
@@ -3630,7 +4707,16 @@ components:
                 - selectionOptions
                 id: id
               type: ROW
-            dependsOn: dependsOn
+              branch:
+                name: name
+                id: id
+            dateTimeFormat:
+              zoneOffset: zoneOffset
+              dateFormat:
+                name: name
+                format: format
+              timeFormat: hour12
+              showTimeZone: true
             numberFormat:
               decimalPlaces: 0
               currencySymbol: currencySymbol
@@ -3638,13 +4724,11 @@ components:
               use1000Separator: true
             isSource: true
             name: name
-            selectionOptions:
-            - selectionOptions
-            - selectionOptions
-            description: description
+            formula:
+              formulaText: formulaText
+              detectResultValueType: list
+              alwaysFormatResultValueAsList: true
             id: id
-            languageCode: languageCode
-            type: singleLine
           name: name
           description: description
           id: id
@@ -3654,15 +4738,19 @@ components:
           - path: path
             cells:
             - sourceStatus: unset
+              lengthLimit: 6
               columnId: columnId
               dependencyStatus: upToDate
+              tm: true
               referencedIds:
               - referencedIds
               - referencedIds
               value: ""
             - sourceStatus: unset
+              lengthLimit: 6
               columnId: columnId
               dependencyStatus: upToDate
+              tm: true
               referencedIds:
               - referencedIds
               - referencedIds
@@ -3673,15 +4761,19 @@ components:
           - path: path
             cells:
             - sourceStatus: unset
+              lengthLimit: 6
               columnId: columnId
               dependencyStatus: upToDate
+              tm: true
               referencedIds:
               - referencedIds
               - referencedIds
               value: ""
             - sourceStatus: unset
+              lengthLimit: 6
               columnId: columnId
               dependencyStatus: upToDate
+              tm: true
               referencedIds:
               - referencedIds
               - referencedIds
@@ -3690,7 +4782,15 @@ components:
             lastModifiedBy: lastModifiedBy
             id: id
           columns:
-          - isTarget: true
+          - dependsOn: dependsOn
+            selectionOptions:
+            - selectionOptions
+            - selectionOptions
+            description: description
+            localizationType: sourceLanguage
+            languageCode: languageCode
+            type: singleLine
+            isTarget: true
             reference:
               selectionType: SINGLE
               grid:
@@ -3703,7 +4803,16 @@ components:
                 - selectionOptions
                 id: id
               type: ROW
-            dependsOn: dependsOn
+              branch:
+                name: name
+                id: id
+            dateTimeFormat:
+              zoneOffset: zoneOffset
+              dateFormat:
+                name: name
+                format: format
+              timeFormat: hour12
+              showTimeZone: true
             numberFormat:
               decimalPlaces: 0
               currencySymbol: currencySymbol
@@ -3711,14 +4820,20 @@ components:
               use1000Separator: true
             isSource: true
             name: name
+            formula:
+              formulaText: formulaText
+              detectResultValueType: list
+              alwaysFormatResultValueAsList: true
+            id: id
+          - dependsOn: dependsOn
             selectionOptions:
             - selectionOptions
             - selectionOptions
             description: description
-            id: id
+            localizationType: sourceLanguage
             languageCode: languageCode
             type: singleLine
-          - isTarget: true
+            isTarget: true
             reference:
               selectionType: SINGLE
               grid:
@@ -3731,7 +4846,16 @@ components:
                 - selectionOptions
                 id: id
               type: ROW
-            dependsOn: dependsOn
+              branch:
+                name: name
+                id: id
+            dateTimeFormat:
+              zoneOffset: zoneOffset
+              dateFormat:
+                name: name
+                format: format
+              timeFormat: hour12
+              showTimeZone: true
             numberFormat:
               decimalPlaces: 0
               currencySymbol: currencySymbol
@@ -3739,13 +4863,11 @@ components:
               use1000Separator: true
             isSource: true
             name: name
-            selectionOptions:
-            - selectionOptions
-            - selectionOptions
-            description: description
+            formula:
+              formulaText: formulaText
+              detectResultValueType: list
+              alwaysFormatResultValueAsList: true
             id: id
-            languageCode: languageCode
-            type: singleLine
           name: name
           id: id
           gridId: gridId
@@ -3754,15 +4876,19 @@ components:
           - path: path
             cells:
             - sourceStatus: unset
+              lengthLimit: 6
               columnId: columnId
               dependencyStatus: upToDate
+              tm: true
               referencedIds:
               - referencedIds
               - referencedIds
               value: ""
             - sourceStatus: unset
+              lengthLimit: 6
               columnId: columnId
               dependencyStatus: upToDate
+              tm: true
               referencedIds:
               - referencedIds
               - referencedIds
@@ -3773,15 +4899,19 @@ components:
           - path: path
             cells:
             - sourceStatus: unset
+              lengthLimit: 6
               columnId: columnId
               dependencyStatus: upToDate
+              tm: true
               referencedIds:
               - referencedIds
               - referencedIds
               value: ""
             - sourceStatus: unset
+              lengthLimit: 6
               columnId: columnId
               dependencyStatus: upToDate
+              tm: true
               referencedIds:
               - referencedIds
               - referencedIds
@@ -3790,7 +4920,15 @@ components:
             lastModifiedBy: lastModifiedBy
             id: id
           columns:
-          - isTarget: true
+          - dependsOn: dependsOn
+            selectionOptions:
+            - selectionOptions
+            - selectionOptions
+            description: description
+            localizationType: sourceLanguage
+            languageCode: languageCode
+            type: singleLine
+            isTarget: true
             reference:
               selectionType: SINGLE
               grid:
@@ -3803,7 +4941,16 @@ components:
                 - selectionOptions
                 id: id
               type: ROW
-            dependsOn: dependsOn
+              branch:
+                name: name
+                id: id
+            dateTimeFormat:
+              zoneOffset: zoneOffset
+              dateFormat:
+                name: name
+                format: format
+              timeFormat: hour12
+              showTimeZone: true
             numberFormat:
               decimalPlaces: 0
               currencySymbol: currencySymbol
@@ -3811,14 +4958,20 @@ components:
               use1000Separator: true
             isSource: true
             name: name
+            formula:
+              formulaText: formulaText
+              detectResultValueType: list
+              alwaysFormatResultValueAsList: true
+            id: id
+          - dependsOn: dependsOn
             selectionOptions:
             - selectionOptions
             - selectionOptions
             description: description
-            id: id
+            localizationType: sourceLanguage
             languageCode: languageCode
             type: singleLine
-          - isTarget: true
+            isTarget: true
             reference:
               selectionType: SINGLE
               grid:
@@ -3831,7 +4984,16 @@ components:
                 - selectionOptions
                 id: id
               type: ROW
-            dependsOn: dependsOn
+              branch:
+                name: name
+                id: id
+            dateTimeFormat:
+              zoneOffset: zoneOffset
+              dateFormat:
+                name: name
+                format: format
+              timeFormat: hour12
+              showTimeZone: true
             numberFormat:
               decimalPlaces: 0
               currencySymbol: currencySymbol
@@ -3839,13 +5001,11 @@ components:
               use1000Separator: true
             isSource: true
             name: name
-            selectionOptions:
-            - selectionOptions
-            - selectionOptions
-            description: description
+            formula:
+              formulaText: formulaText
+              detectResultValueType: list
+              alwaysFormatResultValueAsList: true
             id: id
-            languageCode: languageCode
-            type: singleLine
           name: name
           id: id
           gridId: gridId
@@ -3878,8 +5038,8 @@ components:
       type: object
     Group:
       example:
-        companyId: 3
-        groupId: 9
+        companyId: 4
+        groupId: 2
         isSystemGroup: true
         name: name
         id: id
@@ -3928,6 +5088,7 @@ components:
     CreateDatabase:
       description: body
       example:
+        enableGuidRecord: true
         name: name
         description: description
         id: id
@@ -3936,6 +5097,8 @@ components:
           type: string
         description:
           type: string
+        enableGuidRecord:
+          type: boolean
         id:
           pattern: ^\w+$
           type: string
@@ -3948,13 +5111,14 @@ components:
         - name: name
           description: description
           project:
+            companyId: 3
             role:
               privileges:
               - level: level
                 extra: extra
                 name: name
                 description: description
-                id: 1
+                id: 5
                 label: label
                 serviceId: serviceId
                 order: 5
@@ -3962,33 +5126,33 @@ components:
                 extra: extra
                 name: name
                 description: description
-                id: 1
+                id: 5
                 label: label
                 serviceId: serviceId
                 order: 5
               isSystemRole: true
               level: level
               name: name
-              id: 6
+              id: 1
               title: title
               type: type
               privilegeIds:
-              - 5
-              - 5
+              - 2
+              - 2
             name: name
             description: description
-            id: 7
+            id: 9
           groups:
-          - companyId: 3
-            groupId: 9
+          - companyId: 4
+            groupId: 2
             isSystemGroup: true
             name: name
             id: id
             type: NORMAL
             systemGroup: true
             logoUrl: logoUrl
-          - companyId: 3
-            groupId: 9
+          - companyId: 4
+            groupId: 2
             isSystemGroup: true
             name: name
             id: id
@@ -3996,14 +5160,22 @@ components:
             systemGroup: true
             logoUrl: logoUrl
           id: id
-          projectId: 2
+          projectId: 7
           grids:
           - recordIdentifierType: recordId
             metadata:
               key: metadata
             defaultAccessViewId: defaultAccessViewId
             columns:
-            - isTarget: true
+            - dependsOn: dependsOn
+              selectionOptions:
+              - selectionOptions
+              - selectionOptions
+              description: description
+              localizationType: sourceLanguage
+              languageCode: languageCode
+              type: singleLine
+              isTarget: true
               reference:
                 selectionType: SINGLE
                 grid:
@@ -4016,7 +5188,16 @@ components:
                   - selectionOptions
                   id: id
                 type: ROW
-              dependsOn: dependsOn
+                branch:
+                  name: name
+                  id: id
+              dateTimeFormat:
+                zoneOffset: zoneOffset
+                dateFormat:
+                  name: name
+                  format: format
+                timeFormat: hour12
+                showTimeZone: true
               numberFormat:
                 decimalPlaces: 0
                 currencySymbol: currencySymbol
@@ -4024,14 +5205,20 @@ components:
                 use1000Separator: true
               isSource: true
               name: name
+              formula:
+                formulaText: formulaText
+                detectResultValueType: list
+                alwaysFormatResultValueAsList: true
+              id: id
+            - dependsOn: dependsOn
               selectionOptions:
               - selectionOptions
               - selectionOptions
               description: description
-              id: id
+              localizationType: sourceLanguage
               languageCode: languageCode
               type: singleLine
-            - isTarget: true
+              isTarget: true
               reference:
                 selectionType: SINGLE
                 grid:
@@ -4044,7 +5231,16 @@ components:
                   - selectionOptions
                   id: id
                 type: ROW
-              dependsOn: dependsOn
+                branch:
+                  name: name
+                  id: id
+              dateTimeFormat:
+                zoneOffset: zoneOffset
+                dateFormat:
+                  name: name
+                  format: format
+                timeFormat: hour12
+                showTimeZone: true
               numberFormat:
                 decimalPlaces: 0
                 currencySymbol: currencySymbol
@@ -4052,13 +5248,11 @@ components:
                 use1000Separator: true
               isSource: true
               name: name
-              selectionOptions:
-              - selectionOptions
-              - selectionOptions
-              description: description
+              formula:
+                formulaText: formulaText
+                detectResultValueType: list
+                alwaysFormatResultValueAsList: true
               id: id
-              languageCode: languageCode
-              type: singleLine
             name: name
             description: description
             id: id
@@ -4068,7 +5262,15 @@ components:
               key: metadata
             defaultAccessViewId: defaultAccessViewId
             columns:
-            - isTarget: true
+            - dependsOn: dependsOn
+              selectionOptions:
+              - selectionOptions
+              - selectionOptions
+              description: description
+              localizationType: sourceLanguage
+              languageCode: languageCode
+              type: singleLine
+              isTarget: true
               reference:
                 selectionType: SINGLE
                 grid:
@@ -4081,7 +5283,16 @@ components:
                   - selectionOptions
                   id: id
                 type: ROW
-              dependsOn: dependsOn
+                branch:
+                  name: name
+                  id: id
+              dateTimeFormat:
+                zoneOffset: zoneOffset
+                dateFormat:
+                  name: name
+                  format: format
+                timeFormat: hour12
+                showTimeZone: true
               numberFormat:
                 decimalPlaces: 0
                 currencySymbol: currencySymbol
@@ -4089,14 +5300,20 @@ components:
                 use1000Separator: true
               isSource: true
               name: name
+              formula:
+                formulaText: formulaText
+                detectResultValueType: list
+                alwaysFormatResultValueAsList: true
+              id: id
+            - dependsOn: dependsOn
               selectionOptions:
               - selectionOptions
               - selectionOptions
               description: description
-              id: id
+              localizationType: sourceLanguage
               languageCode: languageCode
               type: singleLine
-            - isTarget: true
+              isTarget: true
               reference:
                 selectionType: SINGLE
                 grid:
@@ -4109,7 +5326,16 @@ components:
                   - selectionOptions
                   id: id
                 type: ROW
-              dependsOn: dependsOn
+                branch:
+                  name: name
+                  id: id
+              dateTimeFormat:
+                zoneOffset: zoneOffset
+                dateFormat:
+                  name: name
+                  format: format
+                timeFormat: hour12
+                showTimeZone: true
               numberFormat:
                 decimalPlaces: 0
                 currencySymbol: currencySymbol
@@ -4117,13 +5343,11 @@ components:
                 use1000Separator: true
               isSource: true
               name: name
-              selectionOptions:
-              - selectionOptions
-              - selectionOptions
-              description: description
+              formula:
+                formulaText: formulaText
+                detectResultValueType: list
+                alwaysFormatResultValueAsList: true
               id: id
-              languageCode: languageCode
-              type: singleLine
             name: name
             description: description
             id: id
@@ -4133,15 +5357,19 @@ components:
             - path: path
               cells:
               - sourceStatus: unset
+                lengthLimit: 6
                 columnId: columnId
                 dependencyStatus: upToDate
+                tm: true
                 referencedIds:
                 - referencedIds
                 - referencedIds
                 value: ""
               - sourceStatus: unset
+                lengthLimit: 6
                 columnId: columnId
                 dependencyStatus: upToDate
+                tm: true
                 referencedIds:
                 - referencedIds
                 - referencedIds
@@ -4152,15 +5380,19 @@ components:
             - path: path
               cells:
               - sourceStatus: unset
+                lengthLimit: 6
                 columnId: columnId
                 dependencyStatus: upToDate
+                tm: true
                 referencedIds:
                 - referencedIds
                 - referencedIds
                 value: ""
               - sourceStatus: unset
+                lengthLimit: 6
                 columnId: columnId
                 dependencyStatus: upToDate
+                tm: true
                 referencedIds:
                 - referencedIds
                 - referencedIds
@@ -4169,7 +5401,15 @@ components:
               lastModifiedBy: lastModifiedBy
               id: id
             columns:
-            - isTarget: true
+            - dependsOn: dependsOn
+              selectionOptions:
+              - selectionOptions
+              - selectionOptions
+              description: description
+              localizationType: sourceLanguage
+              languageCode: languageCode
+              type: singleLine
+              isTarget: true
               reference:
                 selectionType: SINGLE
                 grid:
@@ -4182,7 +5422,16 @@ components:
                   - selectionOptions
                   id: id
                 type: ROW
-              dependsOn: dependsOn
+                branch:
+                  name: name
+                  id: id
+              dateTimeFormat:
+                zoneOffset: zoneOffset
+                dateFormat:
+                  name: name
+                  format: format
+                timeFormat: hour12
+                showTimeZone: true
               numberFormat:
                 decimalPlaces: 0
                 currencySymbol: currencySymbol
@@ -4190,14 +5439,20 @@ components:
                 use1000Separator: true
               isSource: true
               name: name
+              formula:
+                formulaText: formulaText
+                detectResultValueType: list
+                alwaysFormatResultValueAsList: true
+              id: id
+            - dependsOn: dependsOn
               selectionOptions:
               - selectionOptions
               - selectionOptions
               description: description
-              id: id
+              localizationType: sourceLanguage
               languageCode: languageCode
               type: singleLine
-            - isTarget: true
+              isTarget: true
               reference:
                 selectionType: SINGLE
                 grid:
@@ -4210,7 +5465,16 @@ components:
                   - selectionOptions
                   id: id
                 type: ROW
-              dependsOn: dependsOn
+                branch:
+                  name: name
+                  id: id
+              dateTimeFormat:
+                zoneOffset: zoneOffset
+                dateFormat:
+                  name: name
+                  format: format
+                timeFormat: hour12
+                showTimeZone: true
               numberFormat:
                 decimalPlaces: 0
                 currencySymbol: currencySymbol
@@ -4218,13 +5482,11 @@ components:
                 use1000Separator: true
               isSource: true
               name: name
-              selectionOptions:
-              - selectionOptions
-              - selectionOptions
-              description: description
+              formula:
+                formulaText: formulaText
+                detectResultValueType: list
+                alwaysFormatResultValueAsList: true
               id: id
-              languageCode: languageCode
-              type: singleLine
             name: name
             id: id
             gridId: gridId
@@ -4233,15 +5495,19 @@ components:
             - path: path
               cells:
               - sourceStatus: unset
+                lengthLimit: 6
                 columnId: columnId
                 dependencyStatus: upToDate
+                tm: true
                 referencedIds:
                 - referencedIds
                 - referencedIds
                 value: ""
               - sourceStatus: unset
+                lengthLimit: 6
                 columnId: columnId
                 dependencyStatus: upToDate
+                tm: true
                 referencedIds:
                 - referencedIds
                 - referencedIds
@@ -4252,15 +5518,19 @@ components:
             - path: path
               cells:
               - sourceStatus: unset
+                lengthLimit: 6
                 columnId: columnId
                 dependencyStatus: upToDate
+                tm: true
                 referencedIds:
                 - referencedIds
                 - referencedIds
                 value: ""
               - sourceStatus: unset
+                lengthLimit: 6
                 columnId: columnId
                 dependencyStatus: upToDate
+                tm: true
                 referencedIds:
                 - referencedIds
                 - referencedIds
@@ -4269,7 +5539,15 @@ components:
               lastModifiedBy: lastModifiedBy
               id: id
             columns:
-            - isTarget: true
+            - dependsOn: dependsOn
+              selectionOptions:
+              - selectionOptions
+              - selectionOptions
+              description: description
+              localizationType: sourceLanguage
+              languageCode: languageCode
+              type: singleLine
+              isTarget: true
               reference:
                 selectionType: SINGLE
                 grid:
@@ -4282,7 +5560,16 @@ components:
                   - selectionOptions
                   id: id
                 type: ROW
-              dependsOn: dependsOn
+                branch:
+                  name: name
+                  id: id
+              dateTimeFormat:
+                zoneOffset: zoneOffset
+                dateFormat:
+                  name: name
+                  format: format
+                timeFormat: hour12
+                showTimeZone: true
               numberFormat:
                 decimalPlaces: 0
                 currencySymbol: currencySymbol
@@ -4290,14 +5577,20 @@ components:
                 use1000Separator: true
               isSource: true
               name: name
+              formula:
+                formulaText: formulaText
+                detectResultValueType: list
+                alwaysFormatResultValueAsList: true
+              id: id
+            - dependsOn: dependsOn
               selectionOptions:
               - selectionOptions
               - selectionOptions
               description: description
-              id: id
+              localizationType: sourceLanguage
               languageCode: languageCode
               type: singleLine
-            - isTarget: true
+              isTarget: true
               reference:
                 selectionType: SINGLE
                 grid:
@@ -4310,7 +5603,16 @@ components:
                   - selectionOptions
                   id: id
                 type: ROW
-              dependsOn: dependsOn
+                branch:
+                  name: name
+                  id: id
+              dateTimeFormat:
+                zoneOffset: zoneOffset
+                dateFormat:
+                  name: name
+                  format: format
+                timeFormat: hour12
+                showTimeZone: true
               numberFormat:
                 decimalPlaces: 0
                 currencySymbol: currencySymbol
@@ -4318,13 +5620,11 @@ components:
                 use1000Separator: true
               isSource: true
               name: name
-              selectionOptions:
-              - selectionOptions
-              - selectionOptions
-              description: description
+              formula:
+                formulaText: formulaText
+                detectResultValueType: list
+                alwaysFormatResultValueAsList: true
               id: id
-              languageCode: languageCode
-              type: singleLine
             name: name
             id: id
             gridId: gridId
@@ -4332,13 +5632,14 @@ components:
         - name: name
           description: description
           project:
+            companyId: 3
             role:
               privileges:
               - level: level
                 extra: extra
                 name: name
                 description: description
-                id: 1
+                id: 5
                 label: label
                 serviceId: serviceId
                 order: 5
@@ -4346,33 +5647,33 @@ components:
                 extra: extra
                 name: name
                 description: description
-                id: 1
+                id: 5
                 label: label
                 serviceId: serviceId
                 order: 5
               isSystemRole: true
               level: level
               name: name
-              id: 6
+              id: 1
               title: title
               type: type
               privilegeIds:
-              - 5
-              - 5
+              - 2
+              - 2
             name: name
             description: description
-            id: 7
+            id: 9
           groups:
-          - companyId: 3
-            groupId: 9
+          - companyId: 4
+            groupId: 2
             isSystemGroup: true
             name: name
             id: id
             type: NORMAL
             systemGroup: true
             logoUrl: logoUrl
-          - companyId: 3
-            groupId: 9
+          - companyId: 4
+            groupId: 2
             isSystemGroup: true
             name: name
             id: id
@@ -4380,14 +5681,22 @@ components:
             systemGroup: true
             logoUrl: logoUrl
           id: id
-          projectId: 2
+          projectId: 7
           grids:
           - recordIdentifierType: recordId
             metadata:
               key: metadata
             defaultAccessViewId: defaultAccessViewId
             columns:
-            - isTarget: true
+            - dependsOn: dependsOn
+              selectionOptions:
+              - selectionOptions
+              - selectionOptions
+              description: description
+              localizationType: sourceLanguage
+              languageCode: languageCode
+              type: singleLine
+              isTarget: true
               reference:
                 selectionType: SINGLE
                 grid:
@@ -4400,7 +5709,16 @@ components:
                   - selectionOptions
                   id: id
                 type: ROW
-              dependsOn: dependsOn
+                branch:
+                  name: name
+                  id: id
+              dateTimeFormat:
+                zoneOffset: zoneOffset
+                dateFormat:
+                  name: name
+                  format: format
+                timeFormat: hour12
+                showTimeZone: true
               numberFormat:
                 decimalPlaces: 0
                 currencySymbol: currencySymbol
@@ -4408,14 +5726,20 @@ components:
                 use1000Separator: true
               isSource: true
               name: name
+              formula:
+                formulaText: formulaText
+                detectResultValueType: list
+                alwaysFormatResultValueAsList: true
+              id: id
+            - dependsOn: dependsOn
               selectionOptions:
               - selectionOptions
               - selectionOptions
               description: description
-              id: id
+              localizationType: sourceLanguage
               languageCode: languageCode
               type: singleLine
-            - isTarget: true
+              isTarget: true
               reference:
                 selectionType: SINGLE
                 grid:
@@ -4428,7 +5752,16 @@ components:
                   - selectionOptions
                   id: id
                 type: ROW
-              dependsOn: dependsOn
+                branch:
+                  name: name
+                  id: id
+              dateTimeFormat:
+                zoneOffset: zoneOffset
+                dateFormat:
+                  name: name
+                  format: format
+                timeFormat: hour12
+                showTimeZone: true
               numberFormat:
                 decimalPlaces: 0
                 currencySymbol: currencySymbol
@@ -4436,13 +5769,11 @@ components:
                 use1000Separator: true
               isSource: true
               name: name
-              selectionOptions:
-              - selectionOptions
-              - selectionOptions
-              description: description
+              formula:
+                formulaText: formulaText
+                detectResultValueType: list
+                alwaysFormatResultValueAsList: true
               id: id
-              languageCode: languageCode
-              type: singleLine
             name: name
             description: description
             id: id
@@ -4452,7 +5783,15 @@ components:
               key: metadata
             defaultAccessViewId: defaultAccessViewId
             columns:
-            - isTarget: true
+            - dependsOn: dependsOn
+              selectionOptions:
+              - selectionOptions
+              - selectionOptions
+              description: description
+              localizationType: sourceLanguage
+              languageCode: languageCode
+              type: singleLine
+              isTarget: true
               reference:
                 selectionType: SINGLE
                 grid:
@@ -4465,7 +5804,16 @@ components:
                   - selectionOptions
                   id: id
                 type: ROW
-              dependsOn: dependsOn
+                branch:
+                  name: name
+                  id: id
+              dateTimeFormat:
+                zoneOffset: zoneOffset
+                dateFormat:
+                  name: name
+                  format: format
+                timeFormat: hour12
+                showTimeZone: true
               numberFormat:
                 decimalPlaces: 0
                 currencySymbol: currencySymbol
@@ -4473,14 +5821,20 @@ components:
                 use1000Separator: true
               isSource: true
               name: name
+              formula:
+                formulaText: formulaText
+                detectResultValueType: list
+                alwaysFormatResultValueAsList: true
+              id: id
+            - dependsOn: dependsOn
               selectionOptions:
               - selectionOptions
               - selectionOptions
               description: description
-              id: id
+              localizationType: sourceLanguage
               languageCode: languageCode
               type: singleLine
-            - isTarget: true
+              isTarget: true
               reference:
                 selectionType: SINGLE
                 grid:
@@ -4493,7 +5847,16 @@ components:
                   - selectionOptions
                   id: id
                 type: ROW
-              dependsOn: dependsOn
+                branch:
+                  name: name
+                  id: id
+              dateTimeFormat:
+                zoneOffset: zoneOffset
+                dateFormat:
+                  name: name
+                  format: format
+                timeFormat: hour12
+                showTimeZone: true
               numberFormat:
                 decimalPlaces: 0
                 currencySymbol: currencySymbol
@@ -4501,13 +5864,11 @@ components:
                 use1000Separator: true
               isSource: true
               name: name
-              selectionOptions:
-              - selectionOptions
-              - selectionOptions
-              description: description
+              formula:
+                formulaText: formulaText
+                detectResultValueType: list
+                alwaysFormatResultValueAsList: true
               id: id
-              languageCode: languageCode
-              type: singleLine
             name: name
             description: description
             id: id
@@ -4517,15 +5878,19 @@ components:
             - path: path
               cells:
               - sourceStatus: unset
+                lengthLimit: 6
                 columnId: columnId
                 dependencyStatus: upToDate
+                tm: true
                 referencedIds:
                 - referencedIds
                 - referencedIds
                 value: ""
               - sourceStatus: unset
+                lengthLimit: 6
                 columnId: columnId
                 dependencyStatus: upToDate
+                tm: true
                 referencedIds:
                 - referencedIds
                 - referencedIds
@@ -4536,15 +5901,19 @@ components:
             - path: path
               cells:
               - sourceStatus: unset
+                lengthLimit: 6
                 columnId: columnId
                 dependencyStatus: upToDate
+                tm: true
                 referencedIds:
                 - referencedIds
                 - referencedIds
                 value: ""
               - sourceStatus: unset
+                lengthLimit: 6
                 columnId: columnId
                 dependencyStatus: upToDate
+                tm: true
                 referencedIds:
                 - referencedIds
                 - referencedIds
@@ -4553,7 +5922,15 @@ components:
               lastModifiedBy: lastModifiedBy
               id: id
             columns:
-            - isTarget: true
+            - dependsOn: dependsOn
+              selectionOptions:
+              - selectionOptions
+              - selectionOptions
+              description: description
+              localizationType: sourceLanguage
+              languageCode: languageCode
+              type: singleLine
+              isTarget: true
               reference:
                 selectionType: SINGLE
                 grid:
@@ -4566,7 +5943,16 @@ components:
                   - selectionOptions
                   id: id
                 type: ROW
-              dependsOn: dependsOn
+                branch:
+                  name: name
+                  id: id
+              dateTimeFormat:
+                zoneOffset: zoneOffset
+                dateFormat:
+                  name: name
+                  format: format
+                timeFormat: hour12
+                showTimeZone: true
               numberFormat:
                 decimalPlaces: 0
                 currencySymbol: currencySymbol
@@ -4574,14 +5960,20 @@ components:
                 use1000Separator: true
               isSource: true
               name: name
+              formula:
+                formulaText: formulaText
+                detectResultValueType: list
+                alwaysFormatResultValueAsList: true
+              id: id
+            - dependsOn: dependsOn
               selectionOptions:
               - selectionOptions
               - selectionOptions
               description: description
-              id: id
+              localizationType: sourceLanguage
               languageCode: languageCode
               type: singleLine
-            - isTarget: true
+              isTarget: true
               reference:
                 selectionType: SINGLE
                 grid:
@@ -4594,7 +5986,16 @@ components:
                   - selectionOptions
                   id: id
                 type: ROW
-              dependsOn: dependsOn
+                branch:
+                  name: name
+                  id: id
+              dateTimeFormat:
+                zoneOffset: zoneOffset
+                dateFormat:
+                  name: name
+                  format: format
+                timeFormat: hour12
+                showTimeZone: true
               numberFormat:
                 decimalPlaces: 0
                 currencySymbol: currencySymbol
@@ -4602,13 +6003,11 @@ components:
                 use1000Separator: true
               isSource: true
               name: name
-              selectionOptions:
-              - selectionOptions
-              - selectionOptions
-              description: description
+              formula:
+                formulaText: formulaText
+                detectResultValueType: list
+                alwaysFormatResultValueAsList: true
               id: id
-              languageCode: languageCode
-              type: singleLine
             name: name
             id: id
             gridId: gridId
@@ -4617,15 +6016,19 @@ components:
             - path: path
               cells:
               - sourceStatus: unset
+                lengthLimit: 6
                 columnId: columnId
                 dependencyStatus: upToDate
+                tm: true
                 referencedIds:
                 - referencedIds
                 - referencedIds
                 value: ""
               - sourceStatus: unset
+                lengthLimit: 6
                 columnId: columnId
                 dependencyStatus: upToDate
+                tm: true
                 referencedIds:
                 - referencedIds
                 - referencedIds
@@ -4636,15 +6039,19 @@ components:
             - path: path
               cells:
               - sourceStatus: unset
+                lengthLimit: 6
                 columnId: columnId
                 dependencyStatus: upToDate
+                tm: true
                 referencedIds:
                 - referencedIds
                 - referencedIds
                 value: ""
               - sourceStatus: unset
+                lengthLimit: 6
                 columnId: columnId
                 dependencyStatus: upToDate
+                tm: true
                 referencedIds:
                 - referencedIds
                 - referencedIds
@@ -4653,7 +6060,15 @@ components:
               lastModifiedBy: lastModifiedBy
               id: id
             columns:
-            - isTarget: true
+            - dependsOn: dependsOn
+              selectionOptions:
+              - selectionOptions
+              - selectionOptions
+              description: description
+              localizationType: sourceLanguage
+              languageCode: languageCode
+              type: singleLine
+              isTarget: true
               reference:
                 selectionType: SINGLE
                 grid:
@@ -4666,7 +6081,16 @@ components:
                   - selectionOptions
                   id: id
                 type: ROW
-              dependsOn: dependsOn
+                branch:
+                  name: name
+                  id: id
+              dateTimeFormat:
+                zoneOffset: zoneOffset
+                dateFormat:
+                  name: name
+                  format: format
+                timeFormat: hour12
+                showTimeZone: true
               numberFormat:
                 decimalPlaces: 0
                 currencySymbol: currencySymbol
@@ -4674,14 +6098,20 @@ components:
                 use1000Separator: true
               isSource: true
               name: name
+              formula:
+                formulaText: formulaText
+                detectResultValueType: list
+                alwaysFormatResultValueAsList: true
+              id: id
+            - dependsOn: dependsOn
               selectionOptions:
               - selectionOptions
               - selectionOptions
               description: description
-              id: id
+              localizationType: sourceLanguage
               languageCode: languageCode
               type: singleLine
-            - isTarget: true
+              isTarget: true
               reference:
                 selectionType: SINGLE
                 grid:
@@ -4694,7 +6124,16 @@ components:
                   - selectionOptions
                   id: id
                 type: ROW
-              dependsOn: dependsOn
+                branch:
+                  name: name
+                  id: id
+              dateTimeFormat:
+                zoneOffset: zoneOffset
+                dateFormat:
+                  name: name
+                  format: format
+                timeFormat: hour12
+                showTimeZone: true
               numberFormat:
                 decimalPlaces: 0
                 currencySymbol: currencySymbol
@@ -4702,24 +6141,23 @@ components:
                 use1000Separator: true
               isSource: true
               name: name
-              selectionOptions:
-              - selectionOptions
-              - selectionOptions
-              description: description
+              formula:
+                formulaText: formulaText
+                detectResultValueType: list
+                alwaysFormatResultValueAsList: true
               id: id
-              languageCode: languageCode
-              type: singleLine
             name: name
             id: id
             gridId: gridId
             gridStatus: deleted
+        companyId: 6
         role:
           privileges:
           - level: level
             extra: extra
             name: name
             description: description
-            id: 1
+            id: 5
             label: label
             serviceId: serviceId
             order: 5
@@ -4727,32 +6165,32 @@ components:
             extra: extra
             name: name
             description: description
-            id: 1
+            id: 5
             label: label
             serviceId: serviceId
             order: 5
           isSystemRole: true
           level: level
           name: name
-          id: 6
+          id: 1
           title: title
           type: type
           privilegeIds:
-          - 5
-          - 5
+          - 2
+          - 2
         name: name
         description: description
         groups:
-        - companyId: 3
-          groupId: 9
+        - companyId: 4
+          groupId: 2
           isSystemGroup: true
           name: name
           id: id
           type: NORMAL
           systemGroup: true
           logoUrl: logoUrl
-        - companyId: 3
-          groupId: 9
+        - companyId: 4
+          groupId: 2
           isSystemGroup: true
           name: name
           id: id
@@ -4762,6 +6200,9 @@ components:
         id: 0
       properties:
         id:
+          format: int64
+          type: integer
+        companyId:
           format: int64
           type: integer
         name:
@@ -4779,11 +6220,131 @@ components:
             $ref: '#/components/schemas/Group'
           type: array
       type: object
+    CreateTransMem:
+      example:
+        isPausedConsuming: true
+        populateTranslationStatus: null
+        name: name
+        description: description
+        projectIds:
+        - 0
+        - 0
+        isDisabled: true
+        fuzzyMatch: true
+      properties:
+        name:
+          maxLength: 100
+          pattern: \S
+          type: string
+        description:
+          type: string
+        projectIds:
+          items:
+            format: int64
+            type: integer
+          type: array
+        fuzzyMatch:
+          type: boolean
+        isDisabled:
+          type: boolean
+        isPausedConsuming:
+          type: boolean
+        populateTranslationStatus:
+          $ref: '#/components/schemas/TranslationStatus'
+      required:
+      - name
+      type: object
+    ExportFormat:
+      enum:
+      - tmx
+      - csv
+      - xlsx
+      type: string
+    TransMem:
+      example:
+        isPausedConsuming: true
+        populateTranslationStatus: null
+        name: name
+        description: description
+        id: id
+        projectIds:
+        - 0
+        - 0
+        isDisabled: true
+        fuzzyMatch: true
+      properties:
+        id:
+          type: string
+        projectIds:
+          items:
+            format: int64
+            type: integer
+          type: array
+        isDisabled:
+          type: boolean
+        isPausedConsuming:
+          type: boolean
+        populateTranslationStatus:
+          $ref: '#/components/schemas/TranslationStatus'
+        name:
+          pattern: \S
+          type: string
+        description:
+          type: string
+        fuzzyMatch:
+          type: boolean
+      required:
+      - name
+      type: object
+    TranslationStatus:
+      enum:
+      - upToDate
+      - outOfDate
+      - unset
+      type: string
+    UpdateTransMem:
+      example:
+        isPausedConsuming: true
+        populateTranslationStatus: null
+        name: name
+        description: description
+        projectIds:
+        - 0
+        - 0
+        isDisabled: true
+        fuzzyMatch: true
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        projectIds:
+          items:
+            format: int64
+            type: integer
+          type: array
+        fuzzyMatch:
+          type: boolean
+        isDisabled:
+          type: boolean
+        isPausedConsuming:
+          type: boolean
+        populateTranslationStatus:
+          $ref: '#/components/schemas/TranslationStatus'
+      type: object
     importView_request:
       properties:
         file:
           description: "The following file types are supported: csv, tsv, xls, xlsx\
             \ and json"
+          format: binary
+          type: string
+      required:
+      - file
+      type: object
+    upload_request:
+      properties:
+        file:
           format: binary
           type: string
       required:
@@ -4802,14 +6363,6 @@ components:
       - columnId
       - file
       - fileMappings
-      type: object
-    upload_request:
-      properties:
-        file:
-          format: binary
-          type: string
-      required:
-      - file
       type: object
   securitySchemes:
     ApiKey:

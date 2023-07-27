@@ -12,4 +12,8 @@
 |**_file** | **File** |  |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

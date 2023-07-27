@@ -17,4 +17,8 @@
 |**isSystemRole** | **Boolean** |  |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

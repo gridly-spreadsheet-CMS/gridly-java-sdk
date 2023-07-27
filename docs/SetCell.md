@@ -9,6 +9,7 @@
 |------------ | ------------- | ------------- | -------------|
 |**columnId** | **String** |  |  [optional] |
 |**dependencyStatus** | [**DependencyStatusEnum**](#DependencyStatusEnum) |  |  [optional] |
+|**lengthLimit** | **Integer** |  |  [optional] |
 |**referencedIds** | **List&lt;String&gt;** |  |  [optional] |
 |**sourceStatus** | [**SourceStatusEnum**](#SourceStatusEnum) |  |  [optional] |
 |**value** | **Object** |  |  [optional] |
@@ -35,5 +36,9 @@
 | READYFORTRANSLATION | &quot;readyForTranslation&quot; |
 | LOCKED | &quot;locked&quot; |
 
+
+## Implemented Interfaces
+
+* Serializable
 
 

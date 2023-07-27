@@ -17,4 +17,8 @@
 |**groups** | [**Set&lt;Group&gt;**](Group.md) |  |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

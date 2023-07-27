@@ -19,6 +19,12 @@
 | FAILED | &quot;failed&quot; |
 | SUCCESSFUL | &quot;successful&quot; |
 | RUNNING | &quot;running&quot; |
+| RETRYSUCCESSFUL | &quot;retrySuccessful&quot; |
+| CANCEL | &quot;cancel&quot; |
 
+
+## Implemented Interfaces
+
+* Serializable
 
 

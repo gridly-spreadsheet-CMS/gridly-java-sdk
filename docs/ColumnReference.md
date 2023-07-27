@@ -9,6 +9,7 @@
 |------------ | ------------- | ------------- | -------------|
 |**grid** | [**ReferencedGrid**](ReferencedGrid.md) |  |  [optional] |
 |**column** | [**ReferencedColumn**](ReferencedColumn.md) |  |  [optional] |
+|**branch** | [**ReferencedGrid**](ReferencedGrid.md) |  |  [optional] |
 |**type** | [**TypeEnum**](#TypeEnum) |  |  [optional] |
 |**selectionType** | [**SelectionTypeEnum**](#SelectionTypeEnum) |  |  [optional] |
 
@@ -30,5 +31,9 @@
 | SINGLE | &quot;SINGLE&quot; |
 | MULTIPLE | &quot;MULTIPLE&quot; |
 
+
+## Implemented Interfaces
+
+* Serializable
 
 

@@ -26,4 +26,8 @@
 | ADMIN | &quot;ADMIN&quot; |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

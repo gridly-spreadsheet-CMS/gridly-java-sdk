@@ -8,6 +8,7 @@
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**gridId** | **String** |  |  |
+|**branchId** | **String** |  |  [optional] |
 |**columnId** | **String** |  |  |
 |**type** | [**TypeEnum**](#TypeEnum) |  |  [optional] |
 |**selectionType** | [**SelectionTypeEnum**](#SelectionTypeEnum) |  |  [optional] |
@@ -30,5 +31,9 @@
 | SINGLE | &quot;SINGLE&quot; |
 | MULTIPLE | &quot;MULTIPLE&quot; |
 
+
+## Implemented Interfaces
+
+* Serializable
 
 

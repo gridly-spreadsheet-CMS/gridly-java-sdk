@@ -11,4 +11,8 @@
 |**metadata** | **Map&lt;String, String&gt;** |  |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

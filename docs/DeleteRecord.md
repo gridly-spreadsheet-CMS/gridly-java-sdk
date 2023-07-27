@@ -11,4 +11,8 @@
 |**identifiers** | [**List&lt;RecordIdentifierWrapper&gt;**](RecordIdentifierWrapper.md) |  |  [optional] |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

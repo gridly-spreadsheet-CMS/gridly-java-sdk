@@ -10,4 +10,8 @@
 |**ids** | **List&lt;String&gt;** |  |  |
 
 
+## Implemented Interfaces
+
+* Serializable
+
 

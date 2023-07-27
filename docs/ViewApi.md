@@ -213,7 +213,7 @@ public class Example {
 | **fileHeader** | [**ExportFileHeader**](.md)| fileHeader | [optional] [enum: none, columnName] |
 | **query** | **String**| query | [optional] [default to {}] |
 | **sort** | **String**| sort | [optional] [default to {}] |
-| **type** | **String**| type | [optional] [default to csv] [enum: csv, tsv, xls, xlsx, json, po] |
+| **type** | **String**| type | [optional] [default to csv] [enum: csv, tsv, xls, xlsx, json, po, html] |
 
 ### Return type
 
@@ -366,7 +366,7 @@ public class Example {
 | **viewId** | **String**| viewId | |
 | **_file** | **File**| The following file types are supported: csv, tsv, xls, xlsx and json | |
 | **importRequest** | **String**| importRequest | [optional] [default to {}] |
-| **type** | **String**| type | [optional] [default to csv] [enum: csv, tsv, xls, xlsx, json, po] |
+| **type** | **String**| type | [optional] [default to csv] [enum: csv, tsv, xls, xlsx, json, po, html] |
 
 ### Return type
 
