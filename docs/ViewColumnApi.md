@@ -5,6 +5,7 @@ All URIs are relative to *https://api.gridly.com*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**add**](ViewColumnApi.md#add) | **POST** /v1/views/{viewId}/columns/{columnId}/add | add |
+| [**bulkCreate**](ViewColumnApi.md#bulkCreate) | **POST** /v1/views/{viewId}/columns/bulk | bulkCreate |
 | [**create**](ViewColumnApi.md#create) | **POST** /v1/views/{viewId}/columns | create |
 | [**delete**](ViewColumnApi.md#delete) | **DELETE** /v1/views/{viewId}/columns/{columnId} | delete |
 | [**get**](ViewColumnApi.md#get) | **GET** /v1/views/{viewId}/columns/{columnId} | get |
@@ -82,6 +83,77 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
+
+<a name="bulkCreate"></a>
+# **bulkCreate**
+> List&lt;ViewColumn&gt; bulkCreate(viewId, createColumn)
+
+bulkCreate
+
+bulkCreate
+
+### Example
+```java
+// Import classes:
+import com.gridly.api.client.ApiClient;
+import com.gridly.api.client.ApiException;
+import com.gridly.api.client.Configuration;
+import com.gridly.api.client.auth.*;
+import com.gridly.api.client.models.*;
+import com.gridly.api.service.ViewColumnApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://api.gridly.com");
+    
+    // Configure API key authorization: ApiKey
+    ApiKeyAuth ApiKey = (ApiKeyAuth) defaultClient.getAuthentication("ApiKey");
+    ApiKey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //ApiKey.setApiKeyPrefix("Token");
+
+    ViewColumnApi apiInstance = new ViewColumnApi(defaultClient);
+    String viewId = "viewId_example"; // String | viewId
+    List<CreateColumn> createColumn = Arrays.asList(); // List<CreateColumn> | 
+    try {
+      List<ViewColumn> result = apiInstance.bulkCreate(viewId, createColumn);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ViewColumnApi#bulkCreate");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **viewId** | **String**| viewId | |
+| **createColumn** | [**List&lt;CreateColumn&gt;**](CreateColumn.md)|  | |
+
+### Return type
+
+[**List&lt;ViewColumn&gt;**](ViewColumn.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | Created |  -  |
 
 <a name="create"></a>
 # **create**

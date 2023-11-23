@@ -17,6 +17,8 @@
 |**reference** | [**Reference**](Reference.md) |  |  [optional] |
 |**formula** | [**Formula**](Formula.md) |  |  [optional] |
 |**dateTimeFormat** | [**DateTimeFormat**](DateTimeFormat.md) |  |  [optional] |
+|**viewable** | **Boolean** |  |  [optional] |
+|**editable** | **Boolean** |  |  [optional] |
 |**newId** | **String** |  |  [optional] |
 
 

@@ -7,9 +7,11 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
+|**id** | **String** |  |  [optional] |
 |**name** | **String** |  |  |
 |**description** | **String** |  |  [optional] |
 |**type** | [**TypeEnum**](#TypeEnum) |  |  |
+|**editable** | **Boolean** |  |  [optional] |
 |**languageCode** | [**LanguageCodeEnum**](#LanguageCodeEnum) |  |  [optional] |
 |**localizationType** | [**LocalizationTypeEnum**](#LocalizationTypeEnum) |  |  [optional] |
 |**numberFormat** | [**NumberFormat**](NumberFormat.md) |  |  [optional] |
@@ -17,7 +19,6 @@
 |**reference** | [**Reference**](Reference.md) |  |  [optional] |
 |**formula** | [**Formula**](Formula.md) |  |  [optional] |
 |**dateTimeFormat** | [**DateTimeFormat**](DateTimeFormat.md) |  |  [optional] |
-|**id** | **String** |  |  [optional] |
 
 
 

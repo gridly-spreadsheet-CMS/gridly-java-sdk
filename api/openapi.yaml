@@ -8,9 +8,9 @@ info:
   license:
     name: MIT
     url: ""
-  termsOfService: ""
+  termsOfService: https://www.gridly.com
   title: Gridly API
-  version: 4.15.1
+  version: 4.21.5
 servers:
 - description: Generated server url
   url: https://api.gridly.com
@@ -265,6 +265,76 @@ paths:
       summary: update
       tags:
       - view-dependency
+      x-content-type: application/json
+      x-accepts: application/json
+  /v1/grids/{gridId}/settings/categories/{categoryId}:
+    delete:
+      description: deleteCategory
+      operationId: deleteCategory
+      parameters:
+      - description: gridId
+        explode: false
+        in: path
+        name: gridId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: categoryId
+        explode: false
+        in: path
+        name: categoryId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+      security:
+      - ApiKey: []
+      summary: deleteCategory
+      tags:
+      - grid
+      x-accepts: application/json
+    put:
+      description: updateCategory
+      operationId: updateCategory
+      parameters:
+      - description: gridId
+        explode: false
+        in: path
+        name: gridId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: categoryId
+        explode: false
+        in: path
+        name: categoryId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCategory'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileCategory'
+          description: OK
+      security:
+      - ApiKey: []
+      summary: updateCategory
+      tags:
+      - grid
       x-content-type: application/json
       x-accepts: application/json
   /v1/views:
@@ -1049,6 +1119,43 @@ paths:
       tags:
       - view-column
       x-accepts: application/json
+  /v1/views/{viewId}/columns/bulk:
+    post:
+      description: bulkCreate
+      operationId: bulkCreate
+      parameters:
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/CreateColumn'
+              type: array
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ViewColumn'
+                type: array
+          description: Created
+      security:
+      - ApiKey: []
+      summary: bulkCreate
+      tags:
+      - view-column
+      x-content-type: application/json
+      x-accepts: application/json
   /v1/grids:
     get:
       description: Get a Grid
@@ -1105,6 +1212,80 @@ paths:
       security:
       - ApiKey: []
       summary: create
+      tags:
+      - grid
+      x-content-type: application/json
+      x-accepts: application/json
+  /v1/grids/{gridId}/settings/categories:
+    post:
+      description: createCategory
+      operationId: createCategory
+      parameters:
+      - description: gridId
+        explode: false
+        in: path
+        name: gridId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFileCategory'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileCategory'
+          description: OK
+      security:
+      - ApiKey: []
+      summary: createCategory
+      tags:
+      - grid
+      x-content-type: application/json
+      x-accepts: application/json
+  /v1/grids/{gridId}/settings/categories/{categoryId}/files:
+    post:
+      description: uploadSettingFile
+      operationId: uploadSettingFile
+      parameters:
+      - description: gridId
+        explode: false
+        in: path
+        name: gridId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: categoryId
+        explode: false
+        in: path
+        name: categoryId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/uploadSettingFile_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadedFile'
+          description: OK
+      security:
+      - ApiKey: []
+      summary: uploadSettingFile
       tags:
       - grid
       x-content-type: application/json
@@ -1459,6 +1640,64 @@ paths:
       - grid
       x-content-type: application/json
       x-accepts: application/json
+  /v1/grids/{gridId}/settings:
+    get:
+      description: getSetting
+      operationId: getSetting
+      parameters:
+      - description: gridId
+        explode: false
+        in: path
+        name: gridId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GridSetting'
+          description: OK
+      security:
+      - ApiKey: []
+      summary: getSetting
+      tags:
+      - grid
+      x-accepts: application/json
+    patch:
+      description: updateSetting
+      operationId: updateSetting
+      parameters:
+      - description: gridId
+        explode: false
+        in: path
+        name: gridId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateGridSetting'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GridSetting'
+          description: OK
+      security:
+      - ApiKey: []
+      summary: updateSetting
+      tags:
+      - grid
+      x-content-type: application/json
+      x-accepts: application/json
   /v1/views/{viewId}:
     get:
       description: get
@@ -1538,6 +1777,44 @@ paths:
       security:
       - ApiKey: []
       summary: get
+      tags:
+      - view
+      x-accepts: application/json
+  /v1/views/{viewId}/statistic:
+    get:
+      description: getStatistic
+      operationId: getStatistic
+      parameters:
+      - description: viewId
+        explode: false
+        in: path
+        name: viewId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: columnIds
+        explode: true
+        in: query
+        name: columnIds
+        required: false
+        schema:
+          default: []
+          items:
+            type: string
+          nullable: true
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ViewStatistic'
+          description: OK
+      security:
+      - ApiKey: []
+      summary: getStatistic
       tags:
       - view
       x-accepts: application/json
@@ -1788,6 +2065,44 @@ paths:
       tags:
       - task
       x-accepts: application/json
+  /v1/grids/{gridId}/settings/files:
+    get:
+      description: listFiles
+      operationId: listFiles
+      parameters:
+      - description: gridId
+        explode: false
+        in: path
+        name: gridId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: categoryId
+        explode: true
+        in: query
+        name: categoryId
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/SettingFile'
+                type: array
+          description: OK
+      security:
+      - ApiKey: []
+      summary: listFiles
+      tags:
+      - grid
+      x-accepts: application/json
   /v1/branches/{branchId}:
     delete:
       description: delete
@@ -1834,6 +2149,44 @@ paths:
       summary: get
       tags:
       - branch
+      x-accepts: application/json
+  /v1/grids/{gridId}/settings/categories/{categoryId}/files/{fileId}:
+    delete:
+      description: deleteFile
+      operationId: deleteFile
+      parameters:
+      - description: gridId
+        explode: false
+        in: path
+        name: gridId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: categoryId
+        explode: false
+        in: path
+        name: categoryId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: fileId
+        explode: false
+        in: path
+        name: fileId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+      security:
+      - ApiKey: []
+      summary: deleteFile
+      tags:
+      - grid
       x-accepts: application/json
   /v1/projects/{projectId}:
     delete:
@@ -2492,34 +2845,543 @@ components:
       - sourceColumnId
       - targetColumnId
       type: object
-    AddViewColumn:
+    UpdateCategory:
       example:
-        editable: true
+        name: name
+      properties:
+        name:
+          type: string
+      required:
+      - name
+      type: object
+    FileCategory:
+      example:
+        name: name
         id: id
       properties:
-        editable:
-          type: boolean
         id:
           type: string
+        name:
+          type: string
+      type: object
+    AddViewColumn:
+      example:
+        reference:
+          branchId: branchId
+          selectionType: SINGLE
+          columnId: columnId
+          gridId: gridId
+          type: ROW
+        numberFormat:
+          decimalPlaces: 0
+          currencySymbol: currencySymbol
+          type: DECIMAL
+          use1000Separator: true
+        dateTimeFormat:
+          zoneOffset: zoneOffset
+          dateFormat:
+            name: name
+            format: format
+          timeFormat: hour12
+          showTimeZone: true
+        editable: true
+        name: name
+        selectionOptions:
+        - selectionOptions
+        - selectionOptions
+        - selectionOptions
+        - selectionOptions
+        - selectionOptions
+        description: description
+        localizationType: sourceLanguage
+        formula:
+          formulaText: formulaText
+          detectResultValueType: list
+          alwaysFormatResultValueAsList: true
+        id: id
+        type: singleLine
+        languageCode: enUS
+      properties:
+        id:
+          type: string
+        editable:
+          type: boolean
+        name:
+          type: string
+        description:
+          type: string
+        type:
+          enum:
+          - singleLine
+          - multipleLines
+          - richText
+          - markdown
+          - singleSelection
+          - multipleSelections
+          - boolean
+          - number
+          - datetime
+          - files
+          - reference
+          - lookup
+          - language
+          - json
+          - yaml
+          - html
+          - formula
+          type: string
+        languageCode:
+          enum:
+          - enUS
+          - arSA
+          - caES
+          - zhCN
+          - zhTW
+          - deDE
+          - itIT
+          - jaJP
+          - koKR
+          - plPL
+          - ptAO
+          - ptBR
+          - ruRU
+          - esMX
+          - esLA
+          - esES
+          - bnBD
+          - bgBG
+          - zhHK
+          - csCZ
+          - daDK
+          - nlNL
+          - fiFI
+          - frFR
+          - frCA
+          - elGR
+          - heIL
+          - hiIN
+          - huHU
+          - idID
+          - jwID
+          - lvLV
+          - msMY
+          - noNO
+          - ptPT
+          - roRO
+          - skSK
+          - svSE
+          - tlPH
+          - thTH
+          - trTR
+          - ukUA
+          - urIN
+          - viVN
+          - afZA
+          - arAE
+          - arBH
+          - arDZ
+          - arEG
+          - arIQ
+          - arJO
+          - arKW
+          - arLB
+          - arLY
+          - arMA
+          - arOM
+          - arQA
+          - arSY
+          - arTN
+          - arYE
+          - azAZ
+          - beBY
+          - bsBA
+          - cyGB
+          - deAT
+          - deCH
+          - deLI
+          - deLU
+          - dvMV
+          - enAU
+          - enBZ
+          - enCA
+          - enGB
+          - enIE
+          - enJM
+          - enNZ
+          - enPH
+          - enTT
+          - enZA
+          - enZW
+          - enSG
+          - enIN
+          - enGH
+          - enRW
+          - enZM
+          - enKE
+          - enNG
+          - esAR
+          - esBO
+          - esCL
+          - esCO
+          - esCR
+          - esDO
+          - esEC
+          - esGT
+          - esHN
+          - esNI
+          - esPA
+          - esPE
+          - esPR
+          - esPY
+          - esSV
+          - esUY
+          - esVE
+          - etEE
+          - euES
+          - faIR
+          - foFO
+          - frBE
+          - frCH
+          - frLU
+          - frMC
+          - glES
+          - guIN
+          - hrBA
+          - hrHR
+          - hyAM
+          - isIS
+          - itCH
+          - kaGE
+          - kkKZ
+          - knIN
+          - kokIN
+          - kyKG
+          - ltLT
+          - miNZ
+          - mkMK
+          - mnMN
+          - mrIN
+          - msBN
+          - mtMT
+          - nbNO
+          - nlBE
+          - nnNO
+          - nsZA
+          - paIN
+          - psAR
+          - quBO
+          - quEC
+          - quPE
+          - saIN
+          - seFI
+          - seNO
+          - seSE
+          - slSI
+          - sqAL
+          - srBA
+          - srRS
+          - srME
+          - svFI
+          - swKE
+          - syrSY
+          - taIN
+          - teIN
+          - tnZA
+          - ttRU
+          - urPK
+          - uzUZ
+          - xhZA
+          - zhMO
+          - zhSG
+          - zuZA
+          - am
+          - hy
+          - az
+          - bn
+          - bs
+          - ca
+          - hr
+          - da
+          - nl
+          - en
+          - fi
+          - fr
+          - hi
+          - hu
+          - id
+          - it
+          - km
+          - mi
+          - ps
+          - ru
+          - sl
+          - es
+          - sw
+          - ta
+          - ur
+          - af
+          - et
+          - gl
+          - ja
+          - kk
+          - ky
+          - mk
+          - ms
+          - se
+          - pl
+          - pa
+          - ro
+          - sk
+          - sv
+          - tt
+          - te
+          - tr
+          - uz
+          - vi
+          - eu
+          - be
+          - cs
+          - de
+          - gu
+          - he
+          - is
+          - ko
+          - lt
+          - mr
+          - mn
+          - nb
+          - nn
+          - pt
+          - sa
+          - tn
+          - uk
+          - xh
+          - sq
+          - ar
+          - bg
+          - zh
+          - dv
+          - fo
+          - fa
+          - ka
+          - el
+          - kn
+          - lv
+          - mt
+          - qu
+          - sr
+          - si
+          - tl
+          - th
+          - cy
+          - zu
+          - "no"
+          type: string
+        localizationType:
+          enum:
+          - sourceLanguage
+          - targetLanguage
+          type: string
+        numberFormat:
+          $ref: '#/components/schemas/NumberFormat'
+        selectionOptions:
+          items:
+            type: string
+          maxItems: 1000
+          minItems: 0
+          type: array
+        reference:
+          $ref: '#/components/schemas/Reference'
+        formula:
+          $ref: '#/components/schemas/Formula'
+        dateTimeFormat:
+          $ref: '#/components/schemas/DateTimeFormat'
       type: object
     CreateView:
       example:
         columns:
-        - editable: true
+        - reference:
+            branchId: branchId
+            selectionType: SINGLE
+            columnId: columnId
+            gridId: gridId
+            type: ROW
+          numberFormat:
+            decimalPlaces: 0
+            currencySymbol: currencySymbol
+            type: DECIMAL
+            use1000Separator: true
+          dateTimeFormat:
+            zoneOffset: zoneOffset
+            dateFormat:
+              name: name
+              format: format
+            timeFormat: hour12
+            showTimeZone: true
+          editable: true
+          name: name
+          selectionOptions:
+          - selectionOptions
+          - selectionOptions
+          - selectionOptions
+          - selectionOptions
+          - selectionOptions
+          description: description
+          localizationType: sourceLanguage
+          formula:
+            formulaText: formulaText
+            detectResultValueType: list
+            alwaysFormatResultValueAsList: true
           id: id
-        - editable: true
+          type: singleLine
+          languageCode: enUS
+        - reference:
+            branchId: branchId
+            selectionType: SINGLE
+            columnId: columnId
+            gridId: gridId
+            type: ROW
+          numberFormat:
+            decimalPlaces: 0
+            currencySymbol: currencySymbol
+            type: DECIMAL
+            use1000Separator: true
+          dateTimeFormat:
+            zoneOffset: zoneOffset
+            dateFormat:
+              name: name
+              format: format
+            timeFormat: hour12
+            showTimeZone: true
+          editable: true
+          name: name
+          selectionOptions:
+          - selectionOptions
+          - selectionOptions
+          - selectionOptions
+          - selectionOptions
+          - selectionOptions
+          description: description
+          localizationType: sourceLanguage
+          formula:
+            formulaText: formulaText
+            detectResultValueType: list
+            alwaysFormatResultValueAsList: true
           id: id
+          type: singleLine
+          languageCode: enUS
         name: name
         gridId: gridId
       properties:
         name:
           type: string
+        gridId:
+          type: string
         columns:
           items:
             $ref: '#/components/schemas/AddViewColumn'
           type: array
+      type: object
+    DateFormat:
+      example:
+        name: name
+        format: format
+      properties:
+        name:
+          type: string
+        format:
+          type: string
+      type: object
+    DateTimeFormat:
+      example:
+        zoneOffset: zoneOffset
+        dateFormat:
+          name: name
+          format: format
+        timeFormat: hour12
+        showTimeZone: true
+      properties:
+        dateFormat:
+          $ref: '#/components/schemas/DateFormat'
+        timeFormat:
+          enum:
+          - hour12
+          - hour24
+          type: string
+        zoneOffset:
+          type: string
+        showTimeZone:
+          type: boolean
+      type: object
+    Formula:
+      example:
+        formulaText: formulaText
+        detectResultValueType: list
+        alwaysFormatResultValueAsList: true
+      properties:
+        formulaText:
+          type: string
+        alwaysFormatResultValueAsList:
+          type: boolean
+        detectResultValueType:
+          enum:
+          - list
+          - string
+          - decimal
+          - boolean
+          - datetime
+          - na
+          type: string
+      required:
+      - formulaText
+      type: object
+    NumberFormat:
+      example:
+        decimalPlaces: 0
+        currencySymbol: currencySymbol
+        type: DECIMAL
+        use1000Separator: true
+      properties:
+        type:
+          enum:
+          - DECIMAL
+          - INTEGER
+          type: string
+        decimalPlaces:
+          format: int32
+          type: integer
+        currencySymbol:
+          type: string
+        use1000Separator:
+          type: boolean
+      type: object
+    Reference:
+      example:
+        branchId: branchId
+        selectionType: SINGLE
+        columnId: columnId
+        gridId: gridId
+        type: ROW
+      properties:
         gridId:
           type: string
+        branchId:
+          type: string
+        columnId:
+          type: string
+        type:
+          enum:
+          - ROW
+          - CELL
+          type: string
+        selectionType:
+          enum:
+          - SINGLE
+          - MULTIPLE
+          type: string
+      required:
+      - columnId
+      - gridId
       type: object
     Cell:
       example:
@@ -2594,79 +3456,6 @@ components:
           - SINGLE
           - MULTIPLE
           type: string
-      type: object
-    DateFormat:
-      example:
-        name: name
-        format: format
-      properties:
-        name:
-          type: string
-        format:
-          type: string
-      type: object
-    DateTimeFormat:
-      example:
-        zoneOffset: zoneOffset
-        dateFormat:
-          name: name
-          format: format
-        timeFormat: hour12
-        showTimeZone: true
-      properties:
-        dateFormat:
-          $ref: '#/components/schemas/DateFormat'
-        timeFormat:
-          enum:
-          - hour12
-          - hour24
-          type: string
-        zoneOffset:
-          type: string
-        showTimeZone:
-          type: boolean
-      type: object
-    Formula:
-      example:
-        formulaText: formulaText
-        detectResultValueType: list
-        alwaysFormatResultValueAsList: true
-      properties:
-        formulaText:
-          type: string
-        alwaysFormatResultValueAsList:
-          type: boolean
-        detectResultValueType:
-          enum:
-          - list
-          - string
-          - decimal
-          - boolean
-          - datetime
-          - na
-          type: string
-      required:
-      - formulaText
-      type: object
-    NumberFormat:
-      example:
-        decimalPlaces: 0
-        currencySymbol: currencySymbol
-        type: DECIMAL
-        use1000Separator: true
-      properties:
-        type:
-          enum:
-          - DECIMAL
-          - INTEGER
-          type: string
-        decimalPlaces:
-          format: int32
-          type: integer
-        currencySymbol:
-          type: string
-        use1000Separator:
-          type: boolean
       type: object
     Record:
       example:
@@ -2786,6 +3575,7 @@ components:
           id: id
         columns:
         - dependsOn: dependsOn
+          editable: true
           selectionOptions:
           - selectionOptions
           - selectionOptions
@@ -2829,6 +3619,7 @@ components:
             alwaysFormatResultValueAsList: true
           id: id
         - dependsOn: dependsOn
+          editable: true
           selectionOptions:
           - selectionOptions
           - selectionOptions
@@ -2908,6 +3699,7 @@ components:
     ViewColumn:
       example:
         dependsOn: dependsOn
+        editable: true
         selectionOptions:
         - selectionOptions
         - selectionOptions
@@ -2959,6 +3751,8 @@ components:
           type: string
         description:
           type: string
+        editable:
+          type: boolean
         formula:
           $ref: '#/components/schemas/Formula'
         isSource:
@@ -3139,6 +3933,7 @@ components:
       example:
         originalName: originalName
         size: 0
+        thumbnailId: thumbnailId
         id: id
         contentType: contentType
       properties:
@@ -3151,6 +3946,8 @@ components:
         size:
           format: int64
           type: integer
+        thumbnailId:
+          type: string
       type: object
     CreateDependency:
       example:
@@ -3189,6 +3986,7 @@ components:
             format: format
           timeFormat: hour12
           showTimeZone: true
+        editable: true
         name: name
         selectionOptions:
         - selectionOptions
@@ -3206,6 +4004,9 @@ components:
         type: singleLine
         languageCode: enUS
       properties:
+        id:
+          pattern: ^(?!_)\w+$
+          type: string
         name:
           type: string
         description:
@@ -3230,6 +4031,8 @@ components:
           - html
           - formula
           type: string
+        editable:
+          type: boolean
         languageCode:
           enum:
           - enUS
@@ -3496,40 +4299,9 @@ components:
           $ref: '#/components/schemas/Formula'
         dateTimeFormat:
           $ref: '#/components/schemas/DateTimeFormat'
-        id:
-          pattern: ^(?!_)\w+$
-          type: string
       required:
       - name
       - type
-      type: object
-    Reference:
-      example:
-        branchId: branchId
-        selectionType: SINGLE
-        columnId: columnId
-        gridId: gridId
-        type: ROW
-      properties:
-        gridId:
-          type: string
-        branchId:
-          type: string
-        columnId:
-          type: string
-        type:
-          enum:
-          - ROW
-          - CELL
-          type: string
-        selectionType:
-          enum:
-          - SINGLE
-          - MULTIPLE
-          type: string
-      required:
-      - columnId
-      - gridId
       type: object
     CreateGrid:
       example:
@@ -3537,8 +4309,83 @@ components:
         templateGridId: templateGridId
         metadata:
           key: metadata
+        columns:
+        - reference:
+            branchId: branchId
+            selectionType: SINGLE
+            columnId: columnId
+            gridId: gridId
+            type: ROW
+          numberFormat:
+            decimalPlaces: 0
+            currencySymbol: currencySymbol
+            type: DECIMAL
+            use1000Separator: true
+          dateTimeFormat:
+            zoneOffset: zoneOffset
+            dateFormat:
+              name: name
+              format: format
+            timeFormat: hour12
+            showTimeZone: true
+          editable: true
+          name: name
+          selectionOptions:
+          - selectionOptions
+          - selectionOptions
+          - selectionOptions
+          - selectionOptions
+          - selectionOptions
+          description: description
+          localizationType: sourceLanguage
+          formula:
+            formulaText: formulaText
+            detectResultValueType: list
+            alwaysFormatResultValueAsList: true
+          id: id
+          type: singleLine
+          languageCode: enUS
+        - reference:
+            branchId: branchId
+            selectionType: SINGLE
+            columnId: columnId
+            gridId: gridId
+            type: ROW
+          numberFormat:
+            decimalPlaces: 0
+            currencySymbol: currencySymbol
+            type: DECIMAL
+            use1000Separator: true
+          dateTimeFormat:
+            zoneOffset: zoneOffset
+            dateFormat:
+              name: name
+              format: format
+            timeFormat: hour12
+            showTimeZone: true
+          editable: true
+          name: name
+          selectionOptions:
+          - selectionOptions
+          - selectionOptions
+          - selectionOptions
+          - selectionOptions
+          - selectionOptions
+          description: description
+          localizationType: sourceLanguage
+          formula:
+            formulaText: formulaText
+            detectResultValueType: list
+            alwaysFormatResultValueAsList: true
+          id: id
+          type: singleLine
+          languageCode: enUS
         name: name
+        id: id
       properties:
+        id:
+          pattern: ^\w+$
+          type: string
         name:
           type: string
         templateGridId:
@@ -3548,6 +4395,10 @@ components:
           - recordId
           - pathTagRecordId
           type: string
+        columns:
+          items:
+            $ref: '#/components/schemas/CreateColumn'
+          type: array
         metadata:
           additionalProperties:
             type: string
@@ -3563,6 +4414,7 @@ components:
         defaultAccessViewId: defaultAccessViewId
         columns:
         - dependsOn: dependsOn
+          editable: true
           selectionOptions:
           - selectionOptions
           - selectionOptions
@@ -3606,6 +4458,7 @@ components:
             alwaysFormatResultValueAsList: true
           id: id
         - dependsOn: dependsOn
+          editable: true
           selectionOptions:
           - selectionOptions
           - selectionOptions
@@ -3689,6 +4542,15 @@ components:
           - clearingRecords
           type: string
       type: object
+    CreateFileCategory:
+      example:
+        name: name
+      properties:
+        name:
+          type: string
+      required:
+      - name
+      type: object
     CreateBranch:
       example:
         name: name
@@ -3706,6 +4568,7 @@ components:
         defaultAccessViewId: defaultAccessViewId
         columns:
         - dependsOn: dependsOn
+          editable: true
           selectionOptions:
           - selectionOptions
           - selectionOptions
@@ -3749,6 +4612,7 @@ components:
             alwaysFormatResultValueAsList: true
           id: id
         - dependsOn: dependsOn
+          editable: true
           selectionOptions:
           - selectionOptions
           - selectionOptions
@@ -3837,12 +4701,25 @@ components:
       type: object
     UpdateColumn:
       example:
+        editable: true
+        newId: newId
+        selectionOptions:
+        - selectionOptions
+        - selectionOptions
+        - selectionOptions
+        - selectionOptions
+        - selectionOptions
+        description: description
+        localizationType: sourceLanguage
+        type: singleLine
+        languageCode: enUS
         reference:
           branchId: branchId
           selectionType: SINGLE
           columnId: columnId
           gridId: gridId
           type: ROW
+        viewable: true
         numberFormat:
           decimalPlaces: 0
           currencySymbol: currencySymbol
@@ -3855,22 +4732,11 @@ components:
             format: format
           timeFormat: hour12
           showTimeZone: true
-        newId: newId
         name: name
-        selectionOptions:
-        - selectionOptions
-        - selectionOptions
-        - selectionOptions
-        - selectionOptions
-        - selectionOptions
-        description: description
-        localizationType: sourceLanguage
         formula:
           formulaText: formulaText
           detectResultValueType: list
           alwaysFormatResultValueAsList: true
-        type: singleLine
-        languageCode: enUS
       properties:
         name:
           type: string
@@ -4162,6 +5028,10 @@ components:
           $ref: '#/components/schemas/Formula'
         dateTimeFormat:
           $ref: '#/components/schemas/DateTimeFormat'
+        viewable:
+          type: boolean
+        editable:
+          type: boolean
         newId:
           type: string
       type: object
@@ -4176,6 +5046,144 @@ components:
         metadata:
           additionalProperties:
             type: string
+          type: object
+      type: object
+    UpdateGridSetting:
+      example:
+        metadata:
+          key: metadata
+        translatorCanViewAutomations: true
+        defaultDateTimeFormat:
+          zoneOffset: zoneOffset
+          dateFormat:
+            name: name
+            format: format
+          timeFormat: hour12
+          showTimeZone: true
+        defaultSourceLanguageStatus: unset
+      properties:
+        defaultDateTimeFormat:
+          $ref: '#/components/schemas/DateTimeFormat'
+        defaultSourceLanguageStatus:
+          enum:
+          - unset
+          - doNotTranslate
+          - notReadyForTranslation
+          - readyForTranslation
+          - locked
+          type: string
+        translatorCanViewAutomations:
+          type: boolean
+        metadata:
+          additionalProperties:
+            type: string
+          type: object
+      type: object
+    GridSetting:
+      example:
+        metadata:
+          key: metadata
+        lastModifiedTime: 2000-01-23T04:56:07.000+00:00
+        translatorCanViewAutomations: true
+        createdBy: createdBy
+        lastModifiedBy: lastModifiedBy
+        createdTime: 2000-01-23T04:56:07.000+00:00
+        defaultSourceLanguageStatus: unset
+        categories:
+        - name: name
+          id: id
+        - name: name
+          id: id
+      properties:
+        defaultSourceLanguageStatus:
+          enum:
+          - unset
+          - doNotTranslate
+          - notReadyForTranslation
+          - readyForTranslation
+          - locked
+          type: string
+        translatorCanViewAutomations:
+          type: boolean
+        categories:
+          items:
+            $ref: '#/components/schemas/FileCategory'
+          type: array
+        metadata:
+          additionalProperties:
+            type: string
+          type: object
+        createdTime:
+          format: date-time
+          type: string
+        lastModifiedTime:
+          format: date-time
+          type: string
+        createdBy:
+          type: string
+        lastModifiedBy:
+          type: string
+      type: object
+    ColumnStatistic:
+      example:
+        wordCount:
+          all: 6
+          upToDate: 5
+          outOfDate: 1
+          unset: 5
+        recordCount:
+          all: 6
+          upToDate: 5
+          outOfDate: 1
+          unset: 5
+      properties:
+        recordCount:
+          $ref: '#/components/schemas/TranslationCount'
+        wordCount:
+          $ref: '#/components/schemas/TranslationCount'
+      type: object
+    TranslationCount:
+      example:
+        all: 6
+        upToDate: 5
+        outOfDate: 1
+        unset: 5
+      properties:
+        all:
+          format: int64
+          type: integer
+        outOfDate:
+          format: int64
+          type: integer
+        unset:
+          format: int64
+          type: integer
+        upToDate:
+          format: int64
+          type: integer
+      type: object
+    ViewStatistic:
+      example:
+        translations:
+          key:
+            wordCount:
+              all: 6
+              upToDate: 5
+              outOfDate: 1
+              unset: 5
+            recordCount:
+              all: 6
+              upToDate: 5
+              outOfDate: 1
+              unset: 5
+        recordCount: 0
+      properties:
+        recordCount:
+          format: int64
+          type: integer
+        translations:
+          additionalProperties:
+            $ref: '#/components/schemas/ColumnStatistic'
           type: object
       type: object
     FetchFileOption:
@@ -4256,10 +5264,36 @@ components:
       enum:
       - none
       - columnName
+      - columnId
       type: string
       x-enum-varnames:
       - none
       - columnName
+      - columnId
+    SettingFile:
+      example:
+        files:
+        - originalName: originalName
+          size: 0
+          thumbnailId: thumbnailId
+          id: id
+          contentType: contentType
+        - originalName: originalName
+          size: 0
+          thumbnailId: thumbnailId
+          id: id
+          contentType: contentType
+        category:
+          name: name
+          id: id
+      properties:
+        category:
+          $ref: '#/components/schemas/FileCategory'
+        files:
+          items:
+            $ref: '#/components/schemas/UploadedFile'
+          type: array
+      type: object
     DeleteRecord:
       example:
         identifiers:
@@ -4525,20 +5559,26 @@ components:
           id: 9
         groups:
         - companyId: 4
+          createdDate: 2000-01-23T04:56:07.000+00:00
+          lastModifiedDate: 2000-01-23T04:56:07.000+00:00
           groupId: 2
           isSystemGroup: true
           name: name
           id: id
           type: NORMAL
           systemGroup: true
+          shareType: none
           logoUrl: logoUrl
         - companyId: 4
+          createdDate: 2000-01-23T04:56:07.000+00:00
+          lastModifiedDate: 2000-01-23T04:56:07.000+00:00
           groupId: 2
           isSystemGroup: true
           name: name
           id: id
           type: NORMAL
           systemGroup: true
+          shareType: none
           logoUrl: logoUrl
         id: id
         projectId: 7
@@ -4549,6 +5589,7 @@ components:
           defaultAccessViewId: defaultAccessViewId
           columns:
           - dependsOn: dependsOn
+            editable: true
             selectionOptions:
             - selectionOptions
             - selectionOptions
@@ -4592,6 +5633,7 @@ components:
               alwaysFormatResultValueAsList: true
             id: id
           - dependsOn: dependsOn
+            editable: true
             selectionOptions:
             - selectionOptions
             - selectionOptions
@@ -4644,6 +5686,7 @@ components:
           defaultAccessViewId: defaultAccessViewId
           columns:
           - dependsOn: dependsOn
+            editable: true
             selectionOptions:
             - selectionOptions
             - selectionOptions
@@ -4687,6 +5730,7 @@ components:
               alwaysFormatResultValueAsList: true
             id: id
           - dependsOn: dependsOn
+            editable: true
             selectionOptions:
             - selectionOptions
             - selectionOptions
@@ -4783,6 +5827,7 @@ components:
             id: id
           columns:
           - dependsOn: dependsOn
+            editable: true
             selectionOptions:
             - selectionOptions
             - selectionOptions
@@ -4826,6 +5871,7 @@ components:
               alwaysFormatResultValueAsList: true
             id: id
           - dependsOn: dependsOn
+            editable: true
             selectionOptions:
             - selectionOptions
             - selectionOptions
@@ -4921,6 +5967,7 @@ components:
             id: id
           columns:
           - dependsOn: dependsOn
+            editable: true
             selectionOptions:
             - selectionOptions
             - selectionOptions
@@ -4964,6 +6011,7 @@ components:
               alwaysFormatResultValueAsList: true
             id: id
           - dependsOn: dependsOn
+            editable: true
             selectionOptions:
             - selectionOptions
             - selectionOptions
@@ -5039,12 +6087,15 @@ components:
     Group:
       example:
         companyId: 4
+        createdDate: 2000-01-23T04:56:07.000+00:00
+        lastModifiedDate: 2000-01-23T04:56:07.000+00:00
         groupId: 2
         isSystemGroup: true
         name: name
         id: id
         type: NORMAL
         systemGroup: true
+        shareType: none
         logoUrl: logoUrl
       properties:
         id:
@@ -5063,6 +6114,21 @@ components:
           enum:
           - NORMAL
           - ADMIN
+          type: string
+        shareType:
+          enum:
+          - none
+          - full
+          - project
+          - database
+          - grid
+          - view
+          type: string
+        createdDate:
+          format: date-time
+          type: string
+        lastModifiedDate:
+          format: date-time
           type: string
         isSystemGroup:
           type: boolean
@@ -5144,20 +6210,26 @@ components:
             id: 9
           groups:
           - companyId: 4
+            createdDate: 2000-01-23T04:56:07.000+00:00
+            lastModifiedDate: 2000-01-23T04:56:07.000+00:00
             groupId: 2
             isSystemGroup: true
             name: name
             id: id
             type: NORMAL
             systemGroup: true
+            shareType: none
             logoUrl: logoUrl
           - companyId: 4
+            createdDate: 2000-01-23T04:56:07.000+00:00
+            lastModifiedDate: 2000-01-23T04:56:07.000+00:00
             groupId: 2
             isSystemGroup: true
             name: name
             id: id
             type: NORMAL
             systemGroup: true
+            shareType: none
             logoUrl: logoUrl
           id: id
           projectId: 7
@@ -5168,6 +6240,7 @@ components:
             defaultAccessViewId: defaultAccessViewId
             columns:
             - dependsOn: dependsOn
+              editable: true
               selectionOptions:
               - selectionOptions
               - selectionOptions
@@ -5211,6 +6284,7 @@ components:
                 alwaysFormatResultValueAsList: true
               id: id
             - dependsOn: dependsOn
+              editable: true
               selectionOptions:
               - selectionOptions
               - selectionOptions
@@ -5263,6 +6337,7 @@ components:
             defaultAccessViewId: defaultAccessViewId
             columns:
             - dependsOn: dependsOn
+              editable: true
               selectionOptions:
               - selectionOptions
               - selectionOptions
@@ -5306,6 +6381,7 @@ components:
                 alwaysFormatResultValueAsList: true
               id: id
             - dependsOn: dependsOn
+              editable: true
               selectionOptions:
               - selectionOptions
               - selectionOptions
@@ -5402,6 +6478,7 @@ components:
               id: id
             columns:
             - dependsOn: dependsOn
+              editable: true
               selectionOptions:
               - selectionOptions
               - selectionOptions
@@ -5445,6 +6522,7 @@ components:
                 alwaysFormatResultValueAsList: true
               id: id
             - dependsOn: dependsOn
+              editable: true
               selectionOptions:
               - selectionOptions
               - selectionOptions
@@ -5540,6 +6618,7 @@ components:
               id: id
             columns:
             - dependsOn: dependsOn
+              editable: true
               selectionOptions:
               - selectionOptions
               - selectionOptions
@@ -5583,6 +6662,7 @@ components:
                 alwaysFormatResultValueAsList: true
               id: id
             - dependsOn: dependsOn
+              editable: true
               selectionOptions:
               - selectionOptions
               - selectionOptions
@@ -5665,20 +6745,26 @@ components:
             id: 9
           groups:
           - companyId: 4
+            createdDate: 2000-01-23T04:56:07.000+00:00
+            lastModifiedDate: 2000-01-23T04:56:07.000+00:00
             groupId: 2
             isSystemGroup: true
             name: name
             id: id
             type: NORMAL
             systemGroup: true
+            shareType: none
             logoUrl: logoUrl
           - companyId: 4
+            createdDate: 2000-01-23T04:56:07.000+00:00
+            lastModifiedDate: 2000-01-23T04:56:07.000+00:00
             groupId: 2
             isSystemGroup: true
             name: name
             id: id
             type: NORMAL
             systemGroup: true
+            shareType: none
             logoUrl: logoUrl
           id: id
           projectId: 7
@@ -5689,6 +6775,7 @@ components:
             defaultAccessViewId: defaultAccessViewId
             columns:
             - dependsOn: dependsOn
+              editable: true
               selectionOptions:
               - selectionOptions
               - selectionOptions
@@ -5732,6 +6819,7 @@ components:
                 alwaysFormatResultValueAsList: true
               id: id
             - dependsOn: dependsOn
+              editable: true
               selectionOptions:
               - selectionOptions
               - selectionOptions
@@ -5784,6 +6872,7 @@ components:
             defaultAccessViewId: defaultAccessViewId
             columns:
             - dependsOn: dependsOn
+              editable: true
               selectionOptions:
               - selectionOptions
               - selectionOptions
@@ -5827,6 +6916,7 @@ components:
                 alwaysFormatResultValueAsList: true
               id: id
             - dependsOn: dependsOn
+              editable: true
               selectionOptions:
               - selectionOptions
               - selectionOptions
@@ -5923,6 +7013,7 @@ components:
               id: id
             columns:
             - dependsOn: dependsOn
+              editable: true
               selectionOptions:
               - selectionOptions
               - selectionOptions
@@ -5966,6 +7057,7 @@ components:
                 alwaysFormatResultValueAsList: true
               id: id
             - dependsOn: dependsOn
+              editable: true
               selectionOptions:
               - selectionOptions
               - selectionOptions
@@ -6061,6 +7153,7 @@ components:
               id: id
             columns:
             - dependsOn: dependsOn
+              editable: true
               selectionOptions:
               - selectionOptions
               - selectionOptions
@@ -6104,6 +7197,7 @@ components:
                 alwaysFormatResultValueAsList: true
               id: id
             - dependsOn: dependsOn
+              editable: true
               selectionOptions:
               - selectionOptions
               - selectionOptions
@@ -6182,20 +7276,26 @@ components:
         description: description
         groups:
         - companyId: 4
+          createdDate: 2000-01-23T04:56:07.000+00:00
+          lastModifiedDate: 2000-01-23T04:56:07.000+00:00
           groupId: 2
           isSystemGroup: true
           name: name
           id: id
           type: NORMAL
           systemGroup: true
+          shareType: none
           logoUrl: logoUrl
         - companyId: 4
+          createdDate: 2000-01-23T04:56:07.000+00:00
+          lastModifiedDate: 2000-01-23T04:56:07.000+00:00
           groupId: 2
           isSystemGroup: true
           name: name
           id: id
           type: NORMAL
           systemGroup: true
+          shareType: none
           logoUrl: logoUrl
         id: 0
       properties:
@@ -6223,6 +7323,7 @@ components:
     CreateTransMem:
       example:
         isPausedConsuming: true
+        contextLookup: true
         populateTranslationStatus: null
         name: name
         description: description
@@ -6249,6 +7350,8 @@ components:
           type: boolean
         isPausedConsuming:
           type: boolean
+        contextLookup:
+          type: boolean
         populateTranslationStatus:
           $ref: '#/components/schemas/TranslationStatus'
       required:
@@ -6264,6 +7367,7 @@ components:
       example:
         isPausedConsuming: true
         populateTranslationStatus: null
+        contextLookup: true
         name: name
         description: description
         id: id
@@ -6286,6 +7390,8 @@ components:
           type: boolean
         populateTranslationStatus:
           $ref: '#/components/schemas/TranslationStatus'
+        contextLookup:
+          type: boolean
         name:
           pattern: \S
           type: string
@@ -6306,6 +7412,7 @@ components:
       example:
         isPausedConsuming: true
         populateTranslationStatus: null
+        contextLookup: true
         name: name
         description: description
         projectIds:
@@ -6331,6 +7438,8 @@ components:
           type: boolean
         populateTranslationStatus:
           $ref: '#/components/schemas/TranslationStatus'
+        contextLookup:
+          type: boolean
       type: object
     importView_request:
       properties:
@@ -6363,6 +7472,12 @@ components:
       - columnId
       - file
       - fileMappings
+      type: object
+    uploadSettingFile_request:
+      properties:
+        file:
+          format: binary
+          type: string
       type: object
   securitySchemes:
     ApiKey:

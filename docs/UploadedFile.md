@@ -11,6 +11,7 @@
 |**originalName** | **String** |  |  [optional] |
 |**contentType** | **String** |  |  [optional] |
 |**size** | **Long** |  |  [optional] |
+|**thumbnailId** | **String** |  |  [optional] |
 
 
 ## Implemented Interfaces

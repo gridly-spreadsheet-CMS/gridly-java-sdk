@@ -14,6 +14,7 @@
 |**isDisabled** | **Boolean** |  |  [optional] |
 |**isPausedConsuming** | **Boolean** |  |  [optional] |
 |**populateTranslationStatus** | **TranslationStatus** |  |  [optional] |
+|**contextLookup** | **Boolean** |  |  [optional] |
 
 
 ## Implemented Interfaces

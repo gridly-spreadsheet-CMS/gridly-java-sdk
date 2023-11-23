@@ -7,9 +7,11 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
+|**id** | **String** |  |  [optional] |
 |**name** | **String** |  |  |
 |**templateGridId** | **String** |  |  [optional] |
 |**recordIdentifierType** | [**RecordIdentifierTypeEnum**](#RecordIdentifierTypeEnum) |  |  [optional] |
+|**columns** | [**List&lt;CreateColumn&gt;**](CreateColumn.md) |  |  [optional] |
 |**metadata** | **Map&lt;String, String&gt;** |  |  [optional] |
 
 

@@ -1,7 +1,7 @@
 # gridly-api
 
 Gridly API
-- API version: 4.15.1
+- API version: 4.21.5
 
 Gridly API documentation
 
@@ -134,10 +134,18 @@ Class | Method | HTTP request | Description
 *DatabaseApi* | [**update**](docs/DatabaseApi.md#update) | **PUT** /v1/databases/{dbId} | update
 *GridApi* | [**callList**](docs/GridApi.md#callList) | **GET** /v1/grids | list
 *GridApi* | [**create**](docs/GridApi.md#create) | **POST** /v1/grids | create
+*GridApi* | [**createCategory**](docs/GridApi.md#createCategory) | **POST** /v1/grids/{gridId}/settings/categories | createCategory
 *GridApi* | [**delete**](docs/GridApi.md#delete) | **DELETE** /v1/grids/{gridId} | delete
+*GridApi* | [**deleteCategory**](docs/GridApi.md#deleteCategory) | **DELETE** /v1/grids/{gridId}/settings/categories/{categoryId} | deleteCategory
+*GridApi* | [**deleteFile**](docs/GridApi.md#deleteFile) | **DELETE** /v1/grids/{gridId}/settings/categories/{categoryId}/files/{fileId} | deleteFile
 *GridApi* | [**get**](docs/GridApi.md#get) | **GET** /v1/grids/{gridId} | get
+*GridApi* | [**getSetting**](docs/GridApi.md#getSetting) | **GET** /v1/grids/{gridId}/settings | getSetting
+*GridApi* | [**listFiles**](docs/GridApi.md#listFiles) | **GET** /v1/grids/{gridId}/settings/files | listFiles
 *GridApi* | [**listTemplateGrids**](docs/GridApi.md#listTemplateGrids) | **GET** /v1/template-grids | listTemplateGrids
 *GridApi* | [**update**](docs/GridApi.md#update) | **PATCH** /v1/grids/{gridId} | update
+*GridApi* | [**updateCategory**](docs/GridApi.md#updateCategory) | **PUT** /v1/grids/{gridId}/settings/categories/{categoryId} | updateCategory
+*GridApi* | [**updateSetting**](docs/GridApi.md#updateSetting) | **PATCH** /v1/grids/{gridId}/settings | updateSetting
+*GridApi* | [**uploadSettingFile**](docs/GridApi.md#uploadSettingFile) | **POST** /v1/grids/{gridId}/settings/categories/{categoryId}/files | uploadSettingFile
 *PathApi* | [**callList**](docs/PathApi.md#callList) | **GET** /v1/views/{viewId}/paths/tree | list
 *PathApi* | [**create**](docs/PathApi.md#create) | **POST** /v1/views/{viewId}/paths | create
 *PathApi* | [**delete**](docs/PathApi.md#delete) | **DELETE** /v1/views/{viewId}/paths | delete
@@ -171,9 +179,11 @@ Class | Method | HTTP request | Description
 *ViewApi* | [**create**](docs/ViewApi.md#create) | **POST** /v1/views | create
 *ViewApi* | [**export**](docs/ViewApi.md#export) | **GET** /v1/views/{viewId}/export | export
 *ViewApi* | [**get**](docs/ViewApi.md#get) | **GET** /v1/views/{viewId} | get
+*ViewApi* | [**getStatistic**](docs/ViewApi.md#getStatistic) | **GET** /v1/views/{viewId}/statistic | getStatistic
 *ViewApi* | [**importView**](docs/ViewApi.md#importView) | **POST** /v1/views/{viewId}/import | importView
 *ViewApi* | [**merge**](docs/ViewApi.md#merge) | **POST** /v1/views/{viewId}/merge | merge
 *ViewColumnApi* | [**add**](docs/ViewColumnApi.md#add) | **POST** /v1/views/{viewId}/columns/{columnId}/add | add
+*ViewColumnApi* | [**bulkCreate**](docs/ViewColumnApi.md#bulkCreate) | **POST** /v1/views/{viewId}/columns/bulk | bulkCreate
 *ViewColumnApi* | [**create**](docs/ViewColumnApi.md#create) | **POST** /v1/views/{viewId}/columns | create
 *ViewColumnApi* | [**delete**](docs/ViewColumnApi.md#delete) | **DELETE** /v1/views/{viewId}/columns/{columnId} | delete
 *ViewColumnApi* | [**get**](docs/ViewColumnApi.md#get) | **GET** /v1/views/{viewId}/columns/{columnId} | get
@@ -198,10 +208,12 @@ Class | Method | HTTP request | Description
  - [Cell](docs/Cell.md)
  - [CellHistory](docs/CellHistory.md)
  - [ColumnReference](docs/ColumnReference.md)
+ - [ColumnStatistic](docs/ColumnStatistic.md)
  - [CreateBranch](docs/CreateBranch.md)
  - [CreateColumn](docs/CreateColumn.md)
  - [CreateDatabase](docs/CreateDatabase.md)
  - [CreateDependency](docs/CreateDependency.md)
+ - [CreateFileCategory](docs/CreateFileCategory.md)
  - [CreateGrid](docs/CreateGrid.md)
  - [CreatePath](docs/CreatePath.md)
  - [CreateProject](docs/CreateProject.md)
@@ -219,8 +231,10 @@ Class | Method | HTTP request | Description
  - [ExportFileHeader](docs/ExportFileHeader.md)
  - [ExportFormat](docs/ExportFormat.md)
  - [FetchFileOption](docs/FetchFileOption.md)
+ - [FileCategory](docs/FileCategory.md)
  - [Formula](docs/Formula.md)
  - [Grid](docs/Grid.md)
+ - [GridSetting](docs/GridSetting.md)
  - [Group](docs/Group.md)
  - [MovePath](docs/MovePath.md)
  - [NumberFormat](docs/NumberFormat.md)
@@ -239,21 +253,27 @@ Class | Method | HTTP request | Description
  - [Role](docs/Role.md)
  - [SetCell](docs/SetCell.md)
  - [SetRecord](docs/SetRecord.md)
+ - [SettingFile](docs/SettingFile.md)
  - [ShareView](docs/ShareView.md)
  - [Task](docs/Task.md)
  - [TransMem](docs/TransMem.md)
+ - [TranslationCount](docs/TranslationCount.md)
  - [TranslationStatus](docs/TranslationStatus.md)
+ - [UpdateCategory](docs/UpdateCategory.md)
  - [UpdateColumn](docs/UpdateColumn.md)
  - [UpdateDatabase](docs/UpdateDatabase.md)
  - [UpdateDependency](docs/UpdateDependency.md)
  - [UpdateGrid](docs/UpdateGrid.md)
+ - [UpdateGridSetting](docs/UpdateGridSetting.md)
  - [UpdatePath](docs/UpdatePath.md)
  - [UpdateProject](docs/UpdateProject.md)
  - [UpdateTransMem](docs/UpdateTransMem.md)
+ - [UploadSettingFileRequest](docs/UploadSettingFileRequest.md)
  - [UploadZipRequest](docs/UploadZipRequest.md)
  - [UploadedFile](docs/UploadedFile.md)
  - [View](docs/View.md)
  - [ViewColumn](docs/ViewColumn.md)
+ - [ViewStatistic](docs/ViewStatistic.md)
 
 
 ## Documentation for Authorization

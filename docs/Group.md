@@ -13,6 +13,9 @@
 |**name** | **String** |  |  [optional] |
 |**logoUrl** | **String** |  |  [optional] |
 |**type** | [**TypeEnum**](#TypeEnum) |  |  [optional] |
+|**shareType** | [**ShareTypeEnum**](#ShareTypeEnum) |  |  [optional] |
+|**createdDate** | **OffsetDateTime** |  |  [optional] |
+|**lastModifiedDate** | **OffsetDateTime** |  |  [optional] |
 |**isSystemGroup** | **Boolean** |  |  [optional] |
 |**systemGroup** | **Boolean** |  |  [optional] |
 
@@ -24,6 +27,19 @@
 |---- | -----|
 | NORMAL | &quot;NORMAL&quot; |
 | ADMIN | &quot;ADMIN&quot; |
+
+
+
+## Enum: ShareTypeEnum
+
+| Name | Value |
+|---- | -----|
+| NONE | &quot;none&quot; |
+| FULL | &quot;full&quot; |
+| PROJECT | &quot;project&quot; |
+| DATABASE | &quot;database&quot; |
+| GRID | &quot;grid&quot; |
+| VIEW | &quot;view&quot; |
 
 
 ## Implemented Interfaces

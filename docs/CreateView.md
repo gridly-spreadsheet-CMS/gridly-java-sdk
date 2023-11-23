@@ -8,8 +8,8 @@
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**name** | **String** |  |  [optional] |
-|**columns** | [**List&lt;AddViewColumn&gt;**](AddViewColumn.md) |  |  [optional] |
 |**gridId** | **String** |  |  [optional] |
+|**columns** | [**List&lt;AddViewColumn&gt;**](AddViewColumn.md) |  |  [optional] |
 
 
 ## Implemented Interfaces

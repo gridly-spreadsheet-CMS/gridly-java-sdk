@@ -12,6 +12,7 @@
 |**isDisabled** | **Boolean** |  |  [optional] |
 |**isPausedConsuming** | **Boolean** |  |  [optional] |
 |**populateTranslationStatus** | **TranslationStatus** |  |  [optional] |
+|**contextLookup** | **Boolean** |  |  [optional] |
 |**name** | **String** |  |  |
 |**description** | **String** |  |  [optional] |
 |**fuzzyMatch** | **Boolean** |  |  [optional] |
