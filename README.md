@@ -40,7 +40,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.gridly</groupId>
   <artifactId>gridly-api</artifactId>
-  <version>1.2.11</version>
+  <version>1.2.12</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -56,7 +56,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "com.gridly:gridly-api:1.2.11"
+     implementation "com.gridly:gridly-api:1.2.12"
   }
 ```
 
@@ -70,7 +70,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/gridly-api-1.2.11.jar`
+* `target/gridly-api-1.2.12.jar`
 * `target/lib/*.jar`
 
 ## Getting Started

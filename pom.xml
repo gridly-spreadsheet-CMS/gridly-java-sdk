@@ -5,9 +5,9 @@
     <artifactId>gridly-api</artifactId>
     <packaging>jar</packaging>
     <name>gridly-api</name>
-    <version>1.2.11</version>
+    <version>1.2.12</version>
     <url>https://github.com/openapitools/openapi-generator</url>
-    <description>Gridly Java SDK 1.2.11</description>
+    <description>Gridly Java SDK 1.2.12</description>
     <scm>
         <connection>scm:git:git@github.com:openapitools/openapi-generator.git</connection>
         <developerConnection>scm:git:git@github.com:openapitools/openapi-generator.git</developerConnection>
