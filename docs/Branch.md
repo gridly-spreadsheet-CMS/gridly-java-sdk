@@ -43,6 +43,7 @@
 | MERGING | &quot;merging&quot; |
 | DUPLICATING | &quot;duplicating&quot; |
 | CLEARINGRECORDS | &quot;clearingRecords&quot; |
+| COPYING | &quot;copying&quot; |
 
 
 ## Implemented Interfaces

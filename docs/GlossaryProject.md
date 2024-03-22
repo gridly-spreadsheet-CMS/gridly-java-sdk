@@ -1,14 +1,14 @@
 
 
-# DateFormat
+# GlossaryProject
 
 
 ## Properties
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**name** | **String** |  |  [optional] |
-|**format** | **String** |  |  [optional] |
+|**projectId** | **Long** |  |  [optional] |
+|**databaseIds** | **Set&lt;String&gt;** |  |  [optional] |
 
 
 ## Implemented Interfaces

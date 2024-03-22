@@ -23,6 +23,7 @@
 | NOTREADYFORTRANSLATION | &quot;notReadyForTranslation&quot; |
 | READYFORTRANSLATION | &quot;readyForTranslation&quot; |
 | LOCKED | &quot;locked&quot; |
+| LOCKALLLANGUAGES | &quot;lockAllLanguages&quot; |
 
 
 ## Implemented Interfaces

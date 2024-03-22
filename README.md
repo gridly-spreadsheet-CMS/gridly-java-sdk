@@ -1,7 +1,7 @@
 # gridly-api
 
 Gridly API
-- API version: 4.21.5
+- API version: 4.29.1
 
 Gridly API documentation
 
@@ -40,7 +40,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.gridly</groupId>
   <artifactId>gridly-api</artifactId>
-  <version>1.2.10</version>
+  <version>1.2.11</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -56,7 +56,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "com.gridly:gridly-api:1.2.10"
+     implementation "com.gridly:gridly-api:1.2.11"
   }
 ```
 
@@ -70,7 +70,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/gridly-api-1.2.10.jar`
+* `target/gridly-api-1.2.11.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -123,8 +123,10 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *BranchApi* | [**callList**](docs/BranchApi.md#callList) | **GET** /v1/branches | list
 *BranchApi* | [**create**](docs/BranchApi.md#create) | **POST** /v1/branches | create
+*BranchApi* | [**createDiffCheck**](docs/BranchApi.md#createDiffCheck) | **POST** /v1/branches/diffcheck | createDiffCheck
 *BranchApi* | [**delete**](docs/BranchApi.md#delete) | **DELETE** /v1/branches/{branchId} | delete
 *BranchApi* | [**get**](docs/BranchApi.md#get) | **GET** /v1/branches/{branchId} | get
+*BranchApi* | [**getDiffCheck**](docs/BranchApi.md#getDiffCheck) | **GET** /v1/branches/diffcheck/{taskId} | getDiffCheck
 *BranchApi* | [**merge**](docs/BranchApi.md#merge) | **POST** /v1/branches/{branchId}/merge | merge
 *DatabaseApi* | [**callList**](docs/DatabaseApi.md#callList) | **GET** /v1/databases | list
 *DatabaseApi* | [**create**](docs/DatabaseApi.md#create) | **POST** /v1/databases | create
@@ -132,6 +134,13 @@ Class | Method | HTTP request | Description
 *DatabaseApi* | [**duplicate**](docs/DatabaseApi.md#duplicate) | **POST** /v1/databases/{dbId}/duplicate | duplicate
 *DatabaseApi* | [**get**](docs/DatabaseApi.md#get) | **GET** /v1/databases/{dbId} | get
 *DatabaseApi* | [**update**](docs/DatabaseApi.md#update) | **PUT** /v1/databases/{dbId} | update
+*GlossaryApi* | [**create**](docs/GlossaryApi.md#create) | **POST** /v1/glossaries | Create a new glossary
+*GlossaryApi* | [**delete**](docs/GlossaryApi.md#delete) | **DELETE** /v1/glossaries/{id} | Delete a glossary
+*GlossaryApi* | [**exportFile**](docs/GlossaryApi.md#exportFile) | **GET** /v1/glossaries/{id}/export | Export a glossary
+*GlossaryApi* | [**get**](docs/GlossaryApi.md#get) | **GET** /v1/glossaries/{id} | get glossary info
+*GlossaryApi* | [**getAll**](docs/GlossaryApi.md#getAll) | **GET** /v1/glossaries | List all glossaries
+*GlossaryApi* | [**importFile**](docs/GlossaryApi.md#importFile) | **POST** /v1/glossaries/{id}/import | Import a glossary from file
+*GlossaryApi* | [**update**](docs/GlossaryApi.md#update) | **PUT** /v1/glossaries/{id} | Update glossary info
 *GridApi* | [**callList**](docs/GridApi.md#callList) | **GET** /v1/grids | list
 *GridApi* | [**create**](docs/GridApi.md#create) | **POST** /v1/grids | create
 *GridApi* | [**createCategory**](docs/GridApi.md#createCategory) | **POST** /v1/grids/{gridId}/settings/categories | createCategory
@@ -205,6 +214,8 @@ Class | Method | HTTP request | Description
 
  - [AddViewColumn](docs/AddViewColumn.md)
  - [Branch](docs/Branch.md)
+ - [BranchDiffCell](docs/BranchDiffCell.md)
+ - [BranchDiffRecord](docs/BranchDiffRecord.md)
  - [Cell](docs/Cell.md)
  - [CellHistory](docs/CellHistory.md)
  - [ColumnReference](docs/ColumnReference.md)
@@ -214,6 +225,7 @@ Class | Method | HTTP request | Description
  - [CreateDatabase](docs/CreateDatabase.md)
  - [CreateDependency](docs/CreateDependency.md)
  - [CreateFileCategory](docs/CreateFileCategory.md)
+ - [CreateGlossary](docs/CreateGlossary.md)
  - [CreateGrid](docs/CreateGrid.md)
  - [CreatePath](docs/CreatePath.md)
  - [CreateProject](docs/CreateProject.md)
@@ -221,7 +233,6 @@ Class | Method | HTTP request | Description
  - [CreateTransMem](docs/CreateTransMem.md)
  - [CreateView](docs/CreateView.md)
  - [Database](docs/Database.md)
- - [DateFormat](docs/DateFormat.md)
  - [DateTimeFormat](docs/DateTimeFormat.md)
  - [DeleteDependency](docs/DeleteDependency.md)
  - [DeleteFile](docs/DeleteFile.md)
@@ -231,11 +242,20 @@ Class | Method | HTTP request | Description
  - [ExportFileHeader](docs/ExportFileHeader.md)
  - [ExportFormat](docs/ExportFormat.md)
  - [FetchFileOption](docs/FetchFileOption.md)
+ - [FetchRecordHistoryRequest](docs/FetchRecordHistoryRequest.md)
  - [FileCategory](docs/FileCategory.md)
+ - [FilterField](docs/FilterField.md)
  - [Formula](docs/Formula.md)
+ - [Glossary](docs/Glossary.md)
+ - [GlossaryExportFormat](docs/GlossaryExportFormat.md)
+ - [GlossaryProject](docs/GlossaryProject.md)
  - [Grid](docs/Grid.md)
  - [GridSetting](docs/GridSetting.md)
  - [Group](docs/Group.md)
+ - [ImportOption](docs/ImportOption.md)
+ - [MergeBranchRequest](docs/MergeBranchRequest.md)
+ - [MergeCellConflict](docs/MergeCellConflict.md)
+ - [MergeRecordConflict](docs/MergeRecordConflict.md)
  - [MovePath](docs/MovePath.md)
  - [NumberFormat](docs/NumberFormat.md)
  - [PathList](docs/PathList.md)
@@ -263,6 +283,7 @@ Class | Method | HTTP request | Description
  - [UpdateColumn](docs/UpdateColumn.md)
  - [UpdateDatabase](docs/UpdateDatabase.md)
  - [UpdateDependency](docs/UpdateDependency.md)
+ - [UpdateGlossary](docs/UpdateGlossary.md)
  - [UpdateGrid](docs/UpdateGrid.md)
  - [UpdateGridSetting](docs/UpdateGridSetting.md)
  - [UpdatePath](docs/UpdatePath.md)

@@ -10,7 +10,7 @@ info:
     url: ""
   termsOfService: https://www.gridly.com
   title: Gridly API
-  version: 4.21.5
+  version: 4.29.1
 servers:
 - description: Generated server url
   url: https://api.gridly.com
@@ -41,6 +41,8 @@ tags:
   name: database
 - description: Project API
   name: project
+- description: Glossary API
+  name: glossary
 - description: Translation Memory API
   name: transmem
 paths:
@@ -368,6 +370,7 @@ paths:
           - defaultView
           - accessView
           - userView
+          - workflowView
           type: string
         style: form
       responses:
@@ -736,6 +739,12 @@ paths:
           nullable: true
           type: array
         style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MergeBranchRequest'
+        required: true
       responses:
         "202":
           content:
@@ -748,6 +757,7 @@ paths:
       summary: merge
       tags:
       - view
+      x-content-type: application/json
       x-accepts: application/json
   /v1/views/{viewId}/import:
     post:
@@ -1396,6 +1406,12 @@ paths:
           nullable: true
           type: array
         style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MergeBranchRequest'
+        required: true
       responses:
         "202":
           content:
@@ -1406,6 +1422,41 @@ paths:
       security:
       - ApiKey: []
       summary: merge
+      tags:
+      - branch
+      x-content-type: application/json
+      x-accepts: application/json
+  /v1/branches/diffcheck:
+    post:
+      description: createDiffCheck
+      operationId: createDiffCheck
+      parameters:
+      - description: sourceViewId
+        explode: true
+        in: query
+        name: sourceViewId
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: destinationViewId
+        explode: true
+        in: query
+        name: destinationViewId
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: Accepted
+      security:
+      - ApiKey: []
+      summary: createDiffCheck
       tags:
       - branch
       x-accepts: application/json
@@ -1839,15 +1890,13 @@ paths:
         schema:
           type: string
         style: simple
-      - description: page
+      - description: fetchRequest
         explode: true
         in: query
-        name: page
-        required: false
+        name: fetchRequest
+        required: true
         schema:
-          default: "{}"
-          nullable: true
-          type: string
+          $ref: '#/components/schemas/FetchRecordHistoryRequest'
         style: form
       responses:
         "200":
@@ -2147,6 +2196,70 @@ paths:
       security:
       - ApiKey: []
       summary: get
+      tags:
+      - branch
+      x-accepts: application/json
+  /v1/branches/diffcheck/{taskId}:
+    get:
+      description: getDiffCheck
+      operationId: getDiffCheck
+      parameters:
+      - description: mergeRecordOptions
+        explode: true
+        in: query
+        name: mergeRecordOptions
+        required: false
+        schema:
+          items:
+            enum:
+            - add
+            - update
+            - delete
+            - override
+            type: string
+          nullable: true
+          type: array
+        style: form
+      - description: query
+        explode: true
+        in: query
+        name: query
+        required: false
+        schema:
+          default: "{}"
+          nullable: true
+          type: string
+        style: form
+      - description: page
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: "{}"
+          nullable: true
+          type: string
+        style: form
+      - description: taskId
+        explode: false
+        in: path
+        name: taskId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BranchDiffRecord'
+                type: array
+          description: OK
+      security:
+      - ApiKey: []
+      summary: getDiffCheck
       tags:
       - branch
       x-accepts: application/json
@@ -2529,6 +2642,186 @@ paths:
       x-codegen-request-body-name: body
       x-content-type: application/json
       x-accepts: application/json
+  /v1/glossaries:
+    get:
+      operationId: getAll
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Glossary'
+                type: array
+          description: OK
+      summary: List all glossaries
+      tags:
+      - glossary
+      x-accepts: application/json
+    post:
+      operationId: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGlossary'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Glossary'
+          description: Create a new glossary successful !
+      summary: Create a new glossary
+      tags:
+      - glossary
+      x-content-type: application/json
+      x-accepts: application/json
+  /v1/glossaries/{id}:
+    delete:
+      operationId: delete
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: No Content
+      summary: Delete a glossary
+      tags:
+      - glossary
+      x-accepts: application/json
+    get:
+      operationId: get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Glossary'
+          description: OK
+      summary: get glossary info
+      tags:
+      - glossary
+      x-accepts: application/json
+    put:
+      operationId: update
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateGlossary'
+      responses:
+        "200":
+          description: OK
+      summary: Update glossary info
+      tags:
+      - glossary
+      x-content-type: application/json
+      x-accepts: application/json
+  /v1/glossaries/{id}/export:
+    get:
+      operationId: exportFile
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      - explode: true
+        in: query
+        name: fields
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: format
+        required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/GlossaryExportFormat'
+          - {}
+        style: form
+      - explode: true
+        in: query
+        name: langs
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          description: OK
+      summary: Export a glossary
+      tags:
+      - glossary
+      x-accepts: application/json
+  /v1/glossaries/{id}/import:
+    post:
+      operationId: importFile
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      - explode: true
+        in: query
+        name: importOption
+        required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/ImportOption'
+          - {}
+        style: form
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/importFile_request'
+      responses:
+        "201":
+          description: Created
+      summary: Import a glossary from file
+      tags:
+      - glossary
+      x-content-type: multipart/form-data
+      x-accepts: application/json
   /v1/transmems:
     get:
       operationId: listTM
@@ -2581,7 +2874,7 @@ paths:
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/upload_request'
+              $ref: '#/components/schemas/createWithFile_request'
         description: Based tmx file to create translation memory
         required: true
       responses:
@@ -2748,7 +3041,7 @@ paths:
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/upload_request'
+              $ref: '#/components/schemas/importTmx_request'
         description: tmx file to upload
         required: true
       responses:
@@ -2821,9 +3114,9 @@ components:
         newId:
           pattern: ^(?!_)\w+$
           type: string
-        sourceColumnId:
-          type: string
         targetColumnId:
+          type: string
+        sourceColumnId:
           type: string
       required:
       - sourceColumnId
@@ -2879,10 +3172,8 @@ components:
           use1000Separator: true
         dateTimeFormat:
           zoneOffset: zoneOffset
-          dateFormat:
-            name: name
-            format: format
-          timeFormat: hour12
+          dateFormat: dateFormat
+          timeFormat: timeFormat
           showTimeZone: true
         editable: true
         name: name
@@ -3213,10 +3504,8 @@ components:
             use1000Separator: true
           dateTimeFormat:
             zoneOffset: zoneOffset
-            dateFormat:
-              name: name
-              format: format
-            timeFormat: hour12
+            dateFormat: dateFormat
+            timeFormat: timeFormat
             showTimeZone: true
           editable: true
           name: name
@@ -3248,10 +3537,8 @@ components:
             use1000Separator: true
           dateTimeFormat:
             zoneOffset: zoneOffset
-            dateFormat:
-              name: name
-              format: format
-            timeFormat: hour12
+            dateFormat: dateFormat
+            timeFormat: timeFormat
             showTimeZone: true
           editable: true
           name: name
@@ -3282,31 +3569,16 @@ components:
             $ref: '#/components/schemas/AddViewColumn'
           type: array
       type: object
-    DateFormat:
-      example:
-        name: name
-        format: format
-      properties:
-        name:
-          type: string
-        format:
-          type: string
-      type: object
     DateTimeFormat:
       example:
         zoneOffset: zoneOffset
-        dateFormat:
-          name: name
-          format: format
-        timeFormat: hour12
+        dateFormat: dateFormat
+        timeFormat: timeFormat
         showTimeZone: true
       properties:
         dateFormat:
-          $ref: '#/components/schemas/DateFormat'
+          type: string
         timeFormat:
-          enum:
-          - hour12
-          - hour24
           type: string
         zoneOffset:
           type: string
@@ -3417,6 +3689,7 @@ components:
           - notReadyForTranslation
           - readyForTranslation
           - locked
+          - lockAllLanguages
           type: string
         tm:
           type: boolean
@@ -3601,10 +3874,8 @@ components:
               id: id
           dateTimeFormat:
             zoneOffset: zoneOffset
-            dateFormat:
-              name: name
-              format: format
-            timeFormat: hour12
+            dateFormat: dateFormat
+            timeFormat: timeFormat
             showTimeZone: true
           numberFormat:
             decimalPlaces: 0
@@ -3645,10 +3916,8 @@ components:
               id: id
           dateTimeFormat:
             zoneOffset: zoneOffset
-            dateFormat:
-              name: name
-              format: format
-            timeFormat: hour12
+            dateFormat: dateFormat
+            timeFormat: timeFormat
             showTimeZone: true
           numberFormat:
             decimalPlaces: 0
@@ -3688,6 +3957,7 @@ components:
           - merging
           - duplicating
           - clearingRecords
+          - copying
           type: string
         name:
           type: string
@@ -3725,10 +3995,8 @@ components:
             id: id
         dateTimeFormat:
           zoneOffset: zoneOffset
-          dateFormat:
-            name: name
-            format: format
-          timeFormat: hour12
+          dateFormat: dateFormat
+          timeFormat: timeFormat
           showTimeZone: true
         numberFormat:
           decimalPlaces: 0
@@ -3830,6 +4098,7 @@ components:
           - notReadyForTranslation
           - readyForTranslation
           - locked
+          - lockAllLanguages
           type: string
         value:
           type: AnyType
@@ -3900,17 +4169,224 @@ components:
         toParentPath: toParentPath
         moveAfter: moveAfter
       properties:
-        fromParentPath:
-          type: string
-        moveAfter:
-          type: string
-        moveBefore:
-          type: string
         names:
           items:
             type: string
           type: array
+        fromParentPath:
+          type: string
         toParentPath:
+          type: string
+        moveBefore:
+          type: string
+        moveAfter:
+          type: string
+      type: object
+    FilterField:
+      example:
+        caseSensitive: true
+        columnId: columnId
+        values:
+        - "{}"
+        - "{}"
+        queryPathTagViaId: true
+        dynamicColumn: dynamicColumn
+        subField: DEPENDENCY_STATUS
+        operator: isNull
+      properties:
+        caseSensitive:
+          type: boolean
+        columnId:
+          type: string
+        dynamicColumn:
+          readOnly: true
+          type: string
+        operator:
+          enum:
+          - isNull
+          - isNotNull
+          - isEmpty
+          - isNotEmpty
+          - contains
+          - notContains
+          - startsWith
+          - notStartsWith
+          - endsWith
+          - notEndsWith
+          - regexp
+          - notRegexp
+          - =
+          - '!='
+          - <
+          - <=
+          - '>'
+          - '>='
+          - in
+          - notIn
+          - modifiedBy
+          - notModifiedBy
+          - between
+          - notBetween
+          - hasQaError
+          - isLengthViolated
+          - hasTag
+          - isMt
+          type: string
+        queryPathTagViaId:
+          type: boolean
+        subField:
+          enum:
+          - DEPENDENCY_STATUS
+          - SOURCE_STATUS
+          - TARGET_STATUS
+          - FLOW_STATUS
+          - TM
+          - MT
+          - TICKET
+          - COLOR
+          - METADATA
+          - CELL_METADATA
+          - WORD_COUNT
+          - PREVIEW_SOURCE_DATA
+          - PREVIEW_SOURCE_DEPENDENCY_STATUS
+          - PREVIEW_STATUS
+          - PREVIEW_MERGE_OPTION
+          - RELATIVE_TIME
+          - LENGTH_VIOLATED
+          - LENGTH_SETTING
+          - WORKFLOW_STATUS
+          type: string
+        values:
+          items:
+            type: object
+          type: array
+      required:
+      - operator
+      type: object
+    MergeBranchRequest:
+      example:
+        mergeRecordOptions:
+        - add
+        - add
+        mergeRecordConflicts:
+        - recordId: recordId
+          cells:
+          - columnId: columnId
+            option: child
+          - columnId: columnId
+            option: child
+          pathTag: pathTag
+        - recordId: recordId
+          cells:
+          - columnId: columnId
+            option: child
+          - columnId: columnId
+            option: child
+          pathTag: pathTag
+        - recordId: recordId
+          cells:
+          - columnId: columnId
+            option: child
+          - columnId: columnId
+            option: child
+          pathTag: pathTag
+        - recordId: recordId
+          cells:
+          - columnId: columnId
+            option: child
+          - columnId: columnId
+            option: child
+          pathTag: pathTag
+        - recordId: recordId
+          cells:
+          - columnId: columnId
+            option: child
+          - columnId: columnId
+            option: child
+          pathTag: pathTag
+        query:
+        - caseSensitive: true
+          columnId: columnId
+          values:
+          - "{}"
+          - "{}"
+          queryPathTagViaId: true
+          dynamicColumn: dynamicColumn
+          subField: DEPENDENCY_STATUS
+          operator: isNull
+        - caseSensitive: true
+          columnId: columnId
+          values:
+          - "{}"
+          - "{}"
+          queryPathTagViaId: true
+          dynamicColumn: dynamicColumn
+          subField: DEPENDENCY_STATUS
+          operator: isNull
+        useLastMergeResolve: true
+      properties:
+        mergeRecordOptions:
+          items:
+            enum:
+            - add
+            - update
+            - delete
+            - override
+            type: string
+          type: array
+        mergeRecordConflicts:
+          items:
+            $ref: '#/components/schemas/MergeRecordConflict'
+          maxItems: 2000
+          minItems: 0
+          type: array
+        useLastMergeResolve:
+          type: boolean
+        query:
+          items:
+            $ref: '#/components/schemas/FilterField'
+          type: array
+      type: object
+    MergeCellConflict:
+      example:
+        columnId: columnId
+        option: child
+      properties:
+        columnId:
+          type: string
+        option:
+          enum:
+          - child
+          - parent
+          - override
+          - overrideUpToDate
+          - overrideOutOfDate
+          - reserve
+          - ignore
+          - source
+          - destination
+          type: string
+      required:
+      - columnId
+      - option
+      type: object
+    MergeRecordConflict:
+      example:
+        recordId: recordId
+        cells:
+        - columnId: columnId
+          option: child
+        - columnId: columnId
+          option: child
+        pathTag: pathTag
+      properties:
+        cells:
+          items:
+            $ref: '#/components/schemas/MergeCellConflict'
+          type: array
+        pathTag:
+          type: string
+        recordId:
           type: string
       type: object
     Task:
@@ -3958,9 +4434,9 @@ components:
         id:
           pattern: ^(?!_)\w+$
           type: string
-        sourceColumnId:
-          type: string
         targetColumnId:
+          type: string
+        sourceColumnId:
           type: string
       required:
       - sourceColumnId
@@ -3981,10 +4457,8 @@ components:
           use1000Separator: true
         dateTimeFormat:
           zoneOffset: zoneOffset
-          dateFormat:
-            name: name
-            format: format
-          timeFormat: hour12
+          dateFormat: dateFormat
+          timeFormat: timeFormat
           showTimeZone: true
         editable: true
         name: name
@@ -4323,10 +4797,8 @@ components:
             use1000Separator: true
           dateTimeFormat:
             zoneOffset: zoneOffset
-            dateFormat:
-              name: name
-              format: format
-            timeFormat: hour12
+            dateFormat: dateFormat
+            timeFormat: timeFormat
             showTimeZone: true
           editable: true
           name: name
@@ -4358,10 +4830,8 @@ components:
             use1000Separator: true
           dateTimeFormat:
             zoneOffset: zoneOffset
-            dateFormat:
-              name: name
-              format: format
-            timeFormat: hour12
+            dateFormat: dateFormat
+            timeFormat: timeFormat
             showTimeZone: true
           editable: true
           name: name
@@ -4440,10 +4910,8 @@ components:
               id: id
           dateTimeFormat:
             zoneOffset: zoneOffset
-            dateFormat:
-              name: name
-              format: format
-            timeFormat: hour12
+            dateFormat: dateFormat
+            timeFormat: timeFormat
             showTimeZone: true
           numberFormat:
             decimalPlaces: 0
@@ -4484,10 +4952,8 @@ components:
               id: id
           dateTimeFormat:
             zoneOffset: zoneOffset
-            dateFormat:
-              name: name
-              format: format
-            timeFormat: hour12
+            dateFormat: dateFormat
+            timeFormat: timeFormat
             showTimeZone: true
           numberFormat:
             decimalPlaces: 0
@@ -4540,6 +5006,7 @@ components:
           - merging
           - duplicating
           - clearingRecords
+          - copying
           type: string
       type: object
     CreateFileCategory:
@@ -4553,9 +5020,27 @@ components:
       type: object
     CreateBranch:
       example:
+        customProperties:
+          key: "{}"
+        viewId: viewId
         name: name
+        description: description
+        inheritAutomation: true
+        inheritGroupAccess: true
       properties:
         name:
+          type: string
+        description:
+          type: string
+        customProperties:
+          additionalProperties:
+            type: object
+          type: object
+        inheritGroupAccess:
+          type: boolean
+        inheritAutomation:
+          type: boolean
+        viewId:
           type: string
       required:
       - name
@@ -4594,10 +5079,8 @@ components:
               id: id
           dateTimeFormat:
             zoneOffset: zoneOffset
-            dateFormat:
-              name: name
-              format: format
-            timeFormat: hour12
+            dateFormat: dateFormat
+            timeFormat: timeFormat
             showTimeZone: true
           numberFormat:
             decimalPlaces: 0
@@ -4638,10 +5121,8 @@ components:
               id: id
           dateTimeFormat:
             zoneOffset: zoneOffset
-            dateFormat:
-              name: name
-              format: format
-            timeFormat: hour12
+            dateFormat: dateFormat
+            timeFormat: timeFormat
             showTimeZone: true
           numberFormat:
             decimalPlaces: 0
@@ -4695,6 +5176,7 @@ components:
           - merging
           - duplicating
           - clearingRecords
+          - copying
           type: string
         isMaster:
           type: boolean
@@ -4727,10 +5209,8 @@ components:
           use1000Separator: true
         dateTimeFormat:
           zoneOffset: zoneOffset
-          dateFormat:
-            name: name
-            format: format
-          timeFormat: hour12
+          dateFormat: dateFormat
+          timeFormat: timeFormat
           showTimeZone: true
         name: name
         formula:
@@ -5055,10 +5535,8 @@ components:
         translatorCanViewAutomations: true
         defaultDateTimeFormat:
           zoneOffset: zoneOffset
-          dateFormat:
-            name: name
-            format: format
-          timeFormat: hour12
+          dateFormat: dateFormat
+          timeFormat: timeFormat
           showTimeZone: true
         defaultSourceLanguageStatus: unset
       properties:
@@ -5071,6 +5549,7 @@ components:
           - notReadyForTranslation
           - readyForTranslation
           - locked
+          - lockAllLanguages
           type: string
         translatorCanViewAutomations:
           type: boolean
@@ -5102,6 +5581,7 @@ components:
           - notReadyForTranslation
           - readyForTranslation
           - locked
+          - lockAllLanguages
           type: string
         translatorCanViewAutomations:
           type: boolean
@@ -5197,6 +5677,27 @@ components:
       - all
       - id
       - name
+    FetchRecordHistoryRequest:
+      properties:
+        columnIds:
+          items:
+            type: string
+          type: array
+        query:
+          type: string
+        sort:
+          type: string
+        groupBy:
+          items:
+            type: string
+          type: array
+        page:
+          type: string
+        fetchOptions:
+          type: string
+        includeSystemUser:
+          type: boolean
+      type: object
     CellHistory:
       example:
         sourceStatus: unset
@@ -5217,6 +5718,7 @@ components:
           - notReadyForTranslation
           - readyForTranslation
           - locked
+          - lockAllLanguages
           type: string
         columnId:
           type: string
@@ -5293,6 +5795,137 @@ components:
           items:
             $ref: '#/components/schemas/UploadedFile'
           type: array
+      type: object
+    BranchDiffCell:
+      example:
+        sourceDependencyStatus: upToDate
+        sourceLengthSetting: 0
+        destinationValue: "{}"
+        sourceSourceStatus: unset
+        destinationLengthSetting: 6
+        columnId: columnId
+        destinationSourceStatus: unset
+        sourceValue: "{}"
+        destinationDependencyStatus: upToDate
+        status: behind
+      properties:
+        sourceDependencyStatus:
+          enum:
+          - upToDate
+          - outOfDate
+          - unset
+          type: string
+        destinationDependencyStatus:
+          enum:
+          - upToDate
+          - outOfDate
+          - unset
+          type: string
+        sourceSourceStatus:
+          enum:
+          - unset
+          - doNotTranslate
+          - notReadyForTranslation
+          - readyForTranslation
+          - locked
+          - lockAllLanguages
+          type: string
+        destinationSourceStatus:
+          enum:
+          - unset
+          - doNotTranslate
+          - notReadyForTranslation
+          - readyForTranslation
+          - locked
+          - lockAllLanguages
+          type: string
+        sourceLengthSetting:
+          format: int32
+          type: integer
+        destinationLengthSetting:
+          format: int32
+          type: integer
+        status:
+          enum:
+          - behind
+          - ahead
+          - conflicted
+          - unchanged
+          - invalidData
+          - na
+          - empty
+          - targetTranslationEmpty
+          - translationNotReady
+          - translationNotFound
+          - sourceTargetMismatched
+          - targetChangedTMNotApproved
+          - targetNotChanged
+          - sourcedChanged
+          - targetChanged
+          - textOverLength
+          - translationNotChanged
+          - notChanged
+          - warningOff
+          type: string
+        columnId:
+          type: string
+        sourceValue:
+          type: object
+        destinationValue:
+          type: object
+      type: object
+    BranchDiffRecord:
+      example:
+        path: path
+        cells:
+        - sourceDependencyStatus: upToDate
+          sourceLengthSetting: 0
+          destinationValue: "{}"
+          sourceSourceStatus: unset
+          destinationLengthSetting: 6
+          columnId: columnId
+          destinationSourceStatus: unset
+          sourceValue: "{}"
+          destinationDependencyStatus: upToDate
+          status: behind
+        - sourceDependencyStatus: upToDate
+          sourceLengthSetting: 0
+          destinationValue: "{}"
+          sourceSourceStatus: unset
+          destinationLengthSetting: 6
+          columnId: columnId
+          destinationSourceStatus: unset
+          sourceValue: "{}"
+          destinationDependencyStatus: upToDate
+          status: behind
+        lastModifiedTime: 2000-01-23T04:56:07.000+00:00
+        lastModifiedBy: lastModifiedBy
+        id: id
+        status: added
+      properties:
+        id:
+          type: string
+        path:
+          type: string
+        status:
+          enum:
+          - added
+          - updated
+          - deleted
+          - duplicated
+          - exceededLengthId
+          - merged
+          - identifierUpdated
+          type: string
+        cells:
+          items:
+            $ref: '#/components/schemas/BranchDiffCell'
+          type: array
+        lastModifiedBy:
+          type: string
+        lastModifiedTime:
+          format: date-time
+          type: string
       type: object
     DeleteRecord:
       example:
@@ -5615,10 +6248,8 @@ components:
                 id: id
             dateTimeFormat:
               zoneOffset: zoneOffset
-              dateFormat:
-                name: name
-                format: format
-              timeFormat: hour12
+              dateFormat: dateFormat
+              timeFormat: timeFormat
               showTimeZone: true
             numberFormat:
               decimalPlaces: 0
@@ -5659,10 +6290,8 @@ components:
                 id: id
             dateTimeFormat:
               zoneOffset: zoneOffset
-              dateFormat:
-                name: name
-                format: format
-              timeFormat: hour12
+              dateFormat: dateFormat
+              timeFormat: timeFormat
               showTimeZone: true
             numberFormat:
               decimalPlaces: 0
@@ -5712,10 +6341,8 @@ components:
                 id: id
             dateTimeFormat:
               zoneOffset: zoneOffset
-              dateFormat:
-                name: name
-                format: format
-              timeFormat: hour12
+              dateFormat: dateFormat
+              timeFormat: timeFormat
               showTimeZone: true
             numberFormat:
               decimalPlaces: 0
@@ -5756,10 +6383,8 @@ components:
                 id: id
             dateTimeFormat:
               zoneOffset: zoneOffset
-              dateFormat:
-                name: name
-                format: format
-              timeFormat: hour12
+              dateFormat: dateFormat
+              timeFormat: timeFormat
               showTimeZone: true
             numberFormat:
               decimalPlaces: 0
@@ -5853,10 +6478,8 @@ components:
                 id: id
             dateTimeFormat:
               zoneOffset: zoneOffset
-              dateFormat:
-                name: name
-                format: format
-              timeFormat: hour12
+              dateFormat: dateFormat
+              timeFormat: timeFormat
               showTimeZone: true
             numberFormat:
               decimalPlaces: 0
@@ -5897,10 +6520,8 @@ components:
                 id: id
             dateTimeFormat:
               zoneOffset: zoneOffset
-              dateFormat:
-                name: name
-                format: format
-              timeFormat: hour12
+              dateFormat: dateFormat
+              timeFormat: timeFormat
               showTimeZone: true
             numberFormat:
               decimalPlaces: 0
@@ -5993,10 +6614,8 @@ components:
                 id: id
             dateTimeFormat:
               zoneOffset: zoneOffset
-              dateFormat:
-                name: name
-                format: format
-              timeFormat: hour12
+              dateFormat: dateFormat
+              timeFormat: timeFormat
               showTimeZone: true
             numberFormat:
               decimalPlaces: 0
@@ -6037,10 +6656,8 @@ components:
                 id: id
             dateTimeFormat:
               zoneOffset: zoneOffset
-              dateFormat:
-                name: name
-                format: format
-              timeFormat: hour12
+              dateFormat: dateFormat
+              timeFormat: timeFormat
               showTimeZone: true
             numberFormat:
               decimalPlaces: 0
@@ -6266,10 +6883,8 @@ components:
                   id: id
               dateTimeFormat:
                 zoneOffset: zoneOffset
-                dateFormat:
-                  name: name
-                  format: format
-                timeFormat: hour12
+                dateFormat: dateFormat
+                timeFormat: timeFormat
                 showTimeZone: true
               numberFormat:
                 decimalPlaces: 0
@@ -6310,10 +6925,8 @@ components:
                   id: id
               dateTimeFormat:
                 zoneOffset: zoneOffset
-                dateFormat:
-                  name: name
-                  format: format
-                timeFormat: hour12
+                dateFormat: dateFormat
+                timeFormat: timeFormat
                 showTimeZone: true
               numberFormat:
                 decimalPlaces: 0
@@ -6363,10 +6976,8 @@ components:
                   id: id
               dateTimeFormat:
                 zoneOffset: zoneOffset
-                dateFormat:
-                  name: name
-                  format: format
-                timeFormat: hour12
+                dateFormat: dateFormat
+                timeFormat: timeFormat
                 showTimeZone: true
               numberFormat:
                 decimalPlaces: 0
@@ -6407,10 +7018,8 @@ components:
                   id: id
               dateTimeFormat:
                 zoneOffset: zoneOffset
-                dateFormat:
-                  name: name
-                  format: format
-                timeFormat: hour12
+                dateFormat: dateFormat
+                timeFormat: timeFormat
                 showTimeZone: true
               numberFormat:
                 decimalPlaces: 0
@@ -6504,10 +7113,8 @@ components:
                   id: id
               dateTimeFormat:
                 zoneOffset: zoneOffset
-                dateFormat:
-                  name: name
-                  format: format
-                timeFormat: hour12
+                dateFormat: dateFormat
+                timeFormat: timeFormat
                 showTimeZone: true
               numberFormat:
                 decimalPlaces: 0
@@ -6548,10 +7155,8 @@ components:
                   id: id
               dateTimeFormat:
                 zoneOffset: zoneOffset
-                dateFormat:
-                  name: name
-                  format: format
-                timeFormat: hour12
+                dateFormat: dateFormat
+                timeFormat: timeFormat
                 showTimeZone: true
               numberFormat:
                 decimalPlaces: 0
@@ -6644,10 +7249,8 @@ components:
                   id: id
               dateTimeFormat:
                 zoneOffset: zoneOffset
-                dateFormat:
-                  name: name
-                  format: format
-                timeFormat: hour12
+                dateFormat: dateFormat
+                timeFormat: timeFormat
                 showTimeZone: true
               numberFormat:
                 decimalPlaces: 0
@@ -6688,10 +7291,8 @@ components:
                   id: id
               dateTimeFormat:
                 zoneOffset: zoneOffset
-                dateFormat:
-                  name: name
-                  format: format
-                timeFormat: hour12
+                dateFormat: dateFormat
+                timeFormat: timeFormat
                 showTimeZone: true
               numberFormat:
                 decimalPlaces: 0
@@ -6801,10 +7402,8 @@ components:
                   id: id
               dateTimeFormat:
                 zoneOffset: zoneOffset
-                dateFormat:
-                  name: name
-                  format: format
-                timeFormat: hour12
+                dateFormat: dateFormat
+                timeFormat: timeFormat
                 showTimeZone: true
               numberFormat:
                 decimalPlaces: 0
@@ -6845,10 +7444,8 @@ components:
                   id: id
               dateTimeFormat:
                 zoneOffset: zoneOffset
-                dateFormat:
-                  name: name
-                  format: format
-                timeFormat: hour12
+                dateFormat: dateFormat
+                timeFormat: timeFormat
                 showTimeZone: true
               numberFormat:
                 decimalPlaces: 0
@@ -6898,10 +7495,8 @@ components:
                   id: id
               dateTimeFormat:
                 zoneOffset: zoneOffset
-                dateFormat:
-                  name: name
-                  format: format
-                timeFormat: hour12
+                dateFormat: dateFormat
+                timeFormat: timeFormat
                 showTimeZone: true
               numberFormat:
                 decimalPlaces: 0
@@ -6942,10 +7537,8 @@ components:
                   id: id
               dateTimeFormat:
                 zoneOffset: zoneOffset
-                dateFormat:
-                  name: name
-                  format: format
-                timeFormat: hour12
+                dateFormat: dateFormat
+                timeFormat: timeFormat
                 showTimeZone: true
               numberFormat:
                 decimalPlaces: 0
@@ -7039,10 +7632,8 @@ components:
                   id: id
               dateTimeFormat:
                 zoneOffset: zoneOffset
-                dateFormat:
-                  name: name
-                  format: format
-                timeFormat: hour12
+                dateFormat: dateFormat
+                timeFormat: timeFormat
                 showTimeZone: true
               numberFormat:
                 decimalPlaces: 0
@@ -7083,10 +7674,8 @@ components:
                   id: id
               dateTimeFormat:
                 zoneOffset: zoneOffset
-                dateFormat:
-                  name: name
-                  format: format
-                timeFormat: hour12
+                dateFormat: dateFormat
+                timeFormat: timeFormat
                 showTimeZone: true
               numberFormat:
                 decimalPlaces: 0
@@ -7179,10 +7768,8 @@ components:
                   id: id
               dateTimeFormat:
                 zoneOffset: zoneOffset
-                dateFormat:
-                  name: name
-                  format: format
-                timeFormat: hour12
+                dateFormat: dateFormat
+                timeFormat: timeFormat
                 showTimeZone: true
               numberFormat:
                 decimalPlaces: 0
@@ -7223,10 +7810,8 @@ components:
                   id: id
               dateTimeFormat:
                 zoneOffset: zoneOffset
-                dateFormat:
-                  name: name
-                  format: format
-                timeFormat: hour12
+                dateFormat: dateFormat
+                timeFormat: timeFormat
                 showTimeZone: true
               numberFormat:
                 decimalPlaces: 0
@@ -7320,6 +7905,40 @@ components:
             $ref: '#/components/schemas/Group'
           type: array
       type: object
+    CreateGlossary:
+      example:
+        projects:
+        - databaseIds:
+          - databaseIds
+          - databaseIds
+          projectId: 0
+        - databaseIds:
+          - databaseIds
+          - databaseIds
+          projectId: 0
+        name: name
+        description: description
+        langs:
+        - langs
+        - langs
+      properties:
+        name:
+          maxLength: 100
+          pattern: \S
+          type: string
+        description:
+          type: string
+        langs:
+          items:
+            type: string
+          type: array
+        projects:
+          items:
+            $ref: '#/components/schemas/GlossaryProject'
+          type: array
+      required:
+      - name
+      type: object
     CreateTransMem:
       example:
         isPausedConsuming: true
@@ -7362,6 +7981,73 @@ components:
       - tmx
       - csv
       - xlsx
+      type: string
+    FileUpload:
+      type: object
+    FileUploadSchema:
+      format: binary
+      type: string
+    Glossary:
+      example:
+        projects:
+        - databaseIds:
+          - databaseIds
+          - databaseIds
+          projectId: 0
+        - databaseIds:
+          - databaseIds
+          - databaseIds
+          projectId: 0
+        name: name
+        description: description
+        langs:
+        - langs
+        - langs
+        id: id
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        langs:
+          items:
+            type: string
+          type: array
+        projects:
+          items:
+            $ref: '#/components/schemas/GlossaryProject'
+          type: array
+      type: object
+    GlossaryExportFormat:
+      enum:
+      - csv
+      - xls
+      - xlsx
+      - tbx
+      type: string
+    GlossaryProject:
+      example:
+        databaseIds:
+        - databaseIds
+        - databaseIds
+        projectId: 0
+      properties:
+        projectId:
+          format: int64
+          type: integer
+        databaseIds:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+      type: object
+    ImportOption:
+      enum:
+      - ADD
+      - UPDATE
+      - UPDATE_ONLY
       type: string
     TransMem:
       example:
@@ -7408,6 +8094,36 @@ components:
       - outOfDate
       - unset
       type: string
+    UpdateGlossary:
+      example:
+        projects:
+        - databaseIds:
+          - databaseIds
+          - databaseIds
+          projectId: 0
+        - databaseIds:
+          - databaseIds
+          - databaseIds
+          projectId: 0
+        name: name
+        description: description
+        langs:
+        - langs
+        - langs
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        langs:
+          items:
+            type: string
+          type: array
+        projects:
+          items:
+            $ref: '#/components/schemas/GlossaryProject'
+          type: array
+      type: object
     UpdateTransMem:
       example:
         isPausedConsuming: true
@@ -7478,6 +8194,25 @@ components:
         file:
           format: binary
           type: string
+      type: object
+    importFile_request:
+      properties:
+        file:
+          $ref: '#/components/schemas/FileUpload'
+      type: object
+    createWithFile_request:
+      properties:
+        file:
+          $ref: '#/components/schemas/FileUploadSchema'
+      required:
+      - file
+      type: object
+    importTmx_request:
+      properties:
+        file:
+          $ref: '#/components/schemas/FileUpload'
+      required:
+      - file
       type: object
   securitySchemes:
     ApiKey:

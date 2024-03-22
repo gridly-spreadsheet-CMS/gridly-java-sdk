@@ -238,7 +238,7 @@ public class Example {
 
 <a name="fetchHistories"></a>
 # **fetchHistories**
-> List&lt;RecordHistory&gt; fetchHistories(viewId, recordId, page)
+> List&lt;RecordHistory&gt; fetchHistories(viewId, recordId, fetchRequest)
 
 fetchHistories
 
@@ -268,9 +268,9 @@ public class Example {
     RecordApi apiInstance = new RecordApi(defaultClient);
     String viewId = "viewId_example"; // String | viewId
     String recordId = "recordId_example"; // String | recordId
-    String page = "{}"; // String | page
+    FetchRecordHistoryRequest fetchRequest = new HashMap(); // FetchRecordHistoryRequest | fetchRequest
     try {
-      List<RecordHistory> result = apiInstance.fetchHistories(viewId, recordId, page);
+      List<RecordHistory> result = apiInstance.fetchHistories(viewId, recordId, fetchRequest);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling RecordApi#fetchHistories");
@@ -289,7 +289,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **viewId** | **String**| viewId | |
 | **recordId** | **String**| recordId | |
-| **page** | **String**| page | [optional] [default to {}] |
+| **fetchRequest** | [**FetchRecordHistoryRequest**](.md)| fetchRequest | |
 
 ### Return type
 

@@ -8,8 +8,8 @@
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**id** | **String** |  |  [optional] |
-|**sourceColumnId** | **String** |  |  |
 |**targetColumnId** | **String** |  |  |
+|**sourceColumnId** | **String** |  |  |
 
 
 ## Implemented Interfaces

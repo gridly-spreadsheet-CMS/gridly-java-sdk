@@ -8,6 +8,8 @@ build.sbt
 docs/AddViewColumn.md
 docs/Branch.md
 docs/BranchApi.md
+docs/BranchDiffCell.md
+docs/BranchDiffRecord.md
 docs/Cell.md
 docs/CellHistory.md
 docs/ColumnReference.md
@@ -17,6 +19,7 @@ docs/CreateColumn.md
 docs/CreateDatabase.md
 docs/CreateDependency.md
 docs/CreateFileCategory.md
+docs/CreateGlossary.md
 docs/CreateGrid.md
 docs/CreatePath.md
 docs/CreateProject.md
@@ -25,7 +28,6 @@ docs/CreateTransMem.md
 docs/CreateView.md
 docs/Database.md
 docs/DatabaseApi.md
-docs/DateFormat.md
 docs/DateTimeFormat.md
 docs/DeleteDependency.md
 docs/DeleteFile.md
@@ -35,12 +37,22 @@ docs/Dependency.md
 docs/ExportFileHeader.md
 docs/ExportFormat.md
 docs/FetchFileOption.md
+docs/FetchRecordHistoryRequest.md
 docs/FileCategory.md
+docs/FilterField.md
 docs/Formula.md
+docs/Glossary.md
+docs/GlossaryApi.md
+docs/GlossaryExportFormat.md
+docs/GlossaryProject.md
 docs/Grid.md
 docs/GridApi.md
 docs/GridSetting.md
 docs/Group.md
+docs/ImportOption.md
+docs/MergeBranchRequest.md
+docs/MergeCellConflict.md
+docs/MergeRecordConflict.md
 docs/MovePath.md
 docs/NumberFormat.md
 docs/PathApi.md
@@ -74,6 +86,7 @@ docs/UpdateCategory.md
 docs/UpdateColumn.md
 docs/UpdateDatabase.md
 docs/UpdateDependency.md
+docs/UpdateGlossary.md
 docs/UpdateGrid.md
 docs/UpdateGridSetting.md
 docs/UpdatePath.md
@@ -118,6 +131,8 @@ src/main/java/com/gridly/api/client/auth/HttpBearerAuth.java
 src/main/java/com/gridly/api/model/AbstractOpenApiSchema.java
 src/main/java/com/gridly/api/model/AddViewColumn.java
 src/main/java/com/gridly/api/model/Branch.java
+src/main/java/com/gridly/api/model/BranchDiffCell.java
+src/main/java/com/gridly/api/model/BranchDiffRecord.java
 src/main/java/com/gridly/api/model/Cell.java
 src/main/java/com/gridly/api/model/CellHistory.java
 src/main/java/com/gridly/api/model/ColumnReference.java
@@ -127,6 +142,7 @@ src/main/java/com/gridly/api/model/CreateColumn.java
 src/main/java/com/gridly/api/model/CreateDatabase.java
 src/main/java/com/gridly/api/model/CreateDependency.java
 src/main/java/com/gridly/api/model/CreateFileCategory.java
+src/main/java/com/gridly/api/model/CreateGlossary.java
 src/main/java/com/gridly/api/model/CreateGrid.java
 src/main/java/com/gridly/api/model/CreatePath.java
 src/main/java/com/gridly/api/model/CreateProject.java
@@ -134,7 +150,6 @@ src/main/java/com/gridly/api/model/CreateShareView.java
 src/main/java/com/gridly/api/model/CreateTransMem.java
 src/main/java/com/gridly/api/model/CreateView.java
 src/main/java/com/gridly/api/model/Database.java
-src/main/java/com/gridly/api/model/DateFormat.java
 src/main/java/com/gridly/api/model/DateTimeFormat.java
 src/main/java/com/gridly/api/model/DeleteDependency.java
 src/main/java/com/gridly/api/model/DeleteFile.java
@@ -144,11 +159,20 @@ src/main/java/com/gridly/api/model/Dependency.java
 src/main/java/com/gridly/api/model/ExportFileHeader.java
 src/main/java/com/gridly/api/model/ExportFormat.java
 src/main/java/com/gridly/api/model/FetchFileOption.java
+src/main/java/com/gridly/api/model/FetchRecordHistoryRequest.java
 src/main/java/com/gridly/api/model/FileCategory.java
+src/main/java/com/gridly/api/model/FilterField.java
 src/main/java/com/gridly/api/model/Formula.java
+src/main/java/com/gridly/api/model/Glossary.java
+src/main/java/com/gridly/api/model/GlossaryExportFormat.java
+src/main/java/com/gridly/api/model/GlossaryProject.java
 src/main/java/com/gridly/api/model/Grid.java
 src/main/java/com/gridly/api/model/GridSetting.java
 src/main/java/com/gridly/api/model/Group.java
+src/main/java/com/gridly/api/model/ImportOption.java
+src/main/java/com/gridly/api/model/MergeBranchRequest.java
+src/main/java/com/gridly/api/model/MergeCellConflict.java
+src/main/java/com/gridly/api/model/MergeRecordConflict.java
 src/main/java/com/gridly/api/model/MovePath.java
 src/main/java/com/gridly/api/model/NumberFormat.java
 src/main/java/com/gridly/api/model/PathList.java
@@ -176,6 +200,7 @@ src/main/java/com/gridly/api/model/UpdateCategory.java
 src/main/java/com/gridly/api/model/UpdateColumn.java
 src/main/java/com/gridly/api/model/UpdateDatabase.java
 src/main/java/com/gridly/api/model/UpdateDependency.java
+src/main/java/com/gridly/api/model/UpdateGlossary.java
 src/main/java/com/gridly/api/model/UpdateGrid.java
 src/main/java/com/gridly/api/model/UpdateGridSetting.java
 src/main/java/com/gridly/api/model/UpdatePath.java
@@ -189,6 +214,7 @@ src/main/java/com/gridly/api/model/ViewColumn.java
 src/main/java/com/gridly/api/model/ViewStatistic.java
 src/main/java/com/gridly/api/service/BranchApi.java
 src/main/java/com/gridly/api/service/DatabaseApi.java
+src/main/java/com/gridly/api/service/GlossaryApi.java
 src/main/java/com/gridly/api/service/GridApi.java
 src/main/java/com/gridly/api/service/PathApi.java
 src/main/java/com/gridly/api/service/ProjectApi.java
@@ -202,6 +228,7 @@ src/main/java/com/gridly/api/service/ViewDependencyApi.java
 src/main/java/com/gridly/api/service/ViewFileApi.java
 src/test/java/com/gridly/api/service/BranchApiTest.java
 src/test/java/com/gridly/api/service/DatabaseApiTest.java
+src/test/java/com/gridly/api/service/GlossaryApiTest.java
 src/test/java/com/gridly/api/service/GridApiTest.java
 src/test/java/com/gridly/api/service/PathApiTest.java
 src/test/java/com/gridly/api/service/ProjectApiTest.java

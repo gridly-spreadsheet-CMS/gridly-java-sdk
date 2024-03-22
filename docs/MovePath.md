@@ -7,11 +7,11 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**fromParentPath** | **String** |  |  [optional] |
-|**moveAfter** | **String** |  |  [optional] |
-|**moveBefore** | **String** |  |  [optional] |
 |**names** | **List&lt;String&gt;** |  |  [optional] |
+|**fromParentPath** | **String** |  |  [optional] |
 |**toParentPath** | **String** |  |  [optional] |
+|**moveBefore** | **String** |  |  [optional] |
+|**moveAfter** | **String** |  |  [optional] |
 
 
 ## Implemented Interfaces

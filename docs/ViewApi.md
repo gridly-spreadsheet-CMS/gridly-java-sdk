@@ -66,7 +66,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **branchId** | **String**| branchId | [optional] |
 | **gridId** | **String**| gridId | [optional] |
-| **type** | **String**| type | [optional] [enum: defaultView, accessView, userView] |
+| **type** | **String**| type | [optional] [enum: defaultView, accessView, userView, workflowView] |
 
 ### Return type
 
@@ -460,7 +460,7 @@ null (empty response body)
 
 <a name="merge"></a>
 # **merge**
-> Task merge(destinationViewId, viewId, mergeRecordOptions)
+> Task merge(destinationViewId, viewId, mergeBranchRequest, mergeRecordOptions)
 
 merge
 
@@ -490,9 +490,10 @@ public class Example {
     ViewApi apiInstance = new ViewApi(defaultClient);
     String destinationViewId = "destinationViewId_example"; // String | destinationViewId
     String viewId = "viewId_example"; // String | viewId
+    MergeBranchRequest mergeBranchRequest = new MergeBranchRequest(); // MergeBranchRequest | 
     List<String> mergeRecordOptions = Arrays.asList(); // List<String> | mergeRecordOptions
     try {
-      Task result = apiInstance.merge(destinationViewId, viewId, mergeRecordOptions);
+      Task result = apiInstance.merge(destinationViewId, viewId, mergeBranchRequest, mergeRecordOptions);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ViewApi#merge");
@@ -511,6 +512,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **destinationViewId** | **String**| destinationViewId | |
 | **viewId** | **String**| viewId | |
+| **mergeBranchRequest** | [**MergeBranchRequest**](MergeBranchRequest.md)|  | |
 | **mergeRecordOptions** | [**List&lt;String&gt;**](String.md)| mergeRecordOptions | [optional] [enum: add, update, delete, override] |
 
 ### Return type
@@ -523,7 +525,7 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 ### HTTP response details

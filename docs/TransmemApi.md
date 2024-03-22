@@ -451,7 +451,7 @@ public class Example {
 
     TransmemApi apiInstance = new TransmemApi(defaultClient);
     String tmId = "tmId_example"; // String | 
-    File _file = new File("/path/to/file"); // File | 
+    Object _file = null; // Object | 
     try {
       apiInstance.importTmx(tmId, _file);
     } catch (ApiException e) {
@@ -470,7 +470,7 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **tmId** | **String**|  | |
-| **_file** | **File**|  | |
+| **_file** | [**Object**](Object.md)|  | |
 
 ### Return type
 
