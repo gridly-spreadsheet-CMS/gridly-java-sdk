@@ -10,7 +10,7 @@ info:
     url: ""
   termsOfService: https://www.gridly.com
   title: Gridly API
-  version: 4.29.1
+  version: 4.33.0
 servers:
 - description: Generated server url
   url: https://api.gridly.com
@@ -2770,7 +2770,7 @@ paths:
         schema:
           allOf:
           - $ref: '#/components/schemas/GlossaryExportFormat'
-          - {}
+          - default: tbx
         style: form
       - explode: true
         in: query
@@ -2807,7 +2807,7 @@ paths:
         schema:
           allOf:
           - $ref: '#/components/schemas/ImportOption'
-          - {}
+          - default: UPDATE
         style: form
       requestBody:
         content:
@@ -2996,7 +2996,7 @@ paths:
         schema:
           allOf:
           - $ref: '#/components/schemas/ExportFormat'
-          - {}
+          - default: tmx
         style: form
       - explode: true
         in: query
@@ -4230,6 +4230,8 @@ components:
           - hasQaError
           - isLengthViolated
           - hasTag
+          - spellCheck
+          - qaCheck
           - isMt
           type: string
         queryPathTagViaId:
@@ -4255,6 +4257,8 @@ components:
           - LENGTH_VIOLATED
           - LENGTH_SETTING
           - WORKFLOW_STATUS
+          - REPETITION
+          - QA_CHECK_STATUS
           type: string
         values:
           items:
@@ -7951,6 +7955,7 @@ components:
         - 0
         isDisabled: true
         fuzzyMatch: true
+        allowAlternative: true
       properties:
         name:
           maxLength: 100
@@ -7973,6 +7978,8 @@ components:
           type: boolean
         populateTranslationStatus:
           $ref: '#/components/schemas/TranslationStatus'
+        allowAlternative:
+          type: boolean
       required:
       - name
       type: object
@@ -8052,6 +8059,7 @@ components:
     TransMem:
       example:
         isPausedConsuming: true
+        allowAlternativeHasSameRecordId: true
         populateTranslationStatus: null
         contextLookup: true
         name: name
@@ -8062,6 +8070,7 @@ components:
         - 0
         isDisabled: true
         fuzzyMatch: true
+        allowAlternative: true
       properties:
         id:
           type: string
@@ -8084,6 +8093,10 @@ components:
         description:
           type: string
         fuzzyMatch:
+          type: boolean
+        allowAlternative:
+          type: boolean
+        allowAlternativeHasSameRecordId:
           type: boolean
       required:
       - name
@@ -8127,6 +8140,7 @@ components:
     UpdateTransMem:
       example:
         isPausedConsuming: true
+        allowAlternativeHasSameRecordId: true
         populateTranslationStatus: null
         contextLookup: true
         name: name
@@ -8136,6 +8150,7 @@ components:
         - 0
         isDisabled: true
         fuzzyMatch: true
+        allowAlternative: true
       properties:
         name:
           type: string
@@ -8155,6 +8170,10 @@ components:
         populateTranslationStatus:
           $ref: '#/components/schemas/TranslationStatus'
         contextLookup:
+          type: boolean
+        allowAlternative:
+          type: boolean
+        allowAlternativeHasSameRecordId:
           type: boolean
       type: object
     importView_request:

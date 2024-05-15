@@ -48,6 +48,8 @@
 | HASQAERROR | &quot;hasQaError&quot; |
 | ISLENGTHVIOLATED | &quot;isLengthViolated&quot; |
 | HASTAG | &quot;hasTag&quot; |
+| SPELLCHECK | &quot;spellCheck&quot; |
+| QACHECK | &quot;qaCheck&quot; |
 | ISMT | &quot;isMt&quot; |
 
 
@@ -75,6 +77,8 @@
 | LENGTH_VIOLATED | &quot;LENGTH_VIOLATED&quot; |
 | LENGTH_SETTING | &quot;LENGTH_SETTING&quot; |
 | WORKFLOW_STATUS | &quot;WORKFLOW_STATUS&quot; |
+| REPETITION | &quot;REPETITION&quot; |
+| QA_CHECK_STATUS | &quot;QA_CHECK_STATUS&quot; |
 
 
 ## Implemented Interfaces

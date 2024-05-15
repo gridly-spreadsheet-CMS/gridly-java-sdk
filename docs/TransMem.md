@@ -16,6 +16,8 @@
 |**name** | **String** |  |  |
 |**description** | **String** |  |  [optional] |
 |**fuzzyMatch** | **Boolean** |  |  [optional] |
+|**allowAlternative** | **Boolean** |  |  [optional] |
+|**allowAlternativeHasSameRecordId** | **Boolean** |  |  [optional] |
 
 
 ## Implemented Interfaces

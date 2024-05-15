@@ -15,6 +15,8 @@
 |**isPausedConsuming** | **Boolean** |  |  [optional] |
 |**populateTranslationStatus** | **TranslationStatus** |  |  [optional] |
 |**contextLookup** | **Boolean** |  |  [optional] |
+|**allowAlternative** | **Boolean** |  |  [optional] |
+|**allowAlternativeHasSameRecordId** | **Boolean** |  |  [optional] |
 
 
 ## Implemented Interfaces
