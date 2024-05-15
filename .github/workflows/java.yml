@@ -2,7 +2,7 @@ name: Gridly Java SDK
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
     tags: 
       - '*'
 
