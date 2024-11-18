@@ -55,6 +55,7 @@
 | YAML | &quot;yaml&quot; |
 | HTML | &quot;html&quot; |
 | FORMULA | &quot;formula&quot; |
+| USER | &quot;user&quot; |
 
 
 ## Implemented Interfaces

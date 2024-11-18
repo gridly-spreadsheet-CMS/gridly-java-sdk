@@ -214,7 +214,7 @@ public class Example {
 | **page** | **String**| page | [optional] [default to {}] |
 | **query** | **String**| query | [optional] [default to {}] |
 | **sort** | **String**| sort | [optional] [default to {}] |
-| **fetchFileOption** | [**FetchFileOption**](.md)| fetchFileOption | [optional] [default to id] [enum: all, id, name] |
+| **fetchFileOption** | [**FetchFileOption**](.md)| fetchFileOption | [optional] [enum: all, id, name] |
 | **afterRecordId** | **String**| afterRecordId | [optional] |
 | **beforeRecordId** | **String**| beforeRecordId | [optional] |
 

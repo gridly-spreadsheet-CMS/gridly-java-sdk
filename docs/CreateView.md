@@ -7,8 +7,8 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**name** | **String** |  |  [optional] |
-|**gridId** | **String** |  |  [optional] |
+|**name** | **String** |  |  |
+|**gridId** | **String** |  |  |
 |**columns** | [**List&lt;AddViewColumn&gt;**](AddViewColumn.md) |  |  [optional] |
 
 

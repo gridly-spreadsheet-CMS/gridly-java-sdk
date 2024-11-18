@@ -16,8 +16,8 @@
 |**shareType** | [**ShareTypeEnum**](#ShareTypeEnum) |  |  [optional] |
 |**createdDate** | **OffsetDateTime** |  |  [optional] |
 |**lastModifiedDate** | **OffsetDateTime** |  |  [optional] |
-|**isSystemGroup** | **Boolean** |  |  [optional] |
 |**systemGroup** | **Boolean** |  |  [optional] |
+|**isSystemGroup** | **Boolean** |  |  [optional] |
 
 
 

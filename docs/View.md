@@ -32,6 +32,7 @@
 | DUPLICATING | &quot;duplicating&quot; |
 | CLEARINGRECORDS | &quot;clearingRecords&quot; |
 | COPYING | &quot;copying&quot; |
+| UPDATINGWORKFLOW | &quot;updatingWorkflow&quot; |
 
 
 ## Implemented Interfaces

@@ -43,6 +43,7 @@
 | YAML | &quot;yaml&quot; |
 | HTML | &quot;html&quot; |
 | FORMULA | &quot;formula&quot; |
+| USER | &quot;user&quot; |
 
 
 
@@ -71,6 +72,7 @@
 | ZHHK | &quot;zhHK&quot; |
 | CSCZ | &quot;csCZ&quot; |
 | DADK | &quot;daDK&quot; |
+| KLGL | &quot;klGL&quot; |
 | NLNL | &quot;nlNL&quot; |
 | FIFI | &quot;fiFI&quot; |
 | FRFR | &quot;frFR&quot; |
@@ -220,6 +222,7 @@
 | CA | &quot;ca&quot; |
 | HR | &quot;hr&quot; |
 | DA | &quot;da&quot; |
+| KL | &quot;kl&quot; |
 | NL | &quot;nl&quot; |
 | EN | &quot;en&quot; |
 | FI | &quot;fi&quot; |

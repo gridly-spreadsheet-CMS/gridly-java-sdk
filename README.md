@@ -1,7 +1,7 @@
 # gridly-api
 
 Gridly API
-- API version: 4.33.0
+- API version: 5.9.0
 
 Gridly API documentation
 
@@ -40,7 +40,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.gridly</groupId>
   <artifactId>gridly-api</artifactId>
-  <version>1.3.0</version>
+  <version>1.4.0</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -56,7 +56,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "com.gridly:gridly-api:1.3.0"
+     implementation "com.gridly:gridly-api:1.4.0"
   }
 ```
 
@@ -70,7 +70,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/gridly-api-1.3.0.jar`
+* `target/gridly-api-1.4.0.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -128,6 +128,9 @@ Class | Method | HTTP request | Description
 *BranchApi* | [**get**](docs/BranchApi.md#get) | **GET** /v1/branches/{branchId} | get
 *BranchApi* | [**getDiffCheck**](docs/BranchApi.md#getDiffCheck) | **GET** /v1/branches/diffcheck/{taskId} | getDiffCheck
 *BranchApi* | [**merge**](docs/BranchApi.md#merge) | **POST** /v1/branches/{branchId}/merge | merge
+*CdnApi* | [**callList**](docs/CdnApi.md#callList) | **GET** /v1/cdns | list
+*CdnApi* | [**publish**](docs/CdnApi.md#publish) | **PUT** /v1/cdns/{cdnId}/publish | publish
+*CdnApi* | [**unPublish**](docs/CdnApi.md#unPublish) | **PUT** /v1/cdns/{cdnId}/unpublish | unPublish
 *DatabaseApi* | [**callList**](docs/DatabaseApi.md#callList) | **GET** /v1/databases | list
 *DatabaseApi* | [**create**](docs/DatabaseApi.md#create) | **POST** /v1/databases | create
 *DatabaseApi* | [**delete**](docs/DatabaseApi.md#delete) | **DELETE** /v1/databases/{dbId} | delete
@@ -216,6 +219,7 @@ Class | Method | HTTP request | Description
  - [Branch](docs/Branch.md)
  - [BranchDiffCell](docs/BranchDiffCell.md)
  - [BranchDiffRecord](docs/BranchDiffRecord.md)
+ - [CDN](docs/CDN.md)
  - [Cell](docs/Cell.md)
  - [CellHistory](docs/CellHistory.md)
  - [ColumnReference](docs/ColumnReference.md)
@@ -244,6 +248,7 @@ Class | Method | HTTP request | Description
  - [FetchFileOption](docs/FetchFileOption.md)
  - [FetchRecordHistoryRequest](docs/FetchRecordHistoryRequest.md)
  - [FileCategory](docs/FileCategory.md)
+ - [FileType](docs/FileType.md)
  - [FilterField](docs/FilterField.md)
  - [Formula](docs/Formula.md)
  - [Glossary](docs/Glossary.md)
@@ -261,7 +266,6 @@ Class | Method | HTTP request | Description
  - [PathList](docs/PathList.md)
  - [PathNode](docs/PathNode.md)
  - [PathSingle](docs/PathSingle.md)
- - [Privilege](docs/Privilege.md)
  - [Project](docs/Project.md)
  - [ProjectDetail](docs/ProjectDetail.md)
  - [Record](docs/Record.md)
@@ -270,7 +274,6 @@ Class | Method | HTTP request | Description
  - [Reference](docs/Reference.md)
  - [ReferencedColumn](docs/ReferencedColumn.md)
  - [ReferencedGrid](docs/ReferencedGrid.md)
- - [Role](docs/Role.md)
  - [SetCell](docs/SetCell.md)
  - [SetRecord](docs/SetRecord.md)
  - [SettingFile](docs/SettingFile.md)
@@ -290,7 +293,6 @@ Class | Method | HTTP request | Description
  - [UpdateProject](docs/UpdateProject.md)
  - [UpdateTransMem](docs/UpdateTransMem.md)
  - [UploadSettingFileRequest](docs/UploadSettingFileRequest.md)
- - [UploadZipRequest](docs/UploadZipRequest.md)
  - [UploadedFile](docs/UploadedFile.md)
  - [View](docs/View.md)
  - [ViewColumn](docs/ViewColumn.md)

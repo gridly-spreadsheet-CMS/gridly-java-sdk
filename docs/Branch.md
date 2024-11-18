@@ -11,11 +11,11 @@
 |**columns** | [**List&lt;ViewColumn&gt;**](ViewColumn.md) |  |  [optional] |
 |**defaultAccessViewId** | **String** |  |  [optional] |
 |**description** | **String** |  |  [optional] |
+|**isMaster** | **Boolean** |  |  [optional] |
 |**metadata** | **Map&lt;String, String&gt;** |  |  [optional] |
 |**name** | **String** |  |  [optional] |
 |**recordIdentifierType** | [**RecordIdentifierTypeEnum**](#RecordIdentifierTypeEnum) |  |  [optional] |
 |**status** | [**StatusEnum**](#StatusEnum) |  |  [optional] |
-|**isMaster** | **Boolean** |  |  [optional] |
 
 
 
@@ -44,6 +44,7 @@
 | DUPLICATING | &quot;duplicating&quot; |
 | CLEARINGRECORDS | &quot;clearingRecords&quot; |
 | COPYING | &quot;copying&quot; |
+| UPDATINGWORKFLOW | &quot;updatingWorkflow&quot; |
 
 
 ## Implemented Interfaces

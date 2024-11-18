@@ -58,27 +58,30 @@
 
 | Name | Value |
 |---- | -----|
-| DEPENDENCY_STATUS | &quot;DEPENDENCY_STATUS&quot; |
-| SOURCE_STATUS | &quot;SOURCE_STATUS&quot; |
-| TARGET_STATUS | &quot;TARGET_STATUS&quot; |
-| FLOW_STATUS | &quot;FLOW_STATUS&quot; |
-| TM | &quot;TM&quot; |
-| MT | &quot;MT&quot; |
-| TICKET | &quot;TICKET&quot; |
-| COLOR | &quot;COLOR&quot; |
-| METADATA | &quot;METADATA&quot; |
-| CELL_METADATA | &quot;CELL_METADATA&quot; |
-| WORD_COUNT | &quot;WORD_COUNT&quot; |
-| PREVIEW_SOURCE_DATA | &quot;PREVIEW_SOURCE_DATA&quot; |
-| PREVIEW_SOURCE_DEPENDENCY_STATUS | &quot;PREVIEW_SOURCE_DEPENDENCY_STATUS&quot; |
-| PREVIEW_STATUS | &quot;PREVIEW_STATUS&quot; |
-| PREVIEW_MERGE_OPTION | &quot;PREVIEW_MERGE_OPTION&quot; |
-| RELATIVE_TIME | &quot;RELATIVE_TIME&quot; |
-| LENGTH_VIOLATED | &quot;LENGTH_VIOLATED&quot; |
-| LENGTH_SETTING | &quot;LENGTH_SETTING&quot; |
-| WORKFLOW_STATUS | &quot;WORKFLOW_STATUS&quot; |
-| REPETITION | &quot;REPETITION&quot; |
-| QA_CHECK_STATUS | &quot;QA_CHECK_STATUS&quot; |
+| DEPENDENCYSTATUS | &quot;_dependencyStatus&quot; |
+| SOURCESTATUS | &quot;_sourceStatus&quot; |
+| TARGETSTATUS | &quot;_targetStatus&quot; |
+| FLOWSTATUS | &quot;_flowStatus&quot; |
+| TM | &quot;_tm&quot; |
+| MT | &quot;_mt&quot; |
+| TICKET | &quot;_ticket&quot; |
+| COLOR | &quot;_color&quot; |
+| METADATA | &quot;_metadata&quot; |
+| CELL_METADATA | &quot;_cell_metadata&quot; |
+| WORD_COUNT | &quot;_word_count&quot; |
+| PREVIEWSOURCEDATA | &quot;_previewSourceData&quot; |
+| PREVIEWSOURCEDEPENDENCYSTATUS | &quot;_previewSourceDependencyStatus&quot; |
+| PREVIEWSTATUS | &quot;_previewStatus&quot; |
+| PREVIEWMERGEOPTION | &quot;_previewMergeOption&quot; |
+| RELATIVETIME | &quot;_relativeTime&quot; |
+| LENGTH_VIOLATED | &quot;_length_violated&quot; |
+| LENGTHSETTING | &quot;_lengthSetting&quot; |
+| WORKFLOW | &quot;_workflow&quot; |
+| WORKFLOWSTEPTRANSITIONED | &quot;_workflowStepTransitioned&quot; |
+| REPETITION | &quot;_repetition&quot; |
+| QACHECKSTATUS | &quot;_qaCheckStatus&quot; |
+| SPELLCHECKSTATUS | &quot;_spellCheckStatus&quot; |
+| HASTAG | &quot;_hasTag&quot; |
 
 
 ## Implemented Interfaces

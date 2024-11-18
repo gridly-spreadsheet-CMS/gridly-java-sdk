@@ -11,7 +11,17 @@
 |**companyId** | **Long** |  |  [optional] |
 |**name** | **String** |  |  [optional] |
 |**description** | **String** |  |  [optional] |
-|**role** | [**Role**](Role.md) |  |  [optional] |
+|**type** | [**TypeEnum**](#TypeEnum) |  |  [optional] |
+
+
+
+## Enum: TypeEnum
+
+| Name | Value |
+|---- | -----|
+| DEFAULT | &quot;DEFAULT&quot; |
+| INTERNAL | &quot;INTERNAL&quot; |
+| TMS | &quot;TMS&quot; |
 
 
 ## Implemented Interfaces

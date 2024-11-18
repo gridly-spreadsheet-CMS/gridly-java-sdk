@@ -10,33 +10,15 @@ info:
     url: ""
   termsOfService: https://www.gridly.com
   title: Gridly API
-  version: 4.33.0
+  version: 5.9.0
 servers:
 - description: Generated server url
   url: https://api.gridly.com
 security:
 - ApiKey: []
 tags:
-- description: View Dependency API
-  name: view-dependency
-- description: Task API
-  name: task
-- description: View API
-  name: view
-- description: Path API
-  name: Path
-- description: Record API
-  name: record
-- description: Branch API
-  name: branch
-- description: Grid API
-  name: grid
 - description: API for sharing view
   name: share-view
-- description: View File API
-  name: view-file
-- description: View Column API
-  name: view-column
 - description: Database API
   name: database
 - description: Project API
@@ -339,6 +321,58 @@ paths:
       - grid
       x-content-type: application/json
       x-accepts: application/json
+  /v1/cdns/{cdnId}/unpublish:
+    put:
+      description: unPublish
+      operationId: unPublish
+      parameters:
+      - description: cdnId
+        explode: false
+        in: path
+        name: cdnId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CDN'
+          description: OK
+      security:
+      - ApiKey: []
+      summary: unPublish
+      tags:
+      - cdn
+      x-accepts: application/json
+  /v1/cdns/{cdnId}/publish:
+    put:
+      description: publish
+      operationId: publish
+      parameters:
+      - description: cdnId
+        explode: false
+        in: path
+        name: cdnId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CDN'
+          description: OK
+      security:
+      - ApiKey: []
+      summary: publish
+      tags:
+      - cdn
+      x-accepts: application/json
   /v1/views:
     get:
       description: list
@@ -371,6 +405,7 @@ paths:
           - accessView
           - userView
           - workflowView
+          - widgetView
           type: string
         style: form
       responses:
@@ -788,17 +823,7 @@ paths:
         name: type
         required: false
         schema:
-          default: csv
-          enum:
-          - csv
-          - tsv
-          - xls
-          - xlsx
-          - json
-          - po
-          - html
-          nullable: true
-          type: string
+          $ref: '#/components/schemas/FileType'
         style: form
       requestBody:
         content:
@@ -923,9 +948,6 @@ paths:
       requestBody:
         content:
           multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/uploadZip_request'
-          application/json:
             schema:
               $ref: '#/components/schemas/uploadZip_request'
       responses:
@@ -2043,17 +2065,7 @@ paths:
         name: type
         required: false
         schema:
-          default: csv
-          enum:
-          - csv
-          - tsv
-          - xls
-          - xlsx
-          - json
-          - po
-          - html
-          nullable: true
-          type: string
+          $ref: '#/components/schemas/FileType'
         style: form
       responses:
         default:
@@ -2152,6 +2164,74 @@ paths:
       tags:
       - grid
       x-accepts: application/json
+  /v1/cdns:
+    get:
+      description: list
+      operationId: list
+      parameters:
+      - description: offset
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          format: int32
+          nullable: true
+          type: integer
+        style: form
+      - description: limit
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 128
+          format: int32
+          nullable: true
+          type: integer
+        style: form
+      - description: ids
+        explode: true
+        in: query
+        name: ids
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: gridId
+        explode: true
+        in: query
+        name: gridId
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: published
+        explode: true
+        in: query
+        name: published
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CDN'
+                type: array
+          description: OK
+      security:
+      - ApiKey: []
+      summary: list
+      tags:
+      - cdn
+      x-accepts: application/json
   /v1/branches/{branchId}:
     delete:
       description: delete
@@ -2210,6 +2290,10 @@ paths:
         name: mergeRecordOptions
         required: false
         schema:
+          default:
+          - add
+          - update
+          - delete
           items:
             enum:
             - add
@@ -3041,7 +3125,7 @@ paths:
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/importTmx_request'
+              $ref: '#/components/schemas/createWithFile_request'
         description: tmx file to upload
         required: true
       responses:
@@ -3157,18 +3241,86 @@ components:
         name:
           type: string
       type: object
+    CDN:
+      example:
+        lastModifiedTime: 2000-01-23T04:56:07.000+00:00
+        lastModifiedBy: lastModifiedBy
+        description: description
+        lastPublishedTime: 2000-01-23T04:56:07.000+00:00
+        permission: public
+        type: type
+        whiteListIP: whiteListIP
+        lastGeneratedTime: 2000-01-23T04:56:07.000+00:00
+        url: url
+        createdBy: createdBy
+        name: name
+        createdTime: 2000-01-23T04:56:07.000+00:00
+        startTime: 2000-01-23T04:56:07.000+00:00
+        id: id
+        gridId: gridId
+        endTime: 2000-01-23T04:56:07.000+00:00
+        status: readyToPublish
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        url:
+          type: string
+        gridId:
+          type: string
+        status:
+          enum:
+          - readyToPublish
+          - processing
+          - published
+          type: string
+        lastGeneratedTime:
+          format: date-time
+          type: string
+        lastPublishedTime:
+          format: date-time
+          type: string
+        permission:
+          enum:
+          - public
+          - private
+          type: string
+        type:
+          type: string
+        createdTime:
+          format: date-time
+          type: string
+        lastModifiedTime:
+          format: date-time
+          type: string
+        createdBy:
+          type: string
+        lastModifiedBy:
+          type: string
+        startTime:
+          format: date-time
+          type: string
+        endTime:
+          format: date-time
+          type: string
+        whiteListIP:
+          type: string
+      type: object
     AddViewColumn:
       example:
         reference:
           branchId: branchId
-          selectionType: SINGLE
+          selectionType: single
           columnId: columnId
           gridId: gridId
-          type: ROW
+          type: row
         numberFormat:
           decimalPlaces: 0
           currencySymbol: currencySymbol
-          type: DECIMAL
+          type: decimal
           use1000Separator: true
         dateTimeFormat:
           zoneOffset: zoneOffset
@@ -3220,6 +3372,7 @@ components:
           - yaml
           - html
           - formula
+          - user
           type: string
         languageCode:
           enum:
@@ -3244,6 +3397,7 @@ components:
           - zhHK
           - csCZ
           - daDK
+          - klGL
           - nlNL
           - fiFI
           - frFR
@@ -3393,6 +3547,7 @@ components:
           - ca
           - hr
           - da
+          - kl
           - nl
           - en
           - fi
@@ -3477,6 +3632,8 @@ components:
           $ref: '#/components/schemas/NumberFormat'
         selectionOptions:
           items:
+            maxLength: 100
+            minLength: 0
             type: string
           maxItems: 1000
           minItems: 0
@@ -3493,14 +3650,14 @@ components:
         columns:
         - reference:
             branchId: branchId
-            selectionType: SINGLE
+            selectionType: single
             columnId: columnId
             gridId: gridId
-            type: ROW
+            type: row
           numberFormat:
             decimalPlaces: 0
             currencySymbol: currencySymbol
-            type: DECIMAL
+            type: decimal
             use1000Separator: true
           dateTimeFormat:
             zoneOffset: zoneOffset
@@ -3526,14 +3683,14 @@ components:
           languageCode: enUS
         - reference:
             branchId: branchId
-            selectionType: SINGLE
+            selectionType: single
             columnId: columnId
             gridId: gridId
-            type: ROW
+            type: row
           numberFormat:
             decimalPlaces: 0
             currencySymbol: currencySymbol
-            type: DECIMAL
+            type: decimal
             use1000Separator: true
           dateTimeFormat:
             zoneOffset: zoneOffset
@@ -3568,6 +3725,9 @@ components:
           items:
             $ref: '#/components/schemas/AddViewColumn'
           type: array
+      required:
+      - gridId
+      - name
       type: object
     DateTimeFormat:
       example:
@@ -3611,13 +3771,13 @@ components:
       example:
         decimalPlaces: 0
         currencySymbol: currencySymbol
-        type: DECIMAL
+        type: decimal
         use1000Separator: true
       properties:
         type:
           enum:
-          - DECIMAL
-          - INTEGER
+          - decimal
+          - integer
           type: string
         decimalPlaces:
           format: int32
@@ -3630,10 +3790,10 @@ components:
     Reference:
       example:
         branchId: branchId
-        selectionType: SINGLE
+        selectionType: single
         columnId: columnId
         gridId: gridId
-        type: ROW
+        type: row
       properties:
         gridId:
           type: string
@@ -3643,13 +3803,13 @@ components:
           type: string
         type:
           enum:
-          - ROW
-          - CELL
+          - row
+          - cell
           type: string
         selectionType:
           enum:
-          - SINGLE
-          - MULTIPLE
+          - single
+          - multiple
           type: string
       required:
       - columnId
@@ -3698,7 +3858,7 @@ components:
       type: object
     ColumnReference:
       example:
-        selectionType: SINGLE
+        selectionType: single
         grid:
           name: name
           id: id
@@ -3708,7 +3868,7 @@ components:
           - selectionOptions
           - selectionOptions
           id: id
-        type: ROW
+        type: row
         branch:
           name: name
           id: id
@@ -3721,13 +3881,13 @@ components:
           $ref: '#/components/schemas/ReferencedGrid'
         type:
           enum:
-          - ROW
-          - CELL
+          - row
+          - cell
           type: string
         selectionType:
           enum:
-          - SINGLE
-          - MULTIPLE
+          - single
+          - multiple
           type: string
       type: object
     Record:
@@ -3858,7 +4018,7 @@ components:
           type: singleLine
           isTarget: true
           reference:
-            selectionType: SINGLE
+            selectionType: single
             grid:
               name: name
               id: id
@@ -3868,7 +4028,7 @@ components:
               - selectionOptions
               - selectionOptions
               id: id
-            type: ROW
+            type: row
             branch:
               name: name
               id: id
@@ -3880,7 +4040,7 @@ components:
           numberFormat:
             decimalPlaces: 0
             currencySymbol: currencySymbol
-            type: DECIMAL
+            type: decimal
             use1000Separator: true
           isSource: true
           name: name
@@ -3900,7 +4060,7 @@ components:
           type: singleLine
           isTarget: true
           reference:
-            selectionType: SINGLE
+            selectionType: single
             grid:
               name: name
               id: id
@@ -3910,7 +4070,7 @@ components:
               - selectionOptions
               - selectionOptions
               id: id
-            type: ROW
+            type: row
             branch:
               name: name
               id: id
@@ -3922,7 +4082,7 @@ components:
           numberFormat:
             decimalPlaces: 0
             currencySymbol: currencySymbol
-            type: DECIMAL
+            type: decimal
             use1000Separator: true
           isSource: true
           name: name
@@ -3958,6 +4118,7 @@ components:
           - duplicating
           - clearingRecords
           - copying
+          - updatingWorkflow
           type: string
         name:
           type: string
@@ -3979,7 +4140,7 @@ components:
         type: singleLine
         isTarget: true
         reference:
-          selectionType: SINGLE
+          selectionType: single
           grid:
             name: name
             id: id
@@ -3989,7 +4150,7 @@ components:
             - selectionOptions
             - selectionOptions
             id: id
-          type: ROW
+          type: row
           branch:
             name: name
             id: id
@@ -4001,7 +4162,7 @@ components:
         numberFormat:
           decimalPlaces: 0
           currencySymbol: currencySymbol
-          type: DECIMAL
+          type: decimal
           use1000Separator: true
         isSource: true
         name: name
@@ -4063,6 +4224,7 @@ components:
           - yaml
           - html
           - formula
+          - user
           type: string
       type: object
     SetCell:
@@ -4191,7 +4353,7 @@ components:
         - "{}"
         queryPathTagViaId: true
         dynamicColumn: dynamicColumn
-        subField: DEPENDENCY_STATUS
+        subField: _dependencyStatus
         operator: isNull
       properties:
         caseSensitive:
@@ -4238,27 +4400,30 @@ components:
           type: boolean
         subField:
           enum:
-          - DEPENDENCY_STATUS
-          - SOURCE_STATUS
-          - TARGET_STATUS
-          - FLOW_STATUS
-          - TM
-          - MT
-          - TICKET
-          - COLOR
-          - METADATA
-          - CELL_METADATA
-          - WORD_COUNT
-          - PREVIEW_SOURCE_DATA
-          - PREVIEW_SOURCE_DEPENDENCY_STATUS
-          - PREVIEW_STATUS
-          - PREVIEW_MERGE_OPTION
-          - RELATIVE_TIME
-          - LENGTH_VIOLATED
-          - LENGTH_SETTING
-          - WORKFLOW_STATUS
-          - REPETITION
-          - QA_CHECK_STATUS
+          - _dependencyStatus
+          - _sourceStatus
+          - _targetStatus
+          - _flowStatus
+          - _tm
+          - _mt
+          - _ticket
+          - _color
+          - _metadata
+          - _cell_metadata
+          - _word_count
+          - _previewSourceData
+          - _previewSourceDependencyStatus
+          - _previewStatus
+          - _previewMergeOption
+          - _relativeTime
+          - _length_violated
+          - _lengthSetting
+          - _workflow
+          - _workflowStepTransitioned
+          - _repetition
+          - _qaCheckStatus
+          - _spellCheckStatus
+          - _hasTag
           type: string
         values:
           items:
@@ -4308,6 +4473,7 @@ components:
           - columnId: columnId
             option: child
           pathTag: pathTag
+        checkMismatchedColumnType: true
         query:
         - caseSensitive: true
           columnId: columnId
@@ -4316,7 +4482,7 @@ components:
           - "{}"
           queryPathTagViaId: true
           dynamicColumn: dynamicColumn
-          subField: DEPENDENCY_STATUS
+          subField: _dependencyStatus
           operator: isNull
         - caseSensitive: true
           columnId: columnId
@@ -4325,7 +4491,7 @@ components:
           - "{}"
           queryPathTagViaId: true
           dynamicColumn: dynamicColumn
-          subField: DEPENDENCY_STATUS
+          subField: _dependencyStatus
           operator: isNull
         useLastMergeResolve: true
       properties:
@@ -4345,6 +4511,8 @@ components:
           minItems: 0
           type: array
         useLastMergeResolve:
+          type: boolean
+        checkMismatchedColumnType:
           type: boolean
         query:
           items:
@@ -4409,6 +4577,24 @@ components:
           - cancel
           type: string
       type: object
+    FileType:
+      enum:
+      - csv
+      - tsv
+      - xls
+      - xlsx
+      - json
+      - po
+      - html
+      type: string
+      x-enum-varnames:
+      - csv
+      - tsv
+      - xls
+      - xlsx
+      - json
+      - po
+      - html
     UploadedFile:
       example:
         originalName: originalName
@@ -4450,14 +4636,14 @@ components:
       example:
         reference:
           branchId: branchId
-          selectionType: SINGLE
+          selectionType: single
           columnId: columnId
           gridId: gridId
-          type: ROW
+          type: row
         numberFormat:
           decimalPlaces: 0
           currencySymbol: currencySymbol
-          type: DECIMAL
+          type: decimal
           use1000Separator: true
         dateTimeFormat:
           zoneOffset: zoneOffset
@@ -4508,6 +4694,7 @@ components:
           - yaml
           - html
           - formula
+          - user
           type: string
         editable:
           type: boolean
@@ -4534,6 +4721,7 @@ components:
           - zhHK
           - csCZ
           - daDK
+          - klGL
           - nlNL
           - fiFI
           - frFR
@@ -4683,6 +4871,7 @@ components:
           - ca
           - hr
           - da
+          - kl
           - nl
           - en
           - fi
@@ -4767,6 +4956,8 @@ components:
           $ref: '#/components/schemas/NumberFormat'
         selectionOptions:
           items:
+            maxLength: 100
+            minLength: 0
             type: string
           maxItems: 1000
           minItems: 0
@@ -4790,14 +4981,14 @@ components:
         columns:
         - reference:
             branchId: branchId
-            selectionType: SINGLE
+            selectionType: single
             columnId: columnId
             gridId: gridId
-            type: ROW
+            type: row
           numberFormat:
             decimalPlaces: 0
             currencySymbol: currencySymbol
-            type: DECIMAL
+            type: decimal
             use1000Separator: true
           dateTimeFormat:
             zoneOffset: zoneOffset
@@ -4823,14 +5014,14 @@ components:
           languageCode: enUS
         - reference:
             branchId: branchId
-            selectionType: SINGLE
+            selectionType: single
             columnId: columnId
             gridId: gridId
-            type: ROW
+            type: row
           numberFormat:
             decimalPlaces: 0
             currencySymbol: currencySymbol
-            type: DECIMAL
+            type: decimal
             use1000Separator: true
           dateTimeFormat:
             zoneOffset: zoneOffset
@@ -4898,7 +5089,7 @@ components:
           type: singleLine
           isTarget: true
           reference:
-            selectionType: SINGLE
+            selectionType: single
             grid:
               name: name
               id: id
@@ -4908,7 +5099,7 @@ components:
               - selectionOptions
               - selectionOptions
               id: id
-            type: ROW
+            type: row
             branch:
               name: name
               id: id
@@ -4920,7 +5111,7 @@ components:
           numberFormat:
             decimalPlaces: 0
             currencySymbol: currencySymbol
-            type: DECIMAL
+            type: decimal
             use1000Separator: true
           isSource: true
           name: name
@@ -4940,7 +5131,7 @@ components:
           type: singleLine
           isTarget: true
           reference:
-            selectionType: SINGLE
+            selectionType: single
             grid:
               name: name
               id: id
@@ -4950,7 +5141,7 @@ components:
               - selectionOptions
               - selectionOptions
               id: id
-            type: ROW
+            type: row
             branch:
               name: name
               id: id
@@ -4962,7 +5153,7 @@ components:
           numberFormat:
             decimalPlaces: 0
             currencySymbol: currencySymbol
-            type: DECIMAL
+            type: decimal
             use1000Separator: true
           isSource: true
           name: name
@@ -5011,6 +5202,7 @@ components:
           - duplicating
           - clearingRecords
           - copying
+          - updatingWorkflow
           type: string
       type: object
     CreateFileCategory:
@@ -5067,7 +5259,7 @@ components:
           type: singleLine
           isTarget: true
           reference:
-            selectionType: SINGLE
+            selectionType: single
             grid:
               name: name
               id: id
@@ -5077,7 +5269,7 @@ components:
               - selectionOptions
               - selectionOptions
               id: id
-            type: ROW
+            type: row
             branch:
               name: name
               id: id
@@ -5089,7 +5281,7 @@ components:
           numberFormat:
             decimalPlaces: 0
             currencySymbol: currencySymbol
-            type: DECIMAL
+            type: decimal
             use1000Separator: true
           isSource: true
           name: name
@@ -5109,7 +5301,7 @@ components:
           type: singleLine
           isTarget: true
           reference:
-            selectionType: SINGLE
+            selectionType: single
             grid:
               name: name
               id: id
@@ -5119,7 +5311,7 @@ components:
               - selectionOptions
               - selectionOptions
               id: id
-            type: ROW
+            type: row
             branch:
               name: name
               id: id
@@ -5131,7 +5323,7 @@ components:
           numberFormat:
             decimalPlaces: 0
             currencySymbol: currencySymbol
-            type: DECIMAL
+            type: decimal
             use1000Separator: true
           isSource: true
           name: name
@@ -5156,6 +5348,8 @@ components:
           type: string
         description:
           type: string
+        isMaster:
+          type: boolean
         metadata:
           additionalProperties:
             type: string
@@ -5181,9 +5375,8 @@ components:
           - duplicating
           - clearingRecords
           - copying
+          - updatingWorkflow
           type: string
-        isMaster:
-          type: boolean
       type: object
     UpdateColumn:
       example:
@@ -5201,15 +5394,15 @@ components:
         languageCode: enUS
         reference:
           branchId: branchId
-          selectionType: SINGLE
+          selectionType: single
           columnId: columnId
           gridId: gridId
-          type: ROW
+          type: row
         viewable: true
         numberFormat:
           decimalPlaces: 0
           currencySymbol: currencySymbol
-          type: DECIMAL
+          type: decimal
           use1000Separator: true
         dateTimeFormat:
           zoneOffset: zoneOffset
@@ -5245,6 +5438,7 @@ components:
           - yaml
           - html
           - formula
+          - user
           type: string
         languageCode:
           enum:
@@ -5269,6 +5463,7 @@ components:
           - zhHK
           - csCZ
           - daDK
+          - klGL
           - nlNL
           - fiFI
           - frFR
@@ -5418,6 +5613,7 @@ components:
           - ca
           - hr
           - da
+          - kl
           - nl
           - en
           - fi
@@ -5500,6 +5696,8 @@ components:
           type: string
         selectionOptions:
           items:
+            maxLength: 100
+            minLength: 0
             type: string
           maxItems: 1000
           minItems: 0
@@ -5671,7 +5869,6 @@ components:
           type: object
       type: object
     FetchFileOption:
-      default: id
       enum:
       - all
       - id
@@ -6015,69 +6212,13 @@ components:
       required:
       - name
       type: object
-    Privilege:
+    Project:
       example:
-        level: level
-        extra: extra
+        companyId: 5
         name: name
         description: description
         id: 5
-        label: label
-        serviceId: serviceId
-        order: 5
-      properties:
-        id:
-          format: int64
-          type: integer
-        name:
-          type: string
-        label:
-          type: string
-        level:
-          type: string
-        order:
-          format: int32
-          type: integer
-        serviceId:
-          type: string
-        description:
-          type: string
-        extra:
-          type: string
-      type: object
-    Project:
-      example:
-        companyId: 3
-        role:
-          privileges:
-          - level: level
-            extra: extra
-            name: name
-            description: description
-            id: 5
-            label: label
-            serviceId: serviceId
-            order: 5
-          - level: level
-            extra: extra
-            name: name
-            description: description
-            id: 5
-            label: label
-            serviceId: serviceId
-            order: 5
-          isSystemRole: true
-          level: level
-          name: name
-          id: 1
-          title: title
-          type: type
-          privilegeIds:
-          - 2
-          - 2
-        name: name
-        description: description
-        id: 9
+        type: DEFAULT
       properties:
         id:
           format: int64
@@ -6089,62 +6230,12 @@ components:
           type: string
         description:
           type: string
-        role:
-          $ref: '#/components/schemas/Role'
-      type: object
-    Role:
-      example:
-        privileges:
-        - level: level
-          extra: extra
-          name: name
-          description: description
-          id: 5
-          label: label
-          serviceId: serviceId
-          order: 5
-        - level: level
-          extra: extra
-          name: name
-          description: description
-          id: 5
-          label: label
-          serviceId: serviceId
-          order: 5
-        isSystemRole: true
-        level: level
-        name: name
-        id: 1
-        title: title
-        type: type
-        privilegeIds:
-        - 2
-        - 2
-      properties:
-        id:
-          format: int64
-          type: integer
-        name:
-          type: string
-        title:
-          type: string
         type:
+          enum:
+          - DEFAULT
+          - INTERNAL
+          - TMS
           type: string
-        level:
-          type: string
-        privileges:
-          items:
-            $ref: '#/components/schemas/Privilege'
-          type: array
-          uniqueItems: true
-        privilegeIds:
-          items:
-            format: int64
-            type: integer
-          type: array
-          uniqueItems: true
-        isSystemRole:
-          type: boolean
       type: object
     UpdateDatabase:
       example:
@@ -6163,39 +6254,13 @@ components:
         name: name
         description: description
         project:
-          companyId: 3
-          role:
-            privileges:
-            - level: level
-              extra: extra
-              name: name
-              description: description
-              id: 5
-              label: label
-              serviceId: serviceId
-              order: 5
-            - level: level
-              extra: extra
-              name: name
-              description: description
-              id: 5
-              label: label
-              serviceId: serviceId
-              order: 5
-            isSystemRole: true
-            level: level
-            name: name
-            id: 1
-            title: title
-            type: type
-            privilegeIds:
-            - 2
-            - 2
+          companyId: 5
           name: name
           description: description
-          id: 9
+          id: 5
+          type: DEFAULT
         groups:
-        - companyId: 4
+        - companyId: 7
           createdDate: 2000-01-23T04:56:07.000+00:00
           lastModifiedDate: 2000-01-23T04:56:07.000+00:00
           groupId: 2
@@ -6206,7 +6271,7 @@ components:
           systemGroup: true
           shareType: none
           logoUrl: logoUrl
-        - companyId: 4
+        - companyId: 7
           createdDate: 2000-01-23T04:56:07.000+00:00
           lastModifiedDate: 2000-01-23T04:56:07.000+00:00
           groupId: 2
@@ -6218,7 +6283,7 @@ components:
           shareType: none
           logoUrl: logoUrl
         id: id
-        projectId: 7
+        projectId: 1
         grids:
         - recordIdentifierType: recordId
           metadata:
@@ -6236,7 +6301,7 @@ components:
             type: singleLine
             isTarget: true
             reference:
-              selectionType: SINGLE
+              selectionType: single
               grid:
                 name: name
                 id: id
@@ -6246,7 +6311,7 @@ components:
                 - selectionOptions
                 - selectionOptions
                 id: id
-              type: ROW
+              type: row
               branch:
                 name: name
                 id: id
@@ -6258,7 +6323,7 @@ components:
             numberFormat:
               decimalPlaces: 0
               currencySymbol: currencySymbol
-              type: DECIMAL
+              type: decimal
               use1000Separator: true
             isSource: true
             name: name
@@ -6278,7 +6343,7 @@ components:
             type: singleLine
             isTarget: true
             reference:
-              selectionType: SINGLE
+              selectionType: single
               grid:
                 name: name
                 id: id
@@ -6288,7 +6353,7 @@ components:
                 - selectionOptions
                 - selectionOptions
                 id: id
-              type: ROW
+              type: row
               branch:
                 name: name
                 id: id
@@ -6300,7 +6365,7 @@ components:
             numberFormat:
               decimalPlaces: 0
               currencySymbol: currencySymbol
-              type: DECIMAL
+              type: decimal
               use1000Separator: true
             isSource: true
             name: name
@@ -6329,7 +6394,7 @@ components:
             type: singleLine
             isTarget: true
             reference:
-              selectionType: SINGLE
+              selectionType: single
               grid:
                 name: name
                 id: id
@@ -6339,7 +6404,7 @@ components:
                 - selectionOptions
                 - selectionOptions
                 id: id
-              type: ROW
+              type: row
               branch:
                 name: name
                 id: id
@@ -6351,7 +6416,7 @@ components:
             numberFormat:
               decimalPlaces: 0
               currencySymbol: currencySymbol
-              type: DECIMAL
+              type: decimal
               use1000Separator: true
             isSource: true
             name: name
@@ -6371,7 +6436,7 @@ components:
             type: singleLine
             isTarget: true
             reference:
-              selectionType: SINGLE
+              selectionType: single
               grid:
                 name: name
                 id: id
@@ -6381,7 +6446,7 @@ components:
                 - selectionOptions
                 - selectionOptions
                 id: id
-              type: ROW
+              type: row
               branch:
                 name: name
                 id: id
@@ -6393,7 +6458,7 @@ components:
             numberFormat:
               decimalPlaces: 0
               currencySymbol: currencySymbol
-              type: DECIMAL
+              type: decimal
               use1000Separator: true
             isSource: true
             name: name
@@ -6466,7 +6531,7 @@ components:
             type: singleLine
             isTarget: true
             reference:
-              selectionType: SINGLE
+              selectionType: single
               grid:
                 name: name
                 id: id
@@ -6476,7 +6541,7 @@ components:
                 - selectionOptions
                 - selectionOptions
                 id: id
-              type: ROW
+              type: row
               branch:
                 name: name
                 id: id
@@ -6488,7 +6553,7 @@ components:
             numberFormat:
               decimalPlaces: 0
               currencySymbol: currencySymbol
-              type: DECIMAL
+              type: decimal
               use1000Separator: true
             isSource: true
             name: name
@@ -6508,7 +6573,7 @@ components:
             type: singleLine
             isTarget: true
             reference:
-              selectionType: SINGLE
+              selectionType: single
               grid:
                 name: name
                 id: id
@@ -6518,7 +6583,7 @@ components:
                 - selectionOptions
                 - selectionOptions
                 id: id
-              type: ROW
+              type: row
               branch:
                 name: name
                 id: id
@@ -6530,7 +6595,7 @@ components:
             numberFormat:
               decimalPlaces: 0
               currencySymbol: currencySymbol
-              type: DECIMAL
+              type: decimal
               use1000Separator: true
             isSource: true
             name: name
@@ -6602,7 +6667,7 @@ components:
             type: singleLine
             isTarget: true
             reference:
-              selectionType: SINGLE
+              selectionType: single
               grid:
                 name: name
                 id: id
@@ -6612,7 +6677,7 @@ components:
                 - selectionOptions
                 - selectionOptions
                 id: id
-              type: ROW
+              type: row
               branch:
                 name: name
                 id: id
@@ -6624,7 +6689,7 @@ components:
             numberFormat:
               decimalPlaces: 0
               currencySymbol: currencySymbol
-              type: DECIMAL
+              type: decimal
               use1000Separator: true
             isSource: true
             name: name
@@ -6644,7 +6709,7 @@ components:
             type: singleLine
             isTarget: true
             reference:
-              selectionType: SINGLE
+              selectionType: single
               grid:
                 name: name
                 id: id
@@ -6654,7 +6719,7 @@ components:
                 - selectionOptions
                 - selectionOptions
                 id: id
-              type: ROW
+              type: row
               branch:
                 name: name
                 id: id
@@ -6666,7 +6731,7 @@ components:
             numberFormat:
               decimalPlaces: 0
               currencySymbol: currencySymbol
-              type: DECIMAL
+              type: decimal
               use1000Separator: true
             isSource: true
             name: name
@@ -6707,7 +6772,7 @@ components:
       type: object
     Group:
       example:
-        companyId: 4
+        companyId: 7
         createdDate: 2000-01-23T04:56:07.000+00:00
         lastModifiedDate: 2000-01-23T04:56:07.000+00:00
         groupId: 2
@@ -6751,15 +6816,16 @@ components:
         lastModifiedDate:
           format: date-time
           type: string
-        isSystemGroup:
-          type: boolean
         systemGroup:
+          type: boolean
+        isSystemGroup:
           type: boolean
       type: object
     CreateProject:
       example:
         name: name
         description: description
+        type: DEFAULT
       properties:
         name:
           maxLength: 50
@@ -6768,6 +6834,12 @@ components:
         description:
           maxLength: 255
           minLength: 0
+          type: string
+        type:
+          enum:
+          - DEFAULT
+          - INTERNAL
+          - TMS
           type: string
       required:
       - name
@@ -6798,39 +6870,13 @@ components:
         - name: name
           description: description
           project:
-            companyId: 3
-            role:
-              privileges:
-              - level: level
-                extra: extra
-                name: name
-                description: description
-                id: 5
-                label: label
-                serviceId: serviceId
-                order: 5
-              - level: level
-                extra: extra
-                name: name
-                description: description
-                id: 5
-                label: label
-                serviceId: serviceId
-                order: 5
-              isSystemRole: true
-              level: level
-              name: name
-              id: 1
-              title: title
-              type: type
-              privilegeIds:
-              - 2
-              - 2
+            companyId: 5
             name: name
             description: description
-            id: 9
+            id: 5
+            type: DEFAULT
           groups:
-          - companyId: 4
+          - companyId: 7
             createdDate: 2000-01-23T04:56:07.000+00:00
             lastModifiedDate: 2000-01-23T04:56:07.000+00:00
             groupId: 2
@@ -6841,7 +6887,7 @@ components:
             systemGroup: true
             shareType: none
             logoUrl: logoUrl
-          - companyId: 4
+          - companyId: 7
             createdDate: 2000-01-23T04:56:07.000+00:00
             lastModifiedDate: 2000-01-23T04:56:07.000+00:00
             groupId: 2
@@ -6853,7 +6899,7 @@ components:
             shareType: none
             logoUrl: logoUrl
           id: id
-          projectId: 7
+          projectId: 1
           grids:
           - recordIdentifierType: recordId
             metadata:
@@ -6871,7 +6917,7 @@ components:
               type: singleLine
               isTarget: true
               reference:
-                selectionType: SINGLE
+                selectionType: single
                 grid:
                   name: name
                   id: id
@@ -6881,7 +6927,7 @@ components:
                   - selectionOptions
                   - selectionOptions
                   id: id
-                type: ROW
+                type: row
                 branch:
                   name: name
                   id: id
@@ -6893,7 +6939,7 @@ components:
               numberFormat:
                 decimalPlaces: 0
                 currencySymbol: currencySymbol
-                type: DECIMAL
+                type: decimal
                 use1000Separator: true
               isSource: true
               name: name
@@ -6913,7 +6959,7 @@ components:
               type: singleLine
               isTarget: true
               reference:
-                selectionType: SINGLE
+                selectionType: single
                 grid:
                   name: name
                   id: id
@@ -6923,7 +6969,7 @@ components:
                   - selectionOptions
                   - selectionOptions
                   id: id
-                type: ROW
+                type: row
                 branch:
                   name: name
                   id: id
@@ -6935,7 +6981,7 @@ components:
               numberFormat:
                 decimalPlaces: 0
                 currencySymbol: currencySymbol
-                type: DECIMAL
+                type: decimal
                 use1000Separator: true
               isSource: true
               name: name
@@ -6964,7 +7010,7 @@ components:
               type: singleLine
               isTarget: true
               reference:
-                selectionType: SINGLE
+                selectionType: single
                 grid:
                   name: name
                   id: id
@@ -6974,7 +7020,7 @@ components:
                   - selectionOptions
                   - selectionOptions
                   id: id
-                type: ROW
+                type: row
                 branch:
                   name: name
                   id: id
@@ -6986,7 +7032,7 @@ components:
               numberFormat:
                 decimalPlaces: 0
                 currencySymbol: currencySymbol
-                type: DECIMAL
+                type: decimal
                 use1000Separator: true
               isSource: true
               name: name
@@ -7006,7 +7052,7 @@ components:
               type: singleLine
               isTarget: true
               reference:
-                selectionType: SINGLE
+                selectionType: single
                 grid:
                   name: name
                   id: id
@@ -7016,7 +7062,7 @@ components:
                   - selectionOptions
                   - selectionOptions
                   id: id
-                type: ROW
+                type: row
                 branch:
                   name: name
                   id: id
@@ -7028,7 +7074,7 @@ components:
               numberFormat:
                 decimalPlaces: 0
                 currencySymbol: currencySymbol
-                type: DECIMAL
+                type: decimal
                 use1000Separator: true
               isSource: true
               name: name
@@ -7101,7 +7147,7 @@ components:
               type: singleLine
               isTarget: true
               reference:
-                selectionType: SINGLE
+                selectionType: single
                 grid:
                   name: name
                   id: id
@@ -7111,7 +7157,7 @@ components:
                   - selectionOptions
                   - selectionOptions
                   id: id
-                type: ROW
+                type: row
                 branch:
                   name: name
                   id: id
@@ -7123,7 +7169,7 @@ components:
               numberFormat:
                 decimalPlaces: 0
                 currencySymbol: currencySymbol
-                type: DECIMAL
+                type: decimal
                 use1000Separator: true
               isSource: true
               name: name
@@ -7143,7 +7189,7 @@ components:
               type: singleLine
               isTarget: true
               reference:
-                selectionType: SINGLE
+                selectionType: single
                 grid:
                   name: name
                   id: id
@@ -7153,7 +7199,7 @@ components:
                   - selectionOptions
                   - selectionOptions
                   id: id
-                type: ROW
+                type: row
                 branch:
                   name: name
                   id: id
@@ -7165,7 +7211,7 @@ components:
               numberFormat:
                 decimalPlaces: 0
                 currencySymbol: currencySymbol
-                type: DECIMAL
+                type: decimal
                 use1000Separator: true
               isSource: true
               name: name
@@ -7237,7 +7283,7 @@ components:
               type: singleLine
               isTarget: true
               reference:
-                selectionType: SINGLE
+                selectionType: single
                 grid:
                   name: name
                   id: id
@@ -7247,7 +7293,7 @@ components:
                   - selectionOptions
                   - selectionOptions
                   id: id
-                type: ROW
+                type: row
                 branch:
                   name: name
                   id: id
@@ -7259,7 +7305,7 @@ components:
               numberFormat:
                 decimalPlaces: 0
                 currencySymbol: currencySymbol
-                type: DECIMAL
+                type: decimal
                 use1000Separator: true
               isSource: true
               name: name
@@ -7279,7 +7325,7 @@ components:
               type: singleLine
               isTarget: true
               reference:
-                selectionType: SINGLE
+                selectionType: single
                 grid:
                   name: name
                   id: id
@@ -7289,7 +7335,7 @@ components:
                   - selectionOptions
                   - selectionOptions
                   id: id
-                type: ROW
+                type: row
                 branch:
                   name: name
                   id: id
@@ -7301,7 +7347,7 @@ components:
               numberFormat:
                 decimalPlaces: 0
                 currencySymbol: currencySymbol
-                type: DECIMAL
+                type: decimal
                 use1000Separator: true
               isSource: true
               name: name
@@ -7317,39 +7363,13 @@ components:
         - name: name
           description: description
           project:
-            companyId: 3
-            role:
-              privileges:
-              - level: level
-                extra: extra
-                name: name
-                description: description
-                id: 5
-                label: label
-                serviceId: serviceId
-                order: 5
-              - level: level
-                extra: extra
-                name: name
-                description: description
-                id: 5
-                label: label
-                serviceId: serviceId
-                order: 5
-              isSystemRole: true
-              level: level
-              name: name
-              id: 1
-              title: title
-              type: type
-              privilegeIds:
-              - 2
-              - 2
+            companyId: 5
             name: name
             description: description
-            id: 9
+            id: 5
+            type: DEFAULT
           groups:
-          - companyId: 4
+          - companyId: 7
             createdDate: 2000-01-23T04:56:07.000+00:00
             lastModifiedDate: 2000-01-23T04:56:07.000+00:00
             groupId: 2
@@ -7360,7 +7380,7 @@ components:
             systemGroup: true
             shareType: none
             logoUrl: logoUrl
-          - companyId: 4
+          - companyId: 7
             createdDate: 2000-01-23T04:56:07.000+00:00
             lastModifiedDate: 2000-01-23T04:56:07.000+00:00
             groupId: 2
@@ -7372,7 +7392,7 @@ components:
             shareType: none
             logoUrl: logoUrl
           id: id
-          projectId: 7
+          projectId: 1
           grids:
           - recordIdentifierType: recordId
             metadata:
@@ -7390,7 +7410,7 @@ components:
               type: singleLine
               isTarget: true
               reference:
-                selectionType: SINGLE
+                selectionType: single
                 grid:
                   name: name
                   id: id
@@ -7400,7 +7420,7 @@ components:
                   - selectionOptions
                   - selectionOptions
                   id: id
-                type: ROW
+                type: row
                 branch:
                   name: name
                   id: id
@@ -7412,7 +7432,7 @@ components:
               numberFormat:
                 decimalPlaces: 0
                 currencySymbol: currencySymbol
-                type: DECIMAL
+                type: decimal
                 use1000Separator: true
               isSource: true
               name: name
@@ -7432,7 +7452,7 @@ components:
               type: singleLine
               isTarget: true
               reference:
-                selectionType: SINGLE
+                selectionType: single
                 grid:
                   name: name
                   id: id
@@ -7442,7 +7462,7 @@ components:
                   - selectionOptions
                   - selectionOptions
                   id: id
-                type: ROW
+                type: row
                 branch:
                   name: name
                   id: id
@@ -7454,7 +7474,7 @@ components:
               numberFormat:
                 decimalPlaces: 0
                 currencySymbol: currencySymbol
-                type: DECIMAL
+                type: decimal
                 use1000Separator: true
               isSource: true
               name: name
@@ -7483,7 +7503,7 @@ components:
               type: singleLine
               isTarget: true
               reference:
-                selectionType: SINGLE
+                selectionType: single
                 grid:
                   name: name
                   id: id
@@ -7493,7 +7513,7 @@ components:
                   - selectionOptions
                   - selectionOptions
                   id: id
-                type: ROW
+                type: row
                 branch:
                   name: name
                   id: id
@@ -7505,7 +7525,7 @@ components:
               numberFormat:
                 decimalPlaces: 0
                 currencySymbol: currencySymbol
-                type: DECIMAL
+                type: decimal
                 use1000Separator: true
               isSource: true
               name: name
@@ -7525,7 +7545,7 @@ components:
               type: singleLine
               isTarget: true
               reference:
-                selectionType: SINGLE
+                selectionType: single
                 grid:
                   name: name
                   id: id
@@ -7535,7 +7555,7 @@ components:
                   - selectionOptions
                   - selectionOptions
                   id: id
-                type: ROW
+                type: row
                 branch:
                   name: name
                   id: id
@@ -7547,7 +7567,7 @@ components:
               numberFormat:
                 decimalPlaces: 0
                 currencySymbol: currencySymbol
-                type: DECIMAL
+                type: decimal
                 use1000Separator: true
               isSource: true
               name: name
@@ -7620,7 +7640,7 @@ components:
               type: singleLine
               isTarget: true
               reference:
-                selectionType: SINGLE
+                selectionType: single
                 grid:
                   name: name
                   id: id
@@ -7630,7 +7650,7 @@ components:
                   - selectionOptions
                   - selectionOptions
                   id: id
-                type: ROW
+                type: row
                 branch:
                   name: name
                   id: id
@@ -7642,7 +7662,7 @@ components:
               numberFormat:
                 decimalPlaces: 0
                 currencySymbol: currencySymbol
-                type: DECIMAL
+                type: decimal
                 use1000Separator: true
               isSource: true
               name: name
@@ -7662,7 +7682,7 @@ components:
               type: singleLine
               isTarget: true
               reference:
-                selectionType: SINGLE
+                selectionType: single
                 grid:
                   name: name
                   id: id
@@ -7672,7 +7692,7 @@ components:
                   - selectionOptions
                   - selectionOptions
                   id: id
-                type: ROW
+                type: row
                 branch:
                   name: name
                   id: id
@@ -7684,7 +7704,7 @@ components:
               numberFormat:
                 decimalPlaces: 0
                 currencySymbol: currencySymbol
-                type: DECIMAL
+                type: decimal
                 use1000Separator: true
               isSource: true
               name: name
@@ -7756,7 +7776,7 @@ components:
               type: singleLine
               isTarget: true
               reference:
-                selectionType: SINGLE
+                selectionType: single
                 grid:
                   name: name
                   id: id
@@ -7766,7 +7786,7 @@ components:
                   - selectionOptions
                   - selectionOptions
                   id: id
-                type: ROW
+                type: row
                 branch:
                   name: name
                   id: id
@@ -7778,7 +7798,7 @@ components:
               numberFormat:
                 decimalPlaces: 0
                 currencySymbol: currencySymbol
-                type: DECIMAL
+                type: decimal
                 use1000Separator: true
               isSource: true
               name: name
@@ -7798,7 +7818,7 @@ components:
               type: singleLine
               isTarget: true
               reference:
-                selectionType: SINGLE
+                selectionType: single
                 grid:
                   name: name
                   id: id
@@ -7808,7 +7828,7 @@ components:
                   - selectionOptions
                   - selectionOptions
                   id: id
-                type: ROW
+                type: row
                 branch:
                   name: name
                   id: id
@@ -7820,7 +7840,7 @@ components:
               numberFormat:
                 decimalPlaces: 0
                 currencySymbol: currencySymbol
-                type: DECIMAL
+                type: decimal
                 use1000Separator: true
               isSource: true
               name: name
@@ -7834,37 +7854,10 @@ components:
             gridId: gridId
             gridStatus: deleted
         companyId: 6
-        role:
-          privileges:
-          - level: level
-            extra: extra
-            name: name
-            description: description
-            id: 5
-            label: label
-            serviceId: serviceId
-            order: 5
-          - level: level
-            extra: extra
-            name: name
-            description: description
-            id: 5
-            label: label
-            serviceId: serviceId
-            order: 5
-          isSystemRole: true
-          level: level
-          name: name
-          id: 1
-          title: title
-          type: type
-          privilegeIds:
-          - 2
-          - 2
         name: name
         description: description
         groups:
-        - companyId: 4
+        - companyId: 7
           createdDate: 2000-01-23T04:56:07.000+00:00
           lastModifiedDate: 2000-01-23T04:56:07.000+00:00
           groupId: 2
@@ -7875,7 +7868,7 @@ components:
           systemGroup: true
           shareType: none
           logoUrl: logoUrl
-        - companyId: 4
+        - companyId: 7
           createdDate: 2000-01-23T04:56:07.000+00:00
           lastModifiedDate: 2000-01-23T04:56:07.000+00:00
           groupId: 2
@@ -7887,6 +7880,7 @@ components:
           shareType: none
           logoUrl: logoUrl
         id: 0
+        type: DEFAULT
       properties:
         id:
           format: int64
@@ -7898,8 +7892,12 @@ components:
           type: string
         description:
           type: string
-        role:
-          $ref: '#/components/schemas/Role'
+        type:
+          enum:
+          - DEFAULT
+          - INTERNAL
+          - TMS
+          type: string
         databases:
           items:
             $ref: '#/components/schemas/Database'
@@ -8226,15 +8224,9 @@ components:
       required:
       - file
       type: object
-    importTmx_request:
-      properties:
-        file:
-          $ref: '#/components/schemas/FileUpload'
-      required:
-      - file
-      type: object
   securitySchemes:
     ApiKey:
+      bearerFormat: ApiKey
       in: header
       name: Authorization
       type: apiKey

@@ -18,8 +18,8 @@
 
 | Name | Value |
 |---- | -----|
-| DECIMAL | &quot;DECIMAL&quot; |
-| INTEGER | &quot;INTEGER&quot; |
+| DECIMAL | &quot;decimal&quot; |
+| INTEGER | &quot;integer&quot; |
 
 
 ## Implemented Interfaces

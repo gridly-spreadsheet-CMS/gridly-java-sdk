@@ -19,8 +19,8 @@
 
 | Name | Value |
 |---- | -----|
-| ROW | &quot;ROW&quot; |
-| CELL | &quot;CELL&quot; |
+| ROW | &quot;row&quot; |
+| CELL | &quot;cell&quot; |
 
 
 
@@ -28,8 +28,8 @@
 
 | Name | Value |
 |---- | -----|
-| SINGLE | &quot;SINGLE&quot; |
-| MULTIPLE | &quot;MULTIPLE&quot; |
+| SINGLE | &quot;single&quot; |
+| MULTIPLE | &quot;multiple&quot; |
 
 
 ## Implemented Interfaces

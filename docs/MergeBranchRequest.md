@@ -10,6 +10,7 @@
 |**mergeRecordOptions** | [**List&lt;MergeRecordOptionsEnum&gt;**](#List&lt;MergeRecordOptionsEnum&gt;) |  |  [optional] |
 |**mergeRecordConflicts** | [**List&lt;MergeRecordConflict&gt;**](MergeRecordConflict.md) |  |  [optional] |
 |**useLastMergeResolve** | **Boolean** |  |  [optional] |
+|**checkMismatchedColumnType** | **Boolean** |  |  [optional] |
 |**query** | [**List&lt;FilterField&gt;**](FilterField.md) |  |  [optional] |
 
 

@@ -297,7 +297,7 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: multipart/form-data, application/json
+ - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
